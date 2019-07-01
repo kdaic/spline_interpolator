@@ -8,7 +8,7 @@ This is practice for implementing spline-interpolator
 plog is used for logger.
 
 ```
-$ git subomodule update
+$ git subomodule update --init
 ```
 
 # Dependency
@@ -28,7 +28,7 @@ g++, googletest, gnuplot
 │   └── spline_interpolator
 │       ├── cubic_spline_interpolator.hpp
 │       ├── spline_interpolator.hpp
-├── lib : Desitination of static library libspline_interpolator.a
+├── lib : Destination of static library libspline_interpolator.a
 ├── src
 │   ├── main.cpp
 │   ├── spline_interpolator.cpp
@@ -47,7 +47,7 @@ g++, googletest, gnuplot
 $ make
 ```
 
-# Desitination
+# Destination
 
 ## Binary
 
