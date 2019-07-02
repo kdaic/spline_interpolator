@@ -11,7 +11,7 @@ plog is used for logger.
 $ git subomodule update --init
 ```
 
-# Dependency
+# Other Dependency
 
 g++, googletest, gnuplot
 
@@ -21,14 +21,14 @@ g++, googletest, gnuplot
 .
 ├── README.md
 ├── Makefile
-├── bin : Destination of binaries splne_interpolator, unit_test
-├── submodules
-│   └── plog : 3rdparty logger tool.
+├── bin : Destination of binaries (splne_interpolator, unit_test)
 ├── include
-│   └── spline_interpolator
-│       ├── cubic_spline_interpolator.hpp
-│       ├── spline_interpolator.hpp
-├── lib : Destination of static library libspline_interpolator.a
+│   ├── spline_interpolator
+│   │   ├── cubic_spline_interpolator.hpp
+│   │   └── spline_interpolator.hpp
+│   └── submodules
+│       └── plog : 3rdparty logger tool.
+├── lib : Destination of static library (libspline_interpolator.a)
 ├── src
 │   ├── main.cpp
 │   ├── spline_interpolator.cpp

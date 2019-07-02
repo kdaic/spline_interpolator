@@ -39,7 +39,7 @@ TEST_SRC_UTIL_DIR = $(TEST_SRC_DIR)/util
 ##################################################################################
 # include directory
 INCLUDE_DIR = ./include/$(TOP_DIR_NAME)
-INCLUDE_PLOG_DIR = ./submodules/plog/include
+INCLUDE_PLOG_DIR = ./include/submodules/plog/include
 INCLUDE_USRLOCAL_DIR = /usr/local/include
 INCLUDES = . $(INCLUDE_DIR)
 INCLUDES += $(INCLUDE_PLOG_DIR)
