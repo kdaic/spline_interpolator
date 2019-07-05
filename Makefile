@@ -81,12 +81,13 @@ SLIB_APP = $(LIB_DIR)/lib$(APP_NAME).a
 EXE_APP  = $(BIN_DIR)/$(APP_NAME)
 TEST_APP = $(BIN_DIR)/unit_test
 #
+ALL_SRC = $(wildcard $(addsuffix /*.cpp, $(SRC_DIR)))
 EXE_SRC :=$(SRC_DIR)/main.cpp
-SLIB_SRC:=$(wildcard $(filter-out $(SRC_DIR)/*.cpp, $(EXE_SRC)))
-SLIB_SRC+=$(wildcard $(SRC_UTIL_DIR)/*.cpp)
+LIB_SRC = $(filter-out $(EXE_SRC), $(ALL_SRC))
+LIB_SRC+=$(wildcard $(SRC_UTIL_DIR)/*.cpp)
 TEST_SRC:=$(wildcard $(TEST_SRC_DIR)/*.cpp) $(wildcard $(TEST_SRC_UTIL_DIR)/*.cpp)
 #
-SLIB_OBJS=$(SLIB_SRC:%.cpp=%.o)
+LIB_OBJS=$(LIB_SRC:%.cpp=%.o)
 EXE_OBJS =$(EXE_SRC:%.cpp=%.o)
 TEST_OBJS=$(TEST_SRC:%.cpp=%.o)
 
@@ -101,13 +102,13 @@ compile_title:
 
 
 # separate compile -- make staic library
-$(SLIB_APP): $(SLIB_OBJS)
+$(SLIB_APP): $(LIB_OBJS)
 	@echo "\n  "$^" --> "$@"\n"
 	@if [ ! -d $(LIB_DIR) ]; then \
 		mkdir -p $(LIB_DIR); \
 	fi
 	ar rcs $@ $^
-# @rm $(SLIB_OBJS)
+# @rm $(LIB_OBJS)
 
 # separate compile -- make shared library
 $(LIB_APP): $(LIB_OBJS)
@@ -150,7 +151,6 @@ $(TEST_APP): $(TEST_OBJS) $(SLIB_APP)
 
 # make clean
 clean:
-	rm -f $(SLIB_OBJS)
 	rm -f $(LIB_OBJS)
 	rm -f $(EXE_OBJS)
 	rm -f $(TEST_OBJS)
