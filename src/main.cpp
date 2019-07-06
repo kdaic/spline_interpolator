@@ -1,4 +1,4 @@
-#include "cubic_spline_interpolator.hpp"
+#include "path.hpp"
 
 
 /// set logging level of plog
