@@ -1,7 +1,7 @@
-spline_interpolator
+path_interpolator
 ===
 
-This is practice for implementing spline-interpolator
+This is practice for implementing path-interpolator
 
 # Submodule
 
@@ -21,17 +21,17 @@ g++, googletest, gnuplot
 .
 ├── README.md
 ├── Makefile
-├── bin : Destination of binaries (splne_interpolator, unit_test)
+├── bin : Destination of binaries (path_interpolator, unit_test)
+├── lib : Destination of static library (libpath_interpolator.a)
 ├── include
 │   ├── spline_interpolator
 │   │   ├── cubic_spline_interpolator.hpp
-│   │   └── spline_interpolator.hpp
+│   │   └── path_interpolator.hpp
 │   └── submodules
 │       └── plog : 3rdparty logger tool.
-├── lib : Destination of static library (libspline_interpolator.a)
 ├── src
 │   ├── main.cpp
-│   ├── spline_interpolator.cpp
+│   ├── path_interpolator.cpp
 │   └── cubic_spline_interpolator.cpp
 └── test
     ├── unit_test.cpp
@@ -51,9 +51,9 @@ $ make
 
 ## Binary
 
-- spline\_interpolator
+- path\_interpolator
 - unit\_test
 
 ## Library
 
-- libspline\_interpolator.a
+- libspath\_interpolator.a
