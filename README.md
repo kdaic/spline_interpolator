@@ -8,7 +8,7 @@ This is practice for implementing path-interpolator
 plog is used for logger.
 
 ```
-$ git subomodule update --init
+$ git submodule update --init
 ```
 
 # Other Dependency
