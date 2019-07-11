@@ -1,0 +1,12 @@
+.gitignore
+
+bin/*
+lib/*
+
+# emacs backup
+*~
+
+# cpp
+*.o
+*.a
+*.so
