@@ -1,4 +1,11 @@
 #include "path.hpp"
+#include <sysexits.h>
+
+using namespace interp;
+// /// Undefined Exception Handler
+// void g_undef_exception_handler() {
+//   throw UndefPathException("program error");
+// };
 
 
 /// set logging level of plog
@@ -24,10 +31,12 @@ void set_logging_level(const std::string& level) {
 }
 
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
   (void)argc;
   (void)argv;
+
+  // // call for undifined exception handler
+  // std::set_unexpected( g_undef_exception_handler );
 
   // configure logging level
   std::string level;
@@ -35,6 +44,8 @@ int main(int argc, char* argv[])
     level = std::string(env_p);
   }
   set_logging_level(level);
+
+  std::cout << "End." << std::endl;
 
   exit(EXIT_SUCCESS);
 }

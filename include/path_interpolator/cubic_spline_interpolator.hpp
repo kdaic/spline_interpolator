@@ -30,7 +30,7 @@ public:
   /// - PATH_SUCCESS and total travel time (tf - ts)
   /// @details
   /// Path parameters are kept internally.
-  PathRetVal<double> generate_path( const double& xs, const double& xf,
+  RetVal<double> generate_path( const double& xs, const double& xf,
                                     const double& vs=0.0, const double& vf=0.0,
                                     const double& ts=0.0, const double& tf=0.0 );
 
@@ -56,20 +56,20 @@ public:
   /// ```
   ///
   /// and interpolate (v1,a1,j1), (v1,a1,j1),.. automatically.
-  virtual PathRetVal<double> genrate_path( const TPQueue& tp_queue );
+  virtual RetVal<double> genrate_path( const TPQueue& tp_queue );
 
   /// Generate tragectory path from Time,Position(,Velocity) queue
   /// @param[in] Time,Position(,Velocity) queue
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
-  virtual PathRetVal<double> genrate_path( const TPVQueue& tpv_queue );
+  virtual RetVal<double> genrate_path( const TPVQueue& tpv_queue );
 
 
   /// Pop the position and velocity at the input-time from generated tragectory
   /// @param t input time
   /// - PATH_SUCCESS & TPV at the input time
   /// - PATH_NOT_GENERATED and TPV is time=-1.0, position=0.0, velocity=0.0
-  virtual PathRetVal<TPV> pop(const double& t );
+  virtual RetVal<TPV> pop(const double& t );
 };
 
 }

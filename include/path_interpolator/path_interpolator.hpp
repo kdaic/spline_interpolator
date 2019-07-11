@@ -9,8 +9,8 @@
 #include <math.h>
 #include <deque>
 
+#include <exception>
 #include <stdexcept>
-#include <sysexits.h>
 
 #include "plog/Log.h"
 #include <plog/Appenders/ColorConsoleAppender.h>
@@ -18,8 +18,15 @@
 #define PRECISION 1.0e-15
 namespace interp {
 
-/// Path Retrun Code
-enum PathRetCode{
+template<class T> bool g_is_nearEq(T a, T b) {
+  if ( fabs(a-b) > PRECISION ) {
+    return false;
+  }
+  return true;
+}
+
+/// Retrun Code
+enum RetCode{
   PATH_SUCCESS=0,
   PATH_INVALID_INPUT_INDEX,
   PATH_INVALID_INPUT_TIME,
@@ -30,37 +37,102 @@ enum PathRetCode{
   PATH_NOT_RETURN
 };
 
-template<class T> bool g_is_nearEq(T a, T b) {
-  if ( fabs(a-b) > PRECISION ) {
-    return false;
-  }
-  return true;
-}
-
 /// Struct data of Return Value
 template<class T>
-struct PathRetVal {
+struct RetVal {
   /// Constructor
-  PathRetVal(): retcode(PATH_NOT_RETURN), value(-1) {};
+  RetVal(): retcode(PATH_NOT_RETURN), value(-1) {};
 
   /// Constructor(data copy)
-  PathRetVal(const PathRetCode& ret, const T& val):
+  RetVal(const RetCode& ret, const T& val):
     retcode(ret), value(val) {};
 
   /// Copy operator
-  PathRetVal operator=( const PathRetVal<T>& src ) {
-    PathRetVal<T> dest(src.retcode, src.value);
+  RetVal operator=( const RetVal<T>& src ) {
+    RetVal<T> dest(src.retcode, src.value);
     this->retcode = dest.retcode;
     this->value = dest.value;
     return *this;
   };
 
   /// Destructor
-  ~PathRetVal() {};
+  ~RetVal() {};
 
-  PathRetCode retcode;
+  RetCode retcode;
   T value;
 };
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/// Path Exception code
+enum ExceptionCode {
+  PATH_EXCEPTION=0,
+  PATH_UNDEF_EXCEPTION
+};
+
+/// convert number type to string for(C++98)
+/// @param[in] num number
+/// @return converted string of the argument number
+template<class T> const std::string g_num2str(const T& num) {
+  std::stringstream s;
+  s << num;
+  return s.str();
+};
+
+/// wrapper of throw()
+#define THROW( exception_class_name, message )                          \
+  throw exception_class_name( message + std::string(" -- at ")      \
+                              + std::string(__FILE__) + std::string(": l.") \
+                              + g_num2str(__LINE__) + std::string(": ") \
+                              + std::string(__func__ ) + std::string("().") )
+
+/// Path Exception class
+class PathException : public std::runtime_error {
+public:
+  /// Constructor
+  /// @param[in] message explaination of this exception
+  /// @param[in] name the name of this exception class
+  explicit PathException( const std::string& message=" ",
+                          const std::string& name="PathException" ) :
+    std::runtime_error( "["+ name +"]: "+ message ),
+    code_(PATH_EXCEPTION) {}
+
+  /// Destructor
+  ~PathException() throw() {}
+
+  /// get Exception Code
+  /// @return code_
+  virtual const ExceptionCode code() { return code_; }
+private:
+  /// Exception Code
+  const ExceptionCode code_;
+};
+
+/// Undefined Path Exception class
+class UndefPathException : public PathException {
+public:
+  /// Constructor
+  /// @param[in] message Explaination of this exception
+  explicit UndefPathException( const std::string& message,
+                          const std::string& name="UndefPathException" ) :
+    PathException( message, name ),
+    code_(PATH_EXCEPTION) {}
+
+  /// get Exception Code
+  /// @return code_
+  virtual const ExceptionCode code() { return code_; }
+private:
+  /// Exception Code
+  const ExceptionCode code_;
+};
+
+/// Undefined Exception Handler
+/// Call this handler from std::set_unexpected(g_~_hander)
+/// before calling following classes of interp namespace at the main().
+/// If not call this, undefined exceptions may not be catched and std::termniate().
+/// void g_undef_exception_handler() {
+///   throw UndefPathException("not specified");
+/// };
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -143,7 +215,7 @@ public:
   /// @brief push data T into the queue_buffer_
   /// @return
   /// - PATH_SUCCESS: no error
-  virtual PathRetCode push( const T& newval );
+  virtual RetCode push( const T& newval );
 
   /// Pop T data from buffer queue(FIFO)
   /// @brief delete the pop data from queue_buffer_
@@ -160,7 +232,7 @@ public:
   /// @return setted T data
   /// - PATH_SUCCESS: No error
   /// - PATH_INVALID_INPUT_INDEX: Not exist input-index
-  virtual PathRetCode set( const std::size_t index, const T newval );
+  virtual RetCode set( const std::size_t index, const T newval );
 
   /// Clear all data of queue buffer
   void clear();
@@ -199,7 +271,7 @@ public:
   /// @return
   /// - PATH_SUCCESS: no error
   /// - PATH_INVALID_INPUT_TIME: the time is less than the one of previous index
-  virtual PathRetCode push( const TimePosition& newTPval );
+  virtual RetCode push( const TimePosition& newTPval );
 
   /// Push TimePosition data into buffer queue(FIFO) (overload)
   /// @brief push TPV into the tpv_buffer_
@@ -208,7 +280,7 @@ public:
   /// @return
   /// - PATH_SUCCESS: no error
   /// - PATH_INVALID_INPUT_TIME: the time is less than the one of previous index
-  PathRetCode push( const double& time,
+  RetCode push( const double& time,
                     const double& position );
 
   /// Set TimePosition value at the input-index (overload)
@@ -218,7 +290,7 @@ public:
   /// - PATH_SUCCESS: no error
   /// - PATH_INVALID_INPUT_TIME: the time is less than the one of previous index
   /// - PATH_INVALID_INPUT_INDEX: Not exist input-index
-  virtual PathRetCode set( const std::size_t index, const TimePosition& tp_val );
+  virtual RetCode set( const std::size_t index, const TimePosition& tp_val );
 
 }; // End of class TPQueue
 
@@ -245,7 +317,7 @@ public:
   /// @return
   /// - PATH_SUCCESS: no error
   /// - PATH_INVALID_INPUT_TIME: the time is less than the one of previous index
-  virtual PathRetCode push( const TPV& newTPVval );
+  virtual RetCode push( const TPV& newTPVval );
 
   /// Push TPV data into buffer queue(FIFO) (overload)
   /// @brief push TPV into the tpv_buffer_
@@ -255,9 +327,9 @@ public:
   /// @return
   /// - PATH_SUCCESS: no error
   /// - PATH_INVALID_INPUT_TIME: the time is less than the one of previous index
-  PathRetCode push( const double& time,
-                    const double& position,
-                    const double& velocity );
+  RetCode push( const double& time,
+                const double& position,
+                const double& velocity );
 
   /// Set TPV value at the input-index (overload)
   /// @param[in] the index for setting TPV data
@@ -266,7 +338,7 @@ public:
   /// - PATH_SUCCESS: no error
   /// - PATH_INVALID_INPUT_TIME: the time is less than the one of previous index
   /// - PATH_INVALID_INPUT_INDEX: Not exist input-index
-  virtual PathRetCode set( const std::size_t index, const TPV& tpv_val );
+  virtual RetCode set( const std::size_t index, const TPV& tpv_val );
 
 }; // End of class TPVQueue
 
@@ -304,9 +376,9 @@ public:
   ///
   /// interpolator calculates minmum interval time.
   /// This means 100% in the limitation.
-  virtual PathRetVal<double> generate_path( const double& xs, const double& xf,
-                                            const double& vs=0.0, const double& vf=0.0,
-                                            const double& ts=0.0, const double& tf=0.0 )=0;
+  virtual RetVal<double> generate_path( const double& xs, const double& xf,
+                                        const double& vs=0.0, const double& vf=0.0,
+                                        const double& ts=0.0, const double& tf=0.0 )=0;
 
   /// Generate tragectory path from Time,Position queue
   /// @param[in] Time,Position queue
@@ -330,30 +402,30 @@ public:
   /// ```
   ///
   /// and interpolate (v1,a1,j1), (v1,a1,j1),.. automatically.
-  virtual PathRetVal<double> genrate_path( const TPQueue& tp_queue )=0;
+  virtual RetVal<double> genrate_path( const TPQueue& tp_queue )=0;
 
   /// Generate tragectory path from Time,Position(,Velocity) queue
   /// @param[in] Time,Position(,Velocity) queue
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
-  virtual PathRetVal<double> genrate_path( const TPVQueue& tpv_queue )=0;
+  virtual RetVal<double> genrate_path( const TPVQueue& tpv_queue )=0;
 
   /// Pop the position and velocity at the input-time from generated tragectory
   /// @param t input time
   /// @return
   /// - PATH_SUCCESS & TPV at the input time
   /// - PATH_NOT_GENERATED and TPV is time=-1.0, position=0.0, velocity=0.0
-  virtual PathRetVal<TPV> pop(const double& t)=0;
+  virtual RetVal<TPV> pop(const double& t)=0;
 
   /// Get fiish-time
   /// @return
   /// - PATH_SUCCESS and tf
   /// - PATH_NOT_GENERATED and -1.0
-  const PathRetVal<double> finish_time();
+  const RetVal<double> finish_time();
 
   /// Get limit velocity( if exists )
   /// @return limit velocity
-  const PathRetVal<double> v_limit();
+  const RetVal<double> v_limit();
 
   /// Get TPVQueue
   ///

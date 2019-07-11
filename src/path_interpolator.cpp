@@ -18,7 +18,7 @@ Queue<T> Queue<T>::operator=(const Queue<T>& src) {
 }
 
 template<typename T>
-PathRetCode Queue<T>::push( const T& newval ) {
+RetCode Queue<T>::push( const T& newval ) {
   queue_buffer_.push_back(newval);
   return PATH_SUCCESS;
 }
@@ -36,7 +36,7 @@ const T Queue<T>::get( const std::size_t index ) {
 }
 
 template<typename T>
-PathRetCode Queue<T>::set( const std::size_t index, const T newval ) {
+RetCode Queue<T>::set( const std::size_t index, const T newval ) {
   if( index < 0 || index > queue_buffer_.size() -1 ) {
     return PATH_INVALID_INPUT_INDEX;
   }
@@ -68,7 +68,7 @@ TPQueue TPQueue::operator=(const TPQueue& src) {
   return *this;
 }
 
-PathRetCode TPQueue::push( const TimePosition& newTPval ) {
+RetCode TPQueue::push( const TimePosition& newTPval ) {
   if( queue_buffer_.size() > 0
       && newTPval.time < queue_buffer_.front().time ) {
     return PATH_INVALID_INPUT_TIME;
@@ -77,8 +77,8 @@ PathRetCode TPQueue::push( const TimePosition& newTPval ) {
 }
 
 
-PathRetCode TPQueue::push( const double& time,
-                           const double& position ) {
+RetCode TPQueue::push( const double& time,
+                       const double& position ) {
   if( queue_buffer_.size() > 0
       && time < queue_buffer_.front().time ) {
     return PATH_INVALID_INPUT_TIME;
@@ -87,8 +87,8 @@ PathRetCode TPQueue::push( const double& time,
   return Queue<TimePosition>::push( newTPval );
 }
 
-PathRetCode TPQueue::set( const std::size_t index,
-                          const TimePosition& tp_val ) {
+RetCode TPQueue::set( const std::size_t index,
+                      const TimePosition& tp_val ) {
   if( index < 0 || index > queue_buffer_.size() -1 ) {
     return PATH_INVALID_INPUT_INDEX;
   }
@@ -117,7 +117,7 @@ TPVQueue TPVQueue::operator=(const TPVQueue& src) {
   return *this;
 }
 
-PathRetCode TPVQueue::push( const TPV& newTPVval ) {
+RetCode TPVQueue::push( const TPV& newTPVval ) {
   if( queue_buffer_.size() > 0
       && newTPVval.time < queue_buffer_.front().time ) {
     return PATH_INVALID_INPUT_TIME;
@@ -126,9 +126,9 @@ PathRetCode TPVQueue::push( const TPV& newTPVval ) {
 }
 
 
-PathRetCode TPVQueue::push( const double& time,
-                            const double& position,
-                            const double& velocity ) {
+RetCode TPVQueue::push( const double& time,
+                        const double& position,
+                        const double& velocity ) {
   if( queue_buffer_.size() > 0
       && time < queue_buffer_.front().time ) {
     return PATH_INVALID_INPUT_TIME;
@@ -137,8 +137,8 @@ PathRetCode TPVQueue::push( const double& time,
   return Queue<TPV>::push( newTPVval );
 }
 
-PathRetCode TPVQueue::set( const std::size_t index,
-                           const TPV& tpv_val ) {
+RetCode TPVQueue::set( const std::size_t index,
+                       const TPV& tpv_val ) {
   if( index < 0 || index > queue_buffer_.size() -1 ) {
     return PATH_INVALID_INPUT_INDEX;
   }
@@ -156,7 +156,7 @@ PathRetCode TPVQueue::set( const std::size_t index,
 /////////////////////////////////////////////////////////////////////////////////////////
 
 template
-class PathRetVal<double>;
+class RetVal<double>;
 
 PathInterpolator::PathInterpolator() :
   is_path_generated_(false), is_v_limit_(false) {
@@ -177,16 +177,16 @@ void PathInterpolator::set_TPVsf( const double& ts, const double& tf,
 }
 
 
-const PathRetVal<double> PathInterpolator::finish_time() {
+const RetVal<double> PathInterpolator::finish_time() {
   if( !is_path_generated_ ) {
-    return PathRetVal<double>(PATH_NOT_GENERATED, -1.0);
+    return RetVal<double>(PATH_NOT_GENERATED, -1.0);
   }
-  return PathRetVal<double>(PATH_SUCCESS, tf_);
+  return RetVal<double>(PATH_SUCCESS, tf_);
 }
 
-const PathRetVal<double> PathInterpolator::v_limit() {
+const RetVal<double> PathInterpolator::v_limit() {
   if( !is_v_limit_ ) {
-    return PathRetVal<double>(PATH_NOT_DEF_VEL_LIMIT, v_limit_);
+    return RetVal<double>(PATH_NOT_DEF_VEL_LIMIT, v_limit_);
   }
-  return PathRetVal<double>(PATH_SUCCESS, v_limit_);
+  return RetVal<double>(PATH_SUCCESS, v_limit_);
 }
