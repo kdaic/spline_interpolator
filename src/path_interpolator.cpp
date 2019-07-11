@@ -31,7 +31,7 @@ T Queue<T>::pop() {
 }
 
 template<typename T>
-const T Queue<T>::get( const std::size_t index ) {
+const T Queue<T>::get( const std::size_t index ) const {
   return queue_buffer_.at(index);
 }
 
@@ -50,7 +50,7 @@ void Queue<T>::clear() {
 }
 
 template<typename T>
-const std::size_t Queue<T>::size() {
+const std::size_t Queue<T>::size() const {
   return queue_buffer_.size();
 }
 
@@ -165,6 +165,24 @@ PathInterpolator::PathInterpolator() :
 PathInterpolator::~PathInterpolator() {
 }
 
+RetVal<double> PathInterpolator::generate_path(
+                 const double& xs, const double& xf,
+                 const double& vs, const double& vf,
+                 const double& ts, const double& tf ) {
+  if ( ts < 0.0 || ts >= tf ) {
+    return RetVal<double>( PATH_INVALID_INPUT_TIME, -1.0 );
+  }
+
+  TPVQueue tpv_queue;
+  tpv_queue.push( ts, xs, vs );
+  tpv_queue.push( tf, xf, vf );
+
+   set_TPVsf( ts, tf,  xs, xf,  ts, tf );
+
+  return generate_path(tpv_queue);
+}
+
+
 void PathInterpolator::set_TPVsf( const double& ts, const double& tf,
                                   const double& xs, const double& xf,
                                   const double& vs, const double& vf ) {
@@ -175,7 +193,6 @@ void PathInterpolator::set_TPVsf( const double& ts, const double& tf,
   vs_ = vs;
   vf_ = vf;
 }
-
 
 const RetVal<double> PathInterpolator::finish_time() {
   if( !is_path_generated_ ) {

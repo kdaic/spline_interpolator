@@ -18,22 +18,6 @@ public:
   /// Destructor
   ~CubicSplineInterpolator();
 
-  /// Genrate tragectory path from initial-finish point
-  /// @param[in] xs start position
-  /// @param[in] xf finish position
-  /// @param[in] vs start velocity (default: 0.0)
-  /// @param[in] vf finish velocity (default: 0.0)
-  /// @param[in] ts start time (default: 0.0)
-  /// @paran[in] tf finish time (default: 0.0)
-  /// @brief calcurate tragectory parameter
-  /// @return
-  /// - PATH_SUCCESS and total travel time (tf - ts)
-  /// @details
-  /// Path parameters are kept internally.
-  RetVal<double> generate_path( const double& xs, const double& xf,
-                                    const double& vs=0.0, const double& vf=0.0,
-                                    const double& ts=0.0, const double& tf=0.0 );
-
   /// Generate tragectory path from Time,Position queue
   /// @param[in] Time,Position queue
   /// @return
@@ -56,13 +40,13 @@ public:
   /// ```
   ///
   /// and interpolate (v1,a1,j1), (v1,a1,j1),.. automatically.
-  virtual RetVal<double> genrate_path( const TPQueue& tp_queue );
+  virtual RetVal<double> generate_path( const TPQueue& tp_queue );
 
   /// Generate tragectory path from Time,Position(,Velocity) queue
   /// @param[in] Time,Position(,Velocity) queue
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
-  virtual RetVal<double> genrate_path( const TPVQueue& tpv_queue );
+  virtual RetVal<double> generate_path( const TPVQueue& tpv_queue );
 
 
   /// Pop the position and velocity at the input-time from generated tragectory

@@ -224,7 +224,7 @@ public:
 
   /// Get TPV value at the index
   /// @return constant TPV
-  const T get( const std::size_t index );
+  const T get( const std::size_t index ) const;
 
   /// Set T value at the input-index
   /// @param[in] the index for setting T data
@@ -239,7 +239,7 @@ public:
 
   /// Get queue size
   /// @return size of queue_buffer_
-  const std::size_t size();
+  const std::size_t size() const;
 
 protected:
   /// The buffer instance
@@ -367,6 +367,7 @@ public:
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
   /// @details
+  /// Path parameters are kept internally.
   /// If you only give start position & velocity and finish ones,
   /// (you give time zero as start time = 0.0, finish time = 0.0)
   ///
@@ -376,9 +377,9 @@ public:
   ///
   /// interpolator calculates minmum interval time.
   /// This means 100% in the limitation.
-  virtual RetVal<double> generate_path( const double& xs, const double& xf,
-                                        const double& vs=0.0, const double& vf=0.0,
-                                        const double& ts=0.0, const double& tf=0.0 )=0;
+  RetVal<double> generate_path( const double& xs, const double& xf,
+                                const double& vs=0.0, const double& vf=0.0,
+                                const double& ts=0.0, const double& tf=0.0 );
 
   /// Generate tragectory path from Time,Position queue
   /// @param[in] Time,Position queue
@@ -391,7 +392,7 @@ public:
   /// (ts, xs), (t1, x1), (t2, x2), ..., (tf, xf)
   /// ```
   ///
-  /// Interpolator set start & finish velocity, acceleration,(and jerk) as zero,
+  /// Interpolator sets start & finish velocity, acceleration,(and jerk) as zero,
   ///
   /// ```
   /// (ts, xs, vs=0, as=0, js=0),
@@ -401,14 +402,14 @@ public:
   /// (tf, xf, vf=0, a_f=0, j_f=0)
   /// ```
   ///
-  /// and interpolate (v1,a1,j1), (v1,a1,j1),.. automatically.
-  virtual RetVal<double> genrate_path( const TPQueue& tp_queue )=0;
+  /// and interpolates intermediate (v1,a1,j1), (v2,a2,j2),.. automatically.
+  virtual RetVal<double> generate_path( const TPQueue& tp_queue )=0;
 
   /// Generate tragectory path from Time,Position(,Velocity) queue
   /// @param[in] Time,Position(,Velocity) queue
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
-  virtual RetVal<double> genrate_path( const TPVQueue& tpv_queue )=0;
+  virtual RetVal<double> generate_path( const TPVQueue& tpv_queue )=0;
 
   /// Pop the position and velocity at the input-time from generated tragectory
   /// @param t input time
