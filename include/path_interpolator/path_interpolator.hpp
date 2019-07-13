@@ -1,24 +1,18 @@
 #ifndef INCLUDE_BASE_PATH_INTERPOLATOR_HPP_
 #define INCLUDE_BASE_PATH_INTERPOLATOR_HPP_
-#include <cstdlib>
-
-#include <string>
-#include <sstream>
-#include <iostream>
 
 #include <math.h>
 #include <deque>
 
-#include <exception>
-#include <stdexcept>
-
 #include "plog/Log.h"
 #include <plog/Appenders/ColorConsoleAppender.h>
+
+#include "path_exception.hpp"
 
 #define PRECISION 1.0e-15
 namespace interp {
 
-template<class T> bool g_is_nearEq(T a, T b) {
+template<class T> bool g_nearEq(T a, T b) {
   if ( fabs(a-b) > PRECISION ) {
     return false;
   }
@@ -30,7 +24,7 @@ enum RetCode{
   PATH_SUCCESS=0,
   PATH_INVALID_INPUT_INDEX,
   PATH_INVALID_INPUT_TIME,
-  PATH_TOO_SHORT_QUEUE_SIZE,
+  PATH_QUEUE_SIZE_NOT_ENOUGH,
   PATH_NOT_GENERATED,
   PATH_NOT_DEF_100PER_PATH,
   PATH_NOT_DEF_VEL_LIMIT,
@@ -63,77 +57,6 @@ struct RetVal {
   T value;
 };
 
-/////////////////////////////////////////////////////////////////////////////////////////
-
-/// Path Exception code
-enum ExceptionCode {
-  PATH_EXCEPTION=0,
-  PATH_UNDEF_EXCEPTION
-};
-
-/// convert number type to string for(C++98)
-/// @param[in] num number
-/// @return converted string of the argument number
-template<class T> const std::string g_num2str(const T& num) {
-  std::stringstream s;
-  s << num;
-  return s.str();
-};
-
-/// wrapper of throw()
-#define THROW( exception_class_name, message )                          \
-  throw exception_class_name( message + std::string(" -- at ")      \
-                              + std::string(__FILE__) + std::string(": l.") \
-                              + g_num2str(__LINE__) + std::string(": ") \
-                              + std::string(__func__ ) + std::string("().") )
-
-/// Path Exception class
-class PathException : public std::runtime_error {
-public:
-  /// Constructor
-  /// @param[in] message explaination of this exception
-  /// @param[in] name the name of this exception class
-  explicit PathException( const std::string& message=" ",
-                          const std::string& name="PathException" ) :
-    std::runtime_error( "["+ name +"]: "+ message ),
-    code_(PATH_EXCEPTION) {}
-
-  /// Destructor
-  ~PathException() throw() {}
-
-  /// get Exception Code
-  /// @return code_
-  virtual const ExceptionCode code() { return code_; }
-private:
-  /// Exception Code
-  const ExceptionCode code_;
-};
-
-/// Undefined Path Exception class
-class UndefPathException : public PathException {
-public:
-  /// Constructor
-  /// @param[in] message Explaination of this exception
-  explicit UndefPathException( const std::string& message,
-                          const std::string& name="UndefPathException" ) :
-    PathException( message, name ),
-    code_(PATH_EXCEPTION) {}
-
-  /// get Exception Code
-  /// @return code_
-  virtual const ExceptionCode code() { return code_; }
-private:
-  /// Exception Code
-  const ExceptionCode code_;
-};
-
-/// Undefined Exception Handler
-/// Call this handler from std::set_unexpected(g_~_hander)
-/// before calling following classes of interp namespace at the main().
-/// If not call this, undefined exceptions may not be catched and std::termniate().
-/// void g_undef_exception_handler() {
-///   throw UndefPathException("not specified");
-/// };
 
 /////////////////////////////////////////////////////////////////////////////////////////
 

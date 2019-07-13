@@ -12,11 +12,10 @@ RetVal<double> CubicSplineInterpolator::generate_path(
                  const TPQueue& tp_queue ) {
   std::size_t finish_index = tp_queue.size() - 1;
   if ( finish_index <= 0 ) {
-    return RetVal<double>( PATH_TOO_SHORT_QUEUE_SIZE, -1.0 );
+    return RetVal<double>( PATH_QUEUE_SIZE_NOT_ENOUGH, -1.0 );
   }
 
-  if ( g_is_nearEq( tp_queue.get(0).time, 0.0 )
-       && g_is_nearEq( tp_queue.get(finish_index).time, 0.0 ) ) {
+  if ( g_nearEq( tp_queue.get(finish_index).time, 0.0 ) ) {
     return RetVal<double>( PATH_NOT_DEF_100PER_PATH, -1.0 );
   }
 
@@ -33,11 +32,10 @@ RetVal<double> CubicSplineInterpolator::generate_path(
                  const TPVQueue& tpv_queue ) {
   std::size_t finish_index = tpv_queue.size() - 1;
   if ( finish_index <= 0 ) {
-    return RetVal<double>( PATH_TOO_SHORT_QUEUE_SIZE, -1.0 );
+    return RetVal<double>( PATH_QUEUE_SIZE_NOT_ENOUGH, -1.0 );
   }
 
-  if ( g_is_nearEq( tpv_queue.get(0).time, 0.0 )
-       && g_is_nearEq( tpv_queue.get(finish_index).time, 0.0 ) ) {
+  if ( g_nearEq( tpv_queue.get(finish_index).time, 0.0 ) ) {
     return RetVal<double>( PATH_NOT_DEF_100PER_PATH, -1.0 );
   }
 
@@ -47,4 +45,16 @@ RetVal<double> CubicSplineInterpolator::generate_path(
              tpv_queue_.get(0).velocity, tpv_queue_.get(finish_index).velocity );
 
   return RetVal<double>(PATH_NOT_DEF_FUNCTION, -1.0);
+}
+
+RetVal<std::vector<double> >
+CubicSplineInterpolator::tridiagonal_matrix_eq_solver(
+         const std::vector<double>& d, const std::vector<double>& u,
+         const std::vector<double>& l, const std::vector<double>& p ) {
+  if( d.size() != u.size() || d.size() != l.size() || d.size() != p.size() ) {
+    THROW( InvalidInputSize, " all input parmaeter size must be unified." );
+  }
+
+  return RetVal<std::vector<double> >( PATH_NOT_DEF_FUNCTION,
+                                       std::vector<double>() );
 }
