@@ -2,6 +2,17 @@
 
 using namespace interp;
 
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+template
+class RetVal<double>;
+
+template
+class RetVal<std::vector<double> >;
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
 template<typename T>
 Queue<T>::Queue() {
 }
@@ -31,12 +42,12 @@ T Queue<T>::pop() {
 }
 
 template<typename T>
-const T Queue<T>::get( const std::size_t index ) const {
+const T Queue<T>::get( const std::size_t& index ) const {
   return queue_buffer_.at(index);
 }
 
 template<typename T>
-RetCode Queue<T>::set( const std::size_t index, const T newval ) {
+RetCode Queue<T>::set( const std::size_t& index, const T newval ) {
   if( index < 0 || index > queue_buffer_.size() -1 ) {
     return PATH_INVALID_INPUT_INDEX;
   }
@@ -87,7 +98,7 @@ RetCode TPQueue::push( const double& time,
   return Queue<TimePosition>::push( newTPval );
 }
 
-RetCode TPQueue::set( const std::size_t index,
+RetCode TPQueue::set( const std::size_t& index,
                       const TimePosition& tp_val ) {
   if( index < 0 || index > queue_buffer_.size() -1 ) {
     return PATH_INVALID_INPUT_INDEX;
@@ -137,7 +148,7 @@ RetCode TPVQueue::push( const double& time,
   return Queue<TPV>::push( newTPVval );
 }
 
-RetCode TPVQueue::set( const std::size_t index,
+RetCode TPVQueue::set( const std::size_t& index,
                        const TPV& tpv_val ) {
   if( index < 0 || index > queue_buffer_.size() -1 ) {
     return PATH_INVALID_INPUT_INDEX;
@@ -152,11 +163,6 @@ RetCode TPVQueue::set( const std::size_t index,
   return PATH_SUCCESS;
 }
 
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
-template
-class RetVal<double>;
 
 PathInterpolator::PathInterpolator() :
   is_path_generated_(false), is_v_limit_(false) {

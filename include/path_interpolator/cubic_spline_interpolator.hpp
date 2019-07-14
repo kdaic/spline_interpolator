@@ -61,10 +61,10 @@ private:
   /// @param[in] d diagonal element lists
   /// @param[in] u upper element lists
   /// @param[in] l lower element lists
-  /// @param[in] p pushed out parameter lists
+  /// @param[in] p pushed out parameters lists of Matrix Converter
   /// @return x answer lists of tridiagonal matrix equation
   /// @details
-  /// Input Parameters d, u, l, p lists are assined in following Matrix.
+  /// Input Parameters d, u, l, p lists are assined in following Matrix. \n
   ///
   /// ```
   /// ┌                                                          ┐┌     ┐   ┌     ┐
@@ -81,10 +81,24 @@ private:
   /// └                                                          ┘└     ┘   └     ┘
   /// ```
   ///
-  /// This solver solved Output x lists.
-  RetVal<std::vector<double> > tridiagonal_matrix_eq_solver(
-                                 const std::vector<double>& d, const std::vector<double>& u,
-                                 const std::vector<double>& l, const std::vector<double>& p );
+  /// This solver solved Output x lists. \n
+  /// If the size of list is 1, Solver expects following Matrix eq. \n
+  ///
+  /// ```
+  /// [ d_0 ][x_0] = [p_0]
+  /// ```
+  ///
+  /// If the size of list is 2, Solver expects following Matrix eq. \n
+  ///
+  /// ```
+  /// ┌         ┐┌     ┐   ┌     ┐
+  /// │ d_0 u_0 ││ x_0 │ = │ p_0 │
+  /// │ l_1 d_1 ││ x_1 │   │ p_1 │
+  /// └         ┘└     ┘   └     ┘
+  /// ```
+  RetVal<std::vector<double> >
+  tridiagonal_matrix_eq_solver( std::vector<double> d, const std::vector<double>& u,
+                                const std::vector<double>& l, std::vector<double> p);
 };
 
 }

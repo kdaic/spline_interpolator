@@ -1,6 +1,7 @@
 #ifndef INCLUDE_BASE_PATH_INTERPOLATOR_HPP_
 #define INCLUDE_BASE_PATH_INTERPOLATOR_HPP_
 
+#include <typeinfo>
 #include <math.h>
 #include <deque>
 
@@ -13,7 +14,27 @@
 namespace interp {
 
 template<class T> bool g_nearEq(T a, T b) {
+  if ( typeid(a) != typeid(int)
+       && typeid(a) != typeid(float)
+       && typeid(a) != typeid(double)
+       && typeid(b) != typeid(int)
+       && typeid(b) != typeid(float)
+       && typeid(b) != typeid(double) ) {
+    THROW( InvalidTypeArgument, "type must be numerical value");
+  }
   if ( fabs(a-b) > PRECISION ) {
+    return false;
+  }
+  return true;
+}
+
+template<class T> bool g_nearZero(T a) {
+  if ( typeid(a) != typeid(int)
+       && typeid(a) != typeid(float)
+       && typeid(a) != typeid(double) ) {
+    THROW( InvalidTypeArgument, "type must be numerical value");
+  }
+  if ( fabs(a) > PRECISION ) {
     return false;
   }
   return true;
@@ -24,7 +45,9 @@ enum RetCode{
   PATH_SUCCESS=0,
   PATH_INVALID_INPUT_INDEX,
   PATH_INVALID_INPUT_TIME,
-  PATH_QUEUE_SIZE_NOT_ENOUGH,
+  PATH_INVALID_QUEUE_SIZE,
+  PATH_INVALID_ARGUMENT_SIZE,
+  PATH_INVALID_ARGUMENT_VALUE_ZERO,
   PATH_NOT_GENERATED,
   PATH_NOT_DEF_100PER_PATH,
   PATH_NOT_DEF_VEL_LIMIT,
@@ -36,7 +59,7 @@ enum RetCode{
 template<class T>
 struct RetVal {
   /// Constructor
-  RetVal(): retcode(PATH_NOT_RETURN), value(-1) {};
+  RetVal(): retcode(PATH_NOT_RETURN) {};
 
   /// Constructor(data copy)
   RetVal(const RetCode& ret, const T& val):
@@ -148,7 +171,7 @@ public:
 
   /// Get TPV value at the index
   /// @return constant TPV
-  const T get( const std::size_t index ) const;
+  const T get( const std::size_t& index ) const;
 
   /// Set T value at the input-index
   /// @param[in] the index for setting T data
@@ -156,7 +179,7 @@ public:
   /// @return setted T data
   /// - PATH_SUCCESS: No error
   /// - PATH_INVALID_INPUT_INDEX: Not exist input-index
-  virtual RetCode set( const std::size_t index, const T newval );
+  virtual RetCode set( const std::size_t& index, const T newval );
 
   /// Clear all data of queue buffer
   void clear();
@@ -174,6 +197,8 @@ protected:
 
 template
 class Queue<TimePosition>;
+
+/////////////////////////////////////////////////////////////////////////////////////////
 
 /// TimePosition Queue buffer class
 class TPQueue : public Queue<TimePosition> {
@@ -214,9 +239,14 @@ public:
   /// - PATH_SUCCESS: no error
   /// - PATH_INVALID_INPUT_TIME: the time is less than the one of previous index
   /// - PATH_INVALID_INPUT_INDEX: Not exist input-index
-  virtual RetCode set( const std::size_t index, const TimePosition& tp_val );
+  virtual RetCode set( const std::size_t& index, const TimePosition& tp_val );
 
 }; // End of class TPQueue
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+template
+class Queue<TPV>;
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -262,7 +292,7 @@ public:
   /// - PATH_SUCCESS: no error
   /// - PATH_INVALID_INPUT_TIME: the time is less than the one of previous index
   /// - PATH_INVALID_INPUT_INDEX: Not exist input-index
-  virtual RetCode set( const std::size_t index, const TPV& tpv_val );
+  virtual RetCode set( const std::size_t& index, const TPV& tpv_val );
 
 }; // End of class TPVQueue
 

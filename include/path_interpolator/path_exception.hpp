@@ -19,6 +19,7 @@ namespace interp {
 enum ExceptionCode {
   PATH_EXCEPTION=0,
   PATH_UNDEF_EXCEPTION,
+  PATH_IVALID_TYPE_ARGUMENT,
   PATH_IVALID_INPUT_SIZE
 };
 
@@ -78,7 +79,20 @@ public:
 ///   throw UndefPathException("not specified");
 /// };
 
-/////////////////////////////////////////////////////////////////////////////////////////
+/// Invalid Type Argument Exception Class
+class InvalidTypeArgument : public PathException {
+public:
+  /// Constructor
+  /// @param[in] message Explaination of this exception
+  explicit InvalidTypeArgument( const std::string& message,
+                                const std::string& name="InvalidTypeArgument" ) :
+    PathException( message, name ) {}
+
+  /// get Exception Code
+  /// @return code_
+  virtual const ExceptionCode code() { return PATH_IVALID_TYPE_ARGUMENT; }
+};
+
 
 /// Invalid Input Size Exception Class
 class InvalidInputSize : public PathException {
@@ -86,7 +100,7 @@ public:
   /// Constructor
   /// @param[in] message Explaination of this exception
   explicit InvalidInputSize( const std::string& message,
-                             const std::string& name="InvaliInputSize" ) :
+                             const std::string& name="InvalidInputSize" ) :
     PathException( message, name ) {}
 
   /// get Exception Code
