@@ -22,7 +22,7 @@ protected:
 
 using namespace interp;
 
-TEST_F( CubicSplineTest, tri_matrix_eq_solver_invalid_input_size ) {
+TEST_F( CubicSplineTest, tri_matrix_eq_solver_invalid_argument_size_not_same ) {
   double d_array[] = {4, 3};
   std::vector<double> d(d_array, d_array + 2);
   double u_array[] = {3, 2};
@@ -33,7 +33,7 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_invalid_input_size ) {
   std::vector<double> p(p_array, p_array + 1);
 
   EXPECT_THROW( m_tridiagonal_matrix_eq_solver( d, u, l, p ),
-                InvalidInputSize );
+                InvalidArgumentSize );
 }
 
 
@@ -42,12 +42,12 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_invalid_argument_size ) {
   std::vector<double> u;
   std::vector<double> l;
   std::vector<double> p;
-  RetVal<std::vector<double> > ret = m_tridiagonal_matrix_eq_solver( d, u, l, p );
-  EXPECT_EQ( ret.retcode, PATH_INVALID_ARGUMENT_SIZE );
+  EXPECT_THROW( m_tridiagonal_matrix_eq_solver( d, u, l, p ),
+                InvalidArgumentSize );
 }
 
 
-TEST_F( CubicSplineTest, tri_matrix_eq_solver_invalid_argument_value_size ) {
+TEST_F( CubicSplineTest, tri_matrix_eq_solver_invalid_argument_value_zero ) {
   double d_array[] = {0, 3};
   std::vector<double> d(d_array, d_array + 2);
   double u_array[] = {3, 2};

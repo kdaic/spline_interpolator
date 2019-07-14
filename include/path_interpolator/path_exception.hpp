@@ -20,7 +20,7 @@ enum ExceptionCode {
   PATH_EXCEPTION=0,
   PATH_UNDEF_EXCEPTION,
   PATH_IVALID_TYPE_ARGUMENT,
-  PATH_IVALID_INPUT_SIZE
+  PATH_IVALID_ARGUMENT_SIZE
 };
 
 /// convert number type to string for(C++98)
@@ -94,18 +94,18 @@ public:
 };
 
 
-/// Invalid Input Size Exception Class
-class InvalidInputSize : public PathException {
+/// Invalid Argument Size Exception Class
+class InvalidArgumentSize : public PathException {
 public:
   /// Constructor
   /// @param[in] message Explaination of this exception
-  explicit InvalidInputSize( const std::string& message,
-                             const std::string& name="InvalidInputSize" ) :
+  explicit InvalidArgumentSize( const std::string& message,
+                                const std::string& name="InvalidArgumentSize" ) :
     PathException( message, name ) {}
 
   /// get Exception Code
   /// @return code_
-  virtual const ExceptionCode code() { return PATH_IVALID_INPUT_SIZE; }
+  virtual const ExceptionCode code() { return PATH_IVALID_ARGUMENT_SIZE; }
 };
 
 }

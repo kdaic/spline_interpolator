@@ -58,11 +58,10 @@ CubicSplineInterpolator::tridiagonal_matrix_eq_solver(
          std::vector<double> d, const std::vector<double>& u,
          const std::vector<double>& l, std::vector<double> p ) {
   if( d.size() != u.size() || d.size() != l.size() || d.size() != p.size() ) {
-    THROW( InvalidInputSize, " all input parmaeter size must be same." );
+    THROW( InvalidArgumentSize, " all input parmaeter size must be same." );
   }
   if( d.size() < 1 ) {
-    return RetVal<std::vector<double> >( PATH_INVALID_ARGUMENT_SIZE,
-                                         std::vector<double>() );
+    THROW( InvalidArgumentSize, "input parmaeter size must be >= 1." );
   }
   double temp;
   // first loop from top
