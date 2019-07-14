@@ -24,9 +24,10 @@ g++, googletest, gnuplot
 ├── bin : Destination of binaries (path_interpolator, unit_test)
 ├── lib : Destination of static library (libpath_interpolator.a)
 ├── include
-│   ├── spline_interpolator
+│   ├── path_interpolator
 │   │   ├── cubic_spline_interpolator.hpp
-│   │   └── path_interpolator.hpp
+│   │   ├── path_interpolator.hpp
+│   │   └── path_exception.hpp
 │   └── submodules
 │       └── plog : 3rdparty logger tool.
 ├── src
@@ -34,6 +35,8 @@ g++, googletest, gnuplot
 │   ├── path_interpolator.cpp
 │   └── cubic_spline_interpolator.cpp
 └── test
+    ├── test_cubic_spline_interpolator.cpp
+    ├── test_path_interpolator.cpp
     ├── unit_test.cpp
     └── util
         ├── gnuplot_realtime.cpp
