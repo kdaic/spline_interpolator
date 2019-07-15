@@ -187,9 +187,22 @@ public:
   /// @return size of queue_buffer_
   const std::size_t size() const;
 
+  /// Get dT at the input-index
+  /// @param[in] index the index getting dT from queue
+  /// @return dT at the input-index
+  const RetVal<double> dT( const std::size_t& index );
+
 protected:
+  /// calculate dT(t[index] - t[index-1]) internally at push() or set()
+  /// @param[in] index the index calculating dT
+  /// @return calculated dT
+  virtual const double calc_dT( const std::size_t & index );
+
   /// The buffer instance
   std::deque<T> queue_buffer_;
+
+  /// dT(t[index] - t[index-1]) queue calculated internally & automatically at the push()
+  std::deque<double> dT_queue_;
 }; // End of class TPVQueue
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -229,17 +242,21 @@ public:
   /// - PATH_SUCCESS: no error
   /// - PATH_INVALID_INPUT_TIME: the time is less than the one of previous index
   RetCode push( const double& time,
-                    const double& position );
+                const double& position );
 
   /// Set TimePosition value at the input-index (overload)
   /// @param[in] the index for setting TPV data
-  /// @param[in] tp_val setting TPV value
+  /// @param[in] newTPval setting TPV value
   /// @return
   /// - PATH_SUCCESS: no error
   /// - PATH_INVALID_INPUT_TIME: the time is less than the one of previous index
   /// - PATH_INVALID_INPUT_INDEX: Not exist input-index
-  virtual RetCode set( const std::size_t& index, const TimePosition& tp_val );
+  virtual RetCode set( const std::size_t& index, const TimePosition& newTPval );
 
+  /// calculate dT(t[index] - t[index-1]) internally at push() or set()
+  /// @param[in] index the index calculating dT
+  /// @return calculated dT
+  virtual const double calc_dT( const std::size_t & index );
 }; // End of class TPQueue
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -286,13 +303,17 @@ public:
 
   /// Set TPV value at the input-index (overload)
   /// @param[in] the index for setting TPV data
-  /// @param[in] tpv_val setting TPV value
+  /// @param[in] newTPVval setting TPV value
   /// @return
   /// - PATH_SUCCESS: no error
   /// - PATH_INVALID_INPUT_TIME: the time is less than the one of previous index
   /// - PATH_INVALID_INPUT_INDEX: Not exist input-index
-  virtual RetCode set( const std::size_t& index, const TPV& tpv_val );
+  virtual RetCode set( const std::size_t& index, const TPV& newTPVval );
 
+  /// calculate dT(t[index] - t[index-1]) internally at push() or set()
+  /// @param[in] index the index calculating dT
+  /// @return calculated dT
+  virtual const double calc_dT( const std::size_t & index );
 }; // End of class TPVQueue
 
 
@@ -302,12 +323,21 @@ public:
 class PathInterpolator
 {
 public:
-
   /// Constructor
   PathInterpolator();
 
   /// Destructor
   virtual ~PathInterpolator();
+
+ /// Get fiish-time
+  /// @return
+  /// - PATH_SUCCESS and tf
+  /// - PATH_NOT_GENERATED and -1.0
+  const RetVal<double> finish_time();
+
+  /// Get limit velocity( if exists )
+  /// @return limit velocity
+  const RetVal<double> v_limit();
 
   /// Genrate tragectory path from initial-finish point
   /// @param[in] xs start position
@@ -370,19 +400,6 @@ public:
   /// - PATH_SUCCESS & TPV at the input time
   /// - PATH_NOT_GENERATED and TPV is time=-1.0, position=0.0, velocity=0.0
   virtual RetVal<TPV> pop(const double& t)=0;
-
-  /// Get fiish-time
-  /// @return
-  /// - PATH_SUCCESS and tf
-  /// - PATH_NOT_GENERATED and -1.0
-  const RetVal<double> finish_time();
-
-  /// Get limit velocity( if exists )
-  /// @return limit velocity
-  const RetVal<double> v_limit();
-
-  /// Get TPVQueue
-  ///
 
 protected:
   /// Set start and finish TPV

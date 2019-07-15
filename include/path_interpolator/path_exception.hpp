@@ -20,7 +20,8 @@ enum ExceptionCode {
   PATH_EXCEPTION=0,
   PATH_UNDEF_EXCEPTION,
   PATH_IVALID_TYPE_ARGUMENT,
-  PATH_IVALID_ARGUMENT_SIZE
+  PATH_IVALID_ARGUMENT_SIZE,
+  PATH_IVALID_ARGUMENT_VALUE
 };
 
 /// convert number type to string for(C++98)
@@ -106,6 +107,21 @@ public:
   /// get Exception Code
   /// @return code_
   virtual const ExceptionCode code() { return PATH_IVALID_ARGUMENT_SIZE; }
+};
+
+
+/// Invalid Argument Value Exception Class
+class InvalidArgumentValue : public PathException {
+public:
+  /// Constructor
+  /// @param[in] message Explaination of this exception
+  explicit InvalidArgumentValue( const std::string& message,
+                                 const std::string& name="InvalidArgumentValue" ) :
+    PathException( message, name ) {}
+
+  /// get Exception Code
+  /// @return code_
+  virtual const ExceptionCode code() { return PATH_IVALID_ARGUMENT_VALUE; }
 };
 
 }

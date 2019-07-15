@@ -76,7 +76,9 @@ CubicSplineInterpolator::tridiagonal_matrix_eq_solver(
                                            std::vector<double>() );
     }
   }
-  // solved x
+  //
+  // solve x
+  //
   std::vector<double> x( d.size() );
   std::size_t last_index = d.size()-1;
   x[last_index] = p[last_index] / d[last_index];
