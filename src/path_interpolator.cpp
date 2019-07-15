@@ -251,15 +251,20 @@ RetVal<double> PathInterpolator::generate_path(
                  const double& xs, const double& xf,
                  const double& vs, const double& vf,
                  const double& ts, const double& tf ) {
-  if ( ts < 0.0 || ts >= tf ) {
+  if( ts < 0.0 ||
+      ( tf > 0.0 && ts >= tf ) ) {
     return RetVal<double>( PATH_INVALID_INPUT_TIME, -1.0 );
   }
 
-  TPVQueue tpv_queue;
-  tpv_queue.push( ts, xs, vs );
-  tpv_queue.push( tf, xf, vf );
+  if( tf > 0.0 ) {
+    TPVQueue tpv_queue;
+    tpv_queue.push( ts, xs, vs );
+    tpv_queue.push( tf, xf, vf );
 
-  set_TPVsf( ts, tf,  xs, xf,  ts, tf );
+    set_TPVsf( ts, tf,  xs, xf,  ts, tf );
 
-  return generate_path(tpv_queue);
+    return generate_path(tpv_queue);
+  }
+
+  return RetVal<double>(PATH_NOT_DEF_FUNCTION, -1.0);
 }

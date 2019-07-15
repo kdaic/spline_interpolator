@@ -19,7 +19,7 @@ public:
   /// Destructor
   ~CubicSplineInterpolator();
 
-  /// Generate tragectory path from Time,Position queue
+  /// Generate a path from Time, Position queue
   /// @param[in] Time,Position queue
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
@@ -34,17 +34,17 @@ public:
   ///
   /// ```
   /// (ts, xs, vs=0, as=0, js=0),
-  /// (t1, x1, v1,   a1,   j1),
-  /// (t2, x2, v2,   a2,   j2),
+  /// (t1, x1, v1=?, a1=?, j1=?),
+  /// (t2, x2, v2=?, a2=?, j2=?),
   ///  ...,
-  /// (tf, xf, vf=0, a_f=0, j_f=0)
+  /// (tf, xf, vf=0, af=0, jf=0)
   /// ```
   ///
   /// and interpolate (v1,a1,j1), (v1,a1,j1),.. automatically.
   virtual RetVal<double> generate_path( const TPQueue& tp_queue );
 
-  /// Generate tragectory path from Time,Position(,Velocity) queue
-  /// @param[in] Time,Position(,Velocity) queue
+  /// Generate a path from Time, Position(, Velocity) queue
+  /// @param[in] Time,Position(, Velocity) queue
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
   virtual RetVal<double> generate_path( const TPVQueue& tpv_queue );
@@ -58,13 +58,13 @@ public:
 
 private:
   /// Tridiagonal Matrix Equation Solver
-  /// @param[in] d diagonal element lists
-  /// @param[in] u upper element lists
-  /// @param[in] l lower element lists
-  /// @param[in] p pushed out parameters lists of Matrix Converter
-  /// @return x answer lists of tridiagonal matrix equation
+  /// @param[in] d diagonal elements list
+  /// @param[in] u upper elements list
+  /// @param[in] l lower elements list
+  /// @param[in] p pushed out parameters list of Matrix Conversion
+  /// @return x solved list of tridiagonal matrix equation
   /// @details
-  /// Input Parameters d, u, l, p lists are assined in following Matrix. \n
+  /// Input Parameters d, u, l, p lists are assined in following Matrix eq.
   ///
   /// ```
   /// ┌                                                          ┐┌     ┐   ┌     ┐
@@ -82,13 +82,13 @@ private:
   /// ```
   ///
   /// This solver solved Output x lists. \n
-  /// If the size of list is 1, Solver expects following Matrix eq. \n
+  /// If the size of list is 1, Solver expects following Matrix eq.
   ///
   /// ```
   /// [ d_0 ][x_0] = [p_0]
   /// ```
   ///
-  /// If the size of list is 2, Solver expects following Matrix eq. \n
+  /// If the size of list is 2, Solver expects following Matrix eq.
   ///
   /// ```
   /// ┌         ┐┌     ┐   ┌     ┐

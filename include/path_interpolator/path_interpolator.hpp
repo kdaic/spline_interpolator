@@ -339,7 +339,7 @@ public:
   /// @return limit velocity
   const RetVal<double> v_limit();
 
-  /// Genrate tragectory path from initial-finish point
+  /// Genrate a path from initial-finish point
   /// @param[in] xs start position
   /// @param[in] xf finish position
   /// @param[in] vs start velocity (default: 0.0)
@@ -350,21 +350,21 @@ public:
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
   /// @details
-  /// Path parameters are kept internally.
-  /// If you only give start position & velocity and finish ones,
-  /// (you give time zero as start time = 0.0, finish time = 0.0)
+  /// Path parameters are kept internally. \n
+  /// If you only give start position & velocity and finish ones, \n
+  /// (you give impossible finish time as finish time <= 0.0)
   ///
   /// ```
-  /// (x_s, v_s), (x_f, v_f)
+  /// (ts, xs, vs), (tf=?, xf, vf)
   /// ```
   ///
-  /// interpolator calculates minmum interval time.
-  /// This means 100% in the limitation.
-  RetVal<double> generate_path( const double& xs, const double& xf,
-                                const double& vs=0.0, const double& vf=0.0,
-                                const double& ts=0.0, const double& tf=0.0 );
+  /// interpolator calculates minmum interval time -> fiish time(tf). \n
+  /// This means 100% mimum-time path in the limitation.
+  virtual RetVal<double> generate_path( const double& xs, const double& xf,
+                                        const double& vs=0.0, const double& vf=0.0,
+                                        const double& ts=0.0, const double& tf=0.0 );
 
-  /// Generate tragectory path from Time,Position queue
+  /// Generate a path from Time, Position queue
   /// @param[in] Time,Position queue
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
@@ -379,17 +379,17 @@ public:
   ///
   /// ```
   /// (ts, xs, vs=0, as=0, js=0),
-  /// (t1, x1, v1,   a1,   j1),
-  /// (t2, x2, v2,   a2,   j2),
+  /// (t1, x1, v1=?, a1=?, j1=?),
+  /// (t2, x2, v2=?, a2=?, j2=?),
   ///  ...,
-  /// (tf, xf, vf=0, a_f=0, j_f=0)
+  /// (tf, xf, vf=0, af=0, jf=0)
   /// ```
   ///
   /// and interpolates intermediate (v1,a1,j1), (v2,a2,j2),.. automatically.
   virtual RetVal<double> generate_path( const TPQueue& tp_queue )=0;
 
-  /// Generate tragectory path from Time,Position(,Velocity) queue
-  /// @param[in] Time,Position(,Velocity) queue
+  /// Generate a path from Time, Position(, Velocity) queue
+  /// @param[in] Time, Position(, Velocity) queue
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
   virtual RetVal<double> generate_path( const TPVQueue& tpv_queue )=0;
