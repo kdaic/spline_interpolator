@@ -23,6 +23,9 @@ Queue<T>::~Queue() {
 
 template<typename T>
 Queue<T> Queue<T>::operator=(const Queue<T>& src) {
+  if( src.size() < 1 ) {
+    throw InvalidIndexAccess( "source queue size is empty." );
+  }
   this->clear();
   queue_buffer_ = src.queue_buffer_;
   return *this;
@@ -40,19 +43,24 @@ RetCode Queue<T>::push( const T& newval ) {
 }
 
 template<typename T>
-T Queue<T>::pop() {
+RetVal<T> Queue<T>::pop() {
+  if( queue_buffer_.empty() ) {
+    T retval();
+    return RetVal<T>(PATH_QUEUE_SIZE_EMPTY);
+  }
   T front_val = queue_buffer_.front();
   queue_buffer_.pop_front();
   if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 1) ) {
     dT_queue_.pop_front();
   }
-  return front_val;
+  return RetVal<T>(PATH_SUCCESS, front_val);
 }
 
 template<typename T>
-const T Queue<T>::get( const std::size_t& index ) const {
+const T Queue<T>::get( const std::size_t& index ) const
+  throw(InvalidIndexAccess) {
   if( index < 0 || index > queue_buffer_.size() -1 ) {
-    return PATH_INVALID_INPUT_INDEX;
+    throw InvalidIndexAccess( "Queue size is empty." );
   }
   return queue_buffer_.at(index);
 }
@@ -92,11 +100,12 @@ const std::size_t Queue<T>::size() const {
 }
 
 template<typename T>
-const RetVal<double> Queue<T>::dT( const std::size_t& index ) {
+const double Queue<T>::dT( const std::size_t& index )
+  throw(InvalidIndexAccess) {
   if( index < 0 || index > dT_queue_.size() - 1 ) {
-    return RetVal<double>(PATH_INVALID_INPUT_INDEX, -1.0);
+    throw InvalidIndexAccess("Queue size is empty");
   }
-  return RetVal<double>(PATH_SUCCESS, dT_queue_[index]);
+  return dT_queue_[index];
 }
 
 template<typename T>
@@ -118,12 +127,6 @@ TPQueue::TPQueue() {
 }
 
 TPQueue::~TPQueue() {
-}
-
-TPQueue TPQueue::operator=(const TPQueue& src) {
-  queue_buffer_.clear();
-  queue_buffer_ = src.queue_buffer_;
-  return *this;
 }
 
 RetCode TPQueue::push( const TimePosition& newTPval ) {
@@ -169,12 +172,6 @@ TPVQueue::TPVQueue() {
 }
 
 TPVQueue::~TPVQueue() {
-}
-
-TPVQueue TPVQueue::operator=(const TPVQueue& src) {
-  queue_buffer_.clear();
-  queue_buffer_ = src.queue_buffer_;
-  return *this;
 }
 
 RetCode TPVQueue::push( const TPV& newTPVval ) {

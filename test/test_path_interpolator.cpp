@@ -12,6 +12,51 @@ TEST(PathExceptionTest, THROW) {
   }
 }
 
+TEST(g_nearEq, test) {
+  EXPECT_THROW( g_nearEq("a", "b"), InvalidTypeArgument );
+  int a_array[] = {0,1,2};
+  int b_array[] = {0,1,2};
+  EXPECT_THROW( g_nearEq(a_array, b_array), InvalidTypeArgument );
+  // This cannot be compiled.
+  // std::vector<double> a_vector(a_array, a_array+3);
+  // std::vector<double> b_vector(b_array, b_array+3);
+  // EXPECT_THROW( g_nearEq(a_vector, b_vector), InvalidTypeArgument );
+  int a_int = 0;
+  EXPECT_TRUE( g_nearEq(a_int, a_int) );
+  EXPECT_FALSE( g_nearEq(a_int, a_int+1) );
+  EXPECT_FALSE( g_nearEq( double(a_int), a_int+PRECISION*1.1 ) );
+  EXPECT_TRUE( g_nearEq( double(a_int), a_int+PRECISION) );
+  float a_float = 0.0;
+  EXPECT_TRUE( g_nearEq(a_float, a_float) );
+  EXPECT_FALSE( g_nearEq( double(a_float), a_float+PRECISION*1.1 ) );
+  EXPECT_TRUE( g_nearEq( double(a_float), a_float+PRECISION ) );
+  double a_double = 0.0;
+  EXPECT_TRUE( g_nearEq(a_double, a_double) );
+  EXPECT_FALSE( g_nearEq( double(a_double), a_double+PRECISION*1.1 ) );
+  EXPECT_TRUE( g_nearEq( double(a_double), a_double+PRECISION ) );
+}
+
+TEST(g_nearZero, test) {
+  EXPECT_THROW( g_nearZero('a'), InvalidTypeArgument );
+  // This cannot be compiled.
+  // EXPECT_THROW( g_nearZero("a"), InvalidTypeArgument );
+  // int a_array[] = {0,1,2};
+  // EXPECT_THROW( g_nearZero(a_array), InvalidTypeArgument );
+  int a_int = 0;
+  EXPECT_TRUE( g_nearZero(a_int) );
+  EXPECT_FALSE( g_nearZero(a_int+1) );
+  EXPECT_FALSE( g_nearZero( a_int+PRECISION*1.1 ) );
+  EXPECT_TRUE( g_nearZero( a_int+PRECISION) );
+  float a_float = 0.0;
+  EXPECT_TRUE( g_nearZero(a_float) );
+  EXPECT_FALSE( g_nearZero( a_float+PRECISION*1.1 ) );
+  EXPECT_TRUE( g_nearZero( a_float+PRECISION ) );
+  double a_double = 0.0;
+  EXPECT_TRUE( g_nearZero(a_double) );
+  EXPECT_FALSE( g_nearZero( a_double+PRECISION*1.1 ) );
+  EXPECT_TRUE( g_nearZero( a_double+PRECISION ) );
+}
+
 TEST(RetValTest, construct) {
   /// case1 double
   /// no argument constructor
@@ -81,17 +126,10 @@ TEST(TPQueueTest, push_get_dT_size_clear){
   EXPECT_EQ( tp_queue.get(2).position, tp2.position );
   EXPECT_EQ( tp_queue.get(3).position, tp3.position );
   // dT()
-  RetVal<double> retval = tp_queue.dT(0);
-  EXPECT_EQ( retval.retcode, PATH_SUCCESS );
-  EXPECT_EQ( retval.value, tp1.time - tp0.time );
-  retval = tp_queue.dT(1);
-  EXPECT_EQ( retval.retcode, PATH_SUCCESS );
-  EXPECT_EQ( retval.value, tp2.time - tp1.time );
-  retval = tp_queue.dT(2);
-  EXPECT_EQ( retval.retcode, PATH_SUCCESS );
-  EXPECT_EQ( retval.value, tp3.time - tp2.time );
-  retval = tp_queue.dT(3);
-  EXPECT_EQ( retval.retcode, PATH_INVALID_INPUT_INDEX );
+  EXPECT_EQ( tp_queue.dT(0), tp1.time - tp0.time );
+  EXPECT_EQ( tp_queue.dT(1), tp2.time - tp1.time );
+  EXPECT_EQ( tp_queue.dT(2), tp3.time - tp2.time );
+  EXPECT_THROW( tp_queue.dT(3), InvalidIndexAccess );
   // size()
   EXPECT_EQ( tp_queue.size(), 4 );
   // clear()
@@ -117,6 +155,34 @@ TEST(TPQueueTest, push_get_dT_size_clear){
   EXPECT_EQ( tp_queue2.size(), 4 );
   tp_queue2.clear();
   EXPECT_EQ( tp_queue2.size(), 0 );
+}
+
+TEST(TPQueueTest, copy_operator){
+  TimePosition tp0(0.0, 0.0);
+  TimePosition tp1(1.0, 10.001);
+  TimePosition tp2(2.0, 20.002);
+  TimePosition tp3(3.0, 30.003);
+
+  TPQueue tp_queue_src;
+  TPQueue tp_queue_dest;
+  //
+  EXPECT_THROW( (tp_queue_dest = tp_queue_src), InvalidIndexAccess);
+  //
+  EXPECT_EQ( tp_queue_src.push(tp0), PATH_SUCCESS ); // index=0
+  EXPECT_EQ( tp_queue_src.push(tp1), PATH_SUCCESS ); // index=1
+  EXPECT_EQ( tp_queue_src.push(tp2), PATH_SUCCESS ); // index=2
+  EXPECT_EQ( tp_queue_src.push(tp3), PATH_SUCCESS ); // index=3
+  //
+  tp_queue_dest = tp_queue_src;
+  //
+  EXPECT_EQ( tp_queue_dest.get(0).time, tp_queue_src.get(0).time );
+  EXPECT_EQ( tp_queue_dest.get(1).time, tp_queue_src.get(1).time );
+  EXPECT_EQ( tp_queue_dest.get(2).time, tp_queue_src.get(2).time );
+  EXPECT_EQ( tp_queue_dest.get(3).time, tp_queue_src.get(3).time );
+  EXPECT_EQ( tp_queue_dest.get(0).position, tp_queue_src.get(0).position );
+  EXPECT_EQ( tp_queue_dest.get(1).position, tp_queue_src.get(1).position );
+  EXPECT_EQ( tp_queue_dest.get(2).position, tp_queue_src.get(2).position );
+  EXPECT_EQ( tp_queue_dest.get(3).position, tp_queue_src.get(3).position );
 }
 
 TEST(TPQueueTest, push_set){

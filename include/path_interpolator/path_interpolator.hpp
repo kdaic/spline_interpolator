@@ -22,7 +22,7 @@ template<class T> bool g_nearEq(T a, T b) {
        && typeid(b) != typeid(double) ) {
     THROW( InvalidTypeArgument, "type must be numerical value");
   }
-  if ( fabs(a-b) > PRECISION ) {
+  if ( fabs(a - b) > PRECISION ) {
     return false;
   }
   return true;
@@ -45,8 +45,10 @@ enum RetCode{
   PATH_SUCCESS=0,
   PATH_INVALID_INPUT_INDEX,
   PATH_INVALID_INPUT_TIME,
+  PATH_INVALID_QUEUE,
   PATH_INVALID_QUEUE_SIZE,
   PATH_INVALID_ARGUMENT_VALUE_ZERO,
+  PATH_QUEUE_SIZE_EMPTY,
   PATH_NOT_GENERATED,
   PATH_NOT_DEF_100PER_PATH,
   PATH_NOT_DEF_VEL_LIMIT,
@@ -61,7 +63,7 @@ struct RetVal {
   RetVal(): retcode(PATH_NOT_RETURN) {};
 
   /// Constructor(data copy)
-  RetVal(const RetCode& ret, const T& val):
+  RetVal(const RetCode& ret, const T& val=T()):
     retcode(ret), value(val) {};
 
   /// Copy operator
@@ -86,10 +88,11 @@ struct RetVal {
 struct TimePosition {
 public:
   /// Constructor
-  TimePosition(){};
+  // TimePosition():time(0.0),position(0.0) {};
+  TimePosition() {};
 
   /// Constructor(data copy)
-  TimePosition( const double& _time=0.0, const double& _position=0.0 ):
+  TimePosition( const double& _time, const double& _position=0.0 ):
     time(_time), position(_position) {};
 
   /// Destructor
@@ -113,10 +116,11 @@ public:
 struct TPV {
 public:
   /// Constructor
+  // TPV(): time(0.0),position(0.0),velocity(0.0) {};
   TPV(){};
 
   /// Constructor(data copy)
-  TPV( const double& _time=0.0, const double& _position=0.0, const double& _velocity=0.0 ):
+  TPV( const double& _time, const double& _position=0.0, const double& _velocity=0.0 ):
     time(_time), position(_position), velocity(_velocity) {};
 
   /// Destructor
@@ -166,11 +170,13 @@ public:
   /// Pop T data from buffer queue(FIFO)
   /// @brief delete the pop data from queue_buffer_
   /// @return oldest T data
-  T pop();
+  RetVal<T> pop();
 
   /// Get TPV value at the index
-  /// @return constant TPV
-  const T get( const std::size_t& index ) const;
+  /// @return constant TPV at the index
+  /// @exception If invalid index is accessed.
+  const T get( const std::size_t& index ) const
+    throw(InvalidIndexAccess);
 
   /// Set T value at the input-index
   /// @param[in] the index for setting T data
@@ -190,7 +196,9 @@ public:
   /// Get dT at the input-index
   /// @param[in] index the index getting dT from queue
   /// @return dT at the input-index
-  const RetVal<double> dT( const std::size_t& index );
+  /// @exception If invalid index is accessed.
+  const double dT( const std::size_t& index )
+        throw(InvalidIndexAccess);
 
 protected:
   /// calculate dT(t[index] - t[index-1]) internally at push() or set()
@@ -210,6 +218,9 @@ protected:
 template
 class Queue<TimePosition>;
 
+// template
+// class RetVal<TimePosition>;
+
 /////////////////////////////////////////////////////////////////////////////////////////
 
 /// TimePosition Queue buffer class
@@ -220,11 +231,6 @@ public:
 
   /// Destructor
   virtual ~TPQueue();
-
-  /// Copy operator
-  /// @param[in] src TPQueue source for copy
-  /// @return copied instance of TPQueue
-  TPQueue operator=( const TPQueue& src );
 
   /// Push TimePosition data into buffer queue(FIFO)
   /// @brief push TPV into the tpv_buffer_
@@ -264,6 +270,9 @@ public:
 template
 class Queue<TPV>;
 
+// template
+// class RetVal<TPV>;
+
 /////////////////////////////////////////////////////////////////////////////////////////
 
 /// TPV Queue buffer class
@@ -275,11 +284,6 @@ public:
 
   /// Destructor
   virtual ~TPVQueue();
-
-  /// Copy operator
-  /// @param[in] src TPQueue source for copy
-  /// @return copied instance of TPQueue
-  TPVQueue operator=( const TPVQueue& src );
 
   /// Push TPV data into buffer queue(FIFO)
   /// @brief push TPV into the tpv_buffer_
