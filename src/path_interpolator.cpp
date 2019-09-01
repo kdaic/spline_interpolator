@@ -14,15 +14,15 @@ class RetVal<std::vector<double> >;
 /////////////////////////////////////////////////////////////////////////////////////////
 
 template<typename T>
-Queue<T>::Queue() {
+TimeQueue<T>::TimeQueue() {
 }
 
 template<typename T>
-Queue<T>::~Queue() {
+TimeQueue<T>::~TimeQueue() {
 }
 
 template<typename T>
-Queue<T> Queue<T>::operator=(const Queue<T>& src) {
+TimeQueue<T> TimeQueue<T>::operator=(const TimeQueue<T>& src) {
   if( src.size() < 1 ) {
     throw InvalidIndexAccess( "source queue size is empty." );
   }
@@ -32,9 +32,10 @@ Queue<T> Queue<T>::operator=(const Queue<T>& src) {
 }
 
 template<typename T>
-RetCode Queue<T>::push( const T& newval ) {
+RetCode TimeQueue<T>::push( const T& newval ) {
   queue_buffer_.push_back(newval);
   std::size_t last_index = queue_buffer_.size() - 1;
+  // calculate dT if the queue left >= 1.
   if ( last_index >= 1 ) {
     double dT = calc_dT( last_index );
     dT_queue_.push_back(dT);
@@ -43,7 +44,7 @@ RetCode Queue<T>::push( const T& newval ) {
 }
 
 template<typename T>
-RetVal<T> Queue<T>::pop() {
+RetVal<T> TimeQueue<T>::pop() {
   if( queue_buffer_.empty() ) {
     T retval();
     return RetVal<T>(PATH_QUEUE_SIZE_EMPTY);
@@ -57,7 +58,7 @@ RetVal<T> Queue<T>::pop() {
 }
 
 template<typename T>
-const T Queue<T>::get( const std::size_t& index ) const
+const T TimeQueue<T>::get( const std::size_t& index ) const
   throw(InvalidIndexAccess) {
   if( index < 0 || index > queue_buffer_.size() -1 ) {
     throw InvalidIndexAccess( "Queue size is empty." );
@@ -66,7 +67,7 @@ const T Queue<T>::get( const std::size_t& index ) const
 }
 
 template<typename T>
-RetCode Queue<T>::set( const std::size_t& index, const T newval ) {
+RetCode TimeQueue<T>::set( const std::size_t& index, const T newval ) {
   if( index < 0 || index > queue_buffer_.size() -1 ) {
     return PATH_INVALID_INPUT_INDEX;
   }
@@ -89,18 +90,18 @@ RetCode Queue<T>::set( const std::size_t& index, const T newval ) {
 }
 
 template<typename T>
-void Queue<T>::clear() {
+void TimeQueue<T>::clear() {
   queue_buffer_.clear();
   dT_queue_.clear();
 }
 
 template<typename T>
-const std::size_t Queue<T>::size() const {
+const std::size_t TimeQueue<T>::size() const {
   return queue_buffer_.size();
 }
 
 template<typename T>
-const double Queue<T>::dT( const std::size_t& index )
+const double TimeQueue<T>::dT( const std::size_t& index ) const
   throw(InvalidIndexAccess) {
   if( index < 0 || index > dT_queue_.size() - 1 ) {
     throw InvalidIndexAccess("Queue size is empty");
@@ -109,14 +110,14 @@ const double Queue<T>::dT( const std::size_t& index )
 }
 
 template<typename T>
-const double Queue<T>::calc_dT( const std::size_t & index ) {
+const double TimeQueue<T>::calc_dT( const std::size_t & index ) {
   if( queue_buffer_.size() < 2 ) {
     THROW( InvalidArgumentSize, "queue size must be >=2 for calculating dT list.");
   }
   if( index < 1 ) {
     THROW( InvalidArgumentValue, "index must be >=1 for calculating dT.");
   }
-  /// This implement is temporary, please use or implement inherited class.
+  /// This implement is not complete, please use or implement inherited class.
   return 0.0;
 }
 
@@ -134,7 +135,7 @@ RetCode TPQueue::push( const TimePosition& newTPval ) {
       && newTPval.time <= queue_buffer_.back().time ) {
     return PATH_INVALID_INPUT_TIME;
   }
-  return Queue<TimePosition>::push( newTPval );
+  return TimeQueue<TimePosition>::push( newTPval );
 }
 
 
@@ -145,7 +146,7 @@ RetCode TPQueue::push( const double& time,
     return PATH_INVALID_INPUT_TIME;
   }
   TimePosition newTPval(time, position);
-  return Queue<TimePosition>::push( newTPval );
+  return TimeQueue<TimePosition>::push( newTPval );
 }
 
 RetCode TPQueue::set( const std::size_t& index,
@@ -156,12 +157,12 @@ RetCode TPQueue::set( const std::size_t& index,
            && newTPval.time >= queue_buffer_[index+1].time ) ) {
     return PATH_INVALID_INPUT_TIME;
   }
-  return Queue<TimePosition>::set( index, newTPval );
+  return TimeQueue<TimePosition>::set( index, newTPval );
 }
 
 
 const double TPQueue::calc_dT( const std::size_t & index ) {
-  Queue<TimePosition>::calc_dT( index );
+  TimeQueue<TimePosition>::calc_dT( index );
   return queue_buffer_[index].time - queue_buffer_[index-1].time;
 }
 
@@ -179,9 +180,8 @@ RetCode TPVQueue::push( const TPV& newTPVval ) {
       && newTPVval.time <= queue_buffer_.back().time ) {
     return PATH_INVALID_INPUT_TIME;
   }
-  return Queue<TPV>::push( newTPVval );
+  return TimeQueue<TPV>::push( newTPVval );
 }
-
 
 RetCode TPVQueue::push( const double& time,
                         const double& position,
@@ -191,7 +191,7 @@ RetCode TPVQueue::push( const double& time,
     return PATH_INVALID_INPUT_TIME;
   }
   TPV newTPVval(time, position, velocity);
-  return Queue<TPV>::push( newTPVval );
+  return TimeQueue<TPV>::push( newTPVval );
 }
 
 RetCode TPVQueue::set( const std::size_t& index,
@@ -202,11 +202,11 @@ RetCode TPVQueue::set( const std::size_t& index,
            && newTPVval.time >= queue_buffer_[index+1].time ) ) {
     return PATH_INVALID_INPUT_TIME;
   }
-  return Queue<TPV>::set( index, newTPVval );
+  return TimeQueue<TPV>::set( index, newTPVval );
 }
 
 const double TPVQueue::calc_dT( const std::size_t & index ) {
-  Queue<TPV>::calc_dT( index );
+  TimeQueue<TPV>::calc_dT( index );
   return queue_buffer_[index].time - queue_buffer_[index-1].time;
 }
 
@@ -219,11 +219,12 @@ PathInterpolator::PathInterpolator() :
 PathInterpolator::~PathInterpolator() {
 }
 
-const RetVal<double> PathInterpolator::finish_time() {
+const RetVal<double> PathInterpolator::total_dT() {
   if( !is_path_generated_ ) {
     return RetVal<double>(PATH_NOT_GENERATED, -1.0);
   }
-  return RetVal<double>(PATH_SUCCESS, tf_);
+  double total_dT = tpv_queue_.get( tpv_queue_.size() - 1 ).time - tpv_queue_.get(0).time;
+  return RetVal<double>(PATH_SUCCESS, total_dT);
 }
 
 const RetVal<double> PathInterpolator::v_limit() {
@@ -233,32 +234,36 @@ const RetVal<double> PathInterpolator::v_limit() {
   return RetVal<double>(PATH_SUCCESS, v_limit_);
 }
 
-void PathInterpolator::set_TPVsf( const double& ts, const double& tf,
-                                  const double& xs, const double& xf,
-                                  const double& vs, const double& vf ) {
-  ts_ = ts;
-  tf_ = tf;
-  xs_ = xs;
-  xf_ = xf;
-  vs_ = vs;
-  vf_ = vf;
+const RetVal<double> PathInterpolator::finish_time() {
+  if( !is_path_generated_ ) {
+    return RetVal<double>(PATH_NOT_GENERATED, -1.0);
+  }
+  return RetVal<double>(PATH_SUCCESS, tpv_queue_.get( tpv_queue_.size() - 1 ).time );
 }
 
 RetVal<double> PathInterpolator::generate_path(
                  const double& xs, const double& xf,
                  const double& vs, const double& vf,
-                 const double& ts, const double& tf ) {
-  if( ts < 0.0 ||
-      ( tf > 0.0 && ts >= tf ) ) {
+                 const double& dT ) {
+  if( dT < 0.0  ) {
     return RetVal<double>( PATH_INVALID_INPUT_TIME, -1.0 );
   }
 
-  if( tf > 0.0 ) {
-    TPVQueue tpv_queue;
-    tpv_queue.push( ts, xs, vs );
-    tpv_queue.push( tf, xf, vf );
+  if( g_nearZero(dT) ) {
 
-    set_TPVsf( ts, tf,  xs, xf,  ts, tf );
+    PosVel pvs(xs, vs);
+    PosVel pvf(xf, vf);
+    PVQueue pv_queue;
+    pv_queue.push_back(pvs);
+    pv_queue.push_back(pvf);
+
+    return generate_path( pv_queue );
+
+  } else {
+
+    TPVQueue tpv_queue;
+    tpv_queue.push( 0.0, xs, vs );
+    tpv_queue.push( dT, xf, vf );
 
     return generate_path(tpv_queue);
   }

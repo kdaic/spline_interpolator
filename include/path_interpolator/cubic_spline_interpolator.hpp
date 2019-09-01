@@ -8,7 +8,7 @@ namespace interp{
 /// @details Cubic spline is defined as.
 ///
 /// ```
-/// x(t) = a t^3 + b t^2 + c t + d
+/// x_n(t) = a_n (t-t_n)^3 + b_n (t-t_n)^2 + c_n (t-t_n) + d_n
 /// ```
 class CubicSplineInterpolator : public PathInterpolator {
   friend class CubicSplineTest;
@@ -48,6 +48,14 @@ public:
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
   virtual RetVal<double> generate_path( const TPVQueue& tpv_queue );
+
+  /// Generate a path from Position(, Velocity) queue
+  /// @param[in] Position, Velocity queue
+  /// @exception UndefPathException
+  /// @return PATH_NOT_DEF_100PER_PATH.
+  /// CubicSplineInterpolator don't supports this type
+  /// ( cannot generate 100% mimum-time path in the limitation.)
+  virtual RetVal<double> generate_path( const PVQueue& pv_queue );
 
 
   /// Pop the position and velocity at the input-time from generated tragectory
@@ -99,6 +107,19 @@ private:
   RetVal<std::vector<double> >
   tridiagonal_matrix_eq_solver( std::vector<double> d, const std::vector<double>& u,
                                 const std::vector<double>& l, std::vector<double> p);
+
+private:
+  /// third-order parameter of cubic formula.
+  std::vector<double> a_;
+
+  /// second-order parameter of cubic formula.
+  std::vector<double> b_;
+
+  /// first-order parameter of cubic formula.
+  std::vector<double> c_;
+
+  /// zero-order parameter of cubic formula.
+  std::vector<double> d_;
 };
 
 }

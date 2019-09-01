@@ -13,6 +13,10 @@
 #define PRECISION 1.0e-15
 namespace interp {
 
+/// judge nearly equal
+/// @param[in] a
+/// @param[in] b
+/// @return true if a is nearly equal b within PRECISION, else returns false
 template<class T> bool g_nearEq(T a, T b) {
   if ( typeid(a) != typeid(int)
        && typeid(a) != typeid(float)
@@ -28,6 +32,9 @@ template<class T> bool g_nearEq(T a, T b) {
   return true;
 }
 
+/// judge nearly zero
+/// @param[in] a
+/// @return true if a is nearly 0 within PRECISION, else returns false
 template<class T> bool g_nearZero(T a) {
   if ( typeid(a) != typeid(int)
        && typeid(a) != typeid(float)
@@ -53,7 +60,8 @@ enum RetCode{
   PATH_NOT_DEF_100PER_PATH,
   PATH_NOT_DEF_VEL_LIMIT,
   PATH_NOT_DEF_FUNCTION,
-  PATH_NOT_RETURN
+  PATH_NOT_RETURN,
+  PATH_TIME_IS_OUT_OF_RANGE
 };
 
 /// Struct data of Return Value
@@ -68,7 +76,8 @@ struct RetVal {
 
   /// Copy operator
   RetVal operator=( const RetVal<T>& src ) {
-    RetVal<T> dest(src.retcode, src.value);
+    // copy
+    RetVal<T> dest( src.retcode, src.value );
     this->retcode = dest.retcode;
     this->value = dest.value;
     return *this;
@@ -77,14 +86,16 @@ struct RetVal {
   /// Destructor
   ~RetVal() {};
 
+  /// return code
   RetCode retcode;
+  /// return value
   T value;
 };
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-/// Struct data of Time,Position
+/// Struct data of Time, Position
 struct TimePosition {
 public:
   /// Constructor
@@ -100,7 +111,7 @@ public:
 
   /// Copy operator
   TimePosition operator=( const TimePosition& src ) {
-    TimePosition dest(src.time, src.position);
+    TimePosition dest( src.time, src.position );
     this->time = dest.time;
     this->position = dest.position;
     return *this;
@@ -112,7 +123,7 @@ public:
 }; // End of struct TimePosition
 
 
-/// Struct data of Time,Position,Velocity
+/// Struct data of Time, Position, Velocity
 struct TPV {
 public:
   /// Constructor
@@ -128,7 +139,7 @@ public:
 
   /// Copy operator
   TPV operator=( const TPV& src ) {
-    TPV dest(src.time, src.position, src.velocity);
+    TPV dest( src.time, src.position, src.velocity );
     this->time = dest.time;
     this->position = dest.position;
     this->velocity = dest.velocity;
@@ -143,22 +154,51 @@ public:
 
 }; // End of struct TPV
 
-/////////////////////////////////////////////////////////////////////////////////////////
 
-/// Queue buffer base-class
-template<class T>
-class Queue {
+/// Struct data of Position, Velocity
+struct PosVel {
 public:
   /// Constructor
-  Queue();
+  // PosVel(): position(0.0),velocity(0.0) {};
+  PosVel(){};
+
+  /// Constructor(data copy)
+  PosVel( const double& _position=0.0, const double& _velocity=0.0 ):
+    position(_position), velocity(_velocity) {};
 
   /// Destructor
-  virtual ~Queue();
+  ~PosVel(){};
 
   /// Copy operator
-  /// @param[in] src Queue<T> source for copy
-  /// @return copied instance of Queue<T>
-  Queue<T> operator=( const Queue<T>& src );
+  PosVel operator=( const PosVel& src ) {
+    PosVel dest( src.position, src.velocity );
+    this->position = dest.position;
+    this->velocity = dest.velocity;
+    return *this;
+  };
+  /// postion [m, rad, ...etc.]
+  double position;
+  /// velocity [m/s, rad/s, ...etc.]
+  double velocity;
+
+}; // End of struct TPV
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/// Time Queue buffer base-class
+template<class T>
+class TimeQueue {
+public:
+  /// Constructor
+  TimeQueue();
+
+  /// Destructor
+  virtual ~TimeQueue();
+
+  /// Copy operator
+  /// @param[in] src TimeQueue<T> source for copy
+  /// @return copied instance of TimeQueue<T>
+  TimeQueue<T> operator=( const TimeQueue<T>& src );
 
   /// Push T data into buffer queue(FIFO)
   /// @param[in] newval T value source
@@ -197,7 +237,7 @@ public:
   /// @param[in] index the index getting dT from queue
   /// @return dT at the input-index
   /// @exception If invalid index is accessed.
-  const double dT( const std::size_t& index )
+  const double dT( const std::size_t& index ) const
         throw(InvalidIndexAccess);
 
 protected:
@@ -216,7 +256,7 @@ protected:
 /////////////////////////////////////////////////////////////////////////////////////////
 
 template
-class Queue<TimePosition>;
+class TimeQueue<TimePosition>;
 
 // template
 // class RetVal<TimePosition>;
@@ -224,7 +264,7 @@ class Queue<TimePosition>;
 /////////////////////////////////////////////////////////////////////////////////////////
 
 /// TimePosition Queue buffer class
-class TPQueue : public Queue<TimePosition> {
+class TPQueue : public TimeQueue<TimePosition> {
 public:
   /// Constructor
   TPQueue();
@@ -259,6 +299,7 @@ public:
   /// - PATH_INVALID_INPUT_INDEX: Not exist input-index
   virtual RetCode set( const std::size_t& index, const TimePosition& newTPval );
 
+protected:
   /// calculate dT(t[index] - t[index-1]) internally at push() or set()
   /// @param[in] index the index calculating dT
   /// @return calculated dT
@@ -268,7 +309,7 @@ public:
 /////////////////////////////////////////////////////////////////////////////////////////
 
 template
-class Queue<TPV>;
+class TimeQueue<TPV>;
 
 // template
 // class RetVal<TPV>;
@@ -276,7 +317,7 @@ class Queue<TPV>;
 /////////////////////////////////////////////////////////////////////////////////////////
 
 /// TPV Queue buffer class
-class TPVQueue : public Queue<TPV> {
+class TPVQueue : public TimeQueue<TPV> {
 public:
   /// Constructor
   /// @brief initial time is zero(0.0)
@@ -314,12 +355,18 @@ public:
   /// - PATH_INVALID_INPUT_INDEX: Not exist input-index
   virtual RetCode set( const std::size_t& index, const TPV& newTPVval );
 
+protected:
   /// calculate dT(t[index] - t[index-1]) internally at push() or set()
   /// @param[in] index the index calculating dT
   /// @return calculated dT
   virtual const double calc_dT( const std::size_t & index );
 }; // End of class TPVQueue
 
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/// Position & Velocity Queue buffer class
+typedef std::deque<PosVel> PVQueue;
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -333,40 +380,36 @@ public:
   /// Destructor
   virtual ~PathInterpolator();
 
- /// Get fiish-time
+  /// Get total interval time
   /// @return
-  /// - PATH_SUCCESS and tf
+  /// - PATH_SUCCESS and total interval time
   /// - PATH_NOT_GENERATED and -1.0
-  const RetVal<double> finish_time();
+  const RetVal<double> total_dT();
 
   /// Get limit velocity( if exists )
   /// @return limit velocity
   const RetVal<double> v_limit();
+
+  /// Get finish time
+  /// @return finish time
+  const RetVal<double> finish_time();
 
   /// Genrate a path from initial-finish point
   /// @param[in] xs start position
   /// @param[in] xf finish position
   /// @param[in] vs start velocity (default: 0.0)
   /// @param[in] vf finish velocity (default: 0.0)
-  /// @param[in] ts start time (default: 0.0)
-  /// @paran[in] tf finish time (default: 0.0)
+  /// @paran[in] dT interval time (default: 0.0)
   /// @brief calcurate tragectory parameter
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
   /// @details
-  /// Path parameters are kept internally. \n
-  /// If you only give start position & velocity and finish ones, \n
-  /// (you give impossible finish time as finish time <= 0.0)
-  ///
-  /// ```
-  /// (ts, xs, vs), (tf=?, xf, vf)
-  /// ```
-  ///
-  /// interpolator calculates minmum interval time -> fiish time(tf). \n
+  /// If you don't give interval time(dT=0.0),
+  /// Minmum interval time dT are internally calculated automatically. \n
   /// This means 100% mimum-time path in the limitation.
   virtual RetVal<double> generate_path( const double& xs, const double& xf,
                                         const double& vs=0.0, const double& vf=0.0,
-                                        const double& ts=0.0, const double& tf=0.0 );
+                                        const double& dT=0.0 );
 
   /// Generate a path from Time, Position queue
   /// @param[in] Time,Position queue
@@ -398,6 +441,20 @@ public:
   /// - PATH_SUCCESS and total travel time (tf - ts)
   virtual RetVal<double> generate_path( const TPVQueue& tpv_queue )=0;
 
+  /// Generate a path from Position(, Velocity) queue
+  /// @param[in] Position, Velocity queue
+  /// @return
+  /// - PATH_SUCCESS and total travel time (tf - ts)
+  /// you only give start position & velocity and don't give time. \n
+  ///
+  /// ```
+  /// (xs, vs), (x1, v1), (x2, v2),..., (xf, vf)
+  /// ```
+  ///
+  /// Minmum interval time -> ts=0, t1, t2,..., tf are internally calculated automatically. \n
+  /// This means 100% mimum-time path in the limitation.
+  virtual RetVal<double> generate_path( const PVQueue& pv_queue )=0;
+
   /// Pop the position and velocity at the input-time from generated tragectory
   /// @param t input time
   /// @return
@@ -406,41 +463,15 @@ public:
   virtual RetVal<TPV> pop(const double& t)=0;
 
 protected:
-  /// Set start and finish TPV
-  void set_TPVsf( const double& ts, const double& tf,
-                  const double& xs, const double& xf,
-                  const double& vs=0.0, const double& vf=0.0 );
-
   /// flag if the path is generated. (default: false)
   bool is_path_generated_;
 
   /// flag if velocity limit (v_limit) is defined or not (default: false)
   bool is_v_limit_;
 
-  /// start time [sec]
-  double ts_;
-
-  /// finish time [sec]
-  double tf_;
-
-  /// start position [m, rad, ...etc.]
-  double xs_;
-
-  /// finish position [m, rad, ...etc.]
-  double xf_;
-
-  /// start velocity [m/s, rad/s, ...etc.]
-  double vs_;
-
-  /// finish velocity [m/s, rad/s, ...etc.]
-  double vf_;
-
   /// limit velocity [m/s, rad/s, ...etc.]
   /// (if defined)
   double v_limit_;
-
-  /// TPQueue
-  TPQueue tp_queue_;
 
   /// TPVQueue
   TPVQueue tpv_queue_;
