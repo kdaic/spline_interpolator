@@ -21,19 +21,21 @@ public:
 
   /// Generate a path from Time, Position queue
   /// @param[in] Time,Position queue
+  /// @param[in] vs start velocity (default: 0.0)
+  /// @param[in] vf finish velocity (default: 0.0)
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
   /// @details
   /// Input is TimePosition Queue like this.
   ///
   /// ```
-  /// (ts, xs), (t1, x1), (t2, x2), ..., (tf, xf)
+  /// (ts, xs (, vs)), (t1, x1), (t2, x2), ..., (tf, xf)
   /// ```
   ///
   /// Interpolator set start & finish velocity, acceleration,(and jerk) as zero,
   ///
   /// ```
-  /// (ts, xs, vs=0, as=0, js=0),
+  /// (ts, xs, vs,   as=0, js=0),
   /// (t1, x1, v1=?, a1=?, j1=?),
   /// (t2, x2, v2=?, a2=?, j2=?),
   ///  ...,
@@ -41,7 +43,17 @@ public:
   /// ```
   ///
   /// and interpolate (v1,a1,j1), (v1,a1,j1),.. automatically.
-  virtual RetVal<double> generate_path( const TPQueue& tp_queue );
+  virtual RetVal<double> generate_path( const TPQueue& tp_queue,
+                                        const double vs=0.0, const double vf=0.0 );
+
+  /// Generate a path from Time, Position queue
+  /// @param[in] Time,Position queue
+  /// @param[in] vs start acceleration (default: 0.0)
+  /// @param[in] vf finish acceleration (default: 0.0)
+  /// @return
+  /// - PATH_SUCCESS and total travel time (tf - ts)
+  RetVal<double> generate_path_acc( const TPQueue& tp_queue,
+                                    const double as=0.0, const double af=0.0 );
 
   /// Generate a path from Time, Position(, Velocity) queue
   /// @param[in] Time,Position(, Velocity) queue

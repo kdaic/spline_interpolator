@@ -11,7 +11,8 @@ CubicSplineInterpolator::~CubicSplineInterpolator() {
 }
 
 RetVal<double> CubicSplineInterpolator::generate_path(
-                 const TPQueue& tp_queue ) {
+                 const TPQueue& tp_queue,
+                 const double vs, const double vf) {
   std::size_t finish_index = tp_queue.size() - 1;
   if ( finish_index <= 1 ) {
     return RetVal<double>( PATH_INVALID_QUEUE_SIZE, -1.0 );
@@ -25,7 +26,101 @@ RetVal<double> CubicSplineInterpolator::generate_path(
   lower.push_back(0.0);
   diago.push_back(1.0);
   upper.push_back(0.0);
-  param.push_back(0.0); // this corresponds start acceleration :=0.0.
+  param.push_back( vs ); // this corresponds to start velocity.
+  // index >= 1
+  double inverse_dT = 0.0;
+  double inverse_pre_dT = 0.0;
+  for ( std::size_t i=1; i < finish_index; i++ ) {
+    if( g_nearZero( tp_queue.dT(i) ) ) {
+      // Failed because dT = 0
+      return RetVal<double>( PATH_INVALID_INPUT_INTERVAL_TIME_DT, -1.0 );
+    }
+    inverse_dT = 1.0 / tp_queue.dT(i);
+    inverse_pre_dT = 1.0 / tp_queue.dT(i-1);
+    lower.push_back( 2.0 * inverse_dT );
+    diago.push_back( 4.0 * (inverse_dT + inverse_pre_dT) );
+    upper.push_back( 2.0 * inverse_dT );
+    double p
+      = 6.0*(tp_queue.get(i+1).position - tp_queue.get(i).position) * inverse_dT * inverse_dT
+      + 6.0*(tp_queue.get(i).position - tp_queue.get(i-1).position) * inverse_pre_dT * inverse_pre_dT;
+    param.push_back(p);
+  }
+  // the finish index
+  lower.push_back(0.0);
+  diago.push_back(1.0);
+  upper.push_back(0.0);
+  param.push_back( vf ); // this corresponds to finish velocity.
+  RetVal<std::vector<double> > ret_c
+    = tridiagonal_matrix_eq_solver( diago, upper, lower, param );
+
+  LOGD << "solver result :" << (ret_c.retcode == PATH_SUCCESS);
+
+  c_.clear();
+  c_.resize( ret_c.value.size() );
+  std::copy( ret_c.value.begin(), ret_c.value.end(), c_.begin() );
+
+  a_.clear();
+  b_.clear();
+  d_.clear();
+  tpv_queue_.clear();
+  // the start index = 0
+  for ( std::size_t i=0; i < finish_index; i++ ) {
+    inverse_dT = 1.0 / tp_queue.dT(i);
+
+    double dp = tp_queue.get(i+1).position - tp_queue.get(i).position;
+
+    a_.push_back( ( (c_[i+1] + c_[i]) * tp_queue.dT(i) - 2.0 * dp )
+                  * inverse_dT * inverse_dT * inverse_dT );
+    b_.push_back( ( -1.0 * (c_[i+1] + 2.0 * c_[i]) * tp_queue.dT(i) + 3.0 * dp )
+                  * inverse_dT * inverse_dT );
+    d_.push_back( tp_queue.get(i).position );
+
+    TPV tpv( tp_queue.get(i).time,
+             tp_queue.get(i).position,
+             c_[i] );
+    tpv_queue_.push( tpv );
+    LOGD << "a_[" << i << "] : " << a_[i];
+    LOGD << "b_[" << i << "] : " << b_[i];
+    LOGD << "c_[" << i << "] : " << c_[i];
+    LOGD << "d_[" << i << "] : " << d_[i];
+  }
+  // the finish index = tp_queue.size() - 1
+  a_.push_back( 0.0 ); // this corresponds to finish jark :=0.0.
+  b_.push_back( 0.0 ); // this corresponds to finish velocity :=0.0.
+  d_.push_back( tp_queue.get(finish_index).position ); // this corresponds to finish position.
+  LOGD << "a_[" << finish_index << "] : " << a_[finish_index];
+  LOGD << "b_[" << finish_index << "] : " << b_[finish_index];
+  LOGD << "c_[" << finish_index << "] : " << c_[finish_index];
+  LOGD << "d_[" << finish_index << "] : " << d_[finish_index];
+  TPV finish_tpv( tp_queue.get(finish_index).time,
+                  tp_queue.get(finish_index).position,
+                  c_[finish_index] );
+  tpv_queue_.push( finish_tpv );
+
+  is_path_generated_ = true;
+
+  return total_dT();
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+RetVal<double> CubicSplineInterpolator::generate_path_acc(
+                 const TPQueue& tp_queue,
+                 const double as, const double af) {
+  std::size_t finish_index = tp_queue.size() - 1;
+  if ( finish_index <= 1 ) {
+    return RetVal<double>( PATH_INVALID_QUEUE_SIZE, -1.0 );
+  }
+
+  std::vector<double> upper;
+  std::vector<double> diago;
+  std::vector<double> lower;
+  std::vector<double> param;
+  // the start index = 0
+  lower.push_back(0.0);
+  diago.push_back(1.0);
+  upper.push_back(0.0);
+  param.push_back( as ); // this corresponds start acceleration :=0.0.
   // index >= 1
   for ( std::size_t i=1; i < finish_index; i++ ) {
     lower.push_back( tp_queue.dT(i-1) );
@@ -40,7 +135,7 @@ RetVal<double> CubicSplineInterpolator::generate_path(
   lower.push_back(0.0);
   diago.push_back(1.0);
   upper.push_back(0.0);
-  param.push_back(0.0); // this corresponds finish acceleration :=0.0.
+  param.push_back( af ); // this corresponds to finish acceleration :=0.0.
   RetVal<std::vector<double> > ret_b
     = tridiagonal_matrix_eq_solver( diago, upper, lower, param );
 
@@ -52,10 +147,6 @@ RetVal<double> CubicSplineInterpolator::generate_path(
   c_.clear();
   d_.clear();
   // the start index = 0
-  // a_.push_back( 0.0 ); // this corresponds start jark :=0.0.
-  // c_.push_back( 0.0 ); // this corresponds start velocity :=0.0.
-  // d_.push_back( tp_queue.get(0).position ); // this corresponds start position.
-  // index >= 1
   for ( std::size_t i=0; i < finish_index; i++ ) {
     a_.push_back( (b_[i+1] - b_[i]) / (3.0*tp_queue.dT(i)) );
     c_.push_back( (tp_queue.get(i+1).position - tp_queue.get(i).position) / tp_queue.dT(i)
@@ -65,14 +156,9 @@ RetVal<double> CubicSplineInterpolator::generate_path(
              tp_queue.get(i).position,
              c_[i] );
     tpv_queue_.push( tpv );
-    LOGD << "a_[" << i << "] : " << a_[i];
-    LOGD << "b_[" << i << "] : " << b_[i];
-    LOGD << "c_[" << i << "] : " << c_[i];
-    LOGD << "d_[" << i << "] : " << d_[i];
   }
-  // the finish index = tp_queue.size() - 1
-  a_.push_back( 0.0 ); // this corresponds finish jark :=0.0.
-  c_.push_back( 0.0 ); // this corresponds finish velocity :=0.0.
+  a_.push_back( 0.0 ); // this corresponds to finish jark :=0.0.
+  c_.push_back( 0.0 ); // this corresponds to finish velocity :=0.0.
   d_.push_back( tp_queue.get(finish_index).position ); // this corresponds finish position.
   TPV finish_tpv( tp_queue.get(finish_index).time,
                   tp_queue.get(finish_index).position,
@@ -155,14 +241,14 @@ CubicSplineInterpolator::tridiagonal_matrix_eq_solver(
   double temp;
   // first loop from top
   for( std::size_t i=0; i<d.size(); i++ ) {
+    if( g_nearZero(d[i]) ) {
+      return RetVal<std::vector<double> >( PATH_INVALID_ARGUMENT_VALUE_ZERO,
+                                           std::vector<double>() );
+    }
     if( i >= 1 ) {
       temp = l[i] / d[i-1];
       d[i] = d[i] - temp * u[i-1];
       p[i] = p[i] - temp * p[i-1];
-    }
-    if( g_nearZero(d[i]) ) {
-      return RetVal<std::vector<double> >( PATH_INVALID_ARGUMENT_VALUE_ZERO,
-                                           std::vector<double>() );
     }
   }
   //

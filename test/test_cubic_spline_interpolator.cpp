@@ -12,11 +12,15 @@ namespace interp {
 /// @param target_set time & position & velocity target
 /// @param cycle cycle-time
 /// @param path destination path of plotted graph image(.png)
+/// @param vs start velocity (default=0.0)
+/// @param vs finish velocity (default=0.0)
 /// @details generate path of each set
 /// plot graph of time-position, time-velocity, position-velocity \n
 void plot( const TPQueue& target_set,
            const double cycle=0.005,
-           const std::string& output_path="./" ) {
+           const std::string& output_path="./",
+           const double vs=0.0,
+           const double vf=0.0 ) {
   // buffer of input target point
   std::deque<std::pair<double, double> > target_tp;
   std::deque<std::pair<double, double> > target_tv;
@@ -56,7 +60,7 @@ void plot( const TPQueue& target_set,
     output = target_set.get(index);
     // generate_path
     CubicSplineInterpolator tg;
-    RetVal<double> ret_dT_total = tg.generate_path( target_set );
+    RetVal<double> ret_dT_total = tg.generate_path( target_set, vs, vf );
     double dT_total = ret_dT_total.value;
     LOGD << "dT_total:" << dT_total;
 
@@ -342,13 +346,14 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_size_is_3 ) {
 
 TEST_F( CubicSplineTest, pop1 ) {
   TPQueue tp_queue;
-  tp_queue.push( 0.0, 0.0 );
-  tp_queue.push( 1.0, 0.0 );
+  tp_queue.push( 0.0, -1.0 );
+  tp_queue.push( 1.0, -1.0 );
   tp_queue.push( 2.0, 0.0 );
-  tp_queue.push( 3.0, 1.1 );
-  tp_queue.push( 4.0, 2.0 );
+  tp_queue.push( 3.0, 10.1 );
+  tp_queue.push( 4.0, 20.0 );
   tp_queue.push( 5.0, 3.1 );
-  tp_queue.push( 6.0, 3.1 );
-  tp_queue.push( 7.0, 3.1 );
-  plot(tp_queue, 0.005, "./images/");
+  tp_queue.push( 6.0, 7.0 );
+  tp_queue.push( 7.0, 10.1 );
+  // plot(tp_queue, 0.005, "./images/");
+  plot(tp_queue, 0.005, "./images/", -15, 15);
 }

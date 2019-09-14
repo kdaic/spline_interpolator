@@ -52,6 +52,7 @@ enum RetCode{
   PATH_SUCCESS=0,
   PATH_INVALID_INPUT_INDEX,
   PATH_INVALID_INPUT_TIME,
+  PATH_INVALID_INPUT_INTERVAL_TIME_DT,
   PATH_INVALID_QUEUE,
   PATH_INVALID_QUEUE_SIZE,
   PATH_INVALID_ARGUMENT_VALUE_ZERO,
@@ -413,19 +414,21 @@ public:
 
   /// Generate a path from Time, Position queue
   /// @param[in] Time,Position queue
+  /// @param[in] vs start velocity (default: 0.0)
+  /// @param[in] vf finish velocity (default: 0.0)
   /// @return
   /// - PATH_SUCCESS and total travel time (tf - ts)
   /// @details
   /// Input is TimePosition Queue like this.
   ///
   /// ```
-  /// (ts, xs), (t1, x1), (t2, x2), ..., (tf, xf)
+  /// (ts, xs (, vs)), (t1, x1), (t2, x2), ..., (tf, xf)
   /// ```
   ///
   /// Interpolator sets start & finish velocity, acceleration,(and jerk) as zero,
   ///
   /// ```
-  /// (ts, xs, vs=0, as=0, js=0),
+  /// (ts, xs, vs,   as=0, js=0),
   /// (t1, x1, v1=?, a1=?, j1=?),
   /// (t2, x2, v2=?, a2=?, j2=?),
   ///  ...,
@@ -433,7 +436,8 @@ public:
   /// ```
   ///
   /// and interpolates intermediate (v1,a1,j1), (v2,a2,j2),.. automatically.
-  virtual RetVal<double> generate_path( const TPQueue& tp_queue )=0;
+  virtual RetVal<double> generate_path( const TPQueue& tp_queue,
+                                        const double vs=0.0, const double vf=0.0)=0;
 
   /// Generate a path from Time, Position(, Velocity) queue
   /// @param[in] Time, Position(, Velocity) queue
