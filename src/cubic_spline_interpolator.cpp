@@ -10,12 +10,12 @@ CubicSplineInterpolator::CubicSplineInterpolator() {
 CubicSplineInterpolator::~CubicSplineInterpolator() {
 }
 
-RetVal<double> CubicSplineInterpolator::generate_path(
-                 const TPQueue& tp_queue,
-                 const double vs, const double vf) {
+RetCode CubicSplineInterpolator::generate_path(
+          const TPQueue& tp_queue,
+          const double vs, const double vf) {
   std::size_t finish_index = tp_queue.size() - 1;
   if ( finish_index <= 1 ) {
-    return RetVal<double>( PATH_INVALID_QUEUE_SIZE, -1.0 );
+    return PATH_INVALID_QUEUE_SIZE;
   }
 
   std::vector<double> upper;
@@ -33,7 +33,7 @@ RetVal<double> CubicSplineInterpolator::generate_path(
   for ( std::size_t i=1; i < finish_index; i++ ) {
     if( g_nearZero( tp_queue.dT(i) ) ) {
       // Failed because dT = 0
-      return RetVal<double>( PATH_INVALID_INPUT_INTERVAL_TIME_DT, -1.0 );
+      return PATH_INVALID_INPUT_INTERVAL_TIME_DT;
     }
     inverse_dT = 1.0 / tp_queue.dT(i);
     inverse_pre_dT = 1.0 / tp_queue.dT(i-1);
@@ -50,14 +50,18 @@ RetVal<double> CubicSplineInterpolator::generate_path(
   diago.push_back(1.0);
   upper.push_back(0.0);
   param.push_back( vf ); // this corresponds to finish velocity.
-  RetVal<std::vector<double> > ret_c
-    = tridiagonal_matrix_eq_solver( diago, upper, lower, param );
+  std::vector<double> ret_c;
+  RetCode retcode = tridiagonal_matrix_eq_solver( diago, upper, lower, param, ret_c );
+  if( retcode != PATH_SUCCESS ) {
+    // diago[i]=0, PATH_INVALID_MATRIX_ARGUMENT_VALUE_ZERO
+    return retcode;
+  }
 
-  LOGD << "solver result :" << (ret_c.retcode == PATH_SUCCESS);
+  LOGD << "solver result :" << (retcode == PATH_SUCCESS);
 
   c_.clear();
-  c_.resize( ret_c.value.size() );
-  std::copy( ret_c.value.begin(), ret_c.value.end(), c_.begin() );
+  c_.resize( ret_c.size() );
+  std::copy( ret_c.begin(), ret_c.end(), c_.begin() );
 
   a_.clear();
   b_.clear();
@@ -99,17 +103,17 @@ RetVal<double> CubicSplineInterpolator::generate_path(
 
   is_path_generated_ = true;
 
-  return total_dT();
+  return PATH_SUCCESS;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-RetVal<double> CubicSplineInterpolator::generate_path_acc(
-                 const TPQueue& tp_queue,
-                 const double as, const double af) {
+RetCode CubicSplineInterpolator::generate_path_acc(
+          const TPQueue& tp_queue,
+          const double as, const double af) {
   std::size_t finish_index = tp_queue.size() - 1;
   if ( finish_index <= 1 ) {
-    return RetVal<double>( PATH_INVALID_QUEUE_SIZE, -1.0 );
+    return PATH_INVALID_QUEUE_SIZE;
   }
 
   std::vector<double> upper;
@@ -136,12 +140,16 @@ RetVal<double> CubicSplineInterpolator::generate_path_acc(
   diago.push_back(1.0);
   upper.push_back(0.0);
   param.push_back( af ); // this corresponds to finish acceleration :=0.0.
-  RetVal<std::vector<double> > ret_b
-    = tridiagonal_matrix_eq_solver( diago, upper, lower, param );
+  std::vector<double> ret_b;
+  RetCode retcode = tridiagonal_matrix_eq_solver( diago, upper, lower, param, ret_b );
+  if( retcode != PATH_SUCCESS ) {
+    // diago[i]=0, PATH_INVALID_MATRIX_ARGUMENT_VALUE_ZERO
+    return retcode;
+  }
 
   b_.clear();
-  b_.resize( ret_b.value.size() );
-  std::copy( ret_b.value.begin(), ret_b.value.end(), b_.begin() );
+  b_.resize( ret_b.size() );
+  std::copy( ret_b.begin(), ret_b.end(), b_.begin() );
 
   a_.clear();
   c_.clear();
@@ -149,7 +157,8 @@ RetVal<double> CubicSplineInterpolator::generate_path_acc(
   // the start index = 0
   for ( std::size_t i=0; i < finish_index; i++ ) {
     a_.push_back( (b_[i+1] - b_[i]) / (3.0*tp_queue.dT(i)) );
-    c_.push_back( (tp_queue.get(i+1).position - tp_queue.get(i).position) / tp_queue.dT(i)
+    c_.push_back( (tp_queue.get(i+1).position - tp_queue.get(i).position)
+                    / tp_queue.dT(i)
                   - tp_queue.dT(i) * (b_[i+1] + 2.0*b_[i]) / 3.0 );
     d_.push_back( tp_queue.get(i).position );
     TPV tpv( tp_queue.get(i).time,
@@ -167,41 +176,43 @@ RetVal<double> CubicSplineInterpolator::generate_path_acc(
 
   is_path_generated_ = true;
 
-  return total_dT();
+  return PATH_SUCCESS;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-RetVal<double> CubicSplineInterpolator::generate_path(
-                 const TPVQueue& tpv_queue ) {
+RetCode CubicSplineInterpolator::generate_path(
+          const TPVQueue& tpv_queue ) {
   std::size_t finish_index = tpv_queue.size() - 1;
   if ( finish_index <= 0 ) {
-    return RetVal<double>( PATH_INVALID_QUEUE_SIZE, -1.0 );
+    return PATH_INVALID_QUEUE_SIZE;
   }
 
   if ( g_nearEq( tpv_queue.get(finish_index).time, 0.0 ) ) {
-    return RetVal<double>( PATH_NOT_DEF_100PER_PATH, -1.0 );
+    return PATH_NOT_DEF_100PER_PATH;
   }
 
   tpv_queue_ = tpv_queue;
 
-  return RetVal<double>(PATH_NOT_DEF_FUNCTION, -1.0);
+  return PATH_NOT_DEF_FUNCTION;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-RetVal<double> CubicSplineInterpolator::generate_path(
-                 const PVQueue& pv_queue ) {
-  THROW( UndefPathException, "CubicSplineInterpolator not supports this type - 100 per path generation" );
-  return RetVal<double>( PATH_NOT_DEF_100PER_PATH, -1.0 );
+RetCode CubicSplineInterpolator::generate_path(
+          const PVQueue& pv_queue ) {
+  THROW( UndefPathException,
+         "CubicSplineInterpolator not supports this type - 100 per path generation" );
+  return PATH_NOT_DEF_100PER_PATH;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-RetVal<TPV> CubicSplineInterpolator::pop(const double& t ) {
+RetCode CubicSplineInterpolator::pop(const double& t, TPV& output ) {
   TPV empty_tpv(t);
   if( !is_path_generated_ ) {
-    return RetVal<TPV>(PATH_NOT_GENERATED, empty_tpv);
+    output = empty_tpv;
+    return PATH_NOT_GENERATED;
   }
   int index= -1;
   for ( std::size_t i=0; i < tpv_queue_.size(); i++ ) {
@@ -212,7 +223,8 @@ RetVal<TPV> CubicSplineInterpolator::pop(const double& t ) {
   }
   if( index == -1 ) {
     // time is not within the range of generated path
-    return RetVal<TPV>(PATH_TIME_IS_OUT_OF_RANGE, empty_tpv);
+    output = empty_tpv;
+    return PATH_TIME_IS_OUT_OF_RANGE;
   }
 
   //
@@ -223,15 +235,17 @@ RetVal<TPV> CubicSplineInterpolator::pop(const double& t ) {
   double velocity = 3.0 * a_[index] * square + 2.0 * b_[index] * dTi + c_[index];
   TPV dest_tpv(t, position, velocity);
   //
-  return RetVal<TPV>(PATH_SUCCESS, dest_tpv);
+  output = dest_tpv;
+  return PATH_SUCCESS;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-RetVal<std::vector<double> >
-CubicSplineInterpolator::tridiagonal_matrix_eq_solver(
-         std::vector<double> d, const std::vector<double>& u,
-         const std::vector<double>& l, std::vector<double> p ) {
+RetCode CubicSplineInterpolator::tridiagonal_matrix_eq_solver(
+          std::vector<double> d, const std::vector<double>& u,
+          const std::vector<double>& l, std::vector<double> p,
+          std::vector<double>& out_solved_x ) {
+  out_solved_x.clear();
   if( d.size() != u.size() || d.size() != l.size() || d.size() != p.size() ) {
     THROW( InvalidArgumentSize, " all input parmaeter size must be same." );
   }
@@ -242,8 +256,7 @@ CubicSplineInterpolator::tridiagonal_matrix_eq_solver(
   // first loop from top
   for( std::size_t i=0; i<d.size(); i++ ) {
     if( g_nearZero(d[i]) ) {
-      return RetVal<std::vector<double> >( PATH_INVALID_ARGUMENT_VALUE_ZERO,
-                                           std::vector<double>() );
+      return PATH_INVALID_MATRIX_ARGUMENT_VALUE_ZERO;
     }
     if( i >= 1 ) {
       temp = l[i] / d[i-1];
@@ -254,17 +267,17 @@ CubicSplineInterpolator::tridiagonal_matrix_eq_solver(
   //
   // solve x
   //
-  std::vector<double> x( d.size() );
+  out_solved_x.resize( d.size() );
   std::size_t last_index = d.size()-1;
-  x[last_index] = p[last_index] / d[last_index];
+  out_solved_x[last_index] = p[last_index] / d[last_index];
   if( d.size() == 1 ) {
-    return RetVal<std::vector<double> >( PATH_SUCCESS, x );
+    return PATH_SUCCESS;
   }
   // second loop from bottom
   // list size must be > 2.
   for( int i=last_index-1; i>=0; i-- ) {
-    x[i] = ( p[i] - u[i] * x[i+1] ) / d[i];
+    out_solved_x[i] = ( p[i] - u[i] * out_solved_x[i+1] ) / d[i];
   }
 
-  return RetVal<std::vector<double> >( PATH_SUCCESS, x );
+  return PATH_SUCCESS;
 }

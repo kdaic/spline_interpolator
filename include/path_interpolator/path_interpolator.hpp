@@ -56,6 +56,7 @@ enum RetCode{
   PATH_INVALID_QUEUE,
   PATH_INVALID_QUEUE_SIZE,
   PATH_INVALID_ARGUMENT_VALUE_ZERO,
+  PATH_INVALID_MATRIX_ARGUMENT_VALUE_ZERO,
   PATH_QUEUE_SIZE_EMPTY,
   PATH_NOT_GENERATED,
   PATH_NOT_DEF_100PER_PATH,
@@ -69,17 +70,17 @@ enum RetCode{
 template<class T>
 struct RetVal {
   /// Constructor
-  RetVal(): retcode(PATH_NOT_RETURN) {};
+  RetVal(): code(PATH_NOT_RETURN) {};
 
   /// Constructor(data copy)
   RetVal(const RetCode& ret, const T& val=T()):
-    retcode(ret), value(val) {};
+    code(ret), value(val) {};
 
   /// Copy operator
   RetVal operator=( const RetVal<T>& src ) {
     // copy
-    RetVal<T> dest( src.retcode, src.value );
-    this->retcode = dest.retcode;
+    RetVal<T> dest( src.code, src.value );
+    this->code = dest.code;
     this->value = dest.value;
     return *this;
   };
@@ -88,7 +89,7 @@ struct RetVal {
   ~RetVal() {};
 
   /// return code
-  RetCode retcode;
+  RetCode code;
   /// return value
   T value;
 };
@@ -210,11 +211,14 @@ public:
 
   /// Pop T data from buffer queue(FIFO)
   /// @brief delete the pop data from queue_buffer_
-  /// @return oldest T data
-  RetVal<T> pop();
+  /// @param[out] output oldest T data
+  /// @return
+  /// - PATH_QUEUE_SIZE_EMPTY: buffer size is not enough to pop.
+  /// - PATH_SUCCESS: no error
+  RetCode pop(T& output);
 
-  /// Get TPV value at the index
-  /// @return constant TPV at the index
+  /// Get a value at the index
+  /// @return constant a value at the index
   /// @exception If invalid index is accessed.
   const T get( const std::size_t& index ) const
     throw(InvalidIndexAccess);
@@ -258,9 +262,6 @@ protected:
 
 template
 class TimeQueue<TimePosition>;
-
-// template
-// class RetVal<TimePosition>;
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -311,9 +312,6 @@ protected:
 
 template
 class TimeQueue<TPV>;
-
-// template
-// class RetVal<TPV>;
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -382,18 +380,21 @@ public:
   virtual ~PathInterpolator();
 
   /// Get total interval time
+  /// @param[out] dT total interval time
   /// @return
-  /// - PATH_SUCCESS and total interval time
-  /// - PATH_NOT_GENERATED and -1.0
-  const RetVal<double> total_dT();
+  /// - PATH_SUCCESS
+  /// - PATH_NOT_GENERATED and dT is -1.0
+  const RetCode total_dT(double& out_dT);
 
-  /// Get limit velocity( if exists )
+  /// Get limit of velocity( if exists )
+  /// @param[in] output limit of velocity
   /// @return limit velocity
-  const RetVal<double> v_limit();
+  const RetCode v_limit(double& out_v_limit );
 
   /// Get finish time
+  /// @param[out] finish_time time of path end
   /// @return finish time
-  const RetVal<double> finish_time();
+  const RetCode finish_time(double& out_finish_time);
 
   /// Genrate a path from initial-finish point
   /// @param[in] xs start position
@@ -403,26 +404,26 @@ public:
   /// @paran[in] dT interval time (default: 0.0)
   /// @brief calcurate tragectory parameter
   /// @return
-  /// - PATH_SUCCESS and total travel time (tf - ts)
+  /// - PATH_SUCCESS
   /// @details
   /// If you don't give interval time(dT=0.0),
   /// Minmum interval time dT are internally calculated automatically. \n
   /// This means 100% mimum-time path in the limitation.
-  virtual RetVal<double> generate_path( const double& xs, const double& xf,
-                                        const double& vs=0.0, const double& vf=0.0,
-                                        const double& dT=0.0 );
+  virtual RetCode generate_path( const double& xs, const double& xf,
+                                 const double& vs=0.0, const double& vf=0.0,
+                                 const double& dT=0.0 );
 
   /// Generate a path from Time, Position queue
   /// @param[in] Time,Position queue
   /// @param[in] vs start velocity (default: 0.0)
   /// @param[in] vf finish velocity (default: 0.0)
   /// @return
-  /// - PATH_SUCCESS and total travel time (tf - ts)
+  /// - PATH_SUCCESS
   /// @details
   /// Input is TimePosition Queue like this.
   ///
   /// ```
-  /// (ts, xs (, vs)), (t1, x1), (t2, x2), ..., (tf, xf)
+  /// (ts, xs (, vs)), (t1, x1), (t2, x2), ..., (tf, xf (, vf))
   /// ```
   ///
   /// Interpolator sets start & finish velocity, acceleration,(and jerk) as zero,
@@ -432,23 +433,23 @@ public:
   /// (t1, x1, v1=?, a1=?, j1=?),
   /// (t2, x2, v2=?, a2=?, j2=?),
   ///  ...,
-  /// (tf, xf, vf=0, af=0, jf=0)
+  /// (tf, xf, vf,   af=0, jf=0)
   /// ```
   ///
   /// and interpolates intermediate (v1,a1,j1), (v2,a2,j2),.. automatically.
-  virtual RetVal<double> generate_path( const TPQueue& tp_queue,
-                                        const double vs=0.0, const double vf=0.0)=0;
+  virtual RetCode generate_path( const TPQueue& tp_queue,
+                                 const double vs=0.0, const double vf=0.0)=0;
 
   /// Generate a path from Time, Position(, Velocity) queue
   /// @param[in] Time, Position(, Velocity) queue
   /// @return
-  /// - PATH_SUCCESS and total travel time (tf - ts)
-  virtual RetVal<double> generate_path( const TPVQueue& tpv_queue )=0;
+  /// - PATH_SUCCESS
+  virtual RetCode generate_path( const TPVQueue& tpv_queue )=0;
 
   /// Generate a path from Position(, Velocity) queue
-  /// @param[in] Position, Velocity queue
+  /// @param[in] pv_queue Position, Velocity queue
   /// @return
-  /// - PATH_SUCCESS and total travel time (tf - ts)
+  /// - PATH_SUCCESS
   /// you only give start position & velocity and don't give time. \n
   ///
   /// ```
@@ -457,14 +458,16 @@ public:
   ///
   /// Minmum interval time -> ts=0, t1, t2,..., tf are internally calculated automatically. \n
   /// This means 100% mimum-time path in the limitation.
-  virtual RetVal<double> generate_path( const PVQueue& pv_queue )=0;
+  virtual RetCode generate_path( const PVQueue& pv_queue )=0;
 
   /// Pop the position and velocity at the input-time from generated tragectory
-  /// @param t input time
+  /// @param[in] t input time
+  /// @param[out] output TPV at the input time
   /// @return
-  /// - PATH_SUCCESS & TPV at the input time
-  /// - PATH_NOT_GENERATED and TPV is time=-1.0, position=0.0, velocity=0.0
-  virtual RetVal<TPV> pop(const double& t)=0;
+  /// - PATH_SUCCESS: no error
+  /// - PATH_NOT_GENERATED and TPV: is time=-1.0, position=0.0, velocity=0.0
+  /// - PATH_TIME_IS_OUT_OF_RANGE: time is not within the range of generated path
+  virtual RetCode pop(const double& t, TPV& output)=0;
 
 protected:
   /// flag if the path is generated. (default: false)

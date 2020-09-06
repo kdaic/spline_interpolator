@@ -17,33 +17,49 @@ public:
   /// destructor
   ~TestGraphPlot() {};
   /// plot graph (overload)
-  /// @param target_tp target time-position data
-  ///        (ts, target_tp_s), (t1, target_tp_1), ... , (tf, target_tp_f)
-  /// @param interpolated_path_tpv interpolated path of time-position-velocity
-  ///        (ts, path(s)), (ts+dT, path(ts+dT)), (ts+2dT, path(ts+2dT)), ... , (tf, path(tf))
-  /// @param path destination path of plotted graph image(.png)
-  /// @param path_index prefix index of destination path of plotted graph
+  /// @param[in] target_tp       plotting target time-position data
+  ///                            (ts, target_tp_s),
+  ///                            (t1, target_tp_1),
+  ///                            ... ,
+  ///                            (tf, target_tp_f)
+  /// @param[in] interp_path_tpv plotting interpolated path
+  ///                            of time-position-velocity with cycletime dT.
+  ///                            (ts,     path(s)),
+  ///                            (ts+dT,  path(ts+dT)),
+  ///                            (ts+2dT, path(ts+2dT)),
+  ///                            ... ,
+  ///                            (tf,     path(tf))
+  /// @param[in] output_path     destination path of plotted graph image(.png)
+  /// @param[in] path_index      prefix index of destination path of plotted graph
   void plot( const TPQueue& target_tp,
-             const TPVQueue& interpolated_path_tpv,
+             const TPVQueue& interp_path_tpv,
              const std::string& output_path="./",
              const int path_index = 0 ) {
     TPVQueue empty_target_tpv;
     plot( target_tp,
           empty_target_tpv,
-          interpolated_path_tpv,
+          interp_path_tpv,
           output_path,
           path_index );
   }
 
   /// plot graph (overload)
-  /// @param target_tpv target time-position-velocity data
-  ///        (ts, target_tpv_s), (t1, target_tpv_1), ... , (tf, target_tpv_f)
-  /// @param interpolated_path_tpv interpolated path of time-position-velocity
-  ///        (ts, path(s)), (ts+dT, path(ts+dT)), (ts+2dT, path(ts+2dT)), ... , (tf, path(tf))
-  /// @param path destination path of plotted graph image(.png)
-  /// @param path_index prefix index of destination path of plotted graph
+  /// @param[in] target_tpv      plotting target time-position-velocity data
+  ///                            (ts, target_tpv_s),
+  ///                            (t1, target_tpv_1),
+  ///                             ... ,
+  ///                            (tf, target_tpv_f)
+  /// @param[in] interp_path_tpv plotting interpolated path
+  ///                            of time-position-velocity with cycletime dT.
+  ///                            (ts,     path(s)),
+  ///                            (ts+dT,  path(ts+dT)),
+  ///                            (ts+2dT, path(ts+2dT)),
+  ///                            ... ,
+  ///                            (tf,     path(tf))
+  /// @param[in] output_path     destination path of plotted graph image(.png)
+  /// @param[in] path_index      prefix index of destination path of plotted graph
   void plot( const TPVQueue& target_tpv,
-             const TPVQueue& interpolated_path_tpv,
+             const TPVQueue& interp_path_tpv,
              const std::string& output_path="./",
              const int path_index = 0 ) {
     TPQueue target_tp;
@@ -55,25 +71,36 @@ public:
     }
     plot( target_tp,
           target_tpv,
-          interpolated_path_tpv,
+          interp_path_tpv,
           output_path,
           path_index );
   }
 
   /// plot graph
-  /// @param target_tp target time-position data
-  ///        (ts, target_tp_s), (t1, target_tp_1), ... , (tf, target_tp_f)
-  /// @param target_tpv target time-position-velocity data
-  ///        (ts, target_tpv_s), (t1, target_tpv_1), ... , (tf, target_tpv_f)
-  /// @param interpolated_path_tpv interpolated path of time-position-velocity
-  ///        (ts, path(s)), (ts+dT, path(ts+dT)), (ts+2dT, path(ts+2dT)), ... , (tf, path(tf))
-  /// @param output_path destination path of plotted graph image(.png)
-  /// @param path_index prefix index of destination path of plotted graph
+  /// @param[in] target_tp       plotting target time-position data
+  ///                            (ts, target_tp_s),
+  ///                            (t1, target_tp_1),
+  ///                            ... ,
+  ///                            (tf, target_tp_f)
+  /// @param[in] target_tpv      plotting target time-position-velocity data
+  ///                            (ts, target_tpv_s),
+  ///                            (t1, target_tpv_1),
+  ///                            ... ,
+  ///                            (tf, target_tpv_f)
+  /// @param[in] interp_path_tpv plotting interpolated path
+  ///                            of time-position-velocity with cycletime dT.
+  ///                            (ts,     path(s)),
+  ///                            (ts+dT,  path(ts+dT)),
+  ///                            (ts+2dT, path(ts+2dT)),
+  ///                            ... ,
+  ///                            (tf,     path(tf))
+  /// @param[in] output_path     destination path of plotted graph image(.png)
+  /// @param[in] path_index      prefix index of destination path of plotted graph
   /// @details generate path of each set
   /// plot graph of time-position, time-velocity, position-velocity \n
   void plot( const TPQueue& target_tp,
              const TPVQueue& target_tpv,
-             const TPVQueue& interpolated_path_tpv,
+             const TPVQueue& interp_path_tpv,
              const std::string& output_path="./",
              const int path_index = 0 ) {
     // target plot option
@@ -128,13 +155,13 @@ public:
     // fix digit
     ofstrm << std::fixed << std::setprecision(8);
 
-    for(std::size_t i=0; i < interpolated_path_tpv.size(); i++) {
+    for(std::size_t i=0; i < interp_path_tpv.size(); i++) {
       /////////////////////////////////////////////////////////////////////////
       /// output time-position-velocity data into the text file
       /////////////////////////////////////////////////////////////////////////
-      ofstrm << interpolated_path_tpv.get(i).time
-             << "," << interpolated_path_tpv.get(i).position
-             << "," << interpolated_path_tpv.get(i).velocity << std::endl;
+      ofstrm << interp_path_tpv.get(i).time
+             << "," << interp_path_tpv.get(i).position
+             << "," << interp_path_tpv.get(i).velocity << std::endl;
     }
     ofstrm.close();
 
@@ -155,27 +182,33 @@ public:
                                               target_tpv.get(i).velocity) );
     }
     // add interpolated_path of time-position, time-velocity, position-velocity into plotting buffer
-    for(std::size_t i=0; i<interpolated_path_tpv.size(); i++) {
+    for(std::size_t i=0; i<interp_path_tpv.size(); i++) {
       path_plot_data_tp.push_back(
-                          std::make_pair(interpolated_path_tpv.get(i).time,
-                                         interpolated_path_tpv.get(i).position) );
+                          std::make_pair(interp_path_tpv.get(i).time,
+                                         interp_path_tpv.get(i).position) );
       path_plot_data_tv.push_back(
-                          std::make_pair(interpolated_path_tpv.get(i).time,
-                                         interpolated_path_tpv.get(i).velocity) );
+                          std::make_pair(interp_path_tpv.get(i).time,
+                                         interp_path_tpv.get(i).velocity) );
       path_plot_data_phase.push_back(
-                             std::make_pair(interpolated_path_tpv.get(i).position,
-                                            interpolated_path_tpv.get(i).velocity) );
+                             std::make_pair(interp_path_tpv.get(i).position,
+                                            interp_path_tpv.get(i).velocity) );
     }
     // make final plot data by merging target & interpolated points
     // final plot data of time-position
-    multi_data.push_back( std::make_pair(target_plot_data_tp, options_target) );
-    multi_data.push_back( std::make_pair(path_plot_data_tp,   options) );
+    multi_data.push_back( std::make_pair(target_plot_data_tp,
+                                         options_target) );
+    multi_data.push_back( std::make_pair(path_plot_data_tp,
+                                         options) );
     // final plot data of time-velocity
-    multi_data_v.push_back( std::make_pair(target_plot_data_tv, options_target) );
-    multi_data_v.push_back( std::make_pair(path_plot_data_tv,   options) );
+    multi_data_v.push_back( std::make_pair(target_plot_data_tv,
+                                           options_target) );
+    multi_data_v.push_back( std::make_pair(path_plot_data_tv,
+                                           options) );
     // final plot data of position-velocity(phase diagram)
-    multi_data_phase.push_back( std::make_pair(target_plot_data_phase, options_target) );
-    multi_data_phase.push_back( std::make_pair(path_plot_data_phase,   options) );
+    multi_data_phase.push_back( std::make_pair(target_plot_data_phase,
+                                               options_target) );
+    multi_data_phase.push_back( std::make_pair(path_plot_data_phase,
+                                               options) );
 
     /////////////////////////////////////////////////////////////////////////
     /// time-position plot
@@ -183,7 +216,7 @@ public:
     // set 2 digit lefty embeded 0
     numstr << "'" << output_path
            << std::setfill('0') << std::setw(2) << path_index << "_time-position_graph.png'";
-    std::cerr << "drawing " << numstr.str() << "..." << std::endl;
+    std::cout << "drawing " << numstr.str() << "..." << std::endl;
     gpserver.set("output " +  numstr.str());
     numstr.str("");
     gpserver.set("style data lp");
@@ -207,8 +240,9 @@ public:
     /////////////////////////////////////////////////////////////////////////
     // set 2 digit lefty embeded 0
     numstr << "'" << output_path
-           << std::setfill('0') << std::setw(2) << path_index << "_time-velocity_graph.png'";
-    std::cerr << "drawing " << numstr.str() << "..." << std::endl;
+           << std::setfill('0') << std::setw(2)
+           << path_index << "_time-velocity_graph.png'";
+    std::cout << "drawing " << numstr.str() << "..." << std::endl;
     gpserver.set("output " +  numstr.str());
     numstr.str("");
     gpserver.set("style data lp");
@@ -232,8 +266,9 @@ public:
     /////////////////////////////////////////////////////////////////////////
     // set 2 digit lefty embeded 0
     numstr << "'" << output_path
-           << std::setfill('0') << std::setw(2) << path_index << "_phase_diagram.png'";
-    std::cerr << "drawing " << numstr.str() << "..." << std::endl;
+           << std::setfill('0') << std::setw(2)
+           << path_index << "_phase_diagram.png'";
+    std::cout << "drawing " << numstr.str() << "..." << std::endl;
     gpserver.set("output " +  numstr.str());
     numstr.str("");
     gpserver.set("style data lp");

@@ -44,17 +44,17 @@ RetCode TimeQueue<T>::push( const T& newval ) {
 }
 
 template<typename T>
-RetVal<T> TimeQueue<T>::pop() {
+RetCode TimeQueue<T>::pop(T& output) {
   if( queue_buffer_.empty() ) {
     T retval();
-    return RetVal<T>(PATH_QUEUE_SIZE_EMPTY);
+    return PATH_QUEUE_SIZE_EMPTY;
   }
-  T front_val = queue_buffer_.front();
+  output = queue_buffer_.front();
   queue_buffer_.pop_front();
   if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 1) ) {
     dT_queue_.pop_front();
   }
-  return RetVal<T>(PATH_SUCCESS, front_val);
+  return PATH_SUCCESS;
 }
 
 template<typename T>
@@ -219,34 +219,39 @@ PathInterpolator::PathInterpolator() :
 PathInterpolator::~PathInterpolator() {
 }
 
-const RetVal<double> PathInterpolator::total_dT() {
+const RetCode PathInterpolator::total_dT(double& out_dT) {
   if( !is_path_generated_ ) {
-    return RetVal<double>(PATH_NOT_GENERATED, -1.0);
+    out_dT = -1.0;
+    return PATH_NOT_GENERATED;
   }
-  double total_dT = tpv_queue_.get( tpv_queue_.size() - 1 ).time - tpv_queue_.get(0).time;
-  return RetVal<double>(PATH_SUCCESS, total_dT);
+  out_dT = tpv_queue_.get( tpv_queue_.size() - 1 ).time - tpv_queue_.get(0).time;
+  return PATH_SUCCESS;
 }
 
-const RetVal<double> PathInterpolator::v_limit() {
+const RetCode PathInterpolator::v_limit(double& out_v_limit) {
   if( !is_v_limit_ ) {
-    return RetVal<double>(PATH_NOT_DEF_VEL_LIMIT, v_limit_);
+    out_v_limit = v_limit_;
+    return PATH_NOT_DEF_VEL_LIMIT;
   }
-  return RetVal<double>(PATH_SUCCESS, v_limit_);
+  out_v_limit = v_limit_;
+  return PATH_SUCCESS;
 }
 
-const RetVal<double> PathInterpolator::finish_time() {
+const RetCode PathInterpolator::finish_time(double& out_finish_time) {
   if( !is_path_generated_ ) {
-    return RetVal<double>(PATH_NOT_GENERATED, -1.0);
+    out_finish_time = -1.0;
+    return PATH_NOT_GENERATED;
   }
-  return RetVal<double>(PATH_SUCCESS, tpv_queue_.get( tpv_queue_.size() - 1 ).time );
+  out_finish_time = tpv_queue_.get( tpv_queue_.size() - 1 ).time;
+  return PATH_SUCCESS;
 }
 
-RetVal<double> PathInterpolator::generate_path(
-                 const double& xs, const double& xf,
-                 const double& vs, const double& vf,
-                 const double& dT ) {
+RetCode PathInterpolator::generate_path(
+                            const double& xs, const double& xf,
+                            const double& vs, const double& vf,
+                            const double& dT ) {
   if( dT < 0.0  ) {
-    return RetVal<double>( PATH_INVALID_INPUT_TIME, -1.0 );
+    return PATH_INVALID_INPUT_TIME;
   }
 
   if( g_nearZero(dT) ) {
@@ -265,8 +270,8 @@ RetVal<double> PathInterpolator::generate_path(
     tpv_queue.push( 0.0, xs, vs );
     tpv_queue.push( dT, xf, vf );
 
-    return generate_path(tpv_queue);
+    return generate_path( tpv_queue );
   }
 
-  return RetVal<double>(PATH_NOT_DEF_FUNCTION, -1.0);
+  return PATH_NOT_DEF_FUNCTION;
 }
