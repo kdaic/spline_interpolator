@@ -29,37 +29,29 @@ public:
   /// Input is TimePosition Queue like this.
   ///
   /// ```
-  /// (ts, xs (, vs)), (t1, x1), (t2, x2), ..., (tf, xf)
+  /// (ts, xs(, vs, as)), (t1, x1), (t2, x2), ..., (tf, xf(, vf, af))
   /// ```
   ///
   /// Interpolator set start & finish velocity, acceleration,(and jerk) as zero,
   ///
   /// ```
-  /// (ts, xs, vs,   as=0, js=0),
+  /// (ts, xs, vs,   as, js=0),
   /// (t1, x1, v1=?, a1=?, j1=?),
   /// (t2, x2, v2=?, a2=?, j2=?),
   ///  ...,
   /// (tf, xf, vf=0, af=0, jf=0)
   /// ```
   ///
-  /// and interpolate (v1,a1,j1), (v1,a1,j1),.. automatically.
+  /// and interpolate (v1,a1,j1), (v2,a2,j2),.. automatically.
   virtual RetCode generate_path( const TPQueue& tp_queue,
-                                 const double vs=0.0, const double vf=0.0 );
-
-  /// Generate a path from Time, Position queue
-  /// @param[in] Time,Position queue
-  /// @param[in] vs start acceleration (default: 0.0)
-  /// @param[in] vf finish acceleration (default: 0.0)
-  /// @return
-  /// - PATH_SUCCESS: no error
-  RetCode generate_path_acc( const TPQueue& tp_queue,
-                             const double as=0.0, const double af=0.0 );
+                                 const double vs=0.0, const double vf=0.0,
+                                 const double as=0.0, const double af=0.0 );
 
   /// Generate a path from Time, Position(, Velocity) queue
   /// @param[in] Time,Position(, Velocity) queue
   /// @return
   /// - PATH_SUCCESS: no error
-  virtual RetCode generate_path( const TPVQueue& tpv_queue );
+  virtual RetCode generate_path( const TPVAQueue& tpva_queue );
 
   /// Generate a path from Position(, Velocity) queue
   /// @param[in] Position, Velocity queue
@@ -67,16 +59,15 @@ public:
   /// @return
   /// - PATH_NOT_DEF_100PER_PATH.
   ///   CubicSplineInterpolator don't supports this type
-  ///   ( cannot generate 100% mimum-time path in the limitation.)
-  virtual RetCode generate_path( const PVQueue& pv_queue );
+  ///   ( cannot generate 100% mimum-time path in the limitation. )
+  virtual RetCode generate_path( const PVAQueue& pv_queue );
 
-
-  /// Pop the position and velocity at the input-time from generated tragectory
+  /// Pop the position and velocity at the input-time from generated trajectory
   /// @param[in] t input time
   /// @param[out] output TPV at the input time
   /// - PATH_SUCCESS: no error
   /// - PATH_NOT_GENERATED: TPV is time=-1.0, position=0.0, velocity=0.0
-  virtual RetCode pop( const double& t, TPV& output );
+  virtual RetCode pop( const double& t, TimePVA& output );
 
 private:
   /// Tridiagonal Matrix Equation Solver

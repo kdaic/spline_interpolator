@@ -18,7 +18,7 @@ namespace interp {
 /// Path Exception code
 enum ExceptionCode {
   PATH_EXCEPTION=0,
-  PATH_UNDEF_EXCEPTION,
+  PATH_UNDEFINED_EXCEPTION,
   PATH_IVALID_TYPE_ARGUMENT,
   PATH_IVALID_ARGUMENT_SIZE,
   PATH_IVALID_ARGUMENT_VALUE,
@@ -69,8 +69,8 @@ public:
     PathException( message, name ) {}
 
   /// get Exception Code
-  /// @return PATH_UNDEF_EXCEPTION
-  virtual const ExceptionCode code() { return PATH_UNDEF_EXCEPTION; }
+  /// @return PATH_UNDEFINED_EXCEPTION
+  virtual const ExceptionCode code() { return PATH_UNDEFINED_EXCEPTION; }
 };
 
 /// Undefined Exception Handler

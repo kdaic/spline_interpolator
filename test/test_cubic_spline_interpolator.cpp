@@ -6,20 +6,21 @@
 namespace interp {
 
 /// generaed path from time-position queue
-/// @param[in] target_set target time-position queue
-///                       (ts, target_tp_s),
-///                       (t1, target_tp_1),
-///                       ... ,
-///                       (tf, target_tp_f)
-/// @param[in] cycle      cycle time
-/// @param[in] path       destination path of plotted graph image(.png)
-/// @param[in] vs         start velocity (default=0.0)
-/// @param[in] vf         finish velocity (default=0.0)
+/// and generate cycletime-position-velocity queue from path
+/// @param[in] target_tp target time-position queue
+///                      (ts, target_tp_s),
+///                      (t1, target_tp_1),
+///                      ... ,
+///                      (tf, target_tp_f)
+/// @param[in] cycle     cycle time
+/// @param[in] path      destination path of plotted graph image(.png)
+/// @param[in] vs        start velocity (default=0.0)
+/// @param[in] vf        finish velocity (default=0.0)
 /// @return queue of interpolated time-position-velocity
-const TPVQueue g_generate_path_queue( const TPQueue& target_tp,
-                                      const double cycle=0.005,
-                                      const double vs=0.0,
-                                      const double vf=0.0 ) {
+const TPVAQueue g_generate_path_and_cycletime_queue( const TPQueue& target_tp,
+                                                     const double cycle=0.005,
+                                                     const double vs=0.0,
+                                                     const double vf=0.0 ) {
   // cubic spline path interpolator
   CubicSplineInterpolator tg;
   // generate path & total dT
@@ -31,27 +32,25 @@ const TPVQueue g_generate_path_queue( const TPQueue& target_tp,
   LOGD << "dT_total:" << dT_total;
 
   // queue into plot data
-  TPV plot_point;
-  TPVQueue output_path_tpv_queue;
+  TimePVA plot_point;
+  TPVAQueue output_cycletime_tpva_queue;
   double finish_time;
   if( tg.finish_time( finish_time ) != PATH_SUCCESS) {
     THROW( UndefPathException, "failed to get finish_time() because of failing to generated_path()");
   }
   for(double t=target_tp.get(0).time; t<finish_time; t+=cycle) {
-    tg.pop( t, plot_point );
+    tg.pop(t, plot_point);
     // add buffer of interpolated plot-point
-    output_path_tpv_queue.push(
-                            TPV( plot_point.time,
-                                 plot_point.position,
-                                 plot_point.velocity ) );
+    output_cycletime_tpva_queue.push( TimePVA( plot_point.time,
+                                               plot_point.pos,
+                                               plot_point.vel ) );
   }
   // add target point at last
   tg.pop( finish_time, plot_point );
-  output_path_tpv_queue.push(
-                          TPV( plot_point.time,
-                               plot_point.position,
-                               plot_point.velocity ) );
-  return output_path_tpv_queue;
+  output_cycletime_tpva_queue.push( TimePVA( plot_point.time,
+                                             plot_point.pos,
+                                             plot_point.vel ) );
+  return output_cycletime_tpva_queue;
 };
 
 
@@ -132,7 +131,7 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_list_size_is_1 ) {
   //
   RetCode retcode = m_tridiagonal_matrix_eq_solver( d, u, l, p, out_solved_x );
   EXPECT_EQ( retcode, PATH_SUCCESS );
-  EXPECT_TRUE( g_nearEq( out_solved_x[0], p[0] / d[0] ));
+  EXPECT_TRUE( g_isNearlyEq( out_solved_x[0], p[0] / d[0] ));
 }
 
 TEST_F( CubicSplineTest, tri_matrix_eq_solver_size_is_2 ) {
@@ -148,8 +147,8 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_size_is_2 ) {
   //
   RetCode retcode = m_tridiagonal_matrix_eq_solver( d, u, l, p, out_solved_x );
   EXPECT_EQ( retcode, PATH_SUCCESS );
-  EXPECT_TRUE( g_nearEq( out_solved_x[0], 1.0/3.0 ) );
-  EXPECT_TRUE( g_nearEq( out_solved_x[1], -1.0/9.0 ) );
+  EXPECT_TRUE( g_isNearlyEq( out_solved_x[0], 1.0/3.0 ) );
+  EXPECT_TRUE( g_isNearlyEq( out_solved_x[1], -1.0/9.0 ) );
 }
 
 TEST_F( CubicSplineTest, tri_matrix_eq_solver_size_is_3 ) {
@@ -165,27 +164,27 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_size_is_3 ) {
   //
   RetCode retcode = m_tridiagonal_matrix_eq_solver( d, u, l, p, out_solved_x );
   EXPECT_EQ( retcode, PATH_SUCCESS );
-  EXPECT_TRUE( g_nearEq( out_solved_x[0], 1.0/13.0 ) );
-  EXPECT_TRUE( g_nearEq( out_solved_x[1], 3.0/13.0 ) );
-  EXPECT_TRUE( g_nearEq( out_solved_x[2], -23.0/26.0 ) );
+  EXPECT_TRUE( g_isNearlyEq( out_solved_x[0], 1.0/13.0 ) );
+  EXPECT_TRUE( g_isNearlyEq( out_solved_x[1], 3.0/13.0 ) );
+  EXPECT_TRUE( g_isNearlyEq( out_solved_x[2], -23.0/26.0 ) );
 }
 
 TEST_F( CubicSplineTest, pop1 ) {
   TPQueue tp_queue;
-  tp_queue.push( 0.0, -1.0 );
-  tp_queue.push( 1.0, -1.0 );
-  tp_queue.push( 2.0, 0.0 );
-  tp_queue.push( 3.0, 10.1 );
-  tp_queue.push( 4.0, 20.0 );
-  tp_queue.push( 5.0, 3.1 );
-  tp_queue.push( 6.0, 7.0 );
-  tp_queue.push( 7.0, 10.1 );
+  tp_queue.push_on_dT( 0.0, -1.0 );
+  tp_queue.push_on_dT( 1.0, -1.0 );
+  tp_queue.push_on_dT( 2.0, 0.0 );
+  tp_queue.push_on_dT( 3.0, 10.1 );
+  tp_queue.push_on_dT( 4.0, 20.0 );
+  tp_queue.push_on_dT( 5.0, 3.1 );
+  tp_queue.push_on_dT( 6.0, 7.0 );
+  tp_queue.push_on_dT( 7.0, 10.1 );
 
   // start velocity  = -0.0
   // finish velocity = 0.0
-  TPVQueue interp_path_tpv
-    = g_generate_path_queue(tp_queue, 0.005, -0.0, 0.0 );
+  TPVAQueue interpolated_path_tpva
+    = g_generate_path_and_cycletime_queue(tp_queue, 0.005, -0.0, 0.0 );
 
   TestGraphPlot test_gp;
-  test_gp.plot(tp_queue, interp_path_tpv, "./images/");
+  test_gp.plot(tp_queue, interpolated_path_tpva, "./images/");
 }
