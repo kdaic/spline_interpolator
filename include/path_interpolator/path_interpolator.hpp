@@ -68,35 +68,6 @@ enum RetCode{
   PATH_TIME_IS_OUT_OF_RANGE
 };
 
-/// Struct data of Return Value
-template<class T>
-struct RetVal {
-  /// Constructor
-  RetVal(): code(PATH_NOT_RETURN) {};
-
-  /// Constructor(data copy)
-  RetVal(const RetCode& ret, const T& val=T()):
-    code(ret), value(val) {};
-
-  /// Copy operator
-  RetVal operator=( const RetVal<T>& src ) {
-    // copy
-    RetVal<T> dest( src.code, src.value );
-    this->code = dest.code;
-    this->value = dest.value;
-    return *this;
-  };
-
-  /// Destructor
-  ~RetVal() {};
-
-  /// return code
-  RetCode code;
-  /// return value
-  T value;
-};
-
-
 /////////////////////////////////////////////////////////////////////////////////////////
 
 /// Struct data of clock time, value
