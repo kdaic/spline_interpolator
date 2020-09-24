@@ -78,6 +78,19 @@ RetCode TimeQueue<T>::pop(TimeVal<T>& output) {
 }
 
 template<typename T>
+RetCode TimeQueue<T>::pop_delete() {
+  if( queue_buffer_.empty() ) {
+    return PATH_QUEUE_SIZE_EMPTY;
+  }
+  queue_buffer_.pop_front();
+  if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 1) ) {
+    dT_queue_.pop_front();
+  }
+  return PATH_SUCCESS;
+}
+
+
+template<typename T>
 RetCode TimeQueue<T>::push_on_dT(
                         const double& dT,
                         const T& value ) {
@@ -104,10 +117,29 @@ template<typename T>
 const TimeVal<T> TimeQueue<T>::get( const std::size_t& index ) const
   throw(InvalidIndexAccess) {
   if( index < 0 || index > queue_buffer_.size() -1 ) {
-    THROW( InvalidIndexAccess, "Queue size is empty." );
+    THROW( InvalidIndexAccess, "Queue index is invalid." );
   }
   return queue_buffer_.at(index);
 }
+
+template<typename T>
+const TimeVal<T> TimeQueue<T>::front() const
+  throw(InvalidIndexAccess) {
+  if( queue_buffer_.empty() ) {
+    THROW( InvalidIndexAccess, "Queue size is empty." );
+  }
+  return queue_buffer_.front();
+}
+
+template<typename T>
+const TimeVal<T> TimeQueue<T>::back() const
+  throw(InvalidIndexAccess) {
+  if( queue_buffer_.empty() ) {
+    THROW( InvalidIndexAccess, "Queue size is empty." );
+  }
+  return queue_buffer_.back();
+}
+
 
 template<typename T>
 RetCode TimeQueue<T>::set( const std::size_t& index,

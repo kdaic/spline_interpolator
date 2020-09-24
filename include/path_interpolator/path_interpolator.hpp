@@ -98,8 +98,17 @@ struct TimeVal {
   double time;
   /// value [m, rad, ...etc.]
   T value;
-}; // End of struct ClocktimeVal
+}; // End of struct TimeVal
 
+/////////////////////////////////////////////////////////////////////////////////////////
+
+template
+struct TimeVal<double>;
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// /// type definition of Time-Position struct data derived from TimeVal<T>
+typedef TimeVal<double> TimePosition;
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -375,18 +384,37 @@ public:
                               const T& value );
 
 
-  /// Pop T data from buffer queue(FIFO)
+  /// Pop T (oldest) data from buffer queue(FIFO)
   /// @brief delete the pop data from queue_buffer_
   /// @param[out] output oldest T data
   /// @return
   /// - PATH_QUEUE_SIZE_EMPTY: buffer size is not enough to pop.
   /// - PATH_SUCCESS: no error
-  RetCode pop(TimeVal<T>& output);
+  RetCode pop( TimeVal<T>& output );
+
+  /// delete T front(oldest) data from buffer queue(FIFO)
+  /// @return
+  /// - PATH_QUEUE_SIZE_EMPTY: buffer size is not enough to pop and dlete.
+  /// - PATH_SUCCESS: no error
+  RetCode pop_delete();
 
   /// Get a value at the index
   /// @return constant a value at the index
   /// @exception If invalid index is accessed.
   const TimeVal<T> get( const std::size_t& index ) const
+    throw(InvalidIndexAccess);
+
+  /// Get a value at the first inputted index(oldest data)
+  /// @return constant a value at the first index
+  /// @exception If invalid index is accessed.
+  const TimeVal<T> front() const
+    throw(InvalidIndexAccess);
+
+
+  /// Get a value at the last inputted index(newest data)
+  /// @return constant a value at the last index
+  /// @exception If invalid index is accessed.
+  const TimeVal<T> back() const
     throw(InvalidIndexAccess);
 
   /// Set T value at the input-index

@@ -140,6 +140,6 @@ public:
 };
 
 
-}
+} // End of namespace interp
 
 #endif // INCLUDE_PATH_EXCEPTION_HPP_

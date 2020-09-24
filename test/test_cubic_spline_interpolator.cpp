@@ -170,7 +170,7 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_size_is_3 ) {
 }
 
 TEST_F( CubicSplineTest, pop1 ) {
-  TPQueue tp_queue;
+  TPQueue tp_queue; // TP = time, position
   tp_queue.push_on_dT( 0.0, -1.0 );
   tp_queue.push_on_dT( 1.0, -1.0 );
   tp_queue.push_on_dT( 2.0, 0.0 );
