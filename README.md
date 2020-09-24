@@ -27,6 +27,7 @@ g++, googletest, gnuplot( for unit_test )
 ├── include/
 │   ├── path_interpolator/
 │   │   ├── cubic_spline_interpolator.hpp
+│   │   ├── non_uniform_rounding_spline.hpp
 │   │   ├── path_interpolator.hpp
 │   │   └── path_exception.hpp
 │   └── submodules/
@@ -34,6 +35,7 @@ g++, googletest, gnuplot( for unit_test )
 ├── src/
 │   ├── main.cpp
 │   ├── path_interpolator.cpp
+│   ├── non_uniform_rounding_spline.cpp
 │   └── cubic_spline_interpolator.cpp
 └── test/
     ├── test_cubic_spline_interpolator.cpp
