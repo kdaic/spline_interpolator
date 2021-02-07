@@ -228,7 +228,7 @@ RetCode TPVAQueue::push( const TimePVA& newval ) {
       && newval.time <= queue_buffer_.back().time ) {
     return PATH_INVALID_INPUT_TIME;
   }
-  return TimeQueue<PosVelAcc>::push( newval.tpva_ );
+  return TimeQueue<PosVelAcc>::push( newval );
 }
 
 RetCode TPVAQueue::push( const double& time,
@@ -240,7 +240,7 @@ RetCode TPVAQueue::push( const double& time,
     return PATH_INVALID_INPUT_TIME;
   }
   TimePVA newval(time, position, velocity, acceleration);
-  return TimeQueue<PosVelAcc>::push( newval.tpva_ );
+  return TimeQueue<PosVelAcc>::push( newval );
 }
 
 RetCode TPVAQueue::set( const std::size_t& index,
@@ -251,7 +251,7 @@ RetCode TPVAQueue::set( const std::size_t& index,
            && newval.time >= queue_buffer_[index+1].time ) ) {
     return PATH_INVALID_INPUT_TIME;
   }
-  return TimeQueue<PosVelAcc>::set( index, newval.tpva_ );
+  return TimeQueue<PosVelAcc>::set( index, newval );
 }
 
 
@@ -268,7 +268,7 @@ RetCode TPVAListQueue::push( const TimePVAList& newval ) {
       && newval.time <= queue_buffer_.back().time ) {
     return PATH_INVALID_INPUT_TIME;
   }
-  return TimeQueue<PVAList>::push( newval.tpva_list_ );
+  return TimeQueue<PVAList>::push( newval );
 }
 
 RetCode TPVAListQueue::push( const double& time,
@@ -278,7 +278,7 @@ RetCode TPVAListQueue::push( const double& time,
     return PATH_INVALID_INPUT_TIME;
   }
   TimePVAList newval(time, pva_list);
-  return TimeQueue<PVAList>::push( newval.tpva_list_ );
+  return TimeQueue<PVAList>::push( newval );
 }
 
 RetCode TPVAListQueue::set( const std::size_t& index,
@@ -289,7 +289,7 @@ RetCode TPVAListQueue::set( const std::size_t& index,
            && newval.time >= queue_buffer_[index+1].time ) ) {
     return PATH_INVALID_INPUT_TIME;
   }
-  return TimeQueue<PVAList>::set( index, newval.tpva_list_ );
+  return TimeQueue<PVAList>::set( index, newval );
 }
 
 
@@ -334,7 +334,7 @@ RetCode PathInterpolator::generate_path(
                             const double& vs, const double& vf,
                             const double& as, const double& af,
                             const double& dT ) {
-  if( dT < 0.0  ) {
+  if( dT < 0.0 ) {
     return PATH_INVALID_INPUT_TIME;
   }
 

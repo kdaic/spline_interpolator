@@ -59,6 +59,50 @@ TEST(g_isNearlyZero, test) {
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+TEST(TimeValTest, constructor) {
+  TimeVal<double> tp0;
+  double time = 1.3;
+  double value = 10.2;
+  tp0.time = time;
+  tp0.value = value;
+  EXPECT_EQ( tp0.value, tp0.P );
+
+  TimeVal<double> tp1(tp0);
+  EXPECT_EQ( tp0.time,  tp1.time  );
+  EXPECT_EQ( tp0.value, tp1.value );
+  EXPECT_EQ( tp0.P,     tp1.P     );
+  EXPECT_EQ( tp1.value, tp1.P     );
+
+  TimeVal<double> tp2(time, value);
+  EXPECT_EQ( tp0.time,  tp2.time  );
+  EXPECT_EQ( tp0.value, tp2.value );
+  EXPECT_EQ( tp0.P,     tp2.P     );
+  EXPECT_EQ( tp2.value, tp2.P     );
+}
+
+TEST(TimeValTest, copy_operator) {
+  TimeVal<double> tp0(3.1, -88.7);
+  TimeVal<double> tp1;
+  // pre-check
+  EXPECT_NE( tp0.time,  tp1.time  );
+  EXPECT_NE( tp0.value, tp1.value );
+  EXPECT_NE( tp0.P,     tp1.P     );
+  // copy
+  tp1 = tp0;
+  //
+  EXPECT_EQ( tp0.time,  tp1.time  );
+  EXPECT_EQ( tp0.value, tp1.value );
+  EXPECT_EQ( tp0.P,     tp1.P     );
+  // self copy
+  tp1 = tp1;
+  //
+  EXPECT_EQ( tp0.time,  tp1.time  );
+  EXPECT_EQ( tp0.value, tp1.value );
+  EXPECT_EQ( tp0.P,     tp1.P     );
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
 TEST(TPQueueTest, push_get_intervaltime_size_clear){
   TimeVal<double> tp0(0.0, 0.0);
   TimeVal<double> tp1(1.0, 10.001);

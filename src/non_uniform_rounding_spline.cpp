@@ -1,4 +1,4 @@
-#include "non_uniform_spline.hpp"
+#include "non_uniform_rounding_spline.hpp"
 
 using namespace interp;
 
@@ -93,4 +93,3 @@ void NonUniformRoundingSpline::clear() {
 unsigned int NonUniformRoundingSpline::size() {
   return tpva_buffer_.size();
 }
-

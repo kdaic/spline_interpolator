@@ -21,13 +21,14 @@ g++, googletest, gnuplot( for unit_test )
 .
 ├── README.md
 ├── Makefile
-├── bin/ : Destination of binaries (path_interpolator, unit_test)
+├── bin/ : Destination of executing binaries (path_interpolator, unit_test)
 ├── lib/ : Destination of static library (libpath_interpolator.a)
 ├── images/ : Destination of plotting graph & csv by unit_test
 ├── include/
 │   ├── path_interpolator/
 │   │   ├── cubic_spline_interpolator.hpp
 │   │   ├── non_uniform_rounding_spline.hpp
+│   │   ├── path.hpp
 │   │   ├── path_interpolator.hpp
 │   │   └── path_exception.hpp
 │   └── submodules/

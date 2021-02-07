@@ -75,13 +75,19 @@ template<class T>
 struct TimeVal {
   /// Constructor
   // TimeVal():time(0.0) {};
-  TimeVal() {};
+  TimeVal() :
+    time(0.0), P(this->value) {};
+
+  /// Copy Constructor
+  /// @param[in] src source of TimeVal
+  TimeVal( const TimeVal& src ) :
+    time(src.time), value(src.value), P(value) {};
 
   /// Constructor(data copy)
   /// @param[in] _time  clock time
   /// @param[in] _value value
   TimeVal( const double& _time, const T& _value=0.0 ):
-    time(_time), value(_value) {};
+    time(_time), value(_value), P(value) {};
 
   /// Destructor
   ~TimeVal(){};
@@ -89,8 +95,9 @@ struct TimeVal {
   /// Copy operator
   /// @param[in] src source which is TimeVal type
   TimeVal operator=( const TimeVal<T>& src ) {
+    // against self copy
     TimeVal<T> dest( src.time, src.value );
-    this->time = dest.time;
+    this->time  = dest.time;
     this->value = dest.value;
     return *this;
   };
@@ -98,6 +105,8 @@ struct TimeVal {
   double time;
   /// value [m, rad, ...etc.]
   T value;
+  /// the reference of value
+  T& P;
 }; // End of struct TimeVal
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -117,7 +126,17 @@ struct PosVelAcc {
 public:
   /// Constructor
   // PosVelAcc(): position(0.0),velocity(0.0),acceleration(0.0) {};
-  PosVelAcc(){};
+  PosVelAcc() :
+    pos(0.0),
+    vel(0.0),
+    acc(0.0) {};
+
+  /// Copy Constructor
+  /// @param[in] src source PosVelAcc
+  PosVelAcc( const PosVelAcc& src ) :
+    pos(src.pos),
+    vel(src.vel),
+    acc(src.acc) {};
 
   /// Constructor(data copy)
   /// @param[in] _position     initial position insert into pos
@@ -125,7 +144,7 @@ public:
   /// @param[in] _acceleration initial acceleration insert into acc
   PosVelAcc( const double& _position,
              const double& _velocity=0.0,
-             const double& _acceleration=0.0):
+             const double& _acceleration=0.0) :
     pos(_position),
     vel(_velocity),
     acc(_acceleration) {};
@@ -136,6 +155,7 @@ public:
   /// Copy operator
   /// @param[in] src source of copy which is type of PosVelAcc
   PosVelAcc operator=( const PosVelAcc& src ) {
+    // against self copy
     PosVelAcc dest( src.pos,
                     src.vel,
                     src.acc );
@@ -155,59 +175,53 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+template
+struct TimeVal<PosVelAcc>;
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
 /// Struct data of Time, Position, Velocity, Acceleration
-struct TimePVA {
+struct TimePVA : TimeVal<PosVelAcc> {
 public:
   /// Constructor
-  // TimePVA(): time(0.0),position(0.0),velocity(0.0), acceleration(0.0) {};
   TimePVA() :
-    time(this->tpva_.time),
-    pos(this->tpva_.value.pos),
-    vel(this->tpva_.value.vel),
-    acc(this->tpva_.value.acc) {};
+    TimeVal<PosVelAcc>(),
+    pos(this->value.pos),
+    vel(this->value.vel),
+    acc(this->value.acc) {};
 
-  /// Constructor(data copy)
-  /// @param[in] tpva source of copy which is type of TimePVA
-  TimePVA( const TimePVA& tpva ) :
-    time(this->tpva_.time),
-    pos(this->tpva_.value.pos),
-    vel(this->tpva_.value.vel),
-    acc(this->tpva_.value.acc) {
-
-    this->time = tpva.time;
-    this->pos = tpva.pos;
-    this->vel = tpva.vel;
-    this->acc = tpva.acc;
-  };
-
-  /// Constructor(data copy)
-  /// @param[in] tpva source of copy which is type of TimeVal<PosVelAcc>
-  TimePVA( const TimeVal<PosVelAcc> tpva ) :
-    tpva_(tpva),
-    time(this->tpva_.time),
-    pos(this->tpva_.value.pos),
-    vel(this->tpva_.value.vel),
-    acc(this->tpva_.value.acc) {};
-
-  /// Constructor(data copy)
+  /// Constructor
+  /// TimePVA(): time(0.0),position(0.0),velocity(0.0), acceleration(0.0) {};
   /// @param[in] _time         initial time insert into time
   /// @param[in] _position     initial position insert into pos
   /// @param[in] _velocity     initial velocity insert into vel
   /// @param[in] _acceleration initial acceleration insert into acc
-  TimePVA( const double& _time,
-           const double& _position=0.0,
-           const double& _velocity=0.0,
-           const double& _acceleration=0.0 ) :
-    time(this->tpva_.time),
-    pos(this->tpva_.value.pos),
-    vel(this->tpva_.value.vel),
-    acc(this->tpva_.value.acc) {
+  TimePVA(const double& _time,
+          const double& _position=0.0,
+          const double& _velocity=0.0,
+          const double& _acceleration=0.0) :
+    TimeVal<PosVelAcc>( _time,
+                        PosVelAcc( _position, _velocity, _acceleration ) ),
+    pos(this->value.pos),
+    vel(this->value.vel),
+    acc(this->value.acc) {};
 
-    this->time = _time;
-    this->pos = _position;
-    this->vel = _velocity;
-    this->acc = _acceleration;
-  };
+  /// Constructor(data copy)
+  /// @param[in] tpva source of copy which is type of TimePVA
+  TimePVA( const TimePVA& src ) :
+    TimeVal<PosVelAcc>( src.time,
+                        PosVelAcc(src.pos, src.vel, src.acc) ),
+    pos(this->value.pos),
+    vel(this->value.vel),
+    acc(this->value.acc) {};
+
+  /// Constructor(data copy)
+  /// @param[in] tpva source of copy which is type of TimeVal<PosVelAcc>
+  TimePVA( const TimeVal<PosVelAcc>& src ) :
+    TimeVal<PosVelAcc>(src),
+    pos(this->value.pos),
+    vel(this->value.vel),
+    acc(this->value.acc) {};
 
   /// Destructor
   ~TimePVA(){};
@@ -215,37 +229,29 @@ public:
   /// Copy operator
   /// @param[in] src source of copy which is type of TimePVA
   TimePVA operator=( const TimePVA& src ) {
+    // for self copy
     TimePVA dest( src.time,
-                  src.pos,
-                  src.vel,
-                  src.acc );
-    this->time = dest.time;
-    this->pos = dest.pos;
-    this->vel = dest.vel;
-    this->acc = dest.acc;
+                  src.value.pos,
+                  src.value.vel,
+                  src.value.acc );
+    this->time  = dest.time;
+    this->value = dest.value;
     return *this;
   };
 
   /// Copy operator
   /// @param[in] src source of copy which is type of TimeVal<PosVelAcc>
   TimePVA operator=( const TimeVal<PosVelAcc>& src ) {
+    // for self copy
     TimePVA dest( src.time,
                   src.value.pos,
                   src.value.vel,
-                  src.value.acc);
-    this->time = dest.time;
-    this->pos = dest.pos;
-    this->vel = dest.vel;
-    this->acc = dest.acc;
+                  src.value.acc );
+    this->time  = dest.time;
+    this->value = dest.value;
     return *this;
   };
 
-
-  /// source of TimeVal data
-  TimeVal<PosVelAcc> tpva_;
-
-  /// time [s]
-  double& time;
   /// postion [m, rad, ...etc.]
   double& pos;
   /// velocity [m/s, rad/s, ...etc.]
@@ -261,83 +267,99 @@ typedef std::vector<PosVelAcc> PVAList;
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+template
+struct TimeVal<PVAList>;
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
 /// Struct data of the list of Time, Position, Velocity, Acceleration
-struct TimePVAList {
+struct TimePVAList : TimeVal<PVAList> {
 public:
   /// Constructor
   // TimePVAList(): time(0.0),position(0.0),velocity(0.0), acceleration(0.0) {};
   TimePVAList() :
-    time(this->tpva_list_.time),
-    P(this->tpva_list_.value) {};
+    TimeVal<PVAList>() {};
 
   /// Constructor
   /// @param[in] size the size of PVAList
   TimePVAList(std::size_t size) :
-    time(this->tpva_list_.time),
-    P(this->tpva_list_.value) {
-
-    tpva_list_.value.resize(size);
-
+    TimeVal<PVAList>() {
+    this->value.resize(size);
   };
 
   /// Constructor(data copy)
   /// @param[in] src source of TimePVAList
-  TimePVAList(const TimePVAList& src) :
-    tpva_list_(src.tpva_list_),
-    time(this->tpva_list_.time),
-    P(this->tpva_list_.value) {};
+  TimePVAList( const TimePVAList& src ) :
+    TimeVal<PVAList>( src.time, src.value ) {};
 
   /// Constructor(data copy)
   /// @param[in] src source of TimeVal<PVAList> type
-  TimePVAList( const TimeVal<PVAList> tpva_list) :
-    tpva_list_(tpva_list),
-    time(this->tpva_list_.time),
-    P(this->tpva_list_.value) {};
+  TimePVAList( const TimeVal<PVAList>& src ) :
+    TimeVal<PVAList>(src) {};
 
   /// Constructor(data copy)
   /// @param[in] _time    clock time
   /// @param[in] pva_list the source of PVAList
   TimePVAList( const double& _time,
-               const PVAList& pva_list ) :
-    tpva_list_(_time,
-               pva_list),
-    time(this->tpva_list_.time),
-    P(this->tpva_list_.value) {};
+               const PVAList& _pva_list ) :
+    TimeVal<PVAList>(_time, _pva_list) {};
+
+  /// Constructor(data copy)
+  /// @param[in] _time the source of clock time
+  /// @param[in] _pos  the source of position
+  /// @param[in] _vel  the source of velocity
+  /// @param[in] _acc  the source of acceleration
+  TimePVAList( const double& _time,
+               const std::vector<double>& _pos,
+               const std::vector<double>& _vel,
+               const std::vector<double>& _acc ) :
+    TimeVal<PVAList>() {
+    if( ( _pos.size() != _vel.size() ) ||
+        ( _pos.size() != _acc.size() ) ) {
+      THROW( InvalidArgumentSize,
+             "position of 2nd argument is not equal to the size of velocity of 3rd argument" );
+    }
+    this->value.resize( _pos.size() );
+    for( std::size_t i=0; i<_pos.size(); i++ ) {
+      this->value[i].pos = _pos[i];
+      this->value[i].vel = _vel[i];
+      this->value[i].acc = _acc[i];
+    }
+  };
+
 
   /// Destructor
   ~TimePVAList(){};
 
   /// Copy operator
   /// @param[in] src source of copy which is type of TimePVAList
+  /// @return *this
   TimePVAList operator=( const TimePVAList& src ) {
     this->time = src.time;
-    this->P.resize( src.P.size() );
-    for( std::size_t i=0; i<src.P.size(); i++ ) {
-      this->P[i] = src.P[i];
-    }
+    this->value.clear();
+    this->value.resize(0);
+    std::copy( src.value.begin(), src.value.begin() + src.value.size(),
+               std::back_inserter(this->value) );
     return *this;
   };
 
   /// Copy operator
   /// @param[in] src source of copy which is type of TimeVal<PVAList>
+  /// @return *this
   TimePVAList operator=( const TimeVal<PVAList>& src ) {
     this->time = src.time;
-    this->P.resize( src.value.size() );
-    for( std::size_t i=0; i<src.value.size(); i++ ) {
-      this->P[i] = src.value[i];
-    }
+    this->value.clear();
+    this->value.resize(0);
+    std::copy( src.value.begin(), src.value.begin() + src.value.size(),
+               std::back_inserter(this->value) );
     return *this;
   };
 
-  /// source of TimeVal<PVAList> data
-  TimeVal<PVAList> tpva_list_;
-
-  /// clock time [s] which is a reference of tpva_list_.time
-  double& time;
-
-  /// the list of postion, velocity, acceleration,
-  /// which is a reference of tpva_list_.value
-  PVAList& P;
+  /// returns list size of PVAList
+  /// @return list size of PVAList
+  std::size_t size() {
+    return this->value.size();
+  };
 
 }; // End of struct TimePVAList
 
