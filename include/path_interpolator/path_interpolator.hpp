@@ -4,13 +4,15 @@
 #include <typeinfo>
 #include <math.h>
 #include <deque>
+#include <limits> // for PRECISION ( using epsilon )
 
 #include "plog/Log.h"
 #include <plog/Appenders/ColorConsoleAppender.h>
 
 #include "path_exception.hpp"
 
-#define PRECISION 1.0e-15
+const double PRECISION = std::numeric_limits<double>::epsilon();
+
 namespace interp {
 
 /// judge nearly equal
