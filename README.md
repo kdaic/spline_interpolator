@@ -13,7 +13,7 @@ $ git submodule update --init
 
 # Other Dependency
 
-g++, googletest, gnuplot( for unit_test )
+g++, googletest(>=1.8.1), gnuplot( for unit_test )
 
 # Directory Map
 

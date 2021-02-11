@@ -80,7 +80,7 @@ TEST(TimeValTest, constructor) {
   EXPECT_EQ( tp2.value, tp2.P     );
 }
 
-TEST(TimeValTest, copy_operator) {
+TEST(TimeValTest, insert_operator) {
   TimeVal<double> tp0(3.1, -88.7);
   TimeVal<double> tp1;
   // pre-check
@@ -93,13 +93,141 @@ TEST(TimeValTest, copy_operator) {
   EXPECT_EQ( tp0.time,  tp1.time  );
   EXPECT_EQ( tp0.value, tp1.value );
   EXPECT_EQ( tp0.P,     tp1.P     );
-  // self copy
+  // self insert
   tp1 = tp1;
   //
   EXPECT_EQ( tp0.time,  tp1.time  );
   EXPECT_EQ( tp0.value, tp1.value );
   EXPECT_EQ( tp0.P,     tp1.P     );
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+TEST(PosVelAccTest, constructor ) {
+  double default_val = 0.0;
+  PosVelAcc pva0;
+  /// default value of pos,vel,acc is 0.0
+  EXPECT_EQ(default_val, pva0.pos);
+  EXPECT_EQ(default_val, pva0.vel);
+  EXPECT_EQ(default_val, pva0.acc);
+}
+
+TEST(PosVelAccTest, copy_constructor ) {
+  double pos0 = 1.23;
+  double vel0 = 4.56;
+  double acc0 = 7.89;
+  PosVelAcc pva_src;
+  pva_src.pos = pos0;
+  pva_src.vel = vel0;
+  pva_src.acc = acc0;
+  // copy constructor
+  PosVelAcc pva_dest(pva_src);
+  //
+  // check whether copy is succeeded.
+  EXPECT_EQ(pva_src.pos, pva_dest.pos);
+  EXPECT_EQ(pva_src.vel, pva_dest.vel);
+  EXPECT_EQ(pva_src.acc, pva_dest.acc);
+  // check indipendent allocation
+  double pos1 = 3.21;
+  double vel1 = 6.54;
+  double acc1 = 9.87;
+  pva_src.pos = pos1;
+  pva_src.vel = vel1;
+  pva_src.acc = acc1;
+  EXPECT_NE(pva_src.pos, pva_dest.pos);
+  EXPECT_NE(pva_src.vel, pva_dest.vel);
+  EXPECT_NE(pva_src.acc, pva_dest.acc);
+  // check copied dest is not changed if src is changed.
+  EXPECT_EQ(pos0, pva_dest.pos);
+  EXPECT_EQ(vel0, pva_dest.vel);
+  EXPECT_EQ(acc0, pva_dest.acc);
+}
+
+TEST(PosVelAccTest, value_constructor ) {
+  double default_val = 0.0;
+  double pos0 = 1.23;
+  double vel0 = 4.56;
+  double acc0 = 7.89;
+  //
+  // position
+  PosVelAcc pva0(pos0);
+  // check position copy and check other is default value
+  EXPECT_EQ(pos0,        pva0.pos);
+  EXPECT_EQ(default_val, pva0.vel);
+  EXPECT_EQ(default_val, pva0.acc);
+  //
+  // position, velocity
+  PosVelAcc pva1(pos0, vel0);
+  //
+  EXPECT_EQ(pos0,        pva1.pos);
+  EXPECT_EQ(vel0,        pva1.vel);
+  EXPECT_EQ(default_val, pva1.acc);
+  //
+  // position, velocity, acceleration
+  PosVelAcc pva2(pos0, vel0, acc0);
+  //
+  EXPECT_EQ(pos0, pva2.pos);
+  EXPECT_EQ(vel0, pva2.vel);
+  EXPECT_EQ(acc0, pva2.acc);
+}
+
+TEST(PosVelAccTest, insert_operator ) {
+  double pos0 = 1.23;
+  double vel0 = 4.56;
+  double acc0 = 7.89;
+  PosVelAcc pva_src;
+  pva_src.pos = pos0;
+  pva_src.vel = vel0;
+  pva_src.acc = acc0;
+  // copy operator
+  PosVelAcc pva_dest = pva_src;
+  //
+  // check whether copy is succeeded.
+  EXPECT_EQ(pva_src.pos, pva_dest.pos);
+  EXPECT_EQ(pva_src.vel, pva_dest.vel);
+  EXPECT_EQ(pva_src.acc, pva_dest.acc);
+  // check indipendent allocation
+  double pos1 = 3.21;
+  double vel1 = 6.54;
+  double acc1 = 9.87;
+  pva_src.pos = pos1;
+  pva_src.vel = vel1;
+  pva_src.acc = acc1;
+  EXPECT_NE(pva_src.pos, pva_dest.pos);
+  EXPECT_NE(pva_src.vel, pva_dest.vel);
+  EXPECT_NE(pva_src.acc, pva_dest.acc);
+  // check copied dest is not changed if src is changed.
+  EXPECT_EQ(pos0, pva_dest.pos);
+  EXPECT_EQ(vel0, pva_dest.vel);
+  EXPECT_EQ(acc0, pva_dest.acc);
+  //
+  // self insert
+  pva_dest = pva_dest;
+  EXPECT_EQ(pos0, pva_dest.pos);
+  EXPECT_EQ(vel0, pva_dest.vel);
+  EXPECT_EQ(acc0, pva_dest.acc);
+  // continuous insert
+  PosVelAcc pva_dest2;
+  {
+    PosVelAcc pva_src2(pos1, vel1, acc1);
+    PosVelAcc pva_dest3 = pva_dest2 = pva_src2 = pva_src2;
+    EXPECT_EQ(pos1, pva_src2.pos);
+    EXPECT_EQ(vel1, pva_src2.vel);
+    EXPECT_EQ(acc1, pva_src2.acc);
+    EXPECT_EQ(pos1, pva_dest2.pos);
+    EXPECT_EQ(vel1, pva_dest2.vel);
+    EXPECT_EQ(acc1, pva_dest2.acc);
+    EXPECT_EQ(pos1, pva_dest3.pos);
+    EXPECT_EQ(vel1, pva_dest3.vel);
+    EXPECT_EQ(acc1, pva_dest3.acc);
+  }
+  EXPECT_EQ(pos1, pva_dest2.pos);
+  EXPECT_EQ(vel1, pva_dest2.vel);
+  EXPECT_EQ(acc1, pva_dest2.acc);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -156,7 +284,7 @@ TEST(TPQueueTest, push_get_intervaltime_size_clear){
   EXPECT_EQ( tp_queue2.size(), 0 );
 }
 
-TEST(TPQueueTest, copy_operator){
+TEST(TPQueueTest, insert_operator){
   TimeVal<double> tp0(0.0, 0.0);
   TimeVal<double> tp1(1.0, 10.001);
   TimeVal<double> tp2(2.0, 20.002);
