@@ -225,6 +225,14 @@ public:
     vel(this->value.vel),
     acc(this->value.acc) {};
 
+  /// Constructor(data copy)
+  /// @param[in] tpva source of copy which is type of Time & PosVelAcc
+  TimePVA( const double _time, const PosVelAcc& _pva ) :
+    TimeVal<PosVelAcc>(_time, _pva),
+    pos(this->value.pos),
+    vel(this->value.vel),
+    acc(this->value.acc) {};
+
   /// Destructor
   ~TimePVA(){};
 
