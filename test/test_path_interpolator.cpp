@@ -518,3 +518,88 @@ TEST(TPQueueTest, push_set){
   EXPECT_EQ( tp_queue.set(1, tp1_swap_NG), PATH_INVALID_INPUT_TIME );
   EXPECT_EQ( tp_queue.set(6, tp3_swap), PATH_INVALID_INPUT_INDEX );
 }
+
+
+TEST(TPQueueTest, dump) {
+  TimeVal<double> tp0( 0.0,    0.0   );
+  TimeVal<double> tp1( 1.025, 10.001 );
+  TimeVal<double> tp2( 2.037, 20.002 );
+  TimeVal<double> tp3( 3.048, 30.003 );
+
+  TPQueue tp_queue0;
+  tp_queue0.push(tp0); // index=0
+  tp_queue0.push(tp1); // index=1
+  tp_queue0.push(tp2); // index=2
+  tp_queue0.push(tp3); // index=3
+
+  std::string buf;
+  tp_queue0.dump( buf );
+  std::cout << buf;
+}
+
+
+TEST(TPVAQueueTest, dump) {
+  TimePVA tpva0( 0.0,    5.005,  -5.005, 0.0   );
+  TimePVA tpva1( 1.025, 10.001, -10.001, 0.001 );
+  TimePVA tpva2( 2.037, 20.002, -20.002, 0.002 );
+  TimePVA tpva3( 3.048, 30.003, -30.003, 0.003 );
+
+  TPVAQueue tpva_queue0;
+  tpva_queue0.push(tpva0); // index=0
+  tpva_queue0.push(tpva1); // index=1
+  tpva_queue0.push(tpva2); // index=2
+  tpva_queue0.push(tpva3); // index=3
+
+  std::string buf;
+  tpva_queue0.dump( buf );
+  std::cout << buf;
+}
+
+TEST(TPVAListQueueTest, dump) {
+  PosVelAcc pva0_0(  5.005,  -5.005,  0.0   );
+  PosVelAcc pva0_1(  0.211,  11.212, -3.222 );
+  PosVelAcc pva0_2( -3.043, -98.555, 11.444 );
+  PVAList pva_list0;
+  pva_list0.push_back( pva0_0 );
+  pva_list0.push_back( pva0_1 );
+  pva_list0.push_back( pva0_2 );
+  //
+  PosVelAcc pva1_0(  6.015,  -6.015,  1.010 );
+  PosVelAcc pva1_1(  1.221,  12.222, -4.232 );
+  PosVelAcc pva1_2( -2.032, -97.544, 10.433 );
+  PVAList pva_list1;
+  pva_list1.push_back( pva1_0 );
+  pva_list1.push_back( pva1_1 );
+  pva_list1.push_back( pva1_2 );
+  //
+  PosVelAcc pva2_0(  7.025,  -7.025,  2.020 );
+  PosVelAcc pva2_1(  2.231,  13.232, -5.242 );
+  PosVelAcc pva2_2( -1.022, -96.533,  9.422 );
+  PVAList pva_list2;
+  pva_list2.push_back( pva2_0 );
+  pva_list2.push_back( pva2_1 );
+  pva_list2.push_back( pva2_2 );
+  //
+  PosVelAcc pva3_0(  8.035,  -8.035,  3.030 );
+  PosVelAcc pva3_1(  3.241,  14.242, -6.252 );
+  PosVelAcc pva3_2( -0.011, -95.522,  8.411 );
+  PVAList pva_list3;
+  pva_list3.push_back( pva3_0 );
+  pva_list3.push_back( pva3_1 );
+  pva_list3.push_back( pva3_2 );
+  //
+  TimePVAList tpva_list0( 0.0,   pva_list0 );
+  TimePVAList tpva_list1( 1.025, pva_list1 );
+  TimePVAList tpva_list2( 2.037, pva_list2 );
+  TimePVAList tpva_list3( 3.048, pva_list3 );
+
+  TPVAListQueue tpva_list_queue0;
+  tpva_list_queue0.push(tpva_list0); // index=0
+  tpva_list_queue0.push(tpva_list1); // index=1
+  tpva_list_queue0.push(tpva_list2); // index=2
+  tpva_list_queue0.push(tpva_list3); // index=3
+
+  std::string buf;
+  tpva_list_queue0.dump( buf );
+  std::cout << buf;
+}

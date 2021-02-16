@@ -465,6 +465,9 @@ public:
   /// @return size of queue_buffer_
   const std::size_t size() const;
 
+  // dump all queue list
+  virtual RetCode dump( std::string& queue_dump );
+
   /// Get dT at the input-index
   /// @param[in] index the index getting dT from queue
   /// @return dT at the input-index
@@ -501,6 +504,9 @@ public:
 
   /// Destructor
   virtual ~TPQueue();
+
+  // dump all queue list
+  virtual RetCode dump( std::string& queue_dump );
 
 }; // End of class TPQueue
 
@@ -552,6 +558,9 @@ public:
   /// - PATH_INVALID_INPUT_INDEX: Not exist input-index
   virtual RetCode set( const std::size_t& index, const TimePVA& newval );
 
+  // dump all queue list
+  virtual RetCode dump( std::string& queue_dump );
+
 }; // End of class TPVQueue
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -598,6 +607,9 @@ public:
   /// - PATH_INVALID_INPUT_INDEX: Not exist input-index
   virtual RetCode set( const std::size_t& index,
                        const TimePVAList& newval );
+
+  // dump all queue list
+  virtual RetCode dump( std::string& queue_dump );
 
 }; // End of class TPVAListQueue
 

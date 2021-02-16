@@ -184,6 +184,11 @@ const std::size_t TimeQueue<T>::size() const {
 }
 
 template<typename T>
+RetCode TimeQueue<T>::dump( std::string& queue_dump ) {
+  return PATH_SUCCESS;
+}
+
+template<typename T>
 const double TimeQueue<T>::dT( const std::size_t& index ) const
   throw(InvalidIndexAccess) {
   if( index < 0 || index > dT_queue_.size() - 1 ) {
@@ -211,6 +216,17 @@ TPQueue::TPQueue() {
 }
 
 TPQueue::~TPQueue() {
+}
+
+RetCode TPQueue::dump( std::string& queue_dump ) {
+  queue_dump.clear();
+  std::stringstream ss;
+  for( std::size_t i=0; i<queue_buffer_.size(); i++ ) {
+    ss << queue_buffer_[i].time << ", "
+       << queue_buffer_[i].value << std::endl;;
+  }
+  queue_dump = ss.str();
+  return PATH_SUCCESS;
 }
 
 
@@ -254,6 +270,19 @@ RetCode TPVAQueue::set( const std::size_t& index,
   return TimeQueue<PosVelAcc>::set( index, newval );
 }
 
+RetCode TPVAQueue::dump( std::string& queue_dump ) {
+  queue_dump.clear();
+  std::stringstream ss;
+  for( std::size_t i=0; i<queue_buffer_.size(); i++ ) {
+    ss << queue_buffer_[i].time << ", ["
+       << queue_buffer_[i].P.pos << ", "
+       << queue_buffer_[i].P.vel << ", "
+       << queue_buffer_[i].P.acc << "]" << std::endl;
+  }
+  queue_dump = ss.str();
+  return PATH_SUCCESS;
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -290,6 +319,25 @@ RetCode TPVAListQueue::set( const std::size_t& index,
     return PATH_INVALID_INPUT_TIME;
   }
   return TimeQueue<PVAList>::set( index, newval );
+}
+
+RetCode TPVAListQueue::dump( std::string& queue_dump ) {
+  queue_dump.clear();
+  std::stringstream ss;
+  for( std::size_t i=0; i<queue_buffer_.size(); i++ ) {
+    ss << queue_buffer_[i].time << ", [";
+    std::size_t tpvalist_size = queue_buffer_[i].value.size();
+    for( std::size_t j=0; j<tpvalist_size; j++ ) {
+      ss << "["
+         << queue_buffer_[i].P[j].pos << ", "
+         << queue_buffer_[i].P[j].vel << ", "
+         << queue_buffer_[i].P[j].acc << "]";
+      if( j < tpvalist_size-1 ) { ss << ", "; }
+    }
+    ss << "]" << std::endl;
+  }
+  queue_dump = ss.str();
+  return PATH_SUCCESS;
 }
 
 
