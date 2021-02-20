@@ -17,7 +17,7 @@ TOP_DIR_NAME = $(APP_NAME)
 # compiler
 # OS dependency
 ifeq ($(OS),Linux)
-	CXX:=g++ -std=c++98
+	CXX:=g++ -std=c++03
 else ifeq ($(OS),QNX)
   CXX:=QCC -Vgcc_ntox86_cpp
 else

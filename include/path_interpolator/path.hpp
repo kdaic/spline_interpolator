@@ -5,9 +5,9 @@
 #include "cubic_spline_interpolator.hpp"
 
 
-namespace path {
-
 using namespace interp;
+
+namespace path {
 
 /// Path class
 /// This class include the path interpolator object,
@@ -22,7 +22,7 @@ public:
   virtual ~Path();
 
 private:
-  PathInterpolator interp;
+  PathInterpolator* interp;
 };
 
 }
