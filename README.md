@@ -11,9 +11,13 @@ plog( for logger ).
 $ git submodule update --init
 ```
 
+&nbsp;
+
 # Other Dependency
 
 g++, googletest(>=1.8.1), gnuplot( for unit_test )
+
+&nbsp;
 
 # Directory Map
 
@@ -49,19 +53,35 @@ g++, googletest(>=1.8.1), gnuplot( for unit_test )
 
 ```
 
+&nbsp;
+
 # Make
 
 ```
 $ make
 ```
 
-# Destination
+&nbsp;
+
+# The output from compilation
 
 ## Binary
 
-- path\_interpolator
-- unit\_test
+- bin/path\_interpolator
+- bin/unit\_test
 
 ## Library
 
-- libspath\_interpolator.a
+- lib/libspath\_interpolator.a
+
+&nbsp;
+
+# Test
+
+```
+$ ./bin/unit_test
+```
+
+&nbsp;
+
+<div align="right"> That's All. </div>
