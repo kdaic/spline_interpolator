@@ -42,14 +42,14 @@ const TPVAQueue g_generate_path_and_cycletime_queue( const TPQueue& target_tp,
     tg.pop(t, plot_point);
     // add buffer of interpolated plot-point
     output_cycletime_tpva_queue.push( TimePVA( plot_point.time,
-                                               plot_point.pos,
-                                               plot_point.vel ) );
+                                               PosVelAcc( plot_point.P.pos,
+                                                          plot_point.P.vel ) ) );
   }
   // add target point at last
   tg.pop( finish_time, plot_point );
   output_cycletime_tpva_queue.push( TimePVA( plot_point.time,
-                                             plot_point.pos,
-                                             plot_point.vel ) );
+                                             PosVelAcc( plot_point.P.pos,
+                                                        plot_point.P.vel ) ) );
   return output_cycletime_tpva_queue;
 };
 

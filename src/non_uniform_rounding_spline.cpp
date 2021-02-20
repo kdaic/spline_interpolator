@@ -8,9 +8,9 @@ NonUniformRoundingSpline::NonUniformRoundingSpline(const double& init_position,
   tp_buffer_.push(tp);
 
   TimePVA tpv( tp.time,
-               tp.value, // position
-               init_velocity,
-               0.0 );
+               PosVelAcc( tp.value, // position
+                          init_velocity,
+                          0.0 ) );
   tpva_buffer_.push(tpv);
 }
 
@@ -24,16 +24,16 @@ void NonUniformRoundingSpline::push(const double& time, const double& position) 
   tp_buffer_.push(tp);
 
   TimePVA init_tpv(tp.time,
-                   tp.value, // position
-                   0.0,
-                   0.0);
+                   PosVelAcc( tp.value, // position
+                              0.0,
+                              0.0 ) );
   tpva_buffer_.push(init_tpv);
 
   if ( tp_buffer_.size() >= 3) {
     TimePVA tpva( tp_buffer_.get( tp_buffer_.size()-2 ).time,
-                  tp_buffer_.get( tp_buffer_.size()-2 ).value, // position
-                  this->calculate_velocity(),
-                  0.0);
+                  PosVelAcc( tp_buffer_.get( tp_buffer_.size()-2 ).value, // position
+                             this->calculate_velocity(),
+                             0.0 ) );
     tpva_buffer_.set( tpva_buffer_.size()-2, tpva);
     // delete front(oldest) data
     tp_buffer_.pop_delete();

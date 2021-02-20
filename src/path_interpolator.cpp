@@ -248,6 +248,17 @@ RetCode TPVAQueue::push( const TimePVA& newval ) {
 }
 
 RetCode TPVAQueue::push( const double& time,
+                         const PosVelAcc& pva ) {
+  if( queue_buffer_.size() > 0
+      && time <= queue_buffer_.back().time ) {
+    return PATH_INVALID_INPUT_TIME;
+  }
+  TimePVA newval( time,
+                  PosVelAcc(pva.pos, pva.vel, pva.acc) );
+  return TimeQueue<PosVelAcc>::push( newval );
+}
+
+RetCode TPVAQueue::push( const double& time,
                          const double& position,
                          const double& velocity,
                          const double& acceleration ) {
@@ -255,7 +266,8 @@ RetCode TPVAQueue::push( const double& time,
       && time <= queue_buffer_.back().time ) {
     return PATH_INVALID_INPUT_TIME;
   }
-  TimePVA newval(time, position, velocity, acceleration);
+  TimePVA newval( time,
+                  PosVelAcc(position, velocity, acceleration) );
   return TimeQueue<PosVelAcc>::push( newval );
 }
 

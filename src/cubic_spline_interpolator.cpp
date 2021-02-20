@@ -3,7 +3,6 @@
 
 using namespace interp;
 
-
 CubicSplineInterpolator::CubicSplineInterpolator() {
 }
 
@@ -18,7 +17,7 @@ RetCode CubicSplineInterpolator::generate_path(
   if ( finish_index <= 1 ) {
     return PATH_INVALID_QUEUE_SIZE;
   }
-
+  //
   std::vector<double> upper;
   std::vector<double> diago;
   std::vector<double> lower;
@@ -59,13 +58,13 @@ RetCode CubicSplineInterpolator::generate_path(
     // diago[i]=0, PATH_INVALID_MATRIX_ARGUMENT_VALUE_ZERO
     return retcode;
   }
-
+  //
   LOGD << "solver result :" << (retcode == PATH_SUCCESS);
-
+  //
   c_.clear();
   c_.resize( ret_c.size() );
   std::copy( ret_c.begin(), ret_c.end(), c_.begin() );
-
+  //
   a_.clear();
   b_.clear();
   d_.clear();
@@ -73,15 +72,15 @@ RetCode CubicSplineInterpolator::generate_path(
   // the start index = 0
   for ( std::size_t i=0; i < finish_index; i++ ) {
     inverse_dT = 1.0 / tp_queue.dT(i);
-
+    //
     double dp = tp_queue.get(i+1).value - tp_queue.get(i).value;
-
+    //
     a_.push_back( ( (c_[i+1] + c_[i]) * tp_queue.dT(i) - 2.0 * dp )
                   * inverse_dT * inverse_dT * inverse_dT );
     b_.push_back( ( -1.0 * (c_[i+1] + 2.0 * c_[i]) * tp_queue.dT(i) + 3.0 * dp )
                   * inverse_dT * inverse_dT );
     d_.push_back( tp_queue.get(i).value );
-
+    //
     tpva_queue_.push( tp_queue.get(i).time,
                       tp_queue.get(i).value,
                       c_[i],
@@ -100,13 +99,13 @@ RetCode CubicSplineInterpolator::generate_path(
   LOGD << "c_[" << finish_index << "] : " << c_[finish_index];
   LOGD << "d_[" << finish_index << "] : " << d_[finish_index];
   TimePVA finish_tpva( tp_queue.get(finish_index).time,
-                       tp_queue.get(finish_index).value,
-                       c_[finish_index],
-                       b_[finish_index] );
+                       PosVelAcc( tp_queue.get(finish_index).value,
+                                  c_[finish_index],
+                                  b_[finish_index] ) );
   tpva_queue_.push( finish_tpva );
-
+  //
   is_path_generated_ = true;
-
+  //
   return PATH_SUCCESS;
 }
 
@@ -118,13 +117,13 @@ RetCode CubicSplineInterpolator::generate_path(
   if ( finish_index <= 0 ) {
     return PATH_INVALID_QUEUE_SIZE;
   }
-
+  //
   if ( g_isNearlyEq( tpva_queue.get(finish_index).time, 0.0 ) ) {
     return PATH_NOT_DEF_100PER_PATH;
   }
-
+  //
   tpva_queue_ = tpva_queue;
-
+  //
   return PATH_NOT_DEF_FUNCTION;
 }
 
@@ -157,7 +156,6 @@ RetCode CubicSplineInterpolator::pop(const double& t, TimePVA& output ) {
     output = empty_tpva;
     return PATH_TIME_IS_OUT_OF_RANGE;
   }
-
   //
   double dTi    = (t - tpva_queue_.get(index).time);
   double square = dTi * dTi;
@@ -165,7 +163,8 @@ RetCode CubicSplineInterpolator::pop(const double& t, TimePVA& output ) {
   double position = a_[index] * cube + b_[index] * square + c_[index] * dTi + d_[index];
   double velocity = 3.0 * a_[index] * square + 2.0 * b_[index] * dTi + c_[index];
   double acceleration = 6.0 * a_[index] * dTi + 2.0 * b_[index];
-  TimePVA dest_tpva(t, position, velocity, acceleration);
+  TimePVA dest_tpva( t,
+                     PosVelAcc(position, velocity, acceleration) );
   //
   output = dest_tpva;
   return PATH_SUCCESS;
@@ -210,6 +209,6 @@ RetCode CubicSplineInterpolator::tridiagonal_matrix_eq_solver(
   for( int i=last_index-1; i>=0; i-- ) {
     out_solved_x[i] = ( p[i] - u[i] * out_solved_x[i+1] ) / d[i];
   }
-
+  //
   return PATH_SUCCESS;
 }

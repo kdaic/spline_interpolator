@@ -238,46 +238,49 @@ TEST(TimePVATest, constructor) {
   tpva0.P.vel = vel0;
   tpva0.P.acc = acc0;
   //
-  EXPECT_EQ( tpva0.P.pos, tpva0.pos );
-  EXPECT_EQ( tpva0.P.vel, tpva0.vel );
-  EXPECT_EQ( tpva0.P.acc, tpva0.acc );
+  EXPECT_EQ( tpva0.P.pos, tpva0.P.pos );
+  EXPECT_EQ( tpva0.P.vel, tpva0.P.vel );
+  EXPECT_EQ( tpva0.P.acc, tpva0.P.acc );
   //
   double pos1 = 3.21;
   double vel1 = 6.54;
   double acc1 = 9.87;
   //
-  tpva0.pos = pos1;
-  tpva0.vel = vel1;
-  tpva0.acc = acc1;
+  tpva0.P.pos = pos1;
+  tpva0.P.vel = vel1;
+  tpva0.P.acc = acc1;
   //
-  EXPECT_EQ( tpva0.P.pos, tpva0.pos );
-  EXPECT_EQ( tpva0.P.vel, tpva0.vel );
-  EXPECT_EQ( tpva0.P.acc, tpva0.acc );
+  EXPECT_EQ( tpva0.P.pos, tpva0.P.pos );
+  EXPECT_EQ( tpva0.P.vel, tpva0.P.vel );
+  EXPECT_EQ( tpva0.P.acc, tpva0.P.acc );
   //
   double time0 = 4.44;
   TimePVA tpva1( time0 );
   EXPECT_EQ( time0, tpva1.time );
-  EXPECT_EQ( 0.0,  tpva1.pos );
-  EXPECT_EQ( 0.0,   tpva1.vel );
-  EXPECT_EQ( 0.0,   tpva1.acc );
+  EXPECT_EQ( 0.0,   tpva1.P.pos );
+  EXPECT_EQ( 0.0,   tpva1.P.vel );
+  EXPECT_EQ( 0.0,   tpva1.P.acc );
   //
-  TimePVA tpva2( time0, pos0 );
+  TimePVA tpva2( time0,
+                 PosVelAcc(pos0) );
   EXPECT_EQ( time0, tpva2.time );
-  EXPECT_EQ( pos0,  tpva2.pos );
-  EXPECT_EQ( 0.0,   tpva2.vel );
-  EXPECT_EQ( 0.0,   tpva2.acc );
+  EXPECT_EQ( pos0,  tpva2.P.pos );
+  EXPECT_EQ( 0.0,   tpva2.P.vel );
+  EXPECT_EQ( 0.0,   tpva2.P.acc );
   //
-  TimePVA tpva3( time0, pos0, vel0 );
+  TimePVA tpva3( time0,
+                 PosVelAcc(pos0, vel0) );
   EXPECT_EQ( time0, tpva3.time );
-  EXPECT_EQ( pos0,  tpva3.pos );
-  EXPECT_EQ( vel0,  tpva3.vel );
-  EXPECT_EQ( 0.0,   tpva3.acc );
+  EXPECT_EQ( pos0,  tpva3.P.pos );
+  EXPECT_EQ( vel0,  tpva3.P.vel );
+  EXPECT_EQ( 0.0,   tpva3.P.acc );
   //
-  TimePVA tpva4( time0, pos0, vel0, acc0 );
+  TimePVA tpva4( time0,
+                 PosVelAcc(pos0, vel0, acc0) );
   EXPECT_EQ( time0, tpva4.time );
-  EXPECT_EQ( pos0,  tpva4.pos );
-  EXPECT_EQ( vel0,  tpva4.vel );
-  EXPECT_EQ( acc0,  tpva4.acc );
+  EXPECT_EQ( pos0,  tpva4.P.pos );
+  EXPECT_EQ( vel0,  tpva4.P.vel );
+  EXPECT_EQ( acc0,  tpva4.P.acc );
 }
 
 TEST(TimePVATest, copy_constructor) {
@@ -286,13 +289,14 @@ TEST(TimePVATest, copy_constructor) {
   double vel0 = 4.56;
   double acc0 = 7.89;
   //
-  TimePVA src_tpva0( time0, pos0, vel0, acc0 );
+  TimePVA src_tpva0( time0,
+                     PosVelAcc(pos0, vel0, acc0) );
   TimePVA dest_tpva0( src_tpva0 );
   //
   EXPECT_EQ( src_tpva0.time, dest_tpva0.time );
-  EXPECT_EQ( src_tpva0.pos,  dest_tpva0.pos );
-  EXPECT_EQ( src_tpva0.vel,  dest_tpva0.vel );
-  EXPECT_EQ( src_tpva0.acc,  dest_tpva0.acc );
+  EXPECT_EQ( src_tpva0.P.pos,  dest_tpva0.P.pos );
+  EXPECT_EQ( src_tpva0.P.vel,  dest_tpva0.P.vel );
+  EXPECT_EQ( src_tpva0.P.acc,  dest_tpva0.P.acc );
   //
   double time1 = 0.98;
   double pos1  = 3.21;
@@ -300,22 +304,22 @@ TEST(TimePVATest, copy_constructor) {
   double acc1  = 9.87;
   //
   src_tpva0.time = time1;
-  src_tpva0.pos  = pos1;
-  src_tpva0.vel  = vel1;
-  src_tpva0.acc  = acc1;
+  src_tpva0.P.pos  = pos1;
+  src_tpva0.P.vel  = vel1;
+  src_tpva0.P.acc  = acc1;
   //
   EXPECT_EQ( time0, dest_tpva0.time );
-  EXPECT_EQ( pos0,  dest_tpva0.pos );
-  EXPECT_EQ( vel0,  dest_tpva0.vel );
-  EXPECT_EQ( acc0,  dest_tpva0.acc );
+  EXPECT_EQ( pos0,  dest_tpva0.P.pos );
+  EXPECT_EQ( vel0,  dest_tpva0.P.vel );
+  EXPECT_EQ( acc0,  dest_tpva0.P.acc );
   //
   PosVelAcc pva1( pos1, vel1, acc1 );
   TimePVA dest_tpva1( time1, pva1 );
   //
   EXPECT_EQ( time1, dest_tpva1.time );
-  EXPECT_EQ( pos1,  dest_tpva1.pos );
-  EXPECT_EQ( vel1,  dest_tpva1.vel );
-  EXPECT_EQ( acc1,  dest_tpva1.acc );
+  EXPECT_EQ( pos1,  dest_tpva1.P.pos );
+  EXPECT_EQ( vel1,  dest_tpva1.P.vel );
+  EXPECT_EQ( acc1,  dest_tpva1.P.acc );
 }
 
 
@@ -325,15 +329,16 @@ TEST(TimePVATest, insert_operator ) {
   double vel0 = 4.56;
   double acc0 = 7.89;
   //
-  TimePVA src_tpva0( time0, pos0, vel0, acc0 );
+  TimePVA src_tpva0( time0,
+                     PosVelAcc(pos0, vel0, acc0) );
   // copy operator
   TimePVA dest_tpva0 = src_tpva0;
   //
   // check whether copy is succeeded.
   EXPECT_EQ(src_tpva0.time, dest_tpva0.time);
-  EXPECT_EQ(src_tpva0.pos,  dest_tpva0.pos);
-  EXPECT_EQ(src_tpva0.vel,  dest_tpva0.vel);
-  EXPECT_EQ(src_tpva0.acc,  dest_tpva0.acc);
+  EXPECT_EQ(src_tpva0.P.pos,  dest_tpva0.P.pos);
+  EXPECT_EQ(src_tpva0.P.vel,  dest_tpva0.P.vel);
+  EXPECT_EQ(src_tpva0.P.acc,  dest_tpva0.P.acc);
   //
   // check indipendent allocation
   double time1 = 0.98;
@@ -341,40 +346,41 @@ TEST(TimePVATest, insert_operator ) {
   double vel1 = 6.54;
   double acc1 = 9.87;
   src_tpva0.time = time1;
-  src_tpva0.pos  = pos1;
-  src_tpva0.vel  = vel1;
-  src_tpva0.acc  = acc1;
-  EXPECT_NE(src_tpva0.pos, dest_tpva0.pos);
-  EXPECT_NE(src_tpva0.vel, dest_tpva0.vel);
-  EXPECT_NE(src_tpva0.acc, dest_tpva0.acc);
+  src_tpva0.P.pos  = pos1;
+  src_tpva0.P.vel  = vel1;
+  src_tpva0.P.acc  = acc1;
+  EXPECT_NE(src_tpva0.P.pos, dest_tpva0.P.pos);
+  EXPECT_NE(src_tpva0.P.vel, dest_tpva0.P.vel);
+  EXPECT_NE(src_tpva0.P.acc, dest_tpva0.P.acc);
   // check copied dest is not changed if src is changed.
-  EXPECT_EQ(pos0, dest_tpva0.pos);
-  EXPECT_EQ(vel0, dest_tpva0.vel);
-  EXPECT_EQ(acc0, dest_tpva0.acc);
+  EXPECT_EQ(pos0, dest_tpva0.P.pos);
+  EXPECT_EQ(vel0, dest_tpva0.P.vel);
+  EXPECT_EQ(acc0, dest_tpva0.P.acc);
   //
   // self insert
   dest_tpva0 = dest_tpva0;
-  EXPECT_EQ(pos0, dest_tpva0.pos);
-  EXPECT_EQ(vel0, dest_tpva0.vel);
-  EXPECT_EQ(acc0, dest_tpva0.acc);
+  EXPECT_EQ(pos0, dest_tpva0.P.pos);
+  EXPECT_EQ(vel0, dest_tpva0.P.vel);
+  EXPECT_EQ(acc0, dest_tpva0.P.acc);
   // continuous insert
   TimePVA dest_tpva1;
   {
-    TimePVA src_tpva2(time1, pos1, vel1, acc1);
+    TimePVA src_tpva2( time1,
+                       PosVelAcc(pos1, vel1, acc1) );
     TimePVA dest_tpva2 = dest_tpva1 = src_tpva2 = src_tpva2;
-    EXPECT_EQ(pos1, src_tpva2.pos);
-    EXPECT_EQ(vel1, src_tpva2.vel);
-    EXPECT_EQ(acc1, src_tpva2.acc);
-    EXPECT_EQ(pos1, dest_tpva1.pos);
-    EXPECT_EQ(vel1, dest_tpva1.vel);
-    EXPECT_EQ(acc1, dest_tpva1.acc);
-    EXPECT_EQ(pos1, dest_tpva2.pos);
-    EXPECT_EQ(vel1, dest_tpva2.vel);
-    EXPECT_EQ(acc1, dest_tpva2.acc);
+    EXPECT_EQ(pos1, src_tpva2.P.pos);
+    EXPECT_EQ(vel1, src_tpva2.P.vel);
+    EXPECT_EQ(acc1, src_tpva2.P.acc);
+    EXPECT_EQ(pos1, dest_tpva1.P.pos);
+    EXPECT_EQ(vel1, dest_tpva1.P.vel);
+    EXPECT_EQ(acc1, dest_tpva1.P.acc);
+    EXPECT_EQ(pos1, dest_tpva2.P.pos);
+    EXPECT_EQ(vel1, dest_tpva2.P.vel);
+    EXPECT_EQ(acc1, dest_tpva2.P.acc);
   }
-  EXPECT_EQ(pos1, dest_tpva1.pos);
-  EXPECT_EQ(vel1, dest_tpva1.vel);
-  EXPECT_EQ(acc1, dest_tpva1.acc);
+  EXPECT_EQ(pos1, dest_tpva1.P.pos);
+  EXPECT_EQ(vel1, dest_tpva1.P.vel);
+  EXPECT_EQ(acc1, dest_tpva1.P.acc);
 }
 
 TEST(TimePVATest, insert_operator2 ) {
@@ -396,9 +402,6 @@ TEST(TimePVATest, insert_operator2 ) {
   EXPECT_EQ(src_timeVal0.value.pos,  dest_tpva0.P.pos);
   EXPECT_EQ(src_timeVal0.value.vel,  dest_tpva0.P.vel);
   EXPECT_EQ(src_timeVal0.value.acc,  dest_tpva0.P.acc);
-  EXPECT_EQ(src_timeVal0.value.pos,  dest_tpva0.pos);
-  EXPECT_EQ(src_timeVal0.value.vel,  dest_tpva0.vel);
-  EXPECT_EQ(src_timeVal0.value.acc,  dest_tpva0.acc);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -527,10 +530,10 @@ TEST(TPQueueTest, dump) {
   TimeVal<double> tp3( 3.048, 30.003 );
 
   TPQueue tp_queue0;
-  tp_queue0.push(tp0); // index=0
-  tp_queue0.push(tp1); // index=1
-  tp_queue0.push(tp2); // index=2
-  tp_queue0.push(tp3); // index=3
+  tp_queue0.push( tp0 ); // index=0
+  tp_queue0.push( tp1 ); // index=1
+  tp_queue0.push( tp2 ); // index=2
+  tp_queue0.push( tp3 ); // index=3
 
   std::string buf;
   tp_queue0.dump( buf );
@@ -539,16 +542,16 @@ TEST(TPQueueTest, dump) {
 
 
 TEST(TPVAQueueTest, dump) {
-  TimePVA tpva0( 0.0,    5.005,  -5.005, 0.0   );
-  TimePVA tpva1( 1.025, 10.001, -10.001, 0.001 );
-  TimePVA tpva2( 2.037, 20.002, -20.002, 0.002 );
-  TimePVA tpva3( 3.048, 30.003, -30.003, 0.003 );
+  TimePVA tpva0( 0.0,   PosVelAcc(  5.005,  -5.005, 0.0   ) );
+  TimePVA tpva1( 1.025, PosVelAcc( 10.001, -10.001, 0.001 ) );
+  TimePVA tpva2( 2.037, PosVelAcc( 20.002, -20.002, 0.002 ) );
+  TimePVA tpva3( 3.048, PosVelAcc( 30.003, -30.003, 0.003 ) );
 
   TPVAQueue tpva_queue0;
-  tpva_queue0.push(tpva0); // index=0
-  tpva_queue0.push(tpva1); // index=1
-  tpva_queue0.push(tpva2); // index=2
-  tpva_queue0.push(tpva3); // index=3
+  tpva_queue0.push( tpva0 ); // index=0
+  tpva_queue0.push( tpva1 ); // index=1
+  tpva_queue0.push( tpva2 ); // index=2
+  tpva_queue0.push( tpva3 ); // index=3
 
   std::string buf;
   tpva_queue0.dump( buf );
@@ -594,10 +597,10 @@ TEST(TPVAListQueueTest, dump) {
   TimePVAList tpva_list3( 3.048, pva_list3 );
 
   TPVAListQueue tpva_list_queue0;
-  tpva_list_queue0.push(tpva_list0); // index=0
-  tpva_list_queue0.push(tpva_list1); // index=1
-  tpva_list_queue0.push(tpva_list2); // index=2
-  tpva_list_queue0.push(tpva_list3); // index=3
+  tpva_list_queue0.push( tpva_list0 ); // index=0
+  tpva_list_queue0.push( tpva_list1 ); // index=1
+  tpva_list_queue0.push( tpva_list2 ); // index=2
+  tpva_list_queue0.push( tpva_list3 ); // index=3
 
   std::string buf;
   tpva_list_queue0.dump( buf );
