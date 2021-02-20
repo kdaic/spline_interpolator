@@ -3,6 +3,8 @@ path_interpolator
 
 This is practice for implementing path-interpolator
 
+&nbsp;
+
 # Submodule
 
 plog( for logger ).
@@ -63,7 +65,7 @@ $ make
 
 &nbsp;
 
-# The output from compilation
+# The output
 
 ## Binary
 
@@ -81,6 +83,12 @@ $ make
 ```
 $ ./bin/unit_test
 ```
+
+Interpolated graphs will be generated into ./images/*.{png,csv}  
+when the fllowing tests are executed.
+
+- CubicSplineTest
+
 
 &nbsp;
 
