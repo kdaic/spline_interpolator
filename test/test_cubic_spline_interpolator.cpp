@@ -23,30 +23,27 @@ const TPVAQueue g_generate_path_and_cycletime_queue( const TPQueue& target_tp,
                                                      const double vf=0.0 ) {
   // cubic spline path interpolator
   CubicSplineInterpolator tg;
+
   // generate path & total dT
   if( tg.generate_path( target_tp, vs, vf ) != PATH_SUCCESS ) {
-    THROW( UndefPathException, "failed to generated_path()");
+    THROW( UndefPathException,
+           "failed to generated_path()");
   }
-  double dT_total;
-  tg.total_dT(dT_total);
-  LOGD << "dT_total:" << dT_total;
+  LOGD << "dT_total:" << tg.total_dT();
 
   // queue into plot data
+
   TimePVA plot_point;
   TPVAQueue output_cycletime_tpva_queue;
-  double finish_time;
-  if( tg.finish_time( finish_time ) != PATH_SUCCESS) {
-    THROW( UndefPathException, "failed to get finish_time() because of failing to generated_path()");
-  }
-  for(double t=target_tp.get(0).time; t<finish_time; t+=cycle) {
-    tg.pop(t, plot_point);
+  for(double t=target_tp.get(0).time; t<tg.finish_time(); t+=cycle) {
+    plot_point = tg.pop( t );
     // add buffer of interpolated plot-point
     output_cycletime_tpva_queue.push( TimePVA( plot_point.time,
                                                PosVelAcc( plot_point.P.pos,
                                                           plot_point.P.vel ) ) );
   }
   // add target point at last
-  tg.pop( finish_time, plot_point );
+  plot_point = tg.pop( tg.finish_time() );
   output_cycletime_tpva_queue.push( TimePVA( plot_point.time,
                                              PosVelAcc( plot_point.P.pos,
                                                         plot_point.P.vel ) ) );
@@ -186,5 +183,6 @@ TEST_F( CubicSplineTest, pop1 ) {
     = g_generate_path_and_cycletime_queue(tp_queue, 0.005, -0.0, 0.0 );
 
   TestGraphPlot test_gp;
-  test_gp.plot(tp_queue, interpolated_path_tpva, "./images/");
+  test_gp.plot( tp_queue, interpolated_path_tpva, "./images/" );
+  test_gp.dump_csv( interpolated_path_tpva, "./images/" );
 }

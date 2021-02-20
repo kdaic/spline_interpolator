@@ -33,9 +33,8 @@ public:
   /// @brief
   /// pop the oldest Time-Position-Velocity data in the queue (FIFO)
   /// @return
-  /// - PATH_SUCCESS : successfuly pop data.
   /// - PATH_QUEUE_SIZE_EMPTY : calculated buffer size is empty yet.
-  RetCode pop(TimePVA& output);
+  const TimePVA pop();
 
   /// clear all data from the queue.
   /// @brief clear the all stored data from the queue.

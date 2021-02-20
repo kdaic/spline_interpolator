@@ -61,13 +61,9 @@ enum RetCode{
   PATH_INVALID_QUEUE_SIZE,
   PATH_INVALID_ARGUMENT_VALUE_ZERO,
   PATH_INVALID_MATRIX_ARGUMENT_VALUE_ZERO,
-  PATH_QUEUE_SIZE_EMPTY,
-  PATH_NOT_GENERATED,
   PATH_NOT_DEF_100PER_PATH,
-  PATH_NOT_DEF_VEL_LIMIT,
   PATH_NOT_DEF_FUNCTION,
-  PATH_NOT_RETURN,
-  PATH_TIME_IS_OUT_OF_RANGE
+  PATH_NOT_RETURN
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -360,17 +356,17 @@ public:
 
   /// Pop T (oldest) data from buffer queue(FIFO)
   /// @brief delete the pop data from queue_buffer_
-  /// @param[out] output oldest T data
-  /// @return
+  /// @return output oldest T data
+  /// @exception
   /// - PATH_QUEUE_SIZE_EMPTY: buffer size is not enough to pop.
-  /// - PATH_SUCCESS: no error
-  RetCode pop( TimeVal<T>& output );
+  const TimeVal<T> pop();
 
   /// delete T front(oldest) data from buffer queue(FIFO)
   /// @return
-  /// - PATH_QUEUE_SIZE_EMPTY: buffer size is not enough to pop and dlete.
   /// - PATH_SUCCESS: no error
-  RetCode pop_delete();
+  /// @exception
+  /// - PATH_QUEUE_SIZE_EMPTY: buffer size is not enough to pop and dlete.
+   RetCode pop_delete();
 
   /// Get a value at the index
   /// @return constant a value at the index
@@ -584,30 +580,34 @@ public:
   virtual ~PathInterpolator();
 
   /// Get total interval time
-  /// @param[out] dT total interval time
-  /// @return
-  /// - PATH_SUCCESS
-  /// - PATH_NOT_GENERATED and dT is -1.0
-  const RetCode total_dT(double& out_dT);
+  /// @return total interval time of path
+  /// @exception
+  /// - NotPathGenerated : path is not genrated
+  const double total_dT();
 
   /// Get limit of velocity( if exists )
-  /// @param[in] output limit of velocity
   /// @return limit velocity
-  const RetCode v_limit(double& out_v_limit );
+  /// @exception
+  /// - NoVelocityLimit : velocity limit is not defined
+  const double v_limit();
+
+  /// Get finish v_limit( );
 
   /// Get finish time
-  /// @param[out] finish_time time of path end
   /// @return finish time
-  const RetCode finish_time(double& out_finish_time);
+  /// @exception
+  /// - NotPathGenerated : path is not genrated
+  const double finish_time();
 
   /// Genrate a path from initial-finish point
-  /// @param[in] xs           start position
-  /// @param[in] xf           finish position
-  /// @param[in] vs           start velocity (default: 0.0)
-  /// @param[in] vf           finish velocity (default: 0.0)
-  /// @param[in] as           start acceleration (default: 0.0)
-  /// @param[in] af           finish acceleration (default: 0.0)
-  /// @paran[in] dT           interval time (default: 0.0)
+  /// @param[in] xs start position
+  /// @param[in] xf finish position
+  /// @param[in] vs start velocity (default: 0.0)
+  /// @param[in] vf finish velocity (default: 0.0)
+  /// @param[in] as start acceleration (default: 0.0)
+  /// @param[in] af finish acceleration (default: 0.0)
+  /// @paran[in] ts start time (default: 0.0)
+  /// @paran[in] tf finish time (default: 0.0)
   /// @brief calcurate tragectory parameter
   /// @return
   /// - PATH_SUCCESS
@@ -618,12 +618,12 @@ public:
   virtual RetCode generate_path( const double& xs, const double& xf,
                                  const double& vs=0.0, const double& vf=0.0,
                                  const double& as=0.0, const double& af=0.0,
-                                 const double& dT=0.0 );
+                                 const double& ts=0.0, const double& df=0.0 );
 
   /// Generate a path from Time, Position queue
-  /// @param[in] Time,Position queue
-  /// @param[in] vs start velocity (default: 0.0)
-  /// @param[in] vf finish velocity (default: 0.0)
+  /// @param[in] target_tp_queue target Time,Position queue
+  /// @param[in] vs              start velocity (default: 0.0)
+  /// @param[in] vf              finish velocity (default: 0.0)
   /// @return
   /// - PATH_SUCCESS
   /// @details
@@ -644,18 +644,18 @@ public:
   /// ```
   ///
   /// and interpolates intermediate (v1,a1,j1), (v2,a2,j2),.. automatically.
-  virtual RetCode generate_path( const TPQueue& tp_queue,
+  virtual RetCode generate_path( const TPQueue& target_tp_queue,
                                  const double vs=0.0, const double vf=0.0,
                                  const double as=0.0, const double af=0.0)=0;
 
   /// Generate a path from Time, Position(, Velocity) queue
-  /// @param[in] Time, Position(, Velocity, Acceleration) queue
+  /// @param[in] target_tpva_queue target Time, Position(, Velocity, Acceleration) queue
   /// @return
   /// - PATH_SUCCESS
-  virtual RetCode generate_path( const TPVAQueue& tpva_queue )=0;
+  virtual RetCode generate_path( const TPVAQueue& target_tpva_queue )=0;
 
   /// Generate a path from Position(, Velocity) queue
-  /// @param[in] pv_queue Position, Velocity queue
+  /// @param[in] target_pv_queue target Position, Velocity queue
   /// @return
   /// - PATH_SUCCESS and total interval time (tf - ts)
   /// you only give start position & velocity & acceleration and don't give time. \n
@@ -666,16 +666,15 @@ public:
   ///
   /// Minmum interval time -> ts=0, t1, t2,..., tf are internally calculated automatically. \n
   /// This means 100% mimum-time path in the limitation.
-  virtual RetCode generate_path( const PVAQueue& pva_queue )=0;
+  virtual RetCode generate_path( const PVAQueue& target_pva_queue )=0;
 
   /// Pop the position and velocity at the input-time from generated tragectory
   /// @param[in] t input time
-  /// @param[out] output TPV at the input time
-  /// @return
-  /// - PATH_SUCCESS: no error
-  /// - PATH_NOT_GENERATED and TPV: is time=-1.0, position=0.0, velocity=0.0
-  /// - PATH_TIME_IS_OUT_OF_RANGE: time is not within the range of generated path
-  virtual RetCode pop(const double& t, TimePVA& output)=0;
+  /// @return output TPV at the input time
+  /// @exception
+  /// - NotPathGenerated : path is not genrated
+  /// - TimeOutOfRange : time is not within the range of generated path
+  virtual const TimePVA pop( const double& t )=0;
 
 protected:
   /// flag if the path is generated. (default: false)
@@ -688,8 +687,8 @@ protected:
   /// (if defined)
   double v_limit_;
 
-  /// TPVQueue
-  TPVAQueue tpva_queue_;
+  /// target TPVQueue
+  TPVAQueue target_tpva_queue_;
 }; // End of class PathInterpolator
 
 } // End of namespace interp

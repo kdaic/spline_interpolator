@@ -65,22 +65,22 @@ RetCode TimeQueue<T>::push_on_clocktime(
 
 
 template<typename T>
-RetCode TimeQueue<T>::pop(TimeVal<T>& output) {
+const TimeVal<T> TimeQueue<T>::pop() {
   if( queue_buffer_.empty() ) {
-    return PATH_QUEUE_SIZE_EMPTY;
+    THROW( QueueSizeEmpty, "the size of time queue is empty" );
   }
-  output = queue_buffer_.front();
+  TimeVal<T> output = queue_buffer_.front();
   queue_buffer_.pop_front();
   if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 1) ) {
     dT_queue_.pop_front();
   }
-  return PATH_SUCCESS;
+  return output;
 }
 
 template<typename T>
 RetCode TimeQueue<T>::pop_delete() {
   if( queue_buffer_.empty() ) {
-    return PATH_QUEUE_SIZE_EMPTY;
+    THROW( QueueSizeEmpty, "the size of time queue is empty" );
   }
   queue_buffer_.pop_front();
   if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 1) ) {
@@ -362,38 +362,40 @@ PathInterpolator::PathInterpolator() :
 PathInterpolator::~PathInterpolator() {
 }
 
-const RetCode PathInterpolator::total_dT(double& out_dT) {
+const double PathInterpolator::total_dT() {
   if( !is_path_generated_ ) {
-    out_dT = -1.0;
-    return PATH_NOT_GENERATED;
+    THROW( NotPathGenerated,
+           "total dT not exists -- Path has not be generated yet.");
   }
-  out_dT = tpva_queue_.get( tpva_queue_.size() - 1 ).time - tpva_queue_.get(0).time;
-  return PATH_SUCCESS;
+  const double out_dT = target_tpva_queue_.get( target_tpva_queue_.size() - 1 ).time
+                        - target_tpva_queue_.get( 0 ).time;
+  return out_dT;
 }
 
-const RetCode PathInterpolator::v_limit(double& out_v_limit) {
+const double PathInterpolator::v_limit() {
   if( !is_v_limit_ ) {
-    out_v_limit = v_limit_;
-    return PATH_NOT_DEF_VEL_LIMIT;
+    THROW( NoVelocityLimit,
+           "velocity limits is not defined in this type of path interpolator.");
   }
-  out_v_limit = v_limit_;
-  return PATH_SUCCESS;
+  return v_limit_;
 }
 
-const RetCode PathInterpolator::finish_time(double& out_finish_time) {
+const double PathInterpolator::finish_time() {
   if( !is_path_generated_ ) {
-    out_finish_time = -1.0;
-    return PATH_NOT_GENERATED;
+    THROW( NotPathGenerated,
+           "finish time not exists -- Path has not be generated yet.");
   }
-  out_finish_time = tpva_queue_.get( tpva_queue_.size() - 1 ).time;
-  return PATH_SUCCESS;
+  return target_tpva_queue_.get( target_tpva_queue_.size() - 1 ).time;
 }
 
 RetCode PathInterpolator::generate_path(
                             const double& xs, const double& xf,
                             const double& vs, const double& vf,
                             const double& as, const double& af,
-                            const double& dT ) {
+                            const double& ts, const double& tf ) {
+
+  double dT = tf - ts;
+
   if( dT < 0.0 ) {
     return PATH_INVALID_INPUT_TIME;
   }
@@ -402,19 +404,19 @@ RetCode PathInterpolator::generate_path(
   PosVelAcc pvaf(xf, vf, af);
   if( g_isNearlyZero(dT) ) {
 
-    PVAQueue pva_queue;
-    pva_queue.push_back(pvas);
-    pva_queue.push_back(pvaf);
+    PVAQueue target_pva_queue;
+    target_pva_queue.push_back(pvas);
+    target_pva_queue.push_back(pvaf);
 
-    return generate_path( pva_queue );
+    return generate_path( target_pva_queue );
 
   } else {
 
-    TPVAQueue tpva_queue;
-    tpva_queue.push_on_clocktime( 0.0, pvas );
-    tpva_queue.push_on_dT( dT, pvaf );
+    TPVAQueue target_tpva_queue;
+    target_tpva_queue.push_on_clocktime( 0.0, pvas );
+    target_tpva_queue.push_on_dT( dT, pvaf );
 
-    return generate_path( tpva_queue );
+    return generate_path( target_tpva_queue );
   }
 
   return PATH_NOT_DEF_FUNCTION;

@@ -540,6 +540,7 @@ TEST(TPQueueTest, dump) {
   std::cout << buf;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////
 
 TEST(TPVAQueueTest, dump) {
   TimePVA tpva0( 0.0,   PosVelAcc(  5.005,  -5.005, 0.0   ) );
@@ -557,6 +558,8 @@ TEST(TPVAQueueTest, dump) {
   tpva_queue0.dump( buf );
   std::cout << buf;
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////
 
 TEST(TPVAListQueueTest, dump) {
   PosVelAcc pva0_0(  5.005,  -5.005,  0.0   );

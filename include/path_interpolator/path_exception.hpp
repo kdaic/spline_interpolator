@@ -22,8 +22,14 @@ enum ExceptionCode {
   PATH_IVALID_TYPE_ARGUMENT,
   PATH_IVALID_ARGUMENT_SIZE,
   PATH_IVALID_ARGUMENT_VALUE,
-  PATH_IVALID_INDEX_ACCESS
+  PATH_IVALID_INDEX_ACCESS,
+  PATH_QUEUE_SIZE_EMPTY,
+  PATH_NOT_GENERATED,
+  PATH_NOT_DEF_VEL_LIMIT,
+  PATH_TIME_IS_OUT_OF_RANGE
 };
+
+/////////////////////////////////////////////////////////////////////////////////////////
 
 /// convert number type to string for(C++98)
 /// @param[in] num number
@@ -40,6 +46,8 @@ template<class T> const std::string g_num2str(const T& num) {
                               + std::string(__FILE__) + std::string(": l.") \
                               + g_num2str(__LINE__) + std::string(": ") \
                               + std::string(__func__ ) + std::string("().") )
+
+ /////////////////////////////////////////////////////////////////////////////////////////
 
 /// Path Exception class
 class PathException : public std::runtime_error {
@@ -125,6 +133,7 @@ public:
   virtual const ExceptionCode code() { return PATH_IVALID_ARGUMENT_VALUE; }
 };
 
+
 /// Invalid Index Access Exception Class
 class InvalidIndexAccess : public PathException {
 public:
@@ -137,6 +146,66 @@ public:
   /// get Exception Code
   /// @return code_
   virtual const ExceptionCode code() { return PATH_IVALID_INDEX_ACCESS; }
+};
+
+
+// there is no time queue. (queue size is empty)
+class QueueSizeEmpty : public PathException {
+public:
+  /// Constructor
+  /// @param[in] message Explaination of this exception
+  explicit QueueSizeEmpty( const std::string& message,
+                           const std::string& name="QueueSizeEmpty" ) :
+    PathException( message, name ) {}
+
+  /// get Exception Code
+  /// @return code_
+  virtual const ExceptionCode code() { return PATH_QUEUE_SIZE_EMPTY; }
+};
+
+
+/// Path has not generated.
+class NotPathGenerated : public PathException {
+public:
+  /// Constructor
+  /// @param[in] message Explaination of this exception
+  explicit NotPathGenerated( const std::string& message,
+                             const std::string& name="NotPathGenerated" ) :
+    PathException( message, name ) {}
+
+  /// get Exception Code
+  /// @return code_
+  virtual const ExceptionCode code() { return PATH_NOT_GENERATED; }
+};
+
+
+/// Velocity limit is not defined.
+class NoVelocityLimit : public PathException {
+public:
+  /// Constructor
+  /// @param[in] message Explaination of this exception
+  explicit NoVelocityLimit( const std::string& message,
+                             const std::string& name="NoVelocityLimit" ) :
+    PathException( message, name ) {}
+
+  /// get Exception Code
+  /// @return code_
+  virtual const ExceptionCode code() { return PATH_NOT_DEF_VEL_LIMIT; }
+};
+
+
+/// Ordered Time is out of range
+class TimeOutOfRange : public PathException {
+public:
+  /// Constructor
+  /// @param[in] message Explaination of this exception
+  explicit TimeOutOfRange( const std::string& message,
+                           const std::string& name="TimeOutOfRange" ) :
+    PathException( message, name ) {}
+
+  /// get Exception Code
+  /// @return code_
+  virtual const ExceptionCode code() { return PATH_TIME_IS_OUT_OF_RANGE; }
 };
 
 
