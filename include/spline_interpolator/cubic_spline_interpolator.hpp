@@ -1,6 +1,6 @@
 #ifndef INCLDE_CUBIC_SPLINE_INTERPOLATOR_
 #define INCLDE_CUBIC_SPLINE_INTERPOLATOR_
-#include "path_interpolator.hpp"
+#include "spline_interpolator.hpp"
 
 namespace interp{
 /// Cubic Spline Interpolator
@@ -10,7 +10,7 @@ namespace interp{
 /// ```
 /// x_n(t) = a_n (t-t_n)^3 + b_n (t-t_n)^2 + c_n (t-t_n) + d_n
 /// ```
-class CubicSplineInterpolator : public PathInterpolator {
+class CubicSplineInterpolator : public SplineInterpolator {
   friend class CubicSplineTest;
 public:
   /// Constructor
@@ -19,12 +19,12 @@ public:
   /// Destructor
   ~CubicSplineInterpolator();
 
-  /// Generate a path from Time, Position queue
-  /// @param[in] Time,Position queue
-  /// @param[in] vs start velocity (default: 0.0)
-  /// @param[in] vf finish velocity (default: 0.0)
+  /// Generate a cubic-spline-path from Time, Position queue
+  /// @param[in] target_tp_queue target Time,Position queue
+  /// @param[in] vs              start velocity (default: 0.0)
+  /// @param[in] vf              finish velocity (default: 0.0)
   /// @return
-  /// - PATH_SUCCESS and total travel time (tf - ts)
+  /// - SPLINE_SUCCESS and total travel time (tf - ts)
   /// @details
   /// Input is TimePosition Queue like this.
   ///
@@ -43,31 +43,32 @@ public:
   /// ```
   ///
   /// and interpolate (v1,a1,j1), (v2,a2,j2),.. automatically.
-  virtual RetCode generate_path( const TPQueue& tp_queue,
+  virtual RetCode generate_path( const TPQueue& target_tp_queue,
                                  const double vs=0.0, const double vf=0.0,
                                  const double as=0.0, const double af=0.0 );
 
-  /// Generate a path from Time, Position(, Velocity) queue
-  /// @param[in] Time,Position(, Velocity) queue
+  /// Generate a cubic-spline-path from Time, Position(, Velocity) queue
+  /// @param[in] target_tpva_queue target Time,Position(, Velocity, Acceleration) queue
   /// @return
-  /// - PATH_SUCCESS: no error
-  virtual RetCode generate_path( const TPVAQueue& tpva_queue );
+  /// - SPLINE_SUCCESS: no error
+  virtual RetCode generate_path( const TPVAQueue& target_tpva_queue );
 
-  /// Generate a path from Position(, Velocity) queue
-  /// @param[in] Position, Velocity queue
-  /// @exception UndefPathException
+  /// Generate a cubic-spline-path from Position(, Velocity) queue
+  /// @param[in] target_pv_queue target Position, Velocity queue
+  /// @exception UndefSplineException
   /// @return
-  /// - PATH_NOT_DEF_100PER_PATH.
+  /// - SPLINE_NOT_DEF_100PER_PATH.
   ///   CubicSplineInterpolator don't supports this type
-  ///   ( cannot generate 100% mimum-time path in the limitation. )
-  virtual RetCode generate_path( const PVAQueue& pv_queue );
+  ///   ( cannot generate 100% mimum-time spline-path in the limitation. )
+  virtual RetCode generate_path( const PVAQueue& target_pv_queue );
 
   /// Pop the position and velocity at the input-time from generated trajectory
   /// @param[in] t input time
-  /// @param[out] output TPV at the input time
-  /// - PATH_SUCCESS: no error
-  /// - PATH_NOT_GENERATED: TPV is time=-1.0, position=0.0, velocity=0.0
-  virtual RetCode pop( const double& t, TimePVA& output );
+  /// @return output TPV at the input time
+  /// @exception
+  /// - NotSplineGenerated : spline-path is not genrated
+  /// - TimeOutOfRange : time is not within the range of generated spline-path
+  virtual const TimePVA pop( const double& t );
 
 private:
   /// Tridiagonal Matrix Equation Solver

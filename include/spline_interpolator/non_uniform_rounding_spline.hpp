@@ -1,7 +1,7 @@
 #ifndef INCLUDE_NON_UNIFORM_ROUNDING_SPLINE_HPP_
 #define INCLUDE_NON_UNIFORM_ROUNDING_SPLINE_HPP_
 
-#include "path_interpolator.hpp"
+#include "spline_interpolator.hpp"
 
 namespace interp {
 
@@ -33,9 +33,8 @@ public:
   /// @brief
   /// pop the oldest Time-Position-Velocity data in the queue (FIFO)
   /// @return
-  /// - PATH_SUCCESS : successfuly pop data.
-  /// - PATH_QUEUE_SIZE_EMPTY : calculated buffer size is empty yet.
-  RetCode pop(TimePVA& output);
+  /// - SPLINE_QUEUE_SIZE_EMPTY : calculated buffer size is empty yet.
+  const TimePVA pop();
 
   /// clear all data from the queue.
   /// @brief clear the all stored data from the queue.

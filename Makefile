@@ -7,7 +7,7 @@ UNAME := $(shell uname)
 
 ##################################################################################
 # library file name
-APP_NAME = path_interpolator
+APP_NAME = spline_interpolator
 
 ##################################################################################
 # top directory name

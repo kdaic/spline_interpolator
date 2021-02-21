@@ -23,10 +23,10 @@ void NonUniformRoundingSpline::push(const double& time, const double& position) 
   TimePosition tp( tp_buffer_.back().time + time, position );
   tp_buffer_.push(tp);
 
-  TimePVA init_tpv(tp.time,
-                   PosVelAcc( tp.value, // position
-                              0.0,
-                              0.0 ) );
+  TimePVA init_tpv( tp.time,
+                    PosVelAcc( tp.value, // position
+                               0.0,
+                               0.0 ) );
   tpva_buffer_.push(init_tpv);
 
   if ( tp_buffer_.size() >= 3) {
@@ -71,14 +71,8 @@ double NonUniformRoundingSpline::calculate_velocity() {
   return dx / dt;
 }
 
-RetCode NonUniformRoundingSpline::pop(TimePVA& output) {
-  TimeVal<PosVelAcc> tmp_output;
-  RetCode ret = tpva_buffer_.pop(tmp_output);
-  if( ret == PATH_SUCCESS )
-  {
-    output = tmp_output;
-  }
-  return ret;
+const TimePVA NonUniformRoundingSpline::pop() {
+  return tpva_buffer_.pop();
 }
 
 void NonUniformRoundingSpline::clear() {

@@ -1,4 +1,4 @@
-#include "path_interpolator.hpp"
+#include "spline_interpolator.hpp"
 
 using namespace interp;
 
@@ -27,7 +27,7 @@ template<typename T>
 RetCode TimeQueue<T>::push( const TimeVal<T>& newval ) {
   if( queue_buffer_.size() > 0
       && newval.time <= queue_buffer_.back().time ) {
-    return PATH_INVALID_INPUT_TIME;
+    return SPLINE_INVALID_INPUT_TIME;
   }
 
   queue_buffer_.push_back(newval);
@@ -38,7 +38,7 @@ RetCode TimeQueue<T>::push( const TimeVal<T>& newval ) {
     double dT = calc_dT( last_index );
     dT_queue_.push_back(dT);
   }
-  return PATH_SUCCESS;
+  return SPLINE_SUCCESS;
 }
 
 
@@ -48,7 +48,7 @@ RetCode TimeQueue<T>::push_on_clocktime(
                         const T& value ) {
   if( queue_buffer_.size() > 0
       && clocktime <= queue_buffer_.back().time ) {
-    return PATH_INVALID_INPUT_TIME;
+    return SPLINE_INVALID_INPUT_TIME;
   }
 
   TimeVal<T> newval(clocktime, value);
@@ -60,33 +60,33 @@ RetCode TimeQueue<T>::push_on_clocktime(
     double dT = calc_dT( last_index );
     dT_queue_.push_back(dT);
   }
-  return PATH_SUCCESS;
+  return SPLINE_SUCCESS;
 }
 
 
 template<typename T>
-RetCode TimeQueue<T>::pop(TimeVal<T>& output) {
+const TimeVal<T> TimeQueue<T>::pop() {
   if( queue_buffer_.empty() ) {
-    return PATH_QUEUE_SIZE_EMPTY;
+    THROW( QueueSizeEmpty, "the size of time queue is empty" );
   }
-  output = queue_buffer_.front();
+  TimeVal<T> output = queue_buffer_.front();
   queue_buffer_.pop_front();
   if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 1) ) {
     dT_queue_.pop_front();
   }
-  return PATH_SUCCESS;
+  return output;
 }
 
 template<typename T>
 RetCode TimeQueue<T>::pop_delete() {
   if( queue_buffer_.empty() ) {
-    return PATH_QUEUE_SIZE_EMPTY;
+    THROW( QueueSizeEmpty, "the size of time queue is empty" );
   }
   queue_buffer_.pop_front();
   if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 1) ) {
     dT_queue_.pop_front();
   }
-  return PATH_SUCCESS;
+  return SPLINE_SUCCESS;
 }
 
 
@@ -110,7 +110,7 @@ RetCode TimeQueue<T>::push_on_dT(
     double dT = calc_dT( last_index );
     dT_queue_.push_back(dT);
   }
-  return PATH_SUCCESS;
+  return SPLINE_SUCCESS;
 }
 
 template<typename T>
@@ -148,11 +148,11 @@ RetCode TimeQueue<T>::set( const std::size_t& index,
         && newval.time <= queue_buffer_[index-1].time )
       || ( index < queue_buffer_.size()-1
            && newval.time >= queue_buffer_[index+1].time ) ) {
-    return PATH_INVALID_INPUT_TIME;
+    return SPLINE_INVALID_INPUT_TIME;
   }
 
   if( index < 0 || index > queue_buffer_.size() -1 ) {
-    return PATH_INVALID_INPUT_INDEX;
+    return SPLINE_INVALID_INPUT_INDEX;
   }
   //
   queue_buffer_.at(index) = newval;
@@ -169,7 +169,7 @@ RetCode TimeQueue<T>::set( const std::size_t& index,
     dT_queue_.at( index ) = dT;
   }
 
-  return PATH_SUCCESS;
+  return SPLINE_SUCCESS;
 }
 
 template<typename T>
@@ -185,7 +185,7 @@ const std::size_t TimeQueue<T>::size() const {
 
 template<typename T>
 RetCode TimeQueue<T>::dump( std::string& queue_dump ) {
-  return PATH_SUCCESS;
+  return SPLINE_SUCCESS;
 }
 
 template<typename T>
@@ -226,7 +226,7 @@ RetCode TPQueue::dump( std::string& queue_dump ) {
        << queue_buffer_[i].value << std::endl;;
   }
   queue_dump = ss.str();
-  return PATH_SUCCESS;
+  return SPLINE_SUCCESS;
 }
 
 
@@ -242,7 +242,7 @@ TPVAQueue::~TPVAQueue() {
 RetCode TPVAQueue::push( const TimePVA& newval ) {
   if( queue_buffer_.size() > 0
       && newval.time <= queue_buffer_.back().time ) {
-    return PATH_INVALID_INPUT_TIME;
+    return SPLINE_INVALID_INPUT_TIME;
   }
   return TimeQueue<PosVelAcc>::push( newval );
 }
@@ -251,7 +251,7 @@ RetCode TPVAQueue::push( const double& time,
                          const PosVelAcc& pva ) {
   if( queue_buffer_.size() > 0
       && time <= queue_buffer_.back().time ) {
-    return PATH_INVALID_INPUT_TIME;
+    return SPLINE_INVALID_INPUT_TIME;
   }
   TimePVA newval( time,
                   PosVelAcc(pva.pos, pva.vel, pva.acc) );
@@ -264,7 +264,7 @@ RetCode TPVAQueue::push( const double& time,
                          const double& acceleration ) {
   if( queue_buffer_.size() > 0
       && time <= queue_buffer_.back().time ) {
-    return PATH_INVALID_INPUT_TIME;
+    return SPLINE_INVALID_INPUT_TIME;
   }
   TimePVA newval( time,
                   PosVelAcc(position, velocity, acceleration) );
@@ -277,7 +277,7 @@ RetCode TPVAQueue::set( const std::size_t& index,
         && newval.time <= queue_buffer_[index-1].time )
       || ( index < queue_buffer_.size()-1
            && newval.time >= queue_buffer_[index+1].time ) ) {
-    return PATH_INVALID_INPUT_TIME;
+    return SPLINE_INVALID_INPUT_TIME;
   }
   return TimeQueue<PosVelAcc>::set( index, newval );
 }
@@ -292,7 +292,7 @@ RetCode TPVAQueue::dump( std::string& queue_dump ) {
        << queue_buffer_[i].P.acc << "]" << std::endl;
   }
   queue_dump = ss.str();
-  return PATH_SUCCESS;
+  return SPLINE_SUCCESS;
 }
 
 
@@ -307,7 +307,7 @@ TPVAListQueue::~TPVAListQueue() {
 RetCode TPVAListQueue::push( const TimePVAList& newval ) {
   if( queue_buffer_.size() > 0
       && newval.time <= queue_buffer_.back().time ) {
-    return PATH_INVALID_INPUT_TIME;
+    return SPLINE_INVALID_INPUT_TIME;
   }
   return TimeQueue<PVAList>::push( newval );
 }
@@ -316,7 +316,7 @@ RetCode TPVAListQueue::push( const double& time,
                              const PVAList& pva_list ) {
   if( queue_buffer_.size() > 0
       && time <= queue_buffer_.back().time ) {
-    return PATH_INVALID_INPUT_TIME;
+    return SPLINE_INVALID_INPUT_TIME;
   }
   TimePVAList newval(time, pva_list);
   return TimeQueue<PVAList>::push( newval );
@@ -328,7 +328,7 @@ RetCode TPVAListQueue::set( const std::size_t& index,
         && newval.time <= queue_buffer_[index-1].time )
       || ( index < queue_buffer_.size()-1
            && newval.time >= queue_buffer_[index+1].time ) ) {
-    return PATH_INVALID_INPUT_TIME;
+    return SPLINE_INVALID_INPUT_TIME;
   }
   return TimeQueue<PVAList>::set( index, newval );
 }
@@ -349,73 +349,75 @@ RetCode TPVAListQueue::dump( std::string& queue_dump ) {
     ss << "]" << std::endl;
   }
   queue_dump = ss.str();
-  return PATH_SUCCESS;
+  return SPLINE_SUCCESS;
 }
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-PathInterpolator::PathInterpolator() :
+SplineInterpolator::SplineInterpolator() :
   is_path_generated_(false), is_v_limit_(false) {
 }
 
-PathInterpolator::~PathInterpolator() {
+SplineInterpolator::~SplineInterpolator() {
 }
 
-const RetCode PathInterpolator::total_dT(double& out_dT) {
+const double SplineInterpolator::total_dT() {
   if( !is_path_generated_ ) {
-    out_dT = -1.0;
-    return PATH_NOT_GENERATED;
+    THROW( NotSplineGenerated,
+           "total dT not exists -- spline-path has not be generated yet.");
   }
-  out_dT = tpva_queue_.get( tpva_queue_.size() - 1 ).time - tpva_queue_.get(0).time;
-  return PATH_SUCCESS;
+  const double out_dT = target_tpva_queue_.get( target_tpva_queue_.size() - 1 ).time
+                        - target_tpva_queue_.get( 0 ).time;
+  return out_dT;
 }
 
-const RetCode PathInterpolator::v_limit(double& out_v_limit) {
+const double SplineInterpolator::v_limit() {
   if( !is_v_limit_ ) {
-    out_v_limit = v_limit_;
-    return PATH_NOT_DEF_VEL_LIMIT;
+    THROW( NoVelocityLimit,
+           "velocity limits is not defined in this type of path interpolator.");
   }
-  out_v_limit = v_limit_;
-  return PATH_SUCCESS;
+  return v_limit_;
 }
 
-const RetCode PathInterpolator::finish_time(double& out_finish_time) {
+const double SplineInterpolator::finish_time() {
   if( !is_path_generated_ ) {
-    out_finish_time = -1.0;
-    return PATH_NOT_GENERATED;
+    THROW( NotSplineGenerated,
+           "finish time not exists -- spline-path has not be generated yet.");
   }
-  out_finish_time = tpva_queue_.get( tpva_queue_.size() - 1 ).time;
-  return PATH_SUCCESS;
+  return target_tpva_queue_.get( target_tpva_queue_.size() - 1 ).time;
 }
 
-RetCode PathInterpolator::generate_path(
+RetCode SplineInterpolator::generate_path(
                             const double& xs, const double& xf,
                             const double& vs, const double& vf,
                             const double& as, const double& af,
-                            const double& dT ) {
+                            const double& ts, const double& tf ) {
+
+  double dT = tf - ts;
+
   if( dT < 0.0 ) {
-    return PATH_INVALID_INPUT_TIME;
+    return SPLINE_INVALID_INPUT_TIME;
   }
 
   PosVelAcc pvas(xs, vs, as);
   PosVelAcc pvaf(xf, vf, af);
   if( g_isNearlyZero(dT) ) {
 
-    PVAQueue pva_queue;
-    pva_queue.push_back(pvas);
-    pva_queue.push_back(pvaf);
+    PVAQueue target_pva_queue;
+    target_pva_queue.push_back(pvas);
+    target_pva_queue.push_back(pvaf);
 
-    return generate_path( pva_queue );
+    return generate_path( target_pva_queue );
 
   } else {
 
-    TPVAQueue tpva_queue;
-    tpva_queue.push_on_clocktime( 0.0, pvas );
-    tpva_queue.push_on_dT( dT, pvaf );
+    TPVAQueue target_tpva_queue;
+    target_tpva_queue.push_on_clocktime( 0.0, pvas );
+    target_tpva_queue.push_on_dT( dT, pvaf );
 
-    return generate_path( tpva_queue );
+    return generate_path( target_tpva_queue );
   }
 
-  return PATH_NOT_DEF_FUNCTION;
+  return SPLINE_NOT_DEF_FUNCTION;
 }

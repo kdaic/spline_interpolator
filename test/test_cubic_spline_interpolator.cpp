@@ -5,8 +5,8 @@
 
 namespace interp {
 
-/// generaed path from time-position queue
-/// and generate cycletime-position-velocity queue from path
+/// generaed spline-path from time-position queue
+/// and generate cycletime-position-velocity queue from interpolated path
 /// @param[in] target_tp target time-position queue
 ///                      (ts, target_tp_s),
 ///                      (t1, target_tp_1),
@@ -23,30 +23,27 @@ const TPVAQueue g_generate_path_and_cycletime_queue( const TPQueue& target_tp,
                                                      const double vf=0.0 ) {
   // cubic spline path interpolator
   CubicSplineInterpolator tg;
+
   // generate path & total dT
-  if( tg.generate_path( target_tp, vs, vf ) != PATH_SUCCESS ) {
-    THROW( UndefPathException, "failed to generated_path()");
+  if( tg.generate_path( target_tp, vs, vf ) != SPLINE_SUCCESS ) {
+    THROW( UndefSplineException,
+           "failed to generated_path()");
   }
-  double dT_total;
-  tg.total_dT(dT_total);
-  LOGD << "dT_total:" << dT_total;
+  LOGD << "dT_total:" << tg.total_dT();
 
   // queue into plot data
+
   TimePVA plot_point;
   TPVAQueue output_cycletime_tpva_queue;
-  double finish_time;
-  if( tg.finish_time( finish_time ) != PATH_SUCCESS) {
-    THROW( UndefPathException, "failed to get finish_time() because of failing to generated_path()");
-  }
-  for(double t=target_tp.get(0).time; t<finish_time; t+=cycle) {
-    tg.pop(t, plot_point);
+  for(double t=target_tp.get(0).time; t<tg.finish_time(); t+=cycle) {
+    plot_point = tg.pop( t );
     // add buffer of interpolated plot-point
     output_cycletime_tpva_queue.push( TimePVA( plot_point.time,
                                                PosVelAcc( plot_point.P.pos,
                                                           plot_point.P.vel ) ) );
   }
   // add target point at last
-  tg.pop( finish_time, plot_point );
+  plot_point = tg.pop( tg.finish_time() );
   output_cycletime_tpva_queue.push( TimePVA( plot_point.time,
                                              PosVelAcc( plot_point.P.pos,
                                                         plot_point.P.vel ) ) );
@@ -114,7 +111,7 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_invalid_argument_value_zero ) {
   std::vector<double> out_solved_x;
   //
   RetCode retcode = m_tridiagonal_matrix_eq_solver( d, u, l, p, out_solved_x );
-  EXPECT_EQ( retcode, PATH_INVALID_MATRIX_ARGUMENT_VALUE_ZERO );
+  EXPECT_EQ( retcode, SPLINE_INVALID_MATRIX_ARGUMENT_VALUE_ZERO );
 }
 
 
@@ -130,7 +127,7 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_list_size_is_1 ) {
   std::vector<double> out_solved_x;
   //
   RetCode retcode = m_tridiagonal_matrix_eq_solver( d, u, l, p, out_solved_x );
-  EXPECT_EQ( retcode, PATH_SUCCESS );
+  EXPECT_EQ( retcode, SPLINE_SUCCESS );
   EXPECT_TRUE( g_isNearlyEq( out_solved_x[0], p[0] / d[0] ));
 }
 
@@ -146,7 +143,7 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_size_is_2 ) {
   std::vector<double> out_solved_x;
   //
   RetCode retcode = m_tridiagonal_matrix_eq_solver( d, u, l, p, out_solved_x );
-  EXPECT_EQ( retcode, PATH_SUCCESS );
+  EXPECT_EQ( retcode, SPLINE_SUCCESS );
   EXPECT_TRUE( g_isNearlyEq( out_solved_x[0], 1.0/3.0 ) );
   EXPECT_TRUE( g_isNearlyEq( out_solved_x[1], -1.0/9.0 ) );
 }
@@ -163,7 +160,7 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_size_is_3 ) {
   std::vector<double> out_solved_x;
   //
   RetCode retcode = m_tridiagonal_matrix_eq_solver( d, u, l, p, out_solved_x );
-  EXPECT_EQ( retcode, PATH_SUCCESS );
+  EXPECT_EQ( retcode, SPLINE_SUCCESS );
   EXPECT_TRUE( g_isNearlyEq( out_solved_x[0], 1.0/13.0 ) );
   EXPECT_TRUE( g_isNearlyEq( out_solved_x[1], 3.0/13.0 ) );
   EXPECT_TRUE( g_isNearlyEq( out_solved_x[2], -23.0/26.0 ) );
@@ -186,5 +183,6 @@ TEST_F( CubicSplineTest, pop1 ) {
     = g_generate_path_and_cycletime_queue(tp_queue, 0.005, -0.0, 0.0 );
 
   TestGraphPlot test_gp;
-  test_gp.plot(tp_queue, interpolated_path_tpva, "./images/");
+  test_gp.plot( tp_queue, interpolated_path_tpva, "./images/" );
+  test_gp.dump_csv( interpolated_path_tpva, "./images/" );
 }

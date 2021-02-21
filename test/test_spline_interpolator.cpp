@@ -1,13 +1,13 @@
 #include <gtest/gtest.h>
-#include "path_interpolator.hpp"
+#include "spline_interpolator.hpp"
 
 using namespace interp;
 
-TEST(PathExceptionTest, THROW) {
+TEST(SplineExceptionTest, THROW) {
   try {
-    THROW (PathException, "This is Message.");
-  } catch(PathException& pe) {
-    EXPECT_TRUE(  std::string(pe.what()).find("[PathException] This is Message.") );
+    THROW (SplineException, "This is Message.");
+  } catch(SplineException& pe) {
+    EXPECT_TRUE(  std::string(pe.what()).find("[SplineException] This is Message.") );
     std::cout << pe.what() << std::endl;
   }
 }
@@ -414,10 +414,10 @@ TEST(TPQueueTest, push_get_intervaltime_size_clear) {
 
   TPQueue tp_queue;
   // push TimeVal<double>
-  EXPECT_EQ( tp_queue.push(tp0), PATH_SUCCESS ); // index=0
-  EXPECT_EQ( tp_queue.push(tp1), PATH_SUCCESS ); // index=1
-  EXPECT_EQ( tp_queue.push(tp2), PATH_SUCCESS ); // index=2
-  EXPECT_EQ( tp_queue.push(tp3), PATH_SUCCESS ); // index=3
+  EXPECT_EQ( tp_queue.push(tp0), SPLINE_SUCCESS ); // index=0
+  EXPECT_EQ( tp_queue.push(tp1), SPLINE_SUCCESS ); // index=1
+  EXPECT_EQ( tp_queue.push(tp2), SPLINE_SUCCESS ); // index=2
+  EXPECT_EQ( tp_queue.push(tp3), SPLINE_SUCCESS ); // index=3
   // get()
   EXPECT_EQ( tp_queue.get(0).time, tp0.time );
   EXPECT_EQ( tp_queue.get(1).time, tp1.time );
@@ -440,10 +440,10 @@ TEST(TPQueueTest, push_get_intervaltime_size_clear) {
   //
   TPQueue tp_queue2;
   // push time, position directly
-  EXPECT_EQ( tp_queue2.push_on_clocktime(0.0, 0.0),    PATH_SUCCESS ); // index=0
-  EXPECT_EQ( tp_queue2.push_on_clocktime(1.0, 10.001), PATH_SUCCESS ); // index=1
-  EXPECT_EQ( tp_queue2.push_on_clocktime(2.0, 20.002), PATH_SUCCESS ); // index=2
-  EXPECT_EQ( tp_queue2.push_on_clocktime(3.0, 30.003), PATH_SUCCESS ); // index=3
+  EXPECT_EQ( tp_queue2.push_on_clocktime(0.0, 0.0),    SPLINE_SUCCESS ); // index=0
+  EXPECT_EQ( tp_queue2.push_on_clocktime(1.0, 10.001), SPLINE_SUCCESS ); // index=1
+  EXPECT_EQ( tp_queue2.push_on_clocktime(2.0, 20.002), SPLINE_SUCCESS ); // index=2
+  EXPECT_EQ( tp_queue2.push_on_clocktime(3.0, 30.003), SPLINE_SUCCESS ); // index=3
   //
   EXPECT_EQ( tp_queue2.get(0).time, tp0.time );
   EXPECT_EQ( tp_queue2.get(1).time, tp1.time );
@@ -470,10 +470,10 @@ TEST(TPQueueTest, insert_operator){
   //
   EXPECT_THROW( (tp_queue_dest = tp_queue_src), InvalidIndexAccess);
   //
-  EXPECT_EQ( tp_queue_src.push(tp0), PATH_SUCCESS ); // index=0
-  EXPECT_EQ( tp_queue_src.push(tp1), PATH_SUCCESS ); // index=1
-  EXPECT_EQ( tp_queue_src.push(tp2), PATH_SUCCESS ); // index=2
-  EXPECT_EQ( tp_queue_src.push(tp3), PATH_SUCCESS ); // index=3
+  EXPECT_EQ( tp_queue_src.push(tp0), SPLINE_SUCCESS ); // index=0
+  EXPECT_EQ( tp_queue_src.push(tp1), SPLINE_SUCCESS ); // index=1
+  EXPECT_EQ( tp_queue_src.push(tp2), SPLINE_SUCCESS ); // index=2
+  EXPECT_EQ( tp_queue_src.push(tp3), SPLINE_SUCCESS ); // index=3
   //
   tp_queue_dest = tp_queue_src;
   //
@@ -500,26 +500,26 @@ TEST(TPQueueTest, push_set){
 
   TPQueue tp_queue;
   // push
-  EXPECT_EQ( tp_queue.push(tp0), PATH_SUCCESS ); // index=0
-  EXPECT_EQ( tp_queue.push(tp0), PATH_INVALID_INPUT_TIME );
-  EXPECT_EQ( tp_queue.push(tp1), PATH_SUCCESS ); // index=1
-  EXPECT_EQ( tp_queue.push(tp0), PATH_INVALID_INPUT_TIME );
-  EXPECT_EQ( tp_queue.push(tp1), PATH_INVALID_INPUT_TIME );
-  EXPECT_EQ( tp_queue.push(tp2), PATH_SUCCESS ); // index=2
-  EXPECT_EQ( tp_queue.push(tp0), PATH_INVALID_INPUT_TIME );
-  EXPECT_EQ( tp_queue.push(tp1), PATH_INVALID_INPUT_TIME );
-  EXPECT_EQ( tp_queue.push(tp2), PATH_INVALID_INPUT_TIME );
-  EXPECT_EQ( tp_queue.push(tp3), PATH_SUCCESS ); // index=3
-  EXPECT_EQ( tp_queue.push(tp0), PATH_INVALID_INPUT_TIME );
-  EXPECT_EQ( tp_queue.push(tp1), PATH_INVALID_INPUT_TIME );
-  EXPECT_EQ( tp_queue.push(tp2), PATH_INVALID_INPUT_TIME );
-  EXPECT_EQ( tp_queue.push(tp3), PATH_INVALID_INPUT_TIME );
+  EXPECT_EQ( tp_queue.push(tp0), SPLINE_SUCCESS ); // index=0
+  EXPECT_EQ( tp_queue.push(tp0), SPLINE_INVALID_INPUT_TIME );
+  EXPECT_EQ( tp_queue.push(tp1), SPLINE_SUCCESS ); // index=1
+  EXPECT_EQ( tp_queue.push(tp0), SPLINE_INVALID_INPUT_TIME );
+  EXPECT_EQ( tp_queue.push(tp1), SPLINE_INVALID_INPUT_TIME );
+  EXPECT_EQ( tp_queue.push(tp2), SPLINE_SUCCESS ); // index=2
+  EXPECT_EQ( tp_queue.push(tp0), SPLINE_INVALID_INPUT_TIME );
+  EXPECT_EQ( tp_queue.push(tp1), SPLINE_INVALID_INPUT_TIME );
+  EXPECT_EQ( tp_queue.push(tp2), SPLINE_INVALID_INPUT_TIME );
+  EXPECT_EQ( tp_queue.push(tp3), SPLINE_SUCCESS ); // index=3
+  EXPECT_EQ( tp_queue.push(tp0), SPLINE_INVALID_INPUT_TIME );
+  EXPECT_EQ( tp_queue.push(tp1), SPLINE_INVALID_INPUT_TIME );
+  EXPECT_EQ( tp_queue.push(tp2), SPLINE_INVALID_INPUT_TIME );
+  EXPECT_EQ( tp_queue.push(tp3), SPLINE_INVALID_INPUT_TIME );
   // set
-  EXPECT_EQ( tp_queue.set(0, tp0_swap), PATH_SUCCESS );
-  EXPECT_EQ( tp_queue.set(0, tp0_swap_NG), PATH_INVALID_INPUT_TIME );
-  EXPECT_EQ( tp_queue.set(1, tp1_swap), PATH_SUCCESS );
-  EXPECT_EQ( tp_queue.set(1, tp1_swap_NG), PATH_INVALID_INPUT_TIME );
-  EXPECT_EQ( tp_queue.set(6, tp3_swap), PATH_INVALID_INPUT_INDEX );
+  EXPECT_EQ( tp_queue.set(0, tp0_swap), SPLINE_SUCCESS );
+  EXPECT_EQ( tp_queue.set(0, tp0_swap_NG), SPLINE_INVALID_INPUT_TIME );
+  EXPECT_EQ( tp_queue.set(1, tp1_swap), SPLINE_SUCCESS );
+  EXPECT_EQ( tp_queue.set(1, tp1_swap_NG), SPLINE_INVALID_INPUT_TIME );
+  EXPECT_EQ( tp_queue.set(6, tp3_swap), SPLINE_INVALID_INPUT_INDEX );
 }
 
 
@@ -540,6 +540,7 @@ TEST(TPQueueTest, dump) {
   std::cout << buf;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////
 
 TEST(TPVAQueueTest, dump) {
   TimePVA tpva0( 0.0,   PosVelAcc(  5.005,  -5.005, 0.0   ) );
@@ -557,6 +558,8 @@ TEST(TPVAQueueTest, dump) {
   tpva_queue0.dump( buf );
   std::cout << buf;
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////
 
 TEST(TPVAListQueueTest, dump) {
   PosVelAcc pva0_0(  5.005,  -5.005,  0.0   );
