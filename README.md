@@ -1,4 +1,4 @@
-Spline_interpolator
+spline_interpolator
 ===
 
 This is practice for implementing spline-interpolator
@@ -27,14 +27,13 @@ g++, googletest(>=1.8.1), gnuplot( for unit_test )
 .
 ├── README.md
 ├── Makefile
-├── bin/ : Destination of executing binaries (path_interpolator, unit_test)
-├── lib/ : Destination of static library (libpath_interpolator.a)
+├── bin/ : Destination of executing binaries (spline_interpolator, unit_test)
+├── lib/ : Destination of static library (libspline_interpolator.a)
 ├── images/ : Destination of plotting graph & csv by unit_test
 ├── include/
 │   ├── spline_interpolator/
 │   │   ├── cubic_spline_interpolator.hpp
 │   │   ├── non_uniform_rounding_spline.hpp
-│   │   ├── spline.hpp
 │   │   ├── spline_interpolator.hpp
 │   │   └── spline_exception.hpp
 │   └── submodules/
@@ -74,7 +73,7 @@ $ make
 
 ## Library
 
-- lib/libspath\_interpolator.a
+- lib/libspline\_interpolator.a
 
 &nbsp;
 
