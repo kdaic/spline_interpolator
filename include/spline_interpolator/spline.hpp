@@ -1,28 +1,28 @@
-#ifndef INCLUDE_PATH_HPP_
-#define INCLUDE_PATH_HPP_
+#ifndef INCLUDE_SPLINE_HPP_
+#define INCLUDE_SPLINE_HPP_
 
-#include "path_interpolator.hpp"
+#include "spline_interpolator.hpp"
 #include "cubic_spline_interpolator.hpp"
 
 
 using namespace interp;
 
-namespace path {
+namespace spline {
 
 /// Path class
 /// This class include the path interpolator object,
 /// this is also the factory of some types interpolator object.
-class Path {
+class Spline {
 
 public:
   /// Constructor
-  Path();
+  Spline();
 
   /// Destructor
-  virtual ~Path();
+  virtual ~Spline();
 
 private:
-  PathInterpolator* interp;
+  SplineInterpolator* interp;
 };
 
 }

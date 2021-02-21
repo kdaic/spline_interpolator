@@ -1,7 +1,7 @@
-path_interpolator
+Spline_interpolator
 ===
 
-This is practice for implementing path-interpolator
+This is practice for implementing spline-interpolator
 
 &nbsp;
 
@@ -31,22 +31,22 @@ g++, googletest(>=1.8.1), gnuplot( for unit_test )
 ├── lib/ : Destination of static library (libpath_interpolator.a)
 ├── images/ : Destination of plotting graph & csv by unit_test
 ├── include/
-│   ├── path_interpolator/
+│   ├── spline_interpolator/
 │   │   ├── cubic_spline_interpolator.hpp
 │   │   ├── non_uniform_rounding_spline.hpp
-│   │   ├── path.hpp
-│   │   ├── path_interpolator.hpp
-│   │   └── path_exception.hpp
+│   │   ├── spline.hpp
+│   │   ├── spline_interpolator.hpp
+│   │   └── spline_exception.hpp
 │   └── submodules/
 │       └── plog/ : 3rdparty logger tool.
 ├── src/
 │   ├── main.cpp
-│   ├── path_interpolator.cpp
+│   ├── spline_interpolator.cpp
 │   ├── non_uniform_rounding_spline.cpp
 │   └── cubic_spline_interpolator.cpp
 └── test/
     ├── test_cubic_spline_interpolator.cpp
-    ├── test_path_interpolator.cpp
+    ├── test_spline_interpolator.cpp
     ├── unit_test.cpp
     └── util/
         ├── gnuplot_realtime.cpp
@@ -69,7 +69,7 @@ $ make
 
 ## Binary
 
-- bin/path\_interpolator
+- bin/spline\_interpolator
 - bin/unit\_test
 
 ## Library

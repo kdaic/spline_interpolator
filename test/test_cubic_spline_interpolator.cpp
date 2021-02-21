@@ -5,8 +5,8 @@
 
 namespace interp {
 
-/// generaed path from time-position queue
-/// and generate cycletime-position-velocity queue from path
+/// generaed spline-path from time-position queue
+/// and generate cycletime-position-velocity queue from interpolated path
 /// @param[in] target_tp target time-position queue
 ///                      (ts, target_tp_s),
 ///                      (t1, target_tp_1),
@@ -25,8 +25,8 @@ const TPVAQueue g_generate_path_and_cycletime_queue( const TPQueue& target_tp,
   CubicSplineInterpolator tg;
 
   // generate path & total dT
-  if( tg.generate_path( target_tp, vs, vf ) != PATH_SUCCESS ) {
-    THROW( UndefPathException,
+  if( tg.generate_path( target_tp, vs, vf ) != SPLINE_SUCCESS ) {
+    THROW( UndefSplineException,
            "failed to generated_path()");
   }
   LOGD << "dT_total:" << tg.total_dT();
@@ -111,7 +111,7 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_invalid_argument_value_zero ) {
   std::vector<double> out_solved_x;
   //
   RetCode retcode = m_tridiagonal_matrix_eq_solver( d, u, l, p, out_solved_x );
-  EXPECT_EQ( retcode, PATH_INVALID_MATRIX_ARGUMENT_VALUE_ZERO );
+  EXPECT_EQ( retcode, SPLINE_INVALID_MATRIX_ARGUMENT_VALUE_ZERO );
 }
 
 
@@ -127,7 +127,7 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_list_size_is_1 ) {
   std::vector<double> out_solved_x;
   //
   RetCode retcode = m_tridiagonal_matrix_eq_solver( d, u, l, p, out_solved_x );
-  EXPECT_EQ( retcode, PATH_SUCCESS );
+  EXPECT_EQ( retcode, SPLINE_SUCCESS );
   EXPECT_TRUE( g_isNearlyEq( out_solved_x[0], p[0] / d[0] ));
 }
 
@@ -143,7 +143,7 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_size_is_2 ) {
   std::vector<double> out_solved_x;
   //
   RetCode retcode = m_tridiagonal_matrix_eq_solver( d, u, l, p, out_solved_x );
-  EXPECT_EQ( retcode, PATH_SUCCESS );
+  EXPECT_EQ( retcode, SPLINE_SUCCESS );
   EXPECT_TRUE( g_isNearlyEq( out_solved_x[0], 1.0/3.0 ) );
   EXPECT_TRUE( g_isNearlyEq( out_solved_x[1], -1.0/9.0 ) );
 }
@@ -160,7 +160,7 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_size_is_3 ) {
   std::vector<double> out_solved_x;
   //
   RetCode retcode = m_tridiagonal_matrix_eq_solver( d, u, l, p, out_solved_x );
-  EXPECT_EQ( retcode, PATH_SUCCESS );
+  EXPECT_EQ( retcode, SPLINE_SUCCESS );
   EXPECT_TRUE( g_isNearlyEq( out_solved_x[0], 1.0/13.0 ) );
   EXPECT_TRUE( g_isNearlyEq( out_solved_x[1], 3.0/13.0 ) );
   EXPECT_TRUE( g_isNearlyEq( out_solved_x[2], -23.0/26.0 ) );

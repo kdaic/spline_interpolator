@@ -1,4 +1,4 @@
-#include "path.hpp"
+#include "spline_interpolator.hpp"
 #include <sysexits.h>
 
 using namespace interp;

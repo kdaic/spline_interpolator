@@ -1,5 +1,6 @@
-#include "cubic_spline_interpolator.hpp"
 #include <gtest/gtest.h>
+#include "plog/Log.h"
+#include <plog/Appenders/ColorConsoleAppender.h>
 
 /// set logging level of plog
 /// @param level logging level(fatal, error, info, debug, verbose, none)
