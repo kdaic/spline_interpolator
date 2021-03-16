@@ -39,10 +39,8 @@ TEST_SRC_UTIL_DIR = $(TEST_SRC_DIR)/util
 ##################################################################################
 # include directory
 INCLUDE_DIR = ./include/$(TOP_DIR_NAME)
-INCLUDE_PLOG_DIR = ./include/submodules/plog/include
 INCLUDE_USRLOCAL_DIR = /usr/local/include
 INCLUDES = . $(INCLUDE_DIR)
-INCLUDES += $(INCLUDE_PLOG_DIR)
 INCLUDES += $(INCLUDE_USRLOCAL_DIR)
 #
 # OS dependency
@@ -55,7 +53,7 @@ INCLUDES_PATH = $(addprefix -I, $(INCLUDES))
 
 ##################################################################################
 # library directoxry
-LOCAL_LINK_DIR = -L/usr/local/lib
+LOCAL_LINK_DIRS = -L/usr/local/lib
 LINK_DIRS = -L. -L/usr/lib
 LINK_DIRS += $(LOCAL_LINK_DIRS)
 #
@@ -103,7 +101,7 @@ compile_title:
 
 # separate compile -- make staic library
 $(SLIB_APP): $(LIB_OBJS)
-	@echo "\n  "$^" --> "$@"\n"
+	@echo "\n\n  "$^" --> "$@"\n"
 	@if [ ! -d $(LIB_DIR) ]; then \
 		mkdir -p $(LIB_DIR); \
 	fi
@@ -112,7 +110,7 @@ $(SLIB_APP): $(LIB_OBJS)
 
 # separate compile -- make shared library
 $(LIB_APP): $(LIB_OBJS)
-	@echo "\n  "$^" --> "$@"\n"
+	@echo "\n\n  "$^" --> "$@"\n"
 	@if [ ! -d $(LIB_DIR) ]; then \
 		mkdir -p $(LIB_DIR); \
 	fi
@@ -122,7 +120,7 @@ $(LIB_APP): $(LIB_OBJS)
 
 # separated compile -- make executing application
 $(EXE_APP): $(EXE_OBJS) $(SLIB_APP)
-	@echo "\n  "$^" --> "$@"\n"
+	@echo "\n\n  "$^" --> "$@"\n"
 	@if [ ! -d $(BIN_DIR) ]; then \
 		mkdir -p $(BIN_DIR); \
 	fi
@@ -131,7 +129,7 @@ $(EXE_APP): $(EXE_OBJS) $(SLIB_APP)
 
 # separated compile -- make unit_test application
 $(TEST_APP): $(TEST_OBJS) $(SLIB_APP)
-	@echo "\n  "$^" --> "$@"\n"
+	@echo "\n\n  "$^" --> "$@"\n"
 	@if [ ! -d $(BIN_DIR) ]; then \
 		mkdir -p $(BIN_DIR); \
 	fi
@@ -140,7 +138,7 @@ $(TEST_APP): $(TEST_OBJS) $(SLIB_APP)
 
 ### common compile -- make object file
 %.o: %.cpp
-	@echo "\n  "$<" --> "$@"\n"
+	@echo "\n\n  "$<" --> "$@"\n"
 	@if [ "$(LIB_APP)" != "" ]; then \
 		echo "$(CXX) -c $(CFLAGS) -fPIC $(INCLUDES_PATH) -o $@ $<"; \
 		$(CXX) -c $(CFLAGS) -fPIC $(INCLUDES_PATH) -o $@ $<;\

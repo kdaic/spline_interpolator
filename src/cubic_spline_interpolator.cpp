@@ -1,5 +1,4 @@
 #include "cubic_spline_interpolator.hpp"
-#include <plog/Log.h>
 
 using namespace interp;
 
@@ -61,8 +60,6 @@ RetCode CubicSplineInterpolator::generate_path(
     return retcode;
   }
   //
-  LOGD << "solver result :" << (retcode == SPLINE_SUCCESS);
-  //
   c_.clear();
   c_.resize( ret_c.size() );
   std::copy( ret_c.begin(), ret_c.end(), c_.begin() );
@@ -87,19 +84,19 @@ RetCode CubicSplineInterpolator::generate_path(
                              target_tp_queue.get(i).value,
                              c_[i],
                              b_[i] );
-    LOGD << "a_[" << i << "] : " << a_[i];
-    LOGD << "b_[" << i << "] : " << b_[i];
-    LOGD << "c_[" << i << "] : " << c_[i];
-    LOGD << "d_[" << i << "] : " << d_[i];
+    // std::cout << "a_[" << i << "] : " << a_[i];
+    // std::cout << "b_[" << i << "] : " << b_[i];
+    // std::cout << "c_[" << i << "] : " << c_[i];
+    // std::cout << "d_[" << i << "] : " << d_[i];
   }
   // the finish index = target_tp_queue.size() - 1
   a_.push_back( 0.0 ); // this corresponds to finish jark :=0.0.
   b_.push_back( 0.0 ); // this corresponds to finish velocity :=0.0.
   d_.push_back( target_tp_queue.get(finish_index).value ); // this corresponds to finish position.
-  LOGD << "a_[" << finish_index << "] : " << a_[finish_index];
-  LOGD << "b_[" << finish_index << "] : " << b_[finish_index];
-  LOGD << "c_[" << finish_index << "] : " << c_[finish_index];
-  LOGD << "d_[" << finish_index << "] : " << d_[finish_index];
+  // std::cout << "a_[" << finish_index << "] : " << a_[finish_index];
+  // std::cout << "b_[" << finish_index << "] : " << b_[finish_index];
+  // std::cout << "c_[" << finish_index << "] : " << c_[finish_index];
+  // std::cout << "d_[" << finish_index << "] : " << d_[finish_index];
   TimePVA finish_tpva( target_tp_queue.get(finish_index).time,
                        PosVelAcc( target_tp_queue.get(finish_index).value,
                                   c_[finish_index],
@@ -130,7 +127,7 @@ RetCode CubicSplineInterpolator::generate_path(
   b_.clear();
   c_.clear();
   d_.clear();
-  for( size_t i=0; i < finish_index; i++ ) {
+  for( std::size_t i=0; i < finish_index; i++ ) {
     const double& pos1 = target_tpva_queue_.get( i+1 ).value.pos;
     const double& pos0 = target_tpva_queue_.get( i   ).value.pos;
     const double& vel1 = target_tpva_queue_.get( i+1 ).value.vel;

@@ -29,7 +29,6 @@ const TPVAQueue g_generate_path_and_cycletime_queue( const TPQueue& target_tp,
     THROW( UndefSplineException,
            "failed to generated_path()");
   }
-  LOGD << "dT_total:" << tg.total_dT();
 
   // queue into plot data
 
@@ -52,8 +51,7 @@ const TPVAQueue g_generate_path_and_cycletime_queue( const TPQueue& target_tp,
 
 
 /// Friend Test Class of CubicSplineInterpolator
-class CubicSplineTest: public ::testing::Test
-{
+class CubicSplineTest: public ::testing::Test {
 protected:
   CubicSplineTest() {}
 
@@ -167,6 +165,9 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_size_is_3 ) {
 }
 
 TEST_F( CubicSplineTest, pop1 ) {
+
+#ifndef __QNX__
+
   TPQueue tp_queue; // TP = time, position
   tp_queue.push_on_dT( 0.0, -1.0 );
   tp_queue.push_on_dT( 1.0, -1.0 );
@@ -185,4 +186,7 @@ TEST_F( CubicSplineTest, pop1 ) {
   TestGraphPlot test_gp;
   test_gp.plot( tp_queue, interpolated_path_tpva, "./images/" );
   test_gp.dump_csv( interpolated_path_tpva, "./images/" );
+
+#endif // #ifdef __QNX__
+
 }
