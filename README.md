@@ -5,16 +5,6 @@ This is practice for implementing spline-interpolator
 
 &nbsp;
 
-# Submodule
-
-plog( for logger ).
-
-```
-$ git submodule update --init
-```
-
-&nbsp;
-
 # Other Dependency
 
 g++, googletest(>=1.8.1), gnuplot( for unit_test )
@@ -32,12 +22,9 @@ g++, googletest(>=1.8.1), gnuplot( for unit_test )
 ├── images/ : Destination of plotting graph & csv by unit_test
 ├── include/
 │   ├── spline_interpolator/
-│   │   ├── cubic_spline_interpolator.hpp
-│   │   ├── non_uniform_rounding_spline.hpp
-│   │   ├── spline_interpolator.hpp
-│   │   └── spline_exception.hpp
-│   └── submodules/
-│       └── plog/ : 3rdparty logger tool.
+│   ├── non_uniform_rounding_spline.hpp
+│   ├── spline_interpolator.hpp
+│   └── spline_exception.hpp
 ├── src/
 │   ├── main.cpp
 │   ├── spline_interpolator.cpp

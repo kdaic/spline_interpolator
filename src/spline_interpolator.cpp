@@ -144,15 +144,16 @@ const TimeVal<T> TimeQueue<T>::back() const
 template<typename T>
 RetCode TimeQueue<T>::set( const std::size_t& index,
                            const TimeVal<T> newval ) {
+
+  if( index < 0 || index > queue_buffer_.size() -1 ) {
+    return SPLINE_INVALID_INPUT_INDEX;
+  }
+
   if( ( index >= 1
         && newval.time <= queue_buffer_[index-1].time )
       || ( index < queue_buffer_.size()-1
            && newval.time >= queue_buffer_[index+1].time ) ) {
     return SPLINE_INVALID_INPUT_TIME;
-  }
-
-  if( index < 0 || index > queue_buffer_.size() -1 ) {
-    return SPLINE_INVALID_INPUT_INDEX;
   }
   //
   queue_buffer_.at(index) = newval;
@@ -211,6 +212,11 @@ const double TimeQueue<T>::calc_dT( const std::size_t & index ) {
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+template
+class TimeQueue<double>;
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
 
 TPQueue::TPQueue() {
 }
@@ -229,6 +235,11 @@ RetCode TPQueue::dump( std::string& queue_dump ) {
   return SPLINE_SUCCESS;
 }
 
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+template
+class TimeQueue<PosVelAcc>;
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -295,6 +306,10 @@ RetCode TPVAQueue::dump( std::string& queue_dump ) {
   return SPLINE_SUCCESS;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////
+
+template
+class TimeQueue<PVAList>;
 
 /////////////////////////////////////////////////////////////////////////////////////////
 

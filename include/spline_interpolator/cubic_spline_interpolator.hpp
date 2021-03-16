@@ -17,7 +17,7 @@ public:
   CubicSplineInterpolator();
 
   /// Destructor
-  ~CubicSplineInterpolator();
+  virtual ~CubicSplineInterpolator();
 
   /// Generate a cubic-spline-path from Time, Position queue
   /// @param[in] target_tp_queue target Time,Position queue

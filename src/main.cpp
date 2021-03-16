@@ -1,5 +1,5 @@
 #include "spline_interpolator.hpp"
-#include <sysexits.h>
+#include <stdlib.h>
 
 using namespace interp;
 

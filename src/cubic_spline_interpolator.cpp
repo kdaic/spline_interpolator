@@ -127,7 +127,7 @@ RetCode CubicSplineInterpolator::generate_path(
   b_.clear();
   c_.clear();
   d_.clear();
-  for( size_t i=0; i < finish_index; i++ ) {
+  for( std::size_t i=0; i < finish_index; i++ ) {
     const double& pos1 = target_tpva_queue_.get( i+1 ).value.pos;
     const double& pos0 = target_tpva_queue_.get( i   ).value.pos;
     const double& vel1 = target_tpva_queue_.get( i+1 ).value.vel;
