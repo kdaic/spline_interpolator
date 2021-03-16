@@ -59,10 +59,10 @@ double NonUniformRoundingSpline::calculate_velocity() {
   double dt = (t2 - t1) / dist12 - (t0 - t1) / dist01;
   double dx = (x2 - x1) / dist12 - (x0 - x1) / dist01;
 
-  LOGD << "\n\n ==== Non-Uiform Spline Velocity ====\n";
-  LOGD << "dt : " << dt << std::endl;
-  LOGD << "dx : " << dx << std::endl;
-  LOGD << "v  : " << dx/dt << std::endl;
+  // std::cout << "\n\n ==== Non-Uiform Spline Velocity ====\n";
+  // std::cout << "dt : " << dt << std::endl;
+  // std::cout << "dx : " << dx << std::endl;
+  // std::cout << "v  : " << dx/dt << std::endl;
 
   if (dt == 0.0) {
     std::out_of_range("velocity is infinity (dt = 0.0).");

@@ -3,11 +3,9 @@
 
 #include <typeinfo>
 #include <math.h>
+#include <vector>
 #include <deque>
 #include <limits> // for PRECISION ( using epsilon )
-
-#include "plog/Log.h"
-#include <plog/Appenders/ColorConsoleAppender.h>
 
 #include "spline_exception.hpp"
 

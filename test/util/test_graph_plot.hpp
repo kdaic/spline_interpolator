@@ -1,7 +1,6 @@
 #ifndef INCLUDE_TEST_GRAPH_PLOT_HPP_
 #define INCLUDE_TEST_GRAPH_PLOT_HPP_
 
-#include <plog/Log.h>
 #include "spline_interpolator.hpp"
 #include "test/util/gnuplot_realtime.hpp"
 
