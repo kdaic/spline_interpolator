@@ -5,13 +5,24 @@ This is practice for implementing spline-interpolator
 
 &nbsp;
 
-# Other Dependency
+# 1. Dependency
 
-g++, googletest(>=1.8.1), gnuplot( for unit_test )
+## 1.1. C++ Compiler
+
+- C++ version \>= -std=c++03  
+- gcc version \>= 7.5.0  
+- qcc version \>= -Vgcc\_ntox86\_cpp
+
+## 1.2. 3rd party
+
+These libraries are used at unit_test.
+
+- googletest(>=1.8.1) 
+- gnuplot( for unit_test )
 
 &nbsp;
 
-# Directory Map
+# 2. Directory Map
 
 ```
 .
@@ -21,18 +32,22 @@ g++, googletest(>=1.8.1), gnuplot( for unit_test )
 ├── lib/ : Destination of static library (libspline_interpolator.a)
 ├── images/ : Destination of plotting graph & csv by unit_test
 ├── include/
-│   ├── spline_interpolator/
-│   ├── non_uniform_rounding_spline.hpp
-│   ├── spline_interpolator.hpp
-│   └── spline_exception.hpp
+│       └── spline_interpolator/
+│           ├── spline_data.hpp : Time-queue data class definition.
+│           ├── spline_exception.hpp : Excpetion class definition.
+│           ├── spline_interpolator.hpp : Parent class SplineInterpolator defeinition
+│           ├── non_uniform_rounding_spline.hpp : velocity interploation
+│           └── cubic_spline_exception.hpp : CubicSplineInterpolator inherited SplineInterpolator
 ├── src/
 │   ├── main.cpp
+│   ├── spline_data.cpp
 │   ├── spline_interpolator.cpp
 │   ├── non_uniform_rounding_spline.cpp
 │   └── cubic_spline_interpolator.cpp
 └── test/
-    ├── test_cubic_spline_interpolator.cpp
+    ├── test_spline_data.cpp
     ├── test_spline_interpolator.cpp
+    ├── test_cubic_spline_interpolator.cpp
     ├── unit_test.cpp
     └── util/
         ├── gnuplot_realtime.cpp
@@ -43,7 +58,7 @@ g++, googletest(>=1.8.1), gnuplot( for unit_test )
 
 &nbsp;
 
-# Make
+# 3. Make
 
 ```
 $ make
@@ -51,20 +66,20 @@ $ make
 
 &nbsp;
 
-# The output
+# 4. The output files
 
-## Binary
+## 4.1. Binary
 
 - bin/spline\_interpolator
 - bin/unit\_test
 
-## Library
+## 4.2. Library
 
 - lib/libspline\_interpolator.a
 
 &nbsp;
 
-# Test
+# 5. Test
 
 ```
 $ ./bin/unit_test
@@ -77,5 +92,13 @@ when the fllowing tests are executed.
 
 
 &nbsp;
+
+# 6. License
+
+CopyLight(c) 2021, kdaic 
+All right reserved.  
+
+This software is made under the MIT License.  
+http://opensource.org/licenses/mit-license.php  
 
 <div align="right"> That's All. </div>
