@@ -8,6 +8,7 @@ UNAME := $(shell uname)
 ##################################################################################
 # library file name
 APP_NAME = spline_interpolator
+TEST_APP_NAME = unit_test
 
 ##################################################################################
 # top directory name
@@ -58,17 +59,19 @@ LINK_DIRS = -L. -L/usr/lib
 LINK_DIRS += $(LOCAL_LINK_DIRS)
 #
 # link (pay attension to linking-order)
-LINK_GTEST = -lgtest_main -lgtest
-LINK  = $(LINK_DIRS)
-LINK += -lm $(LINK_GTEST)
+LINK = -lm
 #
 # OS dependency
 ifeq ($(OS),Linux)
   LINK+=-lpthread -ldl
 endif
+#
+# for unit_test
+LINK_GTEST = -lgtest_main -lgtest
 
 ##################################################################################
 # option
+#
 CFLAGS = -g3 -Wall -D$(UNAME) -D_REENTRANT
 # CFLAGS += -Wextra -fPIC -Wl,-rpath=.  -DUSE_PIO -DUSE_DUMMYDEV
 
@@ -77,13 +80,13 @@ CFLAGS = -g3 -Wall -D$(UNAME) -D_REENTRANT
 SLIB_APP = $(LIB_DIR)/lib$(APP_NAME).a
 # LIB_APP = $(LIB_DIR)/lib$(APP_NAME).so
 EXE_APP  = $(BIN_DIR)/$(APP_NAME)
-TEST_APP = $(BIN_DIR)/unit_test
+TEST_APP = $(BIN_DIR)/$(TEST_APP_NAME)
 #
-ALL_SRC = $(wildcard $(addsuffix /*.cpp, $(SRC_DIR)))
-EXE_SRC :=$(SRC_DIR)/main.cpp
-LIB_SRC = $(filter-out $(EXE_SRC), $(ALL_SRC))
-LIB_SRC+=$(wildcard $(SRC_UTIL_DIR)/*.cpp)
-TEST_SRC:=$(wildcard $(TEST_SRC_DIR)/*.cpp) $(wildcard $(TEST_SRC_UTIL_DIR)/*.cpp)
+ALL_SRC  = $(wildcard $(addsuffix /*.cpp, $(SRC_DIR)))
+EXE_SRC  = $(SRC_DIR)/main.cpp
+LIB_SRC  = $(filter-out $(EXE_SRC), $(ALL_SRC))
+LIB_SRC += $(wildcard $(SRC_UTIL_DIR)/*.cpp)
+TEST_SRC = $(wildcard $(TEST_SRC_DIR)/*.cpp) $(wildcard $(TEST_SRC_UTIL_DIR)/*.cpp)
 #
 LIB_OBJS=$(LIB_SRC:%.cpp=%.o)
 EXE_OBJS =$(EXE_SRC:%.cpp=%.o)
@@ -115,7 +118,7 @@ $(LIB_APP): $(LIB_OBJS)
 		mkdir -p $(LIB_DIR); \
 	fi
 	$(eval LIB_CFLAGS = $(CFLAGS) -fPIC)
-	$(CXX) -shared -o $@ $^ $(LIB_CFLAGS) $(LINK)
+	$(CXX) -shared -o $@ $^ $(LIB_CFLAGS) $(LINK_DIRS) $(LINK)
 # @rm $(LIB_OBJS)
 
 # separated compile -- make executing application
@@ -124,7 +127,7 @@ $(EXE_APP): $(EXE_OBJS) $(SLIB_APP)
 	@if [ ! -d $(BIN_DIR) ]; then \
 		mkdir -p $(BIN_DIR); \
 	fi
-	$(CXX) -o $@ $^ $(CFLAGS) $(LINK)
+	$(CXX) -o $@ $^ $(CFLAGS) $(LINK_DIRS) $(LINK)
 # @rm $(EXE_OBJS)
 
 # separated compile -- make unit_test application
@@ -133,7 +136,7 @@ $(TEST_APP): $(TEST_OBJS) $(SLIB_APP)
 	@if [ ! -d $(BIN_DIR) ]; then \
 		mkdir -p $(BIN_DIR); \
 	fi
-	$(CXX) -o $@ $^ $(CFLAGS) $(LINK)
+	$(CXX) -o $@ $^ $(CFLAGS) $(LINK_DIRS) $(LINK_GTEST) $(LINK)
 # @rm $(TEST_OBJS)
 
 ### common compile -- make object file
