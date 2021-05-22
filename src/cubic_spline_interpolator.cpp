@@ -84,19 +84,19 @@ RetCode CubicSplineInterpolator::generate_path(
                              target_tp_queue.get(i).value,
                              c_[i],
                              b_[i] );
-    // std::cout << "a_[" << i << "] : " << a_[i];
-    // std::cout << "b_[" << i << "] : " << b_[i];
-    // std::cout << "c_[" << i << "] : " << c_[i];
-    // std::cout << "d_[" << i << "] : " << d_[i];
+    // std::cout << "a_[" << i << "] : " << a_[i] << std::endl;
+    // std::cout << "b_[" << i << "] : " << b_[i] << std::endl;
+    // std::cout << "c_[" << i << "] : " << c_[i] << std::endl;
+    // std::cout << "d_[" << i << "] : " << d_[i] << std::endl;
   }
   // the finish index = target_tp_queue.size() - 1
   a_.push_back( 0.0 ); // this corresponds to finish jark :=0.0.
   b_.push_back( 0.0 ); // this corresponds to finish velocity :=0.0.
   d_.push_back( target_tp_queue.get(finish_index).value ); // this corresponds to finish position.
-  // std::cout << "a_[" << finish_index << "] : " << a_[finish_index];
-  // std::cout << "b_[" << finish_index << "] : " << b_[finish_index];
-  // std::cout << "c_[" << finish_index << "] : " << c_[finish_index];
-  // std::cout << "d_[" << finish_index << "] : " << d_[finish_index];
+  // std::cout << "a_[" << finish_index << "] : " << a_[finish_index] << std::endl;
+  // std::cout << "b_[" << finish_index << "] : " << b_[finish_index] << std::endl;
+  // std::cout << "c_[" << finish_index << "] : " << c_[finish_index] << std::endl;
+  // std::cout << "d_[" << finish_index << "] : " << d_[finish_index] << std::endl;
   TimePVA finish_tpva( target_tp_queue.get(finish_index).time,
                        PosVelAcc( target_tp_queue.get(finish_index).value,
                                   c_[finish_index],
