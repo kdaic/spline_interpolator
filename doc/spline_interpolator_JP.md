@@ -1,6 +1,6 @@
-<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});</script>
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS_CHTML"></script>
-<script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[['\$','\$'],['\\(','\\)']],processEscapes:true},CommonHTML: {matchFontHeight:false}});</script>  
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS_CHTML"></script>  
+<script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>  
 
 スプライン補間器
 ===
@@ -15,13 +15,10 @@
 
 ![space point](Figure/png/001_position.png)
 
-
 静止した点の表現とは異なり、動作する点の表現では位置は時間と共に発展する。  
-以下の漫画のように、位置の動作は座標軸１本だけでは１枚の図中に表現しきれない。  
-
+以下の漫画のように、位置の動作は座標軸１本だけでは１枚の図中に表すのは難しい。  
 
 ![motion](Figure/png/002_position_moving.png)
-
 
 もう１本、時間 $t$ の座標軸を使って表現しよう。  
 すると位置 $x$ は時間 $t$ の関数 $x(t)$ として平面上に表現できる。  
@@ -55,10 +52,14 @@ $$
 
 このように区分多項式を用いて離散的な複数点間同士を任意の補間曲線で結ぶ、スプライン曲線(※)は動作のモデル表現として有用である。  
 
-(※) スプライン曲線は "Isaac Jacob Schoenberg, 'Contributions to the problem of approximation of equidistant data by analytic functions,' 1946" で最初に数学的に定義されたと言われている。本論文では以下のように定義されていた。  
-- k個の点を通る曲線は k-1 次以上の多項式で表される
+(※) メモ  
+  スプライン曲線は  
+  _"Isaac Jacob Schoenberg, 'Contributions to the problem of approximation of equidistant data by analytic functions,' 1946"_           
+  で最初に数学的に定義されたと言われている。  
+  本論文では以下のように定義されていた。  
+- k 個の点を通る曲線は k-1 次以上の多項式で表される
 - 少なくとも k-2 次までの導関数を持ち、導関数は全て連続(微分可能)
-- 変形多項式曲線をただひとつ取りうる関数とする点は、kが偶数の場合は整数点t=n、奇数の場合はそれ以外の点 t=n+1/2 である。  
+- 変形多項式曲線をただひとつ取りうる関数とする点は、k が偶数の場合は整数点 t=n 、奇数の場合はそれ以外の点 t=n+1/2 である。  
 
 &nbsp;
 
@@ -117,7 +118,7 @@ k 次の多項式どうしが境界で連続かつ微分可能となるように
 - 境界点の時刻、 n 階微分値
 
 どのような多項式モデルを選択するかはユーザの選択に委ねられる。  
-一方、境界点の n 階微分値とは、何階までの値が必要か？多項式の次数と同じ数なのか？それより少ないのか？  
+一方、境界点の n 階微分値とは、何階までの値が必要か？多項式の次数と同じ数なのか？それより少ないのか？補間器に自動計算させる要求範囲と結びつく。  
 ユーザとしては、境界点の入力は 0 階微分値のみ、つまり位置の値のみで済むのが簡単だろう。  
 ユーザが境界点の 1 階微分値や 2 階微分値つまり速度値や加速度値まで指定したいケースというのは、よほど専門的なケースに限られるだろう。  
 
