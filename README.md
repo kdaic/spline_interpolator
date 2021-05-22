@@ -97,7 +97,7 @@ when the fllowing tests are executed.
 
 See the below documents which simply explains this library.
 
-- [./doc/spline_interpolator_JP.md](./doc/spline_interpolator_JP.md)
+- [./doc/spline_interpolator_JP.md](./doc/spline_interpolator_JP.html)
 
 
 &nbsp;
