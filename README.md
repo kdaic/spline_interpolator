@@ -93,7 +93,17 @@ when the fllowing tests are executed.
 
 &nbsp;
 
-# 6. License
+# 6. Documents
+
+See the below documents which simply explains this library.
+
+- [./doc/spline_interpolator_JP.md](./doc/spline_interpolator_JP.md)
+
+
+&nbsp;
+
+
+# 7. License
 
 CopyLight(c) 2021, kdaic 
 All right reserved.  
