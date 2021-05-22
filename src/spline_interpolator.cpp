@@ -38,10 +38,10 @@ const double SplineInterpolator::finish_time() {
 }
 
 RetCode SplineInterpolator::generate_path(
+                            const double& ts, const double& tf,
                             const double& xs, const double& xf,
                             const double& vs, const double& vf,
-                            const double& as, const double& af,
-                            const double& ts, const double& tf ) {
+                            const double& as, const double& af ) {
 
   double dT = tf - ts;
 

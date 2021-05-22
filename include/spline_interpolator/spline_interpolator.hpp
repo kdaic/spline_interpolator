@@ -36,14 +36,14 @@ public:
   const double finish_time();
 
   /// Genrate a spline-path from initial-finish point
+  /// @paran[in] ts start time (default: 0.0)
+  /// @paran[in] tf finish time (default: 0.0)
   /// @param[in] xs start position
   /// @param[in] xf finish position
   /// @param[in] vs start velocity (default: 0.0)
   /// @param[in] vf finish velocity (default: 0.0)
   /// @param[in] as start acceleration (default: 0.0)
   /// @param[in] af finish acceleration (default: 0.0)
-  /// @paran[in] ts start time (default: 0.0)
-  /// @paran[in] tf finish time (default: 0.0)
   /// @brief calcurate tragectory parameter
   /// @return
   /// - SPLINE_SUCCESS
@@ -51,10 +51,10 @@ public:
   /// If you don't give interval time(dT=0.0),
   /// Minmum interval time dT are internally calculated automatically. \n
   /// This means 100% mimum-time spline-path in the limitation.
-  virtual RetCode generate_path( const double& xs, const double& xf,
+  virtual RetCode generate_path( const double& ts=0.0, const double& tf=0.0,
+                                 const double& xs=0.0, const double& xf=0.0,
                                  const double& vs=0.0, const double& vf=0.0,
-                                 const double& as=0.0, const double& af=0.0,
-                                 const double& ts=0.0, const double& df=0.0 );
+                                 const double& as=0.0, const double& af=0.0 );
 
   /// Generate a spline-path from Time, Position queue
   /// @param[in] target_tp_queue target Time,Position queue
