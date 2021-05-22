@@ -7,13 +7,17 @@ This is practice for implementing spline-interpolator
 
 # 1. Dependency
 
+## 1.1. OS
+
+Linux(Ubuntu 18.04), QNX 6.5.0 SP  
+
 ## 1.1. C++ Compiler
 
 - C++ version \>= -std=c++03  
 - gcc version \>= 7.5.0  
-- qcc version \>= -Vgcc\_ntox86\_cpp
+- qcc : -Vgcc\_ntox86\_cpp
 
-## 1.2. 3rd party
+## 1.2. 3rd party libraries
 
 These libraries are used at unit_test.
 
