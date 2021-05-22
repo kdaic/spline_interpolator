@@ -1,12 +1,17 @@
 .gitignore
 
+# output directories
 bin/*
 lib/*
 
 # emacs backup
 *~
 
-# cpp
+# cpp objects
 *.o
 *.a
 *.so
+
+# document objects
+*.pdf
+
