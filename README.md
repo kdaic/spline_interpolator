@@ -7,13 +7,17 @@ This is practice for implementing spline-interpolator
 
 # 1. Dependency
 
-## 1.1. C++ Compiler
+## OS
+
+Linux(Ubuntu 18.04), QNX 6.5.0 SP  
+
+## C++ Compiler
 
 - C++ version \>= -std=c++03  
 - gcc version \>= 7.5.0  
-- qcc version \>= -Vgcc\_ntox86\_cpp
+- qcc : -Vgcc\_ntox86\_cpp
 
-## 1.2. 3rd party
+## 3rd party libraries
 
 These libraries are used at unit_test.
 
@@ -68,12 +72,12 @@ $ make
 
 # 4. The output files
 
-## 4.1. Binary
+## Binary
 
 - bin/spline\_interpolator
 - bin/unit\_test
 
-## 4.2. Library
+## Library
 
 - lib/libspline\_interpolator.a
 
@@ -93,7 +97,17 @@ when the fllowing tests are executed.
 
 &nbsp;
 
-# 6. License
+# 6. Documents
+
+See the below documents which simply explains this library.
+
+- [./doc/spline_interpolator_JP](./doc/spline_interpolator_JP.md)
+
+
+&nbsp;
+
+
+# 7. License
 
 CopyLight(c) 2021, kdaic 
 All right reserved.  
