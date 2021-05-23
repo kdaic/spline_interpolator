@@ -53,14 +53,22 @@ public:
   /// - SPLINE_SUCCESS: no error
   virtual RetCode generate_path( const TPVAQueue& target_tpva_queue );
 
-  /// Generate a cubic-spline-path from Position(, Velocity) queue
-  /// @param[in] target_pv_queue target Position, Velocity queue
-  /// @exception UndefSplineException
+  /// Generate a cubic-spline-path from Position(, Velocity, Acceleration) queue
+  /// @param[in] xs start position
+  /// @param[in] xf finish position
+  /// @param[in] vs start velocity (default: 0.0)
+  /// @param[in] vf finish velocity (default: 0.0)
+  /// @param[in] as start acceleration (default: 0.0)
+  /// @param[in] af finish acceleration (default: 0.0)
   /// @return
   /// - SPLINE_NOT_DEF_100PER_PATH.
   ///   CubicSplineInterpolator don't supports this type
   ///   ( cannot generate 100% mimum-time spline-path in the limitation. )
-  virtual RetCode generate_path( const PVAQueue& target_pv_queue );
+  virtual RetCode generate_path_from_pva( const double& xs,     const double& xf,
+                                          const double& vs,     const double& vf,
+                                          const double& as=0.0, const double& af=0.0 );
+
+
 
   /// Pop the position and velocity at the input-time from generated trajectory
   /// @param[in] t input time
