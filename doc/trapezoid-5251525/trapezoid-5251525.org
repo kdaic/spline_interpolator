@@ -1,0 +1,2381 @@
+#+TITLE: 台形型5-2-5-1-5-2-5次スプライン軌道計算仕様書
+#+AUTHOR: 作成者 兼田
+#+DATE:
+#+OPTIONS: toc:t H:3 num:t \n:nil creator:nil
+#+OPTIONS: ^:{}
+#+LANGUAGE: ja
+#+LaTeX_CLASS: jsarticle
+#+LaTeX_CLASS_OPTIONS: [a4paper]
+#+LaTeX_HEADER: \renewcommand{\theequation}{\thesection.\arabic{equation}}
+#+LaTeX_HEADER: \usepackage{amssymb}
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+
+# LATEX & HTML互換の改ページ用のマクロpagebreak定義
+#+MACRO: pagebreak @@latex:\newpage@@ @@html:<div style="page-break-before: always">&nbsp;</div>@@
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+* 基本仕様
+1. ユーザは設定値として、２つの加速度リミット、最大速度リミット、丸め率を与える。
+2. ユーザは入力として、開始時刻-位置-速度、終端時刻-位置-速度を与える。
+3. 本計算出力の軌道は、
+  位置の5次+2次+5次式の加速(減速)、1次の等速、5次+2次+5次の減速(加速)を組み合わた軌道を描く。
+4. 内部の計算では、
+  設定の加速度リミット、丸め率、入力の開始速度、終端速度、
+  開始位置からの移動距離、開始時刻からの移動時間の拘束条件を守るように、
+  最適な1次の等速度と等速時間区間を計算する。
+5. 最速軌道を描く場合、加速(減速)のみの軌道を描く。
+  もし、最高速度が最大速度リミットに到達したら最大速度を天井として台形軌道とする。
+6. ユーザは設定値と入力値に基づく軌道計算後、
+  開始時刻から終端時刻までの時刻を与えることで、その時刻における軌道上の位置-速度補間点を取得できる。
+
+* メリット
+1. *加速度リミット、最大速度リミットが決まっている。リミットを超えない。* \\
+  リミットを超過する目標位置・時間が与えられるとエラーを出力する。性能限界を考慮した設計に利用できる。
+2. 上記リミット設定値と入力値により最速軌道を計算できるため、 *リミット性能上の100％最短時間軌道を定義することができる。*
+3. *開始位置-速度、終端位置-速度を必ず通るため、複数経由点を速度連続に連結する場合、経由点を必ず通る。* \\
+  通常、台形型の速度軌道は開始＆終端速度が0をにすることが一般的であり、それ故に複数経由点の連続軌道を生成する際に速度軌道を合成(blend,mixなど)する手法をとることが多いが、速度を単純に合成すると経由点(目標位置)を通過することは保証されない。本設計はそれに対抗するものである。
+4. *等速区間が長いため、ユーザにとって移動中の位置を時系列として予測しやすい。* \\
+   目標移動時間に応じて加速度を低下させ設定値と入力値の拘束を守る軌道生成方法をとると、等速区間が減少または消滅するため低速動作でも常に加速か減速し続けることになり、どのタイミングで減速するか不明になる。そのためユーザにとって移動中の時系列としての位置予測が難しい。対して本手法による軌道は、等速区間が長いとタイミングを掴みやすい。
+
+
+{{{pagebreak}}}
+
+
+* 用語
+:PROPERTIES:
+:CUSTOM_ID: sec:term
+:END:
+
+1. *$n$ 次式* \\
+  式の次数の中で最も大きい値 $n$ を以って、その式を $n$ 次式と呼ぶ。 \\
+  たとえば
+  \begin{eqnarray}
+  f(t) = \frac{1}{10}t^5 + \frac{1}{4}t^4 + \frac{1}{2} t^2 + t + 1
+  \end{eqnarray}
+  という式の場合、 *$f(t)$ は $t$ の5次式* という。 \\
+  \begin{eqnarray}
+  f(t) = t^0 + 3  = 3\ ({\rm 定数})
+  \end{eqnarray}
+  という式の場合、 *$f(t)$ は $t$ の0次式* という。
+2. *相図* \\
+  位相空間上の２つの位相の面を図に表したもの。たとえば、位置 $\dot{x}$ を水平軸、速度 $\ddot{x}$ を鉛直軸にとった図。
+3. *位置* \\
+  本書で使用する"*位置*"という言葉は、
+  直交座標空間における位置[m]や、関節空間における関節角度位置[rad]に限らず、
+  加速度や速度などに対応する位相空間上の位置という意味であり、より一般的な言葉として扱う。
+  また、"*距離*"というと位置2点間のユークリッドノルムを指す。
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+
+* 台形型5-2-5-1-5-2-5次スプライン軌道の全体像
+
+#+CAPTION: 全体像
+#+NAME: fig:whole_body
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.8\hsize
+[[./Figure/png/01_whole_body.png]]
+
+
+
+本軌道は、位置 $x$ を時間 $t$ の多項式 $x(t)$ で表し、第一加速(減速)-等速-第二加速(減速)の３つの区間を順に組み合わせて構成する。
+第一加速区間の位置を時間の5次+2次+5次式、等速区間を1次式、第二加速区間を5次+2次+5次式の合計7ステップで構成する。
+
+これら各ステップの軌道の移動時間を求め、
+ステップ間の境界条件となる位置,速度,加速度の制御点を算出し、連続して接続するようにスプライン補間計算を行う。
+この時、各ステップの位置 $x(t)$ 、速度 $\dot{x}(t)$ の時間関数を以下のように定義しておく。
+
+- $x_{\rm Step1}(t)$ : 第一加速区間Step1の位置についての時間の5次関数
+- $\dot{x}_{\rm Step1}(t)$ : 第一加速区間Step1の速度についての時間の4次関数
+- $x_{\rm Step2}(t)$ : 第一加速区間Step2の位置についての時間の2次関数
+- $\dot{x}_{\rm Step2}(t)$ : 第一加速区間Step2の速度についての時間の1次関数
+- $x_{\rm Step3}(t)$ : 第一加速区間Step3の位置についての時間の5次関数
+- $\dot{x}_{\rm Step3}(t)$ : 第一加速区間Step3の速度についての時間の4次関数
+
+- $x_{\rm Step4}(t)$ : 等速区間Step4の位置についての時間の1次関数
+- $\dot{x}_{\rm Step4}(t)$ : 等速区間Step4の速度についての時間の0次関数
+
+- $x_{\rm Step5}(t)$ : 第二加速区間Step5の位置についての時間の5次関数
+- $\dot{x}_{\rm Step5}(t)$ : 第二加速区間Step5の速度についての時間の4次関数
+- $x_{\rm Step6}(t)$ : 第二加速区間Step6の位置についての時間の2次関数
+- $\dot{x}_{\rm Step6}(t)$ : 第二加速区間Step6の速度についての時間の1次関数
+- $x_{\rm Step7}(t)$ : 第二加速区間Step7の位置についての時間の5次関数
+- $\dot{x}_{\rm Step7}(t)$ : 第二加速区間Step7の速度についての時間の4次関数
+
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+* スプライン補間による加速軌道生成
+:PROPERTIES:
+:CUSTOM_ID: sec:spline
+:END:
+
+本章ではまず、第一＆第二加速区間の定義を示し、
+加速区間の移動距離の導出、全7ステップの位置,速度,加速度,躍度の制御点を結ぶスプライン補間式の導出を行う。
+
+** 加速度の連続性を考慮した加速軌道の定義
+:PROPERTIES:
+:CUSTOM_ID: sec:5-2-5acceleration
+:END:
+
+#+CAPTION: 各加速区間の合計時間
+#+NAME: fig:acc_time
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 1.0\hsize
+[[./Figure/png/02_acc_time.png]]
+
+速度-時間の加速区間を、単純な1次式(直線)のみで構成すると、
+加速区間と等速区間で一般的に"台形速度"といわれる完全な台形形状になる。
+この単純な台形形状の1次式区間の速度を4次式+1次式+4次式に分割した場合、
+図[[fig:acc_time]]のように丸みを与えることができる。
+これにより、
+単純な台形速度では加速-等速区間の遷移の加速度変化が不連続なのに対し、
+本軌道では加速-等速区間の遷移の加速度変化を連続に接続することができる。
+
+この速度と時間の4次+1次+4次の区間において、
+ #
+- $\Delta T_1$ : 第一加速区間の、速度における時間の4次式区間(Step1, Step3)の合計時間
+- $\Delta T_2$ : 第一加速区間の、速度における時間の1次式区間(Step2)の合計時間
+- $\Delta T_4$ : 第二加速区間の、速度における時間の4次式区間(Step5, Step7)の合計時間
+- $\Delta T_5$ : 第二加速区間の、速度における時間の1次式区間(Step6)の合計時間
+ #
+とする。また、第一加速、第二加速区間のこの速度と時間の4次+1次+4次の区間において、
+ #
+- $a_{\rm max}$ : 第一加速区間の、速度における時間の1次式区間(Step2)の等加速度(ユーザ入力)
+- $d_{\rm max}$ : 第二加速区間の、速度における時間の1次式区間(Step6)の等加速度(ユーザ入力)
+ #
+とおく。
+$\Delta T_1$ (もしくは $\Delta T_4$ )、$\Delta T_2$ (もしくは $\Delta T_5$ )の値を、
+ユーザ入力のある一定の丸め率 $s_r$ (smoothing rate)により決定する。
+ここで、
+ #
+- $s_{ra}$ : 第一加速区間の丸め率(ユーザ入力)
+- $\dot{x}_0$ : 開始速度(ユーザ入力)
+- $v_{\rm max}$ : 第一加速区間で最終的に到達する等速度
+ #
+とすると、第一加速区間の合計時間は、
+\begin{eqnarray}
+  \Delta T_1 &=& s_{ra} \mid v_{\rm max} - \dot{x}_0 \mid / a_{\rm max} \\
+  \Delta T_2 &=& (1 - s_{ra}) \mid v_{\rm max} - \dot{x}_0 \mid / a_{\rm max}
+\end{eqnarray}
+と表せる。
+同様に
+ #
+- $s_{rd}$ : 第二加速区間の丸め率(ユーザ入力)
+- $\dot{x}_{f}$ : 終端速度(ユーザ入力)
+ #
+とすると、第二加速区間の合計時間は、
+\begin{eqnarray}
+  \Delta T_4 &=& s_{rd} \mid v_{\rm max} - \dot{x}_f \mid / d_{\rm max} \\
+  \Delta T_5 &=& (1 - s_{rd}) \mid v_{\rm max} - \dot{x}_f \mid / d_{\rm max}
+\end{eqnarray}
+となる。
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+# #+LATEX: \subsection*{等価台形}
+# #+LATEX: \addcontentsline{toc}{subsection}{等価台形}
+
+** 等価台形の考えによる加速区間の移動距離導出
+:PROPERTIES:
+:CUSTOM_ID: sec:equivalent_trapezoid
+:END:
+
+#+CAPTION: 等価台形
+#+NAME: fig:how_to_calc_distance
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.8\hsize
+[[./Figure/png/03_how_to_calc_distance.png]]
+
+速度-時間の加速区間を、
+単純な1次式(直線)のみで構成する完全な台形速度軌道に対し、
+4+1+4次式で構成する本軌道は、
+開始速度 $x_{0}$ 、最終速度 $v_{\rm max}$ が同じままであれば、
+図[[fig:how_to_calc_distance]]のように移動距離を面積等価な台形に置き換えて考えることができる。
+この面積(=移動距離)が等価な台形を *等価台形* と呼ぶことにする。
+
+ここで、
+ #
+- $X_{da}$ : 第一加速区間の符号付き合計移動距離
+- $X_{dd}$ : 第二加速区間の符号付き合計移動距離
+ #
+として、等価台形の面積を幾何学的に計算し、
+前節で求めた合計移動時間 $\Delta T_1$,$\Delta T_2$ ($\Delta T_3$,$\Delta T_4$)の式を用いて加速区間の合計移動距離を符号付きで算出する。
+　
+\begin{eqnarray}
+  {\rm (等価台形の符号付き面積)}
+  &=& \frac{1}{2}
+      \left(
+        {\rm (上底)} + {\rm (下底)}
+      \right)
+      \cdot
+      {\rm (高さ)} \nonumber \\
+  &=& \frac{1}{2}
+      \left(
+        \frac{\Delta T_1}{2}
+        + \left( \frac{\Delta T_1}{2} + {\Delta T_2} + {\Delta T_1}\right)
+      \right)
+      \cdot
+      \left(
+        v_{\rm max} - \dot{x}_0
+      \right) \nonumber \\
+  &=& \frac{1}{2}
+      \left(
+        2 \Delta T_1 + \Delta T_2
+      \right)
+      \cdot
+      \left(
+        v_{\rm max} - \dot{x}_0
+      \right) \nonumber \\
+  &=& \frac{1}{2}
+      \left(
+        \frac{2 s_{ra}\mid v_{\rm max} - \dot{x}_0 \mid}{a_{\rm max}}
+        + \frac{(1-s_{ra})\mid v_{\rm max} - \dot{x}_0 \mid}{a_{\rm max}}
+      \right)
+      \cdot
+      \left(
+        v_{\rm max} - \dot{x}_0
+      \right) \nonumber \\
+  &=& \frac{(1+s_{ra})}{2a_{\rm max}} {\mid v_{\rm max} - \dot{x}_0 \mid}
+      \cdot
+      \left(
+        v_{\rm max} - \dot{x}_0
+      \right) \\
+   \ \nonumber \\
+  {\rm (下の長方形の符号付き面積)}
+  &=& {\rm (横の長さ)} \cdot {\rm (縦の長さ)} \nonumber \\
+  &=& \left(
+        2\Delta T_1 + \Delta T_2
+      \right)
+      \cdot \dot{x}_0
+      \nonumber \\
+  &=& \frac{(1+s_{ra})}{a_{\rm max}} {\mid v_{\rm max} - \dot{x}_0 \mid}
+      \cdot \dot{x}_0
+\end{eqnarray}
+面積を符号付きで考える理由は、
+開始速度 $x_{0}$ と等速度 $v_{\rm max}$ それぞれの符号の正負の組み合わせにより
+位置と速度の移動方向が変わり、移動距離の大きさが変わるためである。
+\begin{eqnarray}
+  X_{da}
+  &=& {\rm (等価台形の符号付き面積)} + {\rm (下の長方形の符号付き面積)} \nonumber \\
+  &=& \left(
+        \frac{(1+s_{ra})}{2a_{\rm max}} {\mid v_{\rm max} - \dot{x}_0 \mid}
+        \cdot
+        \left(
+          v_{\rm max} - \dot{x}_0
+        \right)
+      \right)
+      +
+      \left(
+        \frac{(1+s_{ra})}{a_{\rm max}} {\mid v_{\rm max} - \dot{x}_0 \mid}
+        \cdot \dot{x}_0
+      \right) \nonumber \\
+  &=& \frac{(1+s_{ra})}{2a_{\rm max}} {\mid v_{\rm max} - \dot{x}_0 \mid}
+      \cdot
+      \left(
+        v_{\rm max} + \dot{x}_0
+      \right)
+\end{eqnarray}
+ここで、符号変数 ${\rm signA}$ を以下のように導入し、
+\begin{eqnarray}
+  {\rm signA} =
+  \left\{ \begin{array}{cl}
+   -1 & (v_{max} - \dot{x}_0 < 0) \\
+    1 & (v_{max} - \dot{x}_0 \geq 0)
+  \end{array} \right.
+\end{eqnarray}
+絶対値の機能を符号変数 ${\rm signA}$ に移し、
+第一加速区間の合計移動距離を以下のようにまとめることができる。
+\begin{eqnarray}
+  X_{da}
+  &=& {\rm signA}
+      \frac{(1+s_{ra})}{2a_{\rm max}}
+      \left(
+        v_{\rm max} - \dot{x}_0
+      \right)
+      \cdot
+      \left(
+        v_{\rm max} + \dot{x}_0
+      \right) \nonumber \\
+  &=& {\rm signA}
+      \frac{(1+s_{ra})}{2a_{\rm max}}
+      \left(
+        v_{\rm max}^2 - \dot{x}_0^2
+      \right)
+\end{eqnarray}
+第二加速区間も同様に符号変数 ${\rm signD}$ を用いて
+\begin{eqnarray}
+  {\rm signD} =
+  \left\{ \begin{array}{cl}
+  -1 & (v_{max} - \dot{x}_f < 0) \\
+  1 & (v_{max} - \dot{x}_f \geq 0)
+  \end{array} \right.
+\end{eqnarray}
+第二加速区間の合計移動距離を以下のようにまとめることができる。
+\begin{eqnarray}
+  X_{dd}
+  &=& {\rm signD}
+      \frac{(1+s_{rd})}{2a_{\rm max}}
+      \left(
+        v_{\rm max}^2 - \dot{x}_f^2
+      \right)
+\end{eqnarray}
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+** 全7ステップのスプライン補間
+:PROPERTIES:
+:CUSTOM_ID: sec:total_7step_spline
+:END:
+
+*** Step1 ($t_0 \leq t < t_1$)
+:PROPERTIES:
+:CUSTOM_ID: sec:step1
+:END:
+
+#+CAPTION: Step1
+#+NAME: fig:step1
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.6\hsize
+[[./Figure/eps/04_step1.eps]]
+
+第一加速区間のStep1では加速度に連続性を持つよう丸みを与えるため、位置について時間の5次式とする。
+以下のパラメータを境界条件に使用して5次式の各次数の係数 $c_i\ (i=0,1...,5)$ を決定する。
+ #
+- パラメータ :: 　
+  - $t_0$         : 開始時刻(ユーザ入力)
+  - $x_0$         : 開始位置(ユーザ入力)
+  - $\dot{x}_0$   : 開始速度(ユーザ入力)
+  - $t_1$         : Step1の終端時刻かつStep2の開始時刻($=t_0 + \Delta T_1$)
+  - $x_1$         : Step1の終端位置かつStep2の開始位置
+  - $\dot{x}_1$   : Step1の終端速度かつStep2の開始速度
+  - $\Delta T_1$  : Step1の合計時間($=t_1 - t_0$)。 ${\rm (5.3)}$ 式より導出
+  - $a_{\rm max}$ : Step1の終端加速度かつStep2の等加速度、の絶対値(ユーザ入力)
+  - $\rm signA$   : 符号変数。 $v_{max} - \dot{x}_0$ の正負に対応
+#
+\begin{eqnarray}
+  \left\{ \begin{array}{l}
+         x_{\rm Step1}(t) =    c_5 (t-t_0)^5 +   c_4 (t-t_0)^4 +  c_3 (t-t_0)^3
+                            +  c_2 (t-t_0)^2 +   c_1 (t-t_0)   +  c_0 \\
+   \dot{x}_{\rm Step1}(t) =   5c_5 (t-t_0)^4 +  4c_4 (t-t_0)^3 + 3c_3 (t-t_0)^2
+                            + 2c_2 (t-t_0)   +   c_1 \\
+  \ddot{x}_{\rm Step1}(t) =  20c_5 (t-t_0)^3 + 12c_4 (t-t_0)^2 + 6c_3 (t-t_0)
+                            + 2c_2 \\
+   x^{(3)}_{\rm Step1}(t) =  60c_5 (t-t_0)^2 + 24c_4 (t-t_0)   + 6c_3
+  \end{array} \right.
+\end{eqnarray}
+*境界条件*
+\begin{eqnarray}
+         x_{\rm Step1}(t_0) &=&   c_0 = x_0 \\
+   \dot{x}_{\rm Step1}(t_0) &=&   c_1 = \dot{x}_0 \\
+  \ddot{x}_{\rm Step1}(t_0) &=&  2c_2 = 0
+                                 \ \ \Longleftrightarrow
+                                  c_2 = 0 \\
+   x^{(3)}_{\rm Step1}(t_0) &=&  6c_3 = 0
+                                 \ \ \Longleftrightarrow
+                                  c_3 = 0 \\
+         x_{\rm Step1}(t_1) &=&   c_5 \Delta T_1^5     +   c_4 \Delta T_1^4
+                                + \dot{x}_0 \Delta T_1 +   x_0
+                             =    x_1 \\
+   \dot{x}_{\rm Step1}(t_1) &=&  5c_5 \Delta T_1^4     +  4c_4 \Delta T_1^3
+                                + \dot{x}_0
+                             =    \dot{x}_1 \\
+  \ddot{x}_{\rm Step1}(t_1) &=& 20c_5 \Delta T_1^3     + 12c_4 \Delta T_1^2
+                             =  {\rm signA} \cdot a_{\rm max} \\
+   x^{(3)}_{\rm Step1}(t_1) &=& 60c_5 \Delta T_1^2       + 24c_4 \Delta T_1 = 0 \nonumber \\
+                                &\Longleftrightarrow&
+                                30c_5 \Delta T_1^2       + 12c_4 \Delta T_1 = 0
+\end{eqnarray}
+${\rm (5.22)} - {\rm (5.21)}$ より
+\begin{eqnarray}
+  10c_5 \Delta T_1^3 = - {\rm signA} \cdot a_{\rm max}
+    \ \ \Longleftrightarrow
+    c_5 &=& - {\rm signA} \cdot \frac{1}{10} \frac{a_{\rm max}}{\Delta T_1^3} \\
+    c_4 &=&   {\rm signA} \cdot \frac{1}{4}  \frac{a_{\rm max}}{\Delta T_1^2}
+\end{eqnarray}
+以上より求まった係数 $c_i\ (i=0,1...,5)$ よりStep1の位置-速度-加速度の軌道式は以下のようになる。
+\begin{eqnarray}
+         x_{\rm Step1}(t) &=& - {\rm signA} \cdot \frac{1}{10}\frac{a_{\rm max}}{\Delta T_1^3} (t-t_0)^5
+                              + {\rm signA} \cdot \frac{1}{4} \frac{a_{\rm max}}{\Delta T_1^2} (t-t_0)^4
+                              + \dot{x}_0 (t-t_0) + x_0 \\
+   \dot{x}_{\rm Step1}(t) &=& - {\rm signA} \cdot \frac{1}{2} \frac{a_{\rm max}}{\Delta T_1^3} (t-t_0)^4
+                              + {\rm signA} \cdot \frac{a_{\rm max}}{\Delta T_1^2}   (t-t_0)^3
+                              + \dot{x}_0 \\
+  \ddot{x}_{\rm Step1}(t) &=& - {\rm signA} \cdot 2 \frac{a_{\rm max}}{\Delta T_1^3} (t-t_0)^3
+                              + {\rm signA} \cdot 3 \frac{a_{\rm max}}{\Delta T_1^2} (t-t_0)^2 \\
+                          &\Downarrow& \nonumber \\
+                      x_1 &=&   {\rm signA} \cdot \frac{3}{20} a_{\rm max} \Delta T_1^2
+                              + \dot{x}_0  \Delta T_1 + x_0 \\
+                \dot{x}_1 &=&   {\rm signA} \cdot \frac{1}{2} a_{\rm max} \Delta T_1
+                              + \dot{x}_0
+\end{eqnarray}
+
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+*** Step2 ($t_1 \leq t < t_2$)
+:PROPERTIES:
+:CUSTOM_ID: sec:step2
+:END:
+
+#+CAPTION: Step2
+#+NAME: fig:step2
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.6\hsize
+[[./Figure/eps/05_step2.eps]]
+
+
+第一加速区間のStep2では等加速度で移動するように、位置について時間の2次式とする。
+以下のパラメータを境界条件に使用して2次式の各次数の係数 $c_i\ (i=0,1,2)$ を決定する。
+ #
+- パラメータ :: 　
+  - $t_1$ : Step1の終端時刻かつStep2の開始時刻($=t_0 + \Delta T_1$)
+  - $x_1$ : Step1の終端位置かつStep2の開始位置
+  - $\dot{x}_1$ : Step1の終端速度かつStep2の開始速度
+  - $t_2$ : Step2の終端時刻かつStep3の開始時刻($=t_1 + \Delta T_2$)
+  - $x_2$ : Step2の終端位置かつStep3の開始位置
+  - $\dot{x}_2$ : Step2の終端速度かつStep3の開始速度
+  - $\Delta T_2$ : Step2の合計時間($=t_2 - t_1$)。 ${\rm (5.4)}$ 式より導出
+  - $a_{\rm max}$ : Step2の等加速度かつStep3の開始加速度、の絶対値(ユーザ入力)
+  - $\rm signA$   : 符号変数。 $v_{max} - \dot{x}_0$ の正負に対応
+#
+\begin{eqnarray}
+  \left\{ \begin{array}{l}
+         x_{\rm Step2}(t) =  c_2 (t-t_1)^2 + c_1 (t-t_1) + c_0 \\
+   \dot{x}_{\rm Step2}(t) = 2c_2 (t-t_1)   + c_1 \\
+  \ddot{x}_{\rm Step2}(t) = 2c_2 \\
+   x^{(3)}_{\rm Step2}(t) = 0
+  \end{array} \right.
+\end{eqnarray}
+*境界条件*
+\begin{eqnarray}
+         x_{\rm Step2}(t_1) &=&  c_0 = x_1 \\
+   \dot{x}_{\rm Step2}(t_1) &=&  c_1 = \dot{x}_1 \\
+  \ddot{x}_{\rm Step2}(t_1) &=& 2c_2 = {\rm signA} \cdot a_{\rm max}
+                                \ \ \Longleftrightarrow
+                               c_2 = {\rm signA} \cdot \frac{a_{\rm max}}{2}
+\end{eqnarray}
+以上より求まった係数 $c_i\ (i=0,1,2)$ よりStep2の位置-速度の軌道式は以下のようになる。
+\begin{eqnarray}
+         x_{\rm Step2}(t) &=& {\rm signA} \cdot \frac{a_{\rm max}}{2} (t-t_1)^2 + \dot{x}_1 (t-t_1)    + x_1 \\
+   \dot{x}_{\rm Step2}(t) &=& {\rm signA} \cdot       a_{\rm max} (t-t_1)       + \dot{x}_1 \\
+  \ddot{x}_{\rm Step2}(t) &=& {\rm signA} \cdot       a_{\rm max} \\
+                          &\Downarrow& \nonumber \\
+                      x_2 &=& {\rm signA} \cdot \frac{a_{\rm max}}{2} \Delta T_2^2 + \dot{x}_1 \Delta T_2 + x_1 \\
+                \dot{x}_2 &=& {\rm signA} \cdot       a_{\rm max}     \Delta T_2   + \dot{x}_1
+\end{eqnarray}
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+*** Step3 ($t_2 \leq t < t_3$)
+:PROPERTIES:
+:CUSTOM_ID: sec:step3
+:END:
+
+#+CAPTION: Step3
+#+NAME: fig:step3
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.6\hsize
+[[./Figure/eps/06_step3.eps]]
+
+第一加速区間のStep3ではStep1同様、加速度に連続性を持つよう丸みを与えるため、位置について時間の5次式とする。
+以下のパラメータを境界条件に使用して5次式の各次数の係数 $c_i\ (i=0,1...,5)$ を決定する。
+ #
+- パラメータ :: 　
+  - $t_2$         : Step2の終端時刻かつStep3の開始時刻($=t_1 + \Delta T_2$)
+  - $x_2$         : Step2の終端位置かつStep3の開始位置
+  - $\dot{x}_2$   : Step2の終端速度かつStep3の開始速度
+  - $t_3$         : Step3の終端時刻かつStep4の開始時刻($=t_2 + \Delta T_1$)
+  - $x_3$         : Step3の終端位置かつStep4の開始位置
+  - $\dot{x}_3$   : Step3の終端速度かつStep4の開始速度($=v_{\rm max}$)
+  - $\Delta T_1$  : Step3の合計時間($=t_1 - t_0$)。 ${\rm (5.3)}$ 式より導出
+  - $a_{\rm max}$ : Step2の等加速度かつStep3の開始加速度、の絶対値(ユーザ入力)
+  - $\rm signA$   : 符号変数。 $v_{max} - \dot{x}_0$ の正負に対応
+ #
+\begin{eqnarray}
+  \left\{ \begin{array}{l}
+         x_{\rm Step3}(t) =    c_5 (t-t_2)^5 +   c_4 (t-t_2)^4 +  c_3 (t-t_2)^3
+                            +  c_2 (t-t_2)^2 +   c_1 (t-t_2)   +  c_0 \\
+   \dot{x}_{\rm Step3}(t) =   5c_5 (t-t_2)^4 +  4c_4 (t-t_2)^3 + 3c_3 (t-t_2)^2
+                            + 2c_2 (t-t_2)   +   c_1 \\
+  \ddot{x}_{\rm Step3}(t) =  20c_5 (t-t_2)^3 + 12c_4 (t-t_2)^2 + 6c_3 (t-t_2)
+                            + 2c_2 \\
+   x^{(3)}_{\rm Step3}(t) =  60c_5 (t-t_2)^2 + 24c_4 (t-t_2)   + 6c_3
+  \end{array} \right.
+\end{eqnarray}
+*境界条件*
+\begin{eqnarray}
+         x_{\rm Step3}(t_2) &=&   c_0 = x_2 \\
+   \dot{x}_{\rm Step3}(t_2) &=&   c_1 = \dot{x}_2 \\
+  \ddot{x}_{\rm Step3}(t_2) &=&  2c_2 = {\rm signA} \cdot a_{\rm max}
+                                 \ \ \Longleftrightarrow
+                                  c_2 = {\rm signA} \cdot \frac{a_{\rm max}}{2} \\
+   x^{(3)}_{\rm Step3}(t_2) &=&  6c_3 = 0
+                                 \ \ \Longleftrightarrow
+                                  c_3 = 0 \\
+         x_{\rm Step3}(t_3) &=&   c_5 \Delta T_1^5     +   c_4 \Delta T_1^4
+                                + {\rm signA} \cdot \frac{a_{\rm max}}{2} \Delta T_1^2
+                                + \dot{x}_2 \Delta T_1 +   x_2
+                             =    x_3 \\
+   \dot{x}_{\rm Step3}(t_3) &=&  5c_5 \Delta T_1^4     +  4c_4 \Delta T_1^3
+                                + 2\cdot {\rm signA} \cdot \frac{a_{\rm max}}{2} \Delta T_1
+                                + \dot{x}_2
+                             =    \dot{x}_3 \\
+  \ddot{x}_{\rm Step3}(t_3) &=& 20c_5 \Delta T_1^3     + 12c_4 \Delta T_1^2
+                                + 2\cdot {\rm signA} \cdot \frac{a_{\rm max}}{2}
+                             =  0 \nonumber \\
+                                &\Longleftrightarrow&
+                                20c_5 \Delta T_1^3     + 12c_4 \Delta T_1^2
+                             =  - {\rm signA} \cdot a_{\rm max} \\
+   x^{(3)}_{\rm Step3}(t_3) &=& 60c_5 \Delta T_1^2       + 24c_4 \Delta T_1 = 0 \nonumber \\
+                            &\Longleftrightarrow&
+                                30c_5 \Delta T_1^2       + 12c_4 \Delta T_1 = 0
+\end{eqnarray}
+${\rm (5.45)} - {\rm (5.44)}$ より
+\begin{eqnarray}
+  10c_5 \Delta T_1^3 = {\rm signA} \cdot a_{\rm max}
+    \ \ \Longleftrightarrow
+    c_5 &=&  {\rm signA} \frac{1}{10} \frac{a_{\rm max}}{\Delta T_1^3} \\
+    c_4 &=& -{\rm signA} \frac{1}{4}  \frac{a_{\rm max}}{\Delta T_1^2}
+\end{eqnarray}
+以上より求まった係数 $c_i\ (i=0,1...,5)$ よりStep1の位置-速度の軌道式は以下のようになる。
+\begin{eqnarray}
+         x_{\rm Step3}(t) &=&  {\rm signA} \cdot \frac{1}{10}\frac{a_{\rm max}}{\Delta T_1^3} (t-t_2)^5
+                             - {\rm signA} \cdot \frac{1}{4} \frac{a_{\rm max}}{\Delta T_1^2} (t-t_2)^4
+                             + {\rm signA} \cdot \frac{a_{\rm max}}{2} (t-t_2)^2 \\
+                          &\ & + \dot{x}_2 (t-t_2) + x_2 \\
+   \dot{x}_{\rm Step3}(t) &=&  {\rm signA} \cdot \frac{1}{2} \frac{a_{\rm max}}{\Delta T_1^3} (t-t_2)^4
+                             - {\rm signA} \cdot \frac{a_{\rm max}}{\Delta T_1^2} (t-t_2)^3
+                             + {\rm signA} \cdot a_{\rm max} (t-t_2)
+                             + \dot{x}_2 \\
+  \ddot{x}_{\rm Step3}(t) &=&  {\rm signA} \cdot 2           \frac{a_{\rm max}}{\Delta T_1^3} (t-t_2)^3
+                             - {\rm signA} \cdot 3           \frac{a_{\rm max}}{\Delta T_1^2} (t-t_2)^2
+                             + {\rm signA} \cdot a_{\rm max} \\
+                          &\Downarrow& \nonumber \\
+                      x_3 &=&  {\rm signA} \cdot \frac{7}{20} a_{\rm max} \Delta T_1^2
+                             + \dot{x}_2 \Delta T_1 + x_2 \\
+                \dot{x}_3 &=& {\rm signA}  \cdot \frac{1}{2} a_{\rm max} \Delta T_1
+                             + \dot{x}_2
+\end{eqnarray}
+
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+*** Step4 ($t_3 \leq t < t_4$)
+:PROPERTIES:
+:CUSTOM_ID: sec:step4
+:END:
+
+#+CAPTION: Step4
+#+NAME: fig:step4
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.6\hsize
+[[./Figure/eps/07_step4.eps]]
+
+等速区間のStep4では加速度0の軌道を実現するため、位置について時間の1次式とする。
+以下のパラメータを境界条件に使用して1次式を決定する。
+ #
+- パラメータ :: 　
+  - $t_3$         : Step3の終端時刻かつStep4の開始時刻($=t_2 + \Delta T_1$)
+  - $x_3$         : Step3の終端位置かつStep4の開始位置
+  - $\dot{x}_3$   : Step3の終端速度かつStep4の開始速度($=v_{\rm max}$)
+  - $t_4$         : Step4の終端時刻かつStep5の開始時刻($=t_3 + \Delta T_3$)
+  - $x_4$         : Step4の終端位置かつStep5の開始位置
+  - $\dot{x}_4$   : Step4の終端速度かつStep5の開始速度($=v_{\rm max}$)
+  - $\Delta T_3$  : Step4の合計時間($=t_4 - t_3$)。
+ #
+\begin{eqnarray}
+         x_{\rm Step4}(t) &=& v_{\rm max} (t-t_3) + x_3 \\
+   \dot{x}_{\rm Step4}(t) &=& v_{\rm max} \ ({\rm 一定}) \\
+  \ddot{x}_{\rm Step4}(t) &=& 0 \\
+                          &\Downarrow& \nonumber \\
+                      x_4 &=& v_{\rm max} \Delta T_3 + x_3 \nonumber \\
+                          &\Longleftrightarrow& \Delta T_3 = \frac{x_4 - x_3}{v_{\rm max}} \\
+                \dot{x}_4 &=& v_{\rm max}
+\end{eqnarray}
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+Step1 $\longrightarrow$ Step3の順と同様の式で、
+Step7 $\longrightarrow$ Step5の順に軌道式を導出する。
+
+*** Step7 ($t_6 \leq t < t_f$)
+:PROPERTIES:
+:CUSTOM_ID: sec:step7
+:END:
+
+Step3と同様に、位置について時間の5次式となる軌道を導出する。
+ #
+- パラメータ :: 　
+  - $t_6$         : Step6の終端時刻かつStep7の開始時刻($=t_5 + \Delta T_5$)
+  - $x_6$         : Step6の終端位置かつStep7の開始位置
+  - $\dot{x}_2$   : Step6の終端速度かつStep7の開始速度
+  - $t_f$         : Step7の終端時刻(ユーザ入力)
+  - $x_f$         : Step7の終端位置(ユーザ入力)
+  - $\dot{x}_f$   : Step7の終端速度(ユーザ入力)
+  - $\Delta T_4$  : Step7の合計時間($=t_f - t_6 =t_5 - t_4$)。 ${\rm (5.5)}$ 式より導出
+  - $d_{\rm max}$ : Step6の等加速度かつStep7の開始加速度、の絶対値(ユーザ入力)
+  - $\rm signD$   : 符号変数。 $v_{max} - \dot{x}_f$ の正負に対応
+ #
+
+\begin{eqnarray}
+         x_{\rm Step7}(t) &=&- {\rm signD} \cdot \frac{1}{10}\frac{d_{\rm max}}{\Delta T_4^3} (t-t_6)^5
+                             + {\rm signD} \cdot \frac{1}{4} \frac{d_{\rm max}}{\Delta T_4^2} (t-t_6)^4
+                             - {\rm signD} \cdot \frac{d_{\rm max}}{2} (t-t_6)^2 \\
+                          &\ & + \dot{x}_6 (t-t_6) + x_6 \\
+   \dot{x}_{\rm Step7}(t) &=&- {\rm signD} \cdot \frac{1}{2} \frac{d_{\rm max}}{\Delta T_4^3} (t-t_6)^4
+                             + {\rm signD} \cdot             \frac{d_{\rm max}}{\Delta T_4^2} (t-t_6)^3
+                             - {\rm signD} \cdot d_{\rm max} (t-t_6)
+                             + \dot{x}_6 \\
+  \ddot{x}_{\rm Step7}(t) &=&- {\rm signD} \cdot 2           \frac{d_{\rm max}}{\Delta T_4^3} (t-t_6)^3
+                             - {\rm signD} \cdot 3           \frac{d_{\rm max}}{\Delta T_4^2} (t-t_6)^2
+                             - {\rm signD} \cdot d_{\rm max} \\
+                          &\Downarrow& \nonumber \\
+                \dot{x}_6 &=&  \dot{x}_f
+                             + {\rm signD} \cdot \frac{1}{2} d_{\rm max} \Delta T_4 \\
+                      x_6 &=&  x_f
+                             + {\rm signD} \cdot \frac{7}{20} d_{\rm max} \Delta T_4^2
+                             - \dot{x}_6 \Delta T_4 \\
+\end{eqnarray}
+
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+*** Step6 ($t_5 \leq t < t_6$)
+:PROPERTIES:
+:CUSTOM_ID: sec:step6
+:END:
+
+Step2同様に、位置について時間の2次式となる軌道を導出する。
+ #
+- パラメータ :: 　
+  - $t_5$ : Step5の終端時刻かつStep6の開始時刻($=t_4 + \Delta T_4$)
+  - $x_5$ : Step5の終端位置かつStep6の開始位置
+  - $\dot{x}_5$ : Step5の終端速度かつStep6の開始速度
+  - $t_6$ : Step6の終端時刻かつStep7の開始時刻($=t_5 + \Delta T_5$)
+  - $x_6$ : Step6の終端位置かつStep7の開始位置
+  - $\dot{x}_6$ : Step6の終端速度かつStep7の開始速度
+  - $\Delta T_5$ : Step6の合計時間($=t_6 - t_5$)。 ${\rm (5.6)}$ 式より導出
+  - $d_{\rm max}$ : Step5の終端加速度かつStep6の等加速度、の絶対値(ユーザ入力)
+  - $\rm signD$   : 符号変数。 $v_{max} - \dot{x}_f$ の正負に対応
+ #
+\begin{eqnarray}
+         x_{\rm Step6}(t) &=& - {\rm signD} \cdot \frac{d_{\rm max}}{2} (t-t_5)^2 + \dot{x}_5 (t-t_5)    + x_5 \\
+   \dot{x}_{\rm Step6}(t) &=& - {\rm signD} \cdot       d_{\rm max} (t-t_5)       + \dot{x}_5 \\
+  \ddot{x}_{\rm Step6}(t) &=& - {\rm signD} \cdot       d_{\rm max} \\
+                          &\Downarrow& \nonumber \\
+                \dot{x}_5 &=& \dot{x}_6 + {\rm signD} \cdot       d_{\rm max}     \Delta T_5 \\
+                      x_5 &=&       x_6 + {\rm signD} \cdot \frac{d_{\rm max}}{2} \Delta T_5^2 - \dot{x}_5 \Delta T_5
+\end{eqnarray}
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+*** Step5 ($t_4 \leq t < t_5$)
+:PROPERTIES:
+:CUSTOM_ID: sec:step5
+:END:
+
+Step1と同様に、位置について時間の5次式となる軌道を導出する。
+ #
+- パラメータ :: 　
+  - $t_4$         : Step4の終端時刻かつStep5の開始時刻($=t_3 + \Delta T_3$)
+  - $x_4$         : Step4の終端位置かつStep5の開始位置
+  - $\dot{x}_4$   : Step4の終端速度かつStep5の開始速度($=v_{\rm max}$)
+  - $t_5$         : Step5の終端時刻かつStep6の開始時刻($=t_4 + \Delta T_4$)
+  - $x_5$         : Step5の終端位置かつStep6の開始位置
+  - $\dot{x}_5$   : Step5の終端速度かつStep6の開始速度
+  - $\Delta T_4$  : Step5の合計時間($=t_5 - t_4$)。 ${\rm (5.5)}$ 式より導出
+  - $d_{\rm max}$ : Step5の終端加速度かつStep6の等加速度、の絶対値(ユーザ入力)
+  - $\rm signD$   : 符号変数。 $v_{max} - \dot{x}_f$ の正負に対応
+ #
+\begin{eqnarray}
+         x_{\rm Step5}(t) &=&  {\rm signD} \cdot \frac{1}{10}\frac{d_{\rm max}}{\Delta T_4^3} (t-t_4)^5
+                             - {\rm signD} \cdot \frac{1}{4} \frac{d_{\rm max}}{\Delta T_4^2} (t-t_4)^4
+                             + v_{\rm max} (t-t_4) + x_4 \\
+   \dot{x}_{\rm Step5}(t) &=&  {\rm signD} \cdot \frac{1}{2} \frac{d_{\rm max}}{\Delta T_4^3} (t-t_4)^4
+                             - {\rm signD} \cdot             \frac{d_{\rm max}}{\Delta T_4^2} (t-t_4)^3
+                             + v_{\rm max} \\
+  \ddot{x}_{\rm Step5}(t) &=&  {\rm signD} \cdot 2           \frac{d_{\rm max}}{\Delta T_4^3} (t-t_4)^3
+                             - {\rm signD} \cdot 3           \frac{d_{\rm max}}{\Delta T_4^2} (t-t_4)^2 \\
+                          &\Downarrow& \nonumber \\
+                \dot{x}_4 &=& v_{\rm max} \\
+                      x_4 &=&   x_5
+                              + {\rm signD} \cdot \frac{3}{20} d_{\rm max} \Delta T_4^2
+                              - v_{\rm max} \Delta T_4 \\
+\end{eqnarray}
+
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+
+* 軌道パターン生成方法
+:PROPERTIES:
+:CUSTOM_ID: sec:pattern_gen
+:END:
+
+#+CAPTION: 軌道生成パターンの相図
+#+NAME: fig:how_to_generate_tragectory
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.8\hsize
+[[./Figure/eps/08_how_to_generate_tragectory.eps]]
+
+[[#sec:total_7step_spline]]節で述べたStep1〜Step3, Step5〜Step7の計算により
+加速 or 減速の軌道を生成でき、Step4の計算により等速の軌道を生成できる。
+これら軌道を組み合わせ、
+任意の開始時間-位置-速度、終端時間-位置-速度を通る軌道パターンを生成する。
+
+位置-速度 $(x, \dot{x})$ の相図において、
+本軌道生成方法では、加速軌道、減速軌道、等速軌道の３種類を組み合わせる。
+入力された開始状態 $(x_0, \dot{x}_0)$ から、終端状態 $(x_f, \dot{x}_f)$ へ、
+目標到達時間 $t_f - t_0$ を満たすように軌道を切り替えて軌道を生成する。
+
+軌道決定に必要なパラメータは等速軌道の速度(または最大速度) $v_{\rm max}$ 、
+Step4の等速軌道の時間 $\Delta T_{3}$ である。
+これらパラメータにより、 $\Delta T_1$ 〜 $\Delta T_5$ 、およびSttep1〜Step7までの軌道パラメータを求める。
+
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+
+** 最速軌道生成パターン
+:PROPERTIES:
+:CUSTOM_ID: sec:max_speed_tragectory_generate_pattern
+:END:
+
+#+CAPTION: 最速軌道生成パターンの相図
+#+NAME: fig:triangle_vmax_pattern
+#+ATTR_HTML: :align center :width 800
+#+ATTR_LaTeX: :width 0.6\hsize
+[[./Figure/eps/09_triangle_vmax_pattern.eps]]
+
+時刻を問わず、
+入力された開始状態 $(x_0, \dot{x}_0)$ から、終端状態 $(x_f, \dot{x}_f)$ までが決まれば
+設定された加速度 $a_{\rm max}$ ( $d_{\rm max}$ ) 、丸め率 $s_{ra}$ ( $s_{rd}$ ) により最速軌道が一意に決まる。
+
+最速軌道のときStep4の等速区間はない。
+よって、最速軌道を決定するパラメータは、加減速の折り返し点である最大速度 $v_{\rm max}$ のみとなる。
+
+ただし、入力された開始点と終点の位置-速度、移動方向によっては、
+速度到達のために相図状で渦巻状に同じ位置を周回しなくては到達できない場合がある。
+加減速１セットで到達可能かどうかは、判別して決定する必要がある。
+
+最大速度 $v_{\rm max}$ の算出方法を[[#sec:fastest_tragectory_v_max]]項で述べ、
+到達可能か判別する方法は、後の[[#sec:v_max_inverse_region]]項で述べる。
+
+*** 最速軌道の最大速度 $v_{\rm max}$ の算出
+:PROPERTIES:
+:CUSTOM_ID: sec:fastest_tragectory_v_max
+:END:
+
+[[#sec:5-2-5acceleration]]節で述べたように、
+Step1〜Step7の区間の時間 $\Delta T_1$ 〜 $\Delta T_5$ は以下の式で求まる。
+\begin{eqnarray}
+  \Delta T_1 &=& s_{ra} \mid v_{\rm max} - \dot{x}_0 \mid / a_{\rm max} \nonumber \\
+  \Delta T_2 &=& (1 - s_{ra}) \mid v_{\rm max} - \dot{x}_0 \mid / a_{\rm max} \nonumber \\
+  \Delta T_3 &=& s_{rd} \mid v_{\rm max} - \dot{x}_f \mid / d_{\rm max} \nonumber \\
+  \Delta T_4 &=& (1 - s_{rd}) \mid v_{\rm max} - \dot{x}_f \mid / d_{\rm max} \nonumber
+\end{eqnarray}
+
+[[#sec:equivalent_trapezoid]]節より、最速時の合計移動距離 $X_d$ は、
+加速区間の移動距離 $X_{da}$, $X_{dd}$ により以下の式のように表せられる。
+\begin{eqnarray}
+  X_{d}
+  &=&
+  X_{da} + X_{dd} \nonumber \\
+  &=& {\rm signA}
+      \frac{1+s_{ra}}{2a_{\rm max}}
+      \left(
+        v_{\rm max}^2 - \dot{x}_0^2
+      \right)
+    + {\rm signD}
+      \frac{1+s_{rd}}{2d_{\rm max}}
+      \left(
+        v_{\rm max}^2 - \dot{x}_f^2
+      \right) \nonumber
+\end{eqnarray}
+ #
+最速の時、図[[fig:triangle_vmax_pattern]]のように凸状の軌道になり、
+開始速度 $\dot{x}_0$ から見て $v_{\rm max}$ が正側にあり且つ $v_{\rm max}$ が正、
+もしくは $\dot{x}_0$ から見て $v_{\rm max}$ が負側にあり且つ $v_{\rm max}$ が負、
+終端速度 $\dot{x}_f$ も $v_{\rm max}$ に対し同様の相図上位置関係になり、数式で表すと
+${\rm signA}$, ${\rm signD}$ は $v_{\rm max}$ と同じ符号になる。
+これを前提条件とする。
+\begin{eqnarray}
+  ( v_{\rm max} - \dot{x}_0 ) v_{\rm max} &\geq & 0
+  \ \ \Longrightarrow
+  {\rm signA} = (v_{\rm max} {\rm の符号}) \\
+  ( v_{\rm max} - \dot{x}_f ) v_{\rm max} &\geq & 0
+  \ \ \Longrightarrow
+  {\rm signD} = (v_{\rm max} {\rm の符号})
+\end{eqnarray}
+
+ここで、以下の符号変数を導入し、
+\begin{eqnarray}
+  {\rm sign} = \left\{
+    \begin{array}{c}
+      -1 \\
+       1 
+    \end{array}
+  \right. 
+\end{eqnarray}
+
+${\rm signA}$, ${\rm signD}$ を同じ符号 $\rm sign$ (最終的に $v_{\rm max}$ の符号に対応させる)として表す。
+\begin{eqnarray}
+  {\rm signA} = {\rm sign} \nonumber \\
+  {\rm signD} = {\rm sign}
+\end{eqnarray}
+ #
+最速時の合計移動距離の式より最大速度 $v_{\rm max}$ を求める。
+\begin{eqnarray}
+  X_{d}
+  &=& {\rm sign}
+      \frac{1+s_{ra}}{2a_{\rm max}}
+      \left(
+        v_{\rm max}^2 - \dot{x}_0^2
+      \right)
+      +
+      {\rm sign}
+      \frac{1+s_{rd}}{2d_{\rm max}}
+      \left(
+        v_{\rm max}^2 - \dot{x}_f^2
+      \right) \nonumber \\
+  {\rm sign} \cdot X_{d}
+  &=& \left(
+      \frac{1+s_{ra}}{2a_{\rm max}}
+      +
+      \frac{1+s_{rd}}{2d_{\rm max}}
+      \right)
+      v_{\rm max}^2
+      -
+      \left(
+      \frac{1+s_{ra}}{2a_{\rm max}}
+      \dot{x}_0^2
+      +
+      \frac{1+s_{rd}}{2d_{\rm max}}
+      \dot{x}_f^2
+      \right) \nonumber
+\end{eqnarray}
+\begin{eqnarray}
+  &\Updownarrow& \nonumber \\
+  \left(
+  \frac{1+s_{ra}}{2a_{\rm max}}
+  +
+  \frac{1+s_{rd}}{2d_{\rm max}}
+  \right)
+  v_{\rm max}^2
+  &=& \left(
+      \frac{1+s_{ra}}{2a_{\rm max}}
+      \dot{x}_0^2
+      +
+      \frac{1+s_{rd}}{2d_{\rm max}}
+      \dot{x}_f^2
+      \right)
+      +
+      {\rm sign} \cdot X_{d}
+      \nonumber \\
+  \frac{
+    d_{\rm max} (1+s_{ra})
+    +
+    a_{\rm max} (1+s_{rd})
+  }{
+    2 a_{\rm max} d_{\rm max}
+  }
+  v_{\rm max}^2
+  &=& \frac{
+        d_{\rm max} (1+s_{ra}) \dot{x}_0^2
+        +
+        a_{\rm max} (1+s_{rd}) \dot{x}_f^2
+        +
+        2 a_{\rm max} d_{\rm max}\ {\rm sign} \cdot X_{d}
+      }{
+        2 a_{\rm max} d_{\rm max}
+      }
+  \nonumber \\
+  v_{\rm max}^2
+  &=& \frac{
+        d_{\rm max} (1+s_{ra}) \dot{x}_0^2
+        +
+        a_{\rm max} (1+s_{rd}) \dot{x}_f^2
+        +
+        2 a_{\rm max} d_{\rm max}\ {\rm sign} \cdot X_{d}
+      }{
+        d_{\rm max} (1+s_{ra})
+        +
+        a_{\rm max} (1+s_{rd})
+      }
+  \nonumber
+\end{eqnarray}
+# \therforeコマンドはamssymbパッケージが必要
+\begin{eqnarray}
+  &\therefore&
+  v_{\rm max}
+  = {\rm sign}
+      \sqrt{
+        \frac{
+          d_{\rm max} (1+s_{ra}) \dot{x}_0^2
+          +
+          a_{\rm max} (1+s_{rd}) \dot{x}_f^2
+          +
+          2 a_{\rm max} d_{\rm max}\ {\rm sign} \cdot X_{d}
+        }{
+          d_{\rm max} (1+s_{ra})
+          +
+          a_{\rm max} (1+s_{rd})
+        }
+      }
+  \nonumber \\
+  &\ &
+  \left(
+    \begin{array}{l}
+      {\rm sign}
+      = \left\{
+          \begin{array}{cl}
+            -1 \\
+             1
+          \end{array}
+        \right. \\
+      X_d
+      =  x_f - x_0
+    \end{array}
+  \right)
+\end{eqnarray}
+
+以降、この $v_{\rm max}$ を $\hat{v}_{\rm max}$ と表すことにする。\\
+本式の意味を読み取ると、開始速度 $\dot{x}_0$ と終端速度 $\dot{x}_f$ の正負の影響は、
+最大速度 $\hat{v}_{\rm max}$ に直接現れず $\rm sign$ の符号変数を介して現れることがわかる。
+
+また、 $\hat{v}_{\rm max}$ が実数解を持つには根が正であること、
+つまり以下の条件式が成り立つことが前提となる。
+\begin{eqnarray}
+  d_{\rm max} (1+s_{ra}) \dot{x}_0^2
+  +
+  a_{\rm max} (1+s_{rd}) \dot{x}_f^2
+  +
+  2 a_{\rm max} d_{\rm max}\ {\rm sign} \cdot X_{d}
+  > 0
+\end{eqnarray}
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+
+*** 最速軌道の最大速度 $\hat{v}_{\rm max}$ の反転領域と到達限界の判定
+:PROPERTIES:
+:CUSTOM_ID: sec:v_max_inverse_region
+:END:
+
+$\hat{v}_{\rm max}$ の方向、
+および開始状態 $(x_0, \dot{x}_0)$ から終端状態 $(x_f, \dot{x}_f)$ への
+軌道生成が可能か到達限界を調べる。
+
+**** 到達限界
+
+#+CAPTION: 到達限界
+#+NAME: fig:judge_limit01
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.8\hsize
+[[./Figure/png/13_judge_limit01.png]]
+
+
+位置の移動方向は $(x_f - x_0)$ の正負符号に一致し、
+最速軌道の最大速度 $\hat{v}_{\rm max}$ の正負 $\rm sign$ は通常この符号に一致する。
+
+しかし
+図[[fig:judge_limit01]]のように、開始状態からみた終端状態が領域 $L_1$ 〜 $L_4$ にある場合はすべて
+通常軌道  $(x_f - x_0)$ の正負符号のままでは到達不可能の領域にあり、
+到達するためには最大速度 $\hat{v}_{\rm max}$ の正負 $\rm sign$ を
+移動方向に対し反転する必要がある。
+
+終端状態が領域 $L_1$ 〜 $L_4$ の領域か判別できれば、
+最大速度 $\hat{v}_{\rm max}$ の計算は[[#sec:fastest_tragectory_v_max]]節の計算により
+符号変数 ${\rm sign}$ の正負を反転して求めることができる。
+
+以降、開始状態から見た終端状態が領域 $L_1$ 〜 $L_4$ に入るかどうかの判別方法を示す。
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+**** 目標($x_f$, $\dot{x}_f$)が領域 $L_1$ 内にある時
+
+#+CAPTION: 領域 $L_1$ に入るケース
+#+NAME: fig:judge_limit03.png
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 1.0\hsize
+[[./Figure/png/14_judge_limit02.png]]
+
+最大速度 $\hat{v}_{\rm max}$ の符号変数 $\rm sign$ を初期設定する。\\
+開始位置 $x_0$ と終端位置 $x_f$ が同じ値の場合、
+開始・終端速度の絶対値の大きい方の符号をとる(等しい場合は開始側の符号)
+\begin{eqnarray}
+  {\rm sign} =
+    \left\{ \begin{array}{cl}
+    \dot{x}_f {\rm の符号} & (|\dot{x}_0| < |\dot{x}_f| ) \\
+    \dot{x}_0 {\rm の符号} & (|\dot{x}_0| \geq |\dot{x}_f| )
+    \end{array} \right.
+\end{eqnarray}
+それ以外(開始位置 $x_0$ と終端位置 $x_f$ が異なる場合)は、
+開始位置 $x_0$ からみた終端位置 $x_f$ の方向を正負でとる。
+\begin{eqnarray}
+{\rm sign} =
+  \left\{ \begin{array}{cl}
+    -1 & (x_f - x_0 < 0) \\
+    1 & (x_f - x_0 \geq 0)
+  \end{array} \right.
+\end{eqnarray}
+この初期設定の符号変数 $\rm sign$ を使用し[[#sec:fastest_tragectory_v_max]]項の計算により最大速度を $\hat{v}_{\rm max}$ を求め、
+$v'_{\rm max}=\hat{v}_{\rm max}$ とし、
+[[#sec:5-2-5acceleration]]節の式により $\Delta T'_1$ 、 $\Delta T'_2$ を計算する。
+\begin{eqnarray}
+  \Delta T'_1 &=& s_{ra} \mid v'_{\rm max} - \dot{x}_0 \mid / a_{\rm max} \\
+  \Delta T'_2 &=& (1 - s_{ra}) \mid v'_{\rm max} - \dot{x}_0 \mid / a_{\rm max}
+\end{eqnarray}
+[[#sec:step1]]項の式により、以下を計算する。
+\begin{eqnarray}
+        x'_1 &=& {\rm sign} \frac{3}{20} a_{\rm max} \Delta {T'}_1^2
+              + \dot{x}_0 \Delta T'_1 + x_0 \\
+  \dot{x'}_1 &=& {\rm sign} \frac{1}{2} a_{\rm max} \Delta T'_1 + \dot{x}_0
+\end{eqnarray}
+[[#sec:step2]]項の式により、以下のように立式できる。
+\begin{eqnarray}
+      {x'}_{\rm Step2}(t) &=& {\rm sign}\frac{a_{\rm max}}{2} (t-t_1)^2 + \dot{x'}_1 (t-t_1) + x'_1 \\
+  \dot{x'}_{\rm Step2}(t) &=& {\rm sign}\cdot a_{\rm max} (t-t_1)   + \dot{x'}_1
+\end{eqnarray}
+
+ここで $(t-t_1)$ を消去して相図上の判定のために $\dot{x'}_{\rm Step2}^2$ を導く。 \\
+(6.81)式より $(t-t_1)$ は以下となる(符号変数 $\rm sign$ は逆数にしても同じ)。
+\begin{eqnarray}
+  t-t_1 = {\rm sign} \frac{ \dot{x'}_{\rm Step2}(t) - \dot{x'}_1 }{ a_{\rm max} }
+\end{eqnarray}
+
+これを(6.80)式に代入する(因数カッコ $(t)$ は省略、符号変数 $\rm sign$ は２乗すると1になる)。
+\begin{eqnarray}
+  {x'}_{\rm Step2} 
+  &=& {\rm sign} \frac{ a_{\rm max} }{2}
+    \left( {\rm sign} \frac{ \dot{x'}_{\rm Step2} - \dot{x'}_1 }{ a_{\rm max} } \right)^2
+    + \dot{x'}_1 \left( {\rm sign} \frac{ \dot{x'}_{\rm Step2} - \dot{x'}_1 }{ a_{\rm max} } \right)
+    + x'_1
+    \nonumber \\
+  &=& {\rm sign} \frac{ a_{\rm max} }{2} 
+    \frac{ \dot{x'}_{\rm Step2}^2 - 2 \dot{x'}_{\rm Step2} \dot{x'}_1 + \dot{x'}_1^2 }{ a_{\rm max}^2 }
+    + {\rm sign} \frac{ \dot{x'}_{\rm Step2} \dot{x'}_1 - \dot{x'}_1^2 }{ a_{\rm max} }
+    + x'_1
+    \nonumber \\
+  &=& {\rm sign} \frac{1}{2}
+    \frac{ \dot{x'}_{\rm Step2}^2 - 2 \dot{x'}_{\rm Step2} \dot{x'}_1
+          + \dot{x'}_1^2 + 2\dot{x'}_{\rm Step2} \dot{x'}_1 - 2\dot{x'}_1^2 }{ a_{\rm max} }
+    + x'_1
+    \nonumber \\
+  &=& {\rm sign} \frac{1}{2}
+    \frac{ \dot{x'}_{\rm Step2}^2 - \dot{x'}_1^2 }{ a_{\rm max} }
+    + x'_1
+    \nonumber
+\end{eqnarray}
+
+本式を $\dot{x'}_{\rm Step2}^2$ について整理する。
+\begin{eqnarray}
+\dot{x'}_{\rm Step2}^2 = {\rm sign} \cdot 2 a_{\rm max} \left( {x'}_{\rm Step2} - x'_1 \right) + \dot{x'}_1^2
+\nonumber
+\end{eqnarray}
+${x'}_{\rm Step2} = x_f$ とすると、以下の評価値が導ける。
+\begin{eqnarray}
+\left\{ \dot{x'}_{\rm Step2}^2 \mid^{ v'_{\rm max}=\hat{v}_{\rm max} }_{ x=x_f } \right\}^2
+   = {\rm sign} \cdot 2 a_{\rm max} \left( x_f - x'_1 \right) + \dot{x'}_1^2
+\end{eqnarray}
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+**** 目標($x_f$, $\dot{x}_f$)が領域 $L_2$ 、 $L_3$ 、 $L_4$ 内にある時
+
+#+CAPTION: 領域 $L_2$ 、 $L_3$ 、 $L_4$ に入るケース
+#+NAME: fig:judge_limit04.png
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 1.0\hsize
+[[./Figure/png/15_judge_limit03.png]]
+
+相図上開始点からみた終端点が $L_2$ 、 $L_3$ 、 $L_4$ のいずれの領域にあるか判別するため、
+\begin{eqnarray}
+  \left\{ \begin{array}{l}
+    {\rm sign'} = \left\{ \begin{array}{cl}
+      -1 & (\dot{x}_0 < 0) \\
+       1 & (\dot{x}_0 \ge 0)
+    \end{array} \right. \\
+    {v'}_{\rm max} = \dot{x}_0 \\
+    {x'}_f = x_0 \\
+    \dot{x'}_f = - \dot{x}_0
+  \end{array} \right.
+\end{eqnarray}
+
+とし、[[#sec:5-2-5acceleration]]節の式により $\Delta T'_4$ 、 $\Delta T'_5$ を計算する。
+\begin{eqnarray}
+  \Delta T'_4 &=& s_{rd} \mid v'_{\rm max} - \dot{x'}_f \mid / d_{\rm max} \\
+  \Delta T'_5 &=& (1 - s_{rd}) \mid v'_{\rm max} - \dot{x'}_f \mid / d_{\rm max}
+\end{eqnarray}
+
+上式と[[#sec:step7]]節の式により、 $x'_6$ 、 $\dot{x'}_6$ を計算する。
+\begin{eqnarray}
+  \dot{x'}_6 &=&  \dot{x'}_f + {\rm sign'} \frac{1}{2}  d_{\rm max} \Delta {T'}_4 \\
+        x'_6 &=&  x_f        + {\rm sign'} \frac{7}{20} d_{\rm max} \Delta {T'}_4^2
+               - \dot{x'}_6 \Delta T_4
+\end{eqnarray}
+
+[[#sec:step6]]節の式により $x'_5$ 、 $\dot{x'}_5$ を計算する。
+\begin{eqnarray}
+  \dot{x'}_5 &=& \dot{x'}_6 + {\rm sign'} \cdot  d_{\rm max}     \Delta {T'}_5 \\
+        x'_5 &=&       x'_6 + {\rm sign'}  \frac{d_{\rm max}}{2} \Delta {T'}_5^2 - \dot{x}_5 \Delta {T'}_5
+\end{eqnarray}
+
+同様に[[#sec:step6]]節の式より、以下のように立式できる。
+\begin{eqnarray}
+        x'_{\rm Step6}(t) &=& - {\rm sign'} \frac{d_{\rm max}}{2} (t-t_5)^2    + \dot{x'}_5 (t-t_5)    + x'_5 \\
+  \dot{x'}_{\rm Step6}(t) &=& - {\rm sign'} \cdot d_{\rm max} (t-t_5)          + \dot{x'}_5
+\end{eqnarray}
+
+ここで $(t-t_5)$ を消去して相図上の判定のために $x'_{\rm Step6}$ 、 $\dot{x'}_{\rm Step6}^2$ の評価値を導く。 \\
+(6.92)式より $(t-t_5)$ は以下となる(符号変数 $\rm sign'$ は逆数にしても同じ)。
+\begin{eqnarray}
+  t-t_5 = {\rm sign'} \frac{ \dot{x'}_5 - \dot{x'}_{\rm Step6}(t) }{ d_{\rm max} }
+\end{eqnarray}
+
+これを(6.91)式に代入する(因数カッコ $(t)$ は省略、符号変数 $\rm sign'$ は２乗すると1になる)。
+\begin{eqnarray}
+  {x'}_{\rm Step6} &=& - {\rm sign'} \frac{ d_{\rm max} }{2} 
+    \left(  {\rm sign'} \frac{ \dot{x'}_5 - \dot{x'}_{\rm Step6} }{ d_{\rm max} } \right)^2
+    + \dot{x'}_5 \left( {\rm sign'} \frac{ \dot{x'}_5 - \dot{x'}_{\rm Step6} }{ d_{\rm max} } \right)
+    + x'_5
+    \nonumber \\
+  &=& - {\rm sign'} \frac{ d_{\rm max} }{2}
+    \frac{ \dot{x'}_5^2 - 2 \dot{x'}_{\rm Step6} \dot{x'}_5 + \dot{x'}_{\rm Step6}^2 }{ d_{\rm max}^2 }
+    +  {\rm sign'} \frac{ \dot{x'}_5^2 - \dot{x'}_{\rm Step6} \dot{x'}_5 }{ d_{\rm max} }
+    + x'_5
+    \nonumber \\
+  &=& {\rm sign'} \frac{1}{2}
+    \frac{ - \dot{x'}_5^2 + 2 \dot{x'}_{\rm Step6} \dot{x'}_5 - \dot{x'}_{\rm Step6}^2
+        + 2\dot{x'}_5^2 - 2 \dot{x'}_{\rm Step6} \dot{x'}_5 }{ d_{\rm max} }
+    + x'_5
+    \nonumber \\
+  &=& {\rm sign'} \frac{1}{2}
+    \frac{ \dot{x'}_5^2 - \dot{x'}_{\rm Step6}^2 }{ d_{\rm max} }
+    + x'_5
+\end{eqnarray}
+
+$\dot{x'}_{\rm Step6} = 0$ のときの以下の指標値が導ける。
+\begin{eqnarray}
+\left\{ x'_{\rm Step6} \mid^{ v'_{\rm max}=\dot{x'}_0,\ x'_f=x_0,\ \dot{x'}_f=-\dot{x}_0 }_{ \dot{x}=0 } \right\}
+   = {\rm sign'} \frac{1}{2}
+    \frac{ \dot{x'}_5^2 }{ d_{\rm max} }
+    + x'_5
+\end{eqnarray}
+
+本式を $\dot{x'}_{\rm Step6}^2$ について整理する。
+\begin{eqnarray}
+\dot{x'}_{\rm Step6}^2 = {\rm sign'} \cdot 2 d_{\rm max} \left( x'_5 - {x'}_{\rm Step6} \right) + \dot{x'}_5^2
+\nonumber
+\end{eqnarray}
+
+${x'}_{\rm Step6} = x_f$ とすると、以下の評価値が導ける。
+\begin{eqnarray}
+\left\{ \dot{x'}_{\rm Step6} \mid^{ v'_{\rm max}=\dot{x'}_0,\ x'_f=x_0,\ \dot{x'}_f=-\dot{x}_0 }_{ x=x_f } \right\}^2
+   = {\rm sign'} \cdot 2 d_{\rm max} \left( x'_5 - x_f \right) + \dot{x'}_5^2
+\end{eqnarray}
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+**** 到達限界の領域 $L_1$ 〜 $L_4$ に入っているかの判定
+
+#+CAPTION: 領域 $L_1$ 〜 $L_4$ の領域に入るケース
+#+NAME: fig:judge_limit02
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 1.0\hsize
+[[./Figure/png/16_judge_limit04.png]]
+
+上述までの評価値により、領域 $L_1$ 〜 $L_4$ の領域に入るケースを判別する。
+
+まず、初期設定の符号変数 $\rm sign$ を計算。
+
+- (If) :: $x_0$ と $x_f$ が同じ値の場合、 \\
+       $\Longrightarrow$
+       符号変数を開始・終端速度の絶対値の大きい方の符号をとる(等しい場合は開始側の符号)
+       \begin{eqnarray}
+         {\rm sign} =
+ 	        \left\{ \begin{array}{cl}
+ 	        \dot{x}_f {\rm の符号} & (|\dot{x}_0| < |\dot{x}_f| ) \\
+ 	        \dot{x}_0 {\rm の符号} & (|\dot{x}_0| \geq |\dot{x}_f| )
+ 	        \end{array} \right. \nonumber
+       \end{eqnarray}
+- (Else) :: それ以外の場合、 \\
+       $\Longrightarrow$
+       開始位置 $x_0$ から見た終端位置 $x_f$ の方向を正負でとる。
+       \begin{eqnarray}
+              {\rm sign} =
+              \left\{ \begin{array}{cl}
+              -1 & (x_f - x_0 < 0) \\
+              1 & (x_f - x_0 \geq 0)
+              \end{array} \right. \nonumber
+       \end{eqnarray}
+- (EndIf) :: 　
+
+この初期設定の符号変数 $\rm sign$ を用いて最大速度 $\hat{v}_{\rm max}$ および評価値を計算しておく。
+もし最大速度 $\hat{v}_{\rm max}$ が実数として求まらない場合、
+初期設定の符号変数 $\rm sign$ が不適切であったことが分かる。
+
+- (If) :: 以下に当てはまる場合、
+       \begin{eqnarray}
+         d_{\rm max} (1+s_{ra}) \dot{x}_0^2
+         +
+         a_{\rm max} (1+s_{rd}) \dot{x}_f^2
+         +
+         2 a_{\rm max} d_{\rm max}\ {\rm sign} \cdot X_{d}
+         < 0 \ \ ( \hat{v}_{\rm max} {\rm が実数でない(=根が負)} ) \nonumber
+       \end{eqnarray}
+       $\Longrightarrow$
+       *{ $\rm sign$ の設定が不適切。$\rm sign$ を再設定する}*
+- (EndIf) :: 　
+
+次に、初期設定の最大速度 $\hat{v}_{\rm max}$ より、符号変数 $\rm signA$ 、 $\rm signD$ を計算する。
+\begin{eqnarray}
+  {\rm signA} =
+  \left\{ \begin{array}{cl}
+   -1 & (\hat{v}_{\rm max} - \dot{x}_0 < 0) \\
+    1 & (\hat{v}_{\rm max} - \dot{x}_0 \geq 0)
+  \end{array} \right. \nonumber \\
+  {\rm signD} =
+  \left\{ \begin{array}{cl}
+   -1 & (\hat{v}_{\rm max} - \dot{x}_f < 0) \\
+    1 & (\hat{v}_{\rm max} - \dot{x}_f \geq 0)
+  \end{array} \right. \nonumber
+\end{eqnarray}
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+前提より、$\rm signA$ と $\rm signD$ が $\rm sign$ と一致しなければ成立しないため、
+もし符号が不一致であれば初期設定の符号変数 $\rm sign$ が不適切であったことが分かる。
+初期設定が不適切である場合、領域 $L_1$ 〜 $L_4$ のいずれかの領域に入るケースであると判定される。 \\
+数式で表すと、以下のようになる。
+
+- (If) :: 以下のいずれかに当てはまる場合、
+       \begin{eqnarray}
+         & &
+         {\rm sign} \cdot {\rm signA} < 0 \ \ ({\rm signとsignAの符号が不一致}) \nonumber \\
+         & &
+         {\rm 　または　 } \nonumber \\
+         & &
+         {\rm sign} \cdot {\rm signD} < 0 \ \ ({\rm signとsignDの符号が不一致}) \nonumber
+       \end{eqnarray}
+       $\Longrightarrow$ 
+       *{ $L_1$ 〜 $L_4$ の領域いずれかに当てはまる}*
+- (EndIf) :: 　
+
+領域 $L_1$ 〜 $L_4$ のどの領域に当てはまるかは以下の条件により判別される。
+
+- (If) :: 　\\
+        $\dot{x}_0 \dot{x}_f \geq 0$ \hspace{3mm} (開始速度 $\dot{x}_0$ と終端速度 $\dot{x}_f$ の正負が同じ), \\
+        　 *and* \\
+        $\dot{x}_f^2 \geq \left\{ \dot{x}'_{\rm Step2} \mid^{v'_{\rm max}=\hat{v}_{\rm max}}_{x=x_f} \right\}^2$ \hspace{3mm} ((6.83)式で導出した評価値), \\
+        　 *and* \\
+        ${\rm sgn}(x_f - x_0) \dot{x}_f \geq 0$ (終端点が開始点よりも正側の位置＆正の速度、もしくは負側の位置＆負の速度) \\
+        $\left( {\rm ただし} {\rm sgn}(p) = \left\{ \begin{array}{cl} -1 & (p < 0) \\ 1 & (p \geq 0)  \end{array} \
+                              \right. \right)$ \\
+       $\Longrightarrow$
+       *{ $L_1$ の領域に当てはまる}*
+- (ElseIf) :: 　\\
+              $\dot{x}_0 \dot{x}_f \leq 0$ \hspace{3mm} (開始速度 $\dot{x}_0$ と終端速度 $\dot{x}_f$ の正負が異なる), \\
+             　 *and* \\
+              $\dot{x}_f^2 \geq \left\{ \dot{x}'_{\rm Step6} \mid^{v'_{\rm max}=\hat{v}_{\rm max},\ \dot{x}'_f=-\dot{x}_0,\ {x}'_f=x_0}_{x=x_f} \right\}^2$ \hspace{3mm} ((6.96)式で導出した評価値), \\
+             　 *and* \\
+              ${\rm sgn}(x_f - x_0) \dot{x}_f \geq 0$ (終端点が開始点よりも負側の位置＆負の速度、もしくは正側の位置＆正の速度) \\
+              $\Longrightarrow$
+              *{ $L_4$ の領域に当てはまる}*
+- (ElseIf) :: 　\\
+              $\dot{x}_f^2
+               \leq \left\{ \dot{x}'_{\rm Step6} \mid^{v'_{\rm max}=\dot{x}_0,\ \dot{x}'_f=-\dot{x}_0,\ {x}'_f=x_0}_{x=x_f} \right\}^2$ \hspace{3mm} ((6.96)式で導出した評価値), \\
+            　 *and* \\
+              $| x_f - x_0 | \ \leq \ \left| \left\{ {x'}_{\rm Step6} \mid^{v'_{\rm max}=\dot{x}_0,\ \dot{x}'_f=-\dot{x}_0,\ {x}'_f=x_0}_{\dot{x}=0} \right\} - x_0 \right|$ \hspace{3mm} ((6.95)式で導出した評価値) \\
+              $\Longrightarrow$
+              *{ $L_2$, $L_3$ の領域に当てはまる}* 
+- (Else) :: 　\\
+            $\Longrightarrow$ *{到達可能。 $\hat{v}_{\rm max}$ の符号は初期設定の正負と同じで反転しない}*
+- (EndIf) :: 　
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+** 移動時間指定による軌道生成パターン
+:PROPERTIES:
+:CUSTOM_ID: sec:specified_time_tragectory_generate_pattern
+:END:
+
+
+
+#+CAPTION: 移動時間指定による軌道パターン(全8種)
+#+NAME: fig:judge_limit03.png
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.8\hsize
+[[./Figure/eps/10_tragectory_pattern.eps]]
+
+
+*** 方針
+
+ユーザが指定した開始時刻から終端時刻までの間の移動時間を守る軌道を生成する。
+本移動時間は、
+同じく指定された開始から終端への位置・速度遷移における最速軌道の合計移動時間を超えないことを前提とする。
+
+ユーザ指定の合計移動時間が、最速軌道の移動時間を超えている場合は、
+エラーとするか、もしくは最速軌道に制限する方法をとる(設計仕様次第)。
+
+本軌道生成計算では、
+
+- 等速度時の移動時間 $\Delta T_3$ 、
+- 最大等速度 $v_{\rm max}$
+
+を指定の合計移動時間 $(t_f - t_0)$ 、合計移動距離 $X_d$ を満たすように求めることを方針とする。
+
+
+*** 移動時間と移動距離に基づく連立２次方程式
+:PROPERTIES:
+:CUSTOM_ID: sec:vmax_Xd_squared_eq
+:END:
+
+合計移動時間 $(t_f - t_0)$ 、合計移動距離 $X_d$ についての2つの方程式を利用する。
+
+開始時刻 $t_0$ 、終端時刻 $t_f$ における移動時間 $(t_f - t_0)$ より、 \\
+[[#sec:5-2-5acceleration]]節の各区間の移動時間を足し合わて合計移動時間の以下の式を得る。
+
+\begin{eqnarray}
+t_f - t_0
+  &=& 2 \Delta T_1 + \Delta T_2 + \Delta T_3  + 2 \Delta T_4 + \Delta T_5
+  \nonumber \\
+  &=& 2 \cdot \frac{ s_{ra} | v_{\rm max} - \dot{x}_0 | }{ a_{\rm max} }
+    +   \frac{ (1 - s_{ra}) | v_{\rm max} - \dot{x}_0 | }{ a_{\rm max} }
+    +   \Delta T_3
+    + 2 \cdot \frac{ s_{rd} | v_{\rm max} - \dot{x}_f | }{ d_{\rm max} }
+    +   \frac{ (1 - s_{rd}) | v_{\rm max} - \dot{x}_f | }{ d_{\rm max} }
+  \nonumber \\
+  &=& \frac{ (1 + s_{ra}) | v_{\rm max} - \dot{x}_0 | }{ a_{\rm max} }
+    +   \Delta T_3
+    + \frac{ (1 + s_{rd}) | v_{\rm max} - \dot{x}_f | }{ d_{\rm max} }
+  \nonumber
+\end{eqnarray}
+
+これを 等速度の移動時間 $\Delta T_3$ についての方程式に直し、以下を得る。
+\begin{eqnarray}
+\Delta T_3
+  = t_f - t_0
+    - \frac{ (1 + s_{ra}) | v_{\rm max} - \dot{x}_0 | }{ a_{\rm max} }
+    - \frac{ (1 + s_{rd}) | v_{\rm max} - \dot{x}_f | }{ d_{\rm max} }
+\nonumber
+\end{eqnarray}
+
+また、[[#sec:fastest_tragectory_v_max]]節で述べたように
+合計移動距離には、加速区間の移動距離 $X_{da}$ 、 $X_{dd}$ 、
+さらに指定移動時間の時は等速区間の移動距離が $X_{dc}$ 加わり、以下のように表される。
+\begin{eqnarray}
+X_d
+  &=& X_{da} + X_{dc} + X_{dd}
+  \nonumber \\
+  &=& {\rm signA} \frac{ (1+s_{ra}) ( v_{\rm max}^2 - \dot{x}_0^2 ) }{2a_{\rm max} }
+    + v_{\rm max} \Delta T_3
+    + {\rm signD} \frac{ (1+s_{rd}) ( v_{\rm max}^2 - \dot{x}_f^2 ) }{2d_{\rm max}}
+   \nonumber
+\end{eqnarray}
+
+　\\
+
+まとめると、以下2つの $X_d$ , $v_{\rm max}$ についての連立２次方程式が得られる。
+\begin{eqnarray}
+  \Delta T_3
+  &=& t_f - t_0
+    - \frac{ (1 + s_{ra}) | v_{\rm max} - \dot{x}_0 | }{ a_{\rm max} }
+    - \frac{ (1 + s_{rd}) | v_{\rm max} - \dot{x}_f | }{ d_{\rm max} } \\
+  X_d
+  &=& {\rm signA} \frac{ (1+s_{ra}) ( v_{\rm max}^2 - \dot{x}_0^2 ) }{2a_{\rm max} }
+    + v_{\rm max} \Delta T_3
+    + {\rm signD} \frac{ (1+s_{rd}) ( v_{\rm max}^2 - \dot{x}_f^2 ) }{2d_{\rm max}}
+\end{eqnarray}
+
+
+*** 符号変数 $\rm sign$ の導入
+:PROPERTIES:
+:CUSTOM_ID: sec:sign_signA_signD
+:END:
+
+連立方程式の絶対値を外すため、以下の符号変数を導入する。
+\begin{eqnarray}
+  {\rm sign} = \left\{
+    \begin{array}{cc}
+      -1 & ( v_{\rm max} < 0 ) \\
+      1  & ( v_{\rm max} \ge 0 )
+    \end{array}
+  \right.
+\end{eqnarray}
+
+符号変数 $\rm sign$ のパターンに伴い、$\rm signA$ , $\rm signD$ の定義を以下のように再定義する。
+\begin{eqnarray}
+  {\rm signA} = \left\{
+    \begin{array}{cc}
+      -{\rm sign} & (上式 {\rm sign} の2パターンいずれか) \\
+      {\rm sign}  & (同上)
+    \end{array}
+  \right.
+\end{eqnarray}
+
+\begin{eqnarray}
+  {\rm signD} = \left\{
+    \begin{array}{cc}
+      -{\rm sign} & (上式 {\rm sign} の2パターンいずれか) \\
+      {\rm sign}  & (同上)
+    \end{array}
+  \right.
+\end{eqnarray}
+
+この符号変数を上で求めた連立２次方程式に以下のように適用する。
+# ( $|v_{\rm max}|$ の絶対値を外す符号変数 $\rm sign$ は $\rm signA$, $\rm signD$ に含まれる)
+
+\begin{eqnarray}
+  \Delta T_3
+  &=& t_f - t_0
+    - {\rm signA} \frac{ (1 + s_{ra}) ( v_{\rm max} - \dot{x}_0 ) }{ a_{\rm max} }
+    - {\rm signD} \frac{ (1 + s_{rd}) ( v_{\rm max} - \dot{x}_f ) }{ d_{\rm max} } \\
+  X_d
+  &=& {\rm signA} \frac{ (1+s_{ra}) ( v_{\rm max}^2 - \dot{x}_0^2 ) }{2a_{\rm max} }
+    + v_{\rm max} \Delta T_3
+    + {\rm signD} \frac{ (1+s_{rd}) ( v_{\rm max}^2 - \dot{x}_f^2 ) }{2d_{\rm max}}
+\end{eqnarray}
+
+$\Delta T_3$ の式を $X_d$ の式に代入して整理する。
+\begin{eqnarray}
+X_d
+  &=& \left( {\rm signA}\frac{ 1+s_{ra} }{ 2a_{\rm max} }
+           + {\rm signD}\frac{ 1+s_{rd} }{ 2d_{\rm max} }
+      \right) v_{\rm max}^2
+      \nonumber \\
+  & & + v_{\rm max} \left(
+        t_f - t_0
+        - {\rm signA} \frac{ (1+s_{ra})( v_{\rm max} - \dot{x}_0 ) }{ a_{\rm max} }
+        - {\rm signD} \frac{ (1+s_{rd})( v_{\rm max} - \dot{x}_f ) }{ d_{\rm max} }
+      \right)
+      \nonumber \\
+  & & - {\rm signA}\frac{ 1+s_{ra} }{ 2a_{\rm max} } \dot{x}_0^2
+      - {\rm signD}\frac{ 1+s_{rd} }{ 2d_{\rm max} } \dot{x}_f^2
+      \nonumber \\
+  &=& \left( {\rm signA}\frac{ 1+s_{ra} }{ 2a_{\rm max} }
+           + {\rm signD}\frac{ 1+s_{rd} }{ 2d_{\rm max} }
+      \right) v_{\rm max}^2
+      \nonumber \\
+  & & + \left(
+        - {\rm signA} \frac{ 1+s_{ra} }{ a_{\rm max} }
+        - {\rm signD} \frac{ 1+s_{rd} }{ d_{\rm max} }
+      \right) v_{\rm max}^2
+      + \left(
+        t_f - t_0
+        + {\rm signA} \frac{ 1+s_{ra} }{ a_{\rm max} } \dot{x}_0
+        + {\rm signD} \frac{ 1+s_{rd} }{ d_{\rm max} } \dot{x}_f
+      \right) v_{\rm max}
+      \nonumber \\
+  & & - {\rm signA}\frac{ 1+s_{ra} }{ 2a_{\rm max} } \dot{x}_0^2
+      - {\rm signD}\frac{ 1+s_{rd} }{ 2d_{\rm max} } \dot{x}_f^2
+      \nonumber \\
+  &=& \left(
+        - {\rm signA} \frac{ 1+s_{ra} }{ 2a_{\rm max} }
+        - {\rm signD} \frac{ 1+s_{rd} }{ 2d_{\rm max} }
+      \right) v_{\rm max}^2
+    + \left(
+        t_f - t_0
+        + {\rm signA} \frac{ 1+s_{ra} }{ a_{\rm max} } \dot{x}_0
+        + {\rm signD} \frac{ 1+s_{rd} }{ d_{\rm max} } \dot{x}_f
+      \right) v_{\rm max}
+      \nonumber \\
+  & & - {\rm signA}\frac{ 1+s_{ra} }{ 2a_{\rm max} } \dot{x}_0^2
+      - {\rm signD}\frac{ 1+s_{rd} }{ 2d_{\rm max} } \dot{x}_f^2
+      \nonumber
+\end{eqnarray}
+
+$v_{\rm max}$ の2次方程式として整理すると以下のようになる。
+\begin{eqnarray}
+\left(  {\rm signA} \frac{ 1+s_{ra} }{ 2a_{\rm max} }
+      + {\rm signD} \frac{ 1+s_{rd} }{ 2d_{\rm max} }
+\right) v_{\rm max}^2
+    - \left(
+        t_f - t_0
+        + {\rm signA} \frac{ 1+s_{ra} }{ a_{\rm max} } \dot{x}_0
+        + {\rm signD} \frac{ 1+s_{rd} }{ d_{\rm max} } \dot{x}_f
+      \right)
+      & v_{\rm max} &
+      \nonumber \\
+    + X_d
+      + {\rm signA}\frac{ 1+s_{ra} }{ 2a_{\rm max} } \dot{x}_0^2
+      + {\rm signD}\frac{ 1+s_{rd} }{ 2d_{\rm max} } \dot{x}_f^2
+    &=& 0
+\end{eqnarray}
+
+$v_{\rm max}$ の係数をパラメータ $p_A$ , $p_B$ , $p_C$ として以下のようにおく。
+\begin{eqnarray}
+p_A &=& {\rm signA} \frac{ 1+s_{ra} }{ 2a_{\rm max} }
+       + {\rm signD} \frac{ 1+s_{rd} }{ 2d_{\rm max} }
+       \nonumber \\
+p_B &=& t_f - t_0
+       + {\rm signA} \frac{ 1+s_{ra} }{ a_{\rm max} } \dot{x}_0
+       + {\rm signD} \frac{ 1+s_{rd} }{ d_{\rm max} } \dot{x}_f
+       \nonumber \\
+p_C &=& X_d
+       + {\rm signA}\frac{ 1+s_{ra} }{ 2a_{\rm max} } \dot{x}_0^2
+       + {\rm signD}\frac{ 1+s_{rd} }{ 2d_{\rm max} } \dot{x}_f^2
+\end{eqnarray}
+
+よって $v_{\rm max}$ の2次方程式は以下のようになる。
+\begin{eqnarray}
+p_A v_{\rm max}^2 - p_B v_{\rm max} + p_C = 0
+\end{eqnarray}
+
+**** $p_A = 0$ の 場合
+
+- $s_{ra} = s_{rd}$
+- $a_{\rm max} = d_{\rm max}$
+- ${\rm signA} = - {\rm signD}$
+
+が全て成り立つとき、 $p_A = 0$ となる。
+このとき、 $p_B \ne 0$ ならば $v_{\rm max}$ は以下となる。
+\begin{eqnarray}
+- p_B v_{\rm max} + p_C &=& 0 \nonumber \\
+\therefore v_{\rm max} &=& p_C / p_B
+\end{eqnarray}
+
+**** $p_A \ne 0$ の 場合
+
+\begin{eqnarray}
+p_A v_{\rm max}^2 - p_B v_{\rm max} + p_C
+&=& 0
+\nonumber \\
+v_{\rm max}^2 - \frac{ p_B }{ p_A } v_{\rm max} + \frac{ p_C }{ p_A }
+&=& 0
+\nonumber \\
+v_{\rm max}^2 - 2 \cdot \frac{ p_B }{ 2p_A } v_{\rm max}
+  + \left( \frac{ p_B }{ 2 p_A } \right)^2
+  - \left( \frac{ p_B }{ 2 p_A } \right)^2 + \frac{ p_C }{ p_A }
+&=& 0
+\nonumber \\
+\left( v_{\rm max} - \frac{ p_B }{ 2p_A } \right)^2 &=& \frac{ {p_B}^2 - 4p_A p_C }{ (2p_A)^2 }
+\hspace{30mm}
+\end{eqnarray}
+
+2次式の符号について考えるため、一旦以下のようにまとめる。
+\begin{eqnarray}
+\left( \frac{ 2 p_A v_{\rm max} - p_B }{ 2p_A } \right)^2 
+= \frac{ {p_B}^2 - 4p_A p_C }{ (2p_A)^2 }
+\nonumber
+\end{eqnarray}
+
+ここで左辺の項の分子に注目する。
+\begin{eqnarray}
+2 p_A v_{\rm max} - p_B
+&=& 2 {\rm signA} \frac{ 1+s_{ra} }{ 2a_{\rm max} } v_{\rm max}
+  + 2 {\rm signD} \frac{ 1+s_{rd} }{ 2d_{\rm max} } v_{\rm max}
+  \nonumber \\
+& & - t_f + t_0
+  - {\rm signA} \frac{ 1+s_{ra} }{ a_{\rm max} } \dot{x}_0
+  - {\rm signD} \frac{ 1+s_{rd} }{ d_{\rm max} } \dot{x}_f
+  \nonumber \\
+&=& - t_f + t_0
+  + {\rm signA} \frac{ 1+s_{ra} }{ a_{\rm max} } ( v_{\rm max} - \dot{x}_0 )
+  + {\rm signD} \frac{ 1+s_{rd} }{ d_{\rm max} } ( v_{\rm max} - \dot{x}_f )
+  \nonumber \\
+&=& - \Delta T_3
+  \nonumber
+\end{eqnarray}
+
+\begin{eqnarray}
+\therefore
+\left(
+  \frac{ - \Delta T_3 }{ 2 p_A }
+\right)^2
+= \frac{ {p_B}^2 - 4p_A p_C }{ (2p_A)^2 }
+\nonumber
+\end{eqnarray}
+
+$\Delta T_3 > 0$ なので 左辺の底(てい)の符号は $-2p_A$ と同じ。
+${p_B}^2 - 4p_A p_C > 0$ の時、この2次方程式は以下のようにも表される。
+\begin{eqnarray}
+\left(
+  \frac{ \Delta T_3 }{ -2 p_A }
+\right)^2
+= \frac{ {p_B}^2 - 4p_A p_C }{ (-2p_A)^2 }
+\nonumber
+\end{eqnarray}
+
+両辺の底の符号が揃ったため、これを解くと以下のようになる。
+\begin{eqnarray}
+\frac{ - \Delta T_3 }{ 2 p_A }
+= \frac{ - \sqrt{ {p_B}^2 - 4p_A p_C } }{ 2p_A }
+\nonumber
+\end{eqnarray}
+
+左辺の分子を元に戻す。
+\begin{eqnarray}
+\frac{ 2 p_A v_{\rm max} - p_B }{ 2p_A }
+= \frac{ - \sqrt{ {p_B}^2 - 4p_A p_C } }{ 2p_A }
+\end{eqnarray}
+
+さらに左辺を元の式に戻し、 $v_{\rm max}$ の解を得る。
+\begin{eqnarray}
+  v_{\rm max} - \frac{ p_B }{ 2p_A }
+  &=&
+    \frac{ - \sqrt{ {p_B}^2 - 4p_A p_C } }{ 2p_A }
+    \nonumber \\
+  \therefore
+  v_{\rm max}
+  &=&
+  \frac{ p_B - \sqrt{ {p_B}^2 - 4p_A p_C } }{ 2p_A }
+\end{eqnarray}
+
+*** (まとめ) $v_{\rm max}$ , $\Delta T_3$ の解
+:PROPERTIES:
+:CUSTOM_ID: sec:summerize_how_to_solve_v_max_and_T3
+:END:
+
+以上をまとめると、以下のようになる。
+\begin{eqnarray}
+  X_d &=& x_f - x_0
+  \nonumber \\
+  {\rm sign} &=& \left\{
+    \begin{array}{cc}
+      -1 & ( v_{\rm max} < 0 に対応) \\
+      1  & ( v_{\rm max} \ge 0 に対応)
+    \end{array}
+  \right.
+  \nonumber \\
+  {\rm signA} &=& \left\{
+    \begin{array}{cc}
+      -{\rm sign} & (上式 {\rm sign} の2パターンいずれか) \\
+      {\rm sign}  & (同上)
+    \end{array}
+  \right.
+  \nonumber \\
+  {\rm signD} &=& \left\{
+    \begin{array}{cc}
+      -{\rm sign} & (上式 {\rm sign} の2パターンいずれか) \\
+      {\rm sign}  & (同上)
+    \end{array}
+  \right.
+  \nonumber \\
+  p_A &=& {\rm signA} \frac{ 1+s_{ra} }{ 2a_{\rm max} }
+         + {\rm signD} \frac{ 1+s_{rd} }{ 2d_{\rm max} }
+         \nonumber \\
+  p_B &=& t_f - t_0
+         + {\rm signA} \frac{ 1+s_{ra} }{ a_{\rm max} } \dot{x}_0
+         + {\rm signD} \frac{ 1+s_{rd} }{ d_{\rm max} } \dot{x}_f
+         \nonumber \\
+  p_C &=& X_d
+         + {\rm signA}\frac{ 1+s_{ra} }{ 2a_{\rm max} } \dot{x}_0^2
+         + {\rm signD}\frac{ 1+s_{rd} }{ 2d_{\rm max} } \dot{x}_f^2
+         \nonumber \\
+  v_{\rm max} &=& \left\{
+    \begin{array}{cl}
+      p_C / p_B & ( p_A=0 かつ p_B \ne 0 ) \\
+      \frac{ p_B - \sqrt{ {p_B}^2 - 4p_A p_C } }{ 2p_A } & ( p_A \ne 0 かつ {p_B}^2 - 4p_A p_C >0 )
+    \end{array}
+    \right.
+    \nonumber \\
+  \Delta T_3
+  &=& t_f - t_0
+    - {\rm signA} \frac{ (1 + s_{ra}) ( v_{\rm max} - \dot{x}_0 ) }{ a_{\rm max} }
+    - {\rm signD} \frac{ (1 + s_{rd}) ( v_{\rm max} - \dot{x}_f ) }{ d_{\rm max} }
+  \nonumber
+\end{eqnarray}
+
+以下のパターンより試行的に $v_{\rm max}$ , $\Delta T_3$ を解く。
+
+1. 符号変数 $\rm sign$ を1, -1のいずれかに設定してみて、
+2. $\rm signA$ を $\rm sign$ , $-{\rm sign}$ のいずれかに設定し、
+3. $\rm signD$ を $\rm sign$ , $-{\rm sign}$ のいずれかに設定する。
+
+この符号変数の組み合わせ計 $2^3=8$ パターンの中から得られた解のうち、絶対値を外す時の条件と一致し、かつ $\Delta T_3$ が正となるものを最終的な解とする。
+\begin{eqnarray}
+&\bullet& \ {\rm sign} \cdot v_{\rm max} > 0 \\
+&\bullet& \ {\rm signA} ( v_{\rm max} - \dot{x}_0 ) > 0 \\
+&\bullet& \ {\rm signD} ( v_{\rm max} - \dot{x}_f ) > 0 \\
+&\bullet& \ \Delta T_3 > 0
+\end{eqnarray}
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+** 符号変数による移動時間指定軌道の具体的パターン
+:PROPERTIES:
+:CUSTOM_ID: sec:specified_time_tragectory_pattern_sample
+:END:
+
+符号変数 $\rm sign$ 、 $\rm signA$ 、 $\rm signD$ のパターンが自動選択された結果、
+相図上でどのような軌道をとるか本節で具体的に挙げておく。
+
+*** (P1) ${\rm sign}=1$ 、 ${\rm signA}={\rm sign}$ 、 ${\rm signD}={\rm sign}$ の軌道パターン
+
+#+CAPTION: (P1) ${\rm sign}=1$ 、 ${\rm signA}={\rm sign}$ 、 ${\rm signD}={\rm sign}$ の軌道パターン
+#+NAME: fig:pattern_P1
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.4\hsize
+[[./Figure/eps/11_positive_pattern_P1.eps]]
+
+- ${\rm sign} = 1$
+- ${\rm signA} = {\rm sign}$
+- ${\rm signD} = {\rm sign}$
+
+*** (P2) ${\rm sign}=1$ 、 ${\rm signA}={\rm sign}$ 、 ${\rm signD}=-{\rm sign}$ の軌道パターン
+
+#+CAPTION: (P2) ${\rm sign}=1$ 、 ${\rm signA}={\rm sign}$ 、 ${\rm signD}=-{\rm sign}$ の軌道パターン
+#+NAME: fig:pattern_P2
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.4\hsize
+[[./Figure/eps/11_positive_pattern_P2.eps]]
+
+- ${\rm sign} = 1$
+- ${\rm signA} = {\rm sign}$
+- ${\rm signD} = -{\rm sign}$
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+*** (P3) ${\rm sign}=1$ 、 ${\rm signA}=-{\rm sign}$ 、 ${\rm signD}={\rm sign}$ の軌道パターン
+
+#+CAPTION: (P3) ${\rm sign}=1$ 、 ${\rm signA}=-{\rm sign}$ 、 ${\rm signD}={\rm sign}$ の軌道パターン
+#+NAME: fig:pattern_P3
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.4\hsize
+[[./Figure/eps/11_positive_pattern_P3.eps]]
+
+- ${\rm sign} = 1$
+- ${\rm signA} = -{\rm sign}$
+- ${\rm signD} = {\rm sign}$
+
+*** (P4) ${\rm sign}=1$ 、 ${\rm signA}=-{\rm sign}$ 、 ${\rm signD}=-{\rm sign}$ の軌道パターン
+
+#+CAPTION: (P4) ${\rm sign}=1$ 、 ${\rm signA}=-{\rm sign}$ 、 ${\rm signD}=-{\rm sign}$ の軌道パターン
+#+NAME: fig:pattern_P4
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.4\hsize
+[[./Figure/eps/11_positive_pattern_P4.eps]]
+
+- ${\rm sign} = 1$
+- ${\rm signA} = -{\rm sign}$
+- ${\rm signD} = -{\rm sign}$
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+
+*** (N1) ${\rm sign}=-1$ 、 ${\rm signA}={\rm sign}$ 、 ${\rm signD}={\rm sign}$ の軌道パターン
+
+#+CAPTION: (N1) ${\rm sign}=-1$ 、 ${\rm signA}={\rm sign}$ 、 ${\rm signD}={\rm sign}$ の軌道パターン
+#+NAME: fig:pattern_N1
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.4\hsize
+[[./Figure/eps/12_negative_pattern_N1.eps]]
+
+- ${\rm sign} = -1$
+- ${\rm signA} = {\rm sign}$
+- ${\rm signD} = {\rm sign}$
+
+*** (N2) ${\rm sign}=-1$ 、 ${\rm signA}={\rm sign}$ 、 ${\rm signD}=-{\rm sign}$ の軌道パターン
+
+#+CAPTION: (N2) ${\rm sign}=-1$ 、 ${\rm signA}={\rm sign}$ 、 ${\rm signD}=-{\rm sign}$ の軌道パターン
+#+NAME: fig:pattern_N2
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.4\hsize
+[[./Figure/eps/12_negative_pattern_N2.eps]]
+
+- ${\rm sign} = -1$
+- ${\rm signA} = {\rm sign}$
+- ${\rm signD} = -{\rm sign}$
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+*** (N3) ${\rm sign}=-1$ 、 ${\rm signA}=-{\rm sign}$ 、 ${\rm signD}={\rm sign}$ の軌道パターン
+
+#+CAPTION: (N3) ${\rm sign}=-1$ 、 ${\rm signA}=-{\rm sign}$ 、 ${\rm signD}={\rm sign}$ の軌道パターン
+#+NAME: fig:pattern_N3
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.4\hsize
+[[./Figure/eps/12_negative_pattern_N3.eps]]
+
+- ${\rm sign} = -1$
+- ${\rm signA} = -{\rm sign}$
+- ${\rm signD} = {\rm sign}$
+
+*** (N4) ${\rm sign}=-1$ 、 ${\rm signA}=-{\rm sign}$ 、 ${\rm signD}=-{\rm sign}$ の軌道パターン
+
+#+CAPTION: (N4) ${\rm sign}=-1$ 、 ${\rm signA}=-{\rm sign}$ 、 ${\rm signD}=-{\rm sign}$ の軌道パターン
+#+NAME: fig:pattern_N4
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.4\hsize
+[[./Figure/eps/12_negative_pattern_N4.eps]]
+
+- ${\rm sign} = -1$
+- ${\rm signA} = -{\rm sign}$
+- ${\rm signD} = -{\rm sign}$
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+* 軌道生成アルゴリズム
+:PROPERTIES:
+:CUSTOM_ID: sec:tragectory_generation_algorithm
+:END:
+
+** 軌道パラメータ生成
+:PROPERTIES:
+:CUSTOM_ID: sec:tragectory_parameter_gen
+:END:
+
+
+| 入力                           |   | 設定値                       |   | 出力                        |
+|--------------------------------+---+------------------------------+---+-----------------------------|
+| 開始位置 $x_0$                 |   | 第一加(減)速度 $a_{\rm max}$ |   | 台形型スプライン軌道 $x(t)$ |
+| 開始速度 $\dot{x}_0$           |   | 第二加(減)速度 $d_{\rm max}$ |   |                             |
+| 終端位置 $x_f$                 |   | 限界最大速度 $v_{\rm limit}$ |   |                             |
+| 終端速度 $\dot{x}_f$           |   | 第一丸め率 $s_{ra}$          |   |                             |
+| 初期時刻 $t_s$                 |   | 第二丸め率 $s_{rd}$          |   |                             |
+| ・最速軌道なら終端時間指定なし |   |                              |   |                             |
+| ・時間指定なら終端時刻 $t_f$   |   |                              |   |                             |
+|--------------------------------+---+------------------------------+---+-----------------------------|
+
+
+1. 符号変数(最大速度方向)の初期設定
+   - (If) :: $x_0$ と $x_f$ が同じ値の場合、
+             - (If) :: 入力が最速軌道なら \\
+                       符号変数を、開始・終端速度の絶対値の大きい方の符号とする(等しい場合は開始側の符号)
+                       \begin{eqnarray}
+                         {\rm sign} =
+							             \left\{ \begin{array}{cl}
+							             \dot{x}_f {\rm の符号} & (|\dot{x}_0| < |\dot{x}_f| ) \\
+							             \dot{x}_0 {\rm の符号} & (|\dot{x}_0| \geq |\dot{x}_f| )
+							             \end{array} \right.
+                       \end{eqnarray}
+             - (Else) :: 　\\
+                         入力が時間指定ならば、符号変数を、開始-終端速度の絶対値の大きい方の符号の反転とする。 \\
+                         (時間指定の場合、最大8パターン最大速度の方向を試すため、
+                         ここで設定した符号によらず解は求まる)
+                         \begin{eqnarray}
+                           {\rm sign} =
+                           \left\{ \begin{array}{cl}
+                           \dot{x}_f {\rm の符号の反転} & (|\dot{x}_0| < |\dot{x}_f| ) \\
+                           \dot{x}_0 {\rm の符号の反転} & (|\dot{x}_0| \geq |\dot{x}_f| )
+                           \end{array} \right.
+                         \end{eqnarray}
+             - (EndIf) :: 　
+   - (Else) :: 　 \\
+               それ以外の場合、開始位置 $x_0$ から見た終端位置 $x_f$ の方向を正負でとる。
+               \begin{eqnarray}
+                      {\rm sign} =
+                      \left\{ \begin{array}{cl}
+                      -1 & (x_f - x_0 < 0) \\
+                      1 & (x_f - x_0 \geq 0)
+                      \end{array} \right.
+               \end{eqnarray}
+   - (EndIf) :: 　
+2. 初期設定の符号変数 $\rm sign$ が適切であるか判別する。
+   - (If) :: 以下の条件(最大速度 $\hat{v}_{\rm max}$ の根の式が負)に当てはまる場合、
+             $\hat{v}_{\rm max}$ は実数にならないため、
+             初期設定の符号変数 $\rm sign$ が不適切であると判別する。
+             \begin{eqnarray}
+                d_{\rm max} (1+s_{ra}) \dot{x}_0^2
+                +
+                a_{\rm max} (1+s_{rd}) \dot{x}_f^2
+                +
+                2 a_{\rm max} d_{\rm max}\ {\rm sign} \cdot X_{d}
+                < 0
+             \end{eqnarray}
+             $\Longrightarrow$
+             1.の符号変数 $\rm sign$ を反転させて再設定する。
+   - (EndIf) :: 　
+3. 最速軌道の最大速度 $\hat{v}_{\rm max}$ を算出する。
+   \begin{eqnarray}
+     \hat{v}_{\rm max}
+     &=& {\rm sign}
+         \sqrt{
+           \frac{
+             d_{\rm max} (1+s_{ra}) \dot{x}_0^2
+             +
+             a_{\rm max} (1+s_{rd}) \dot{x}_f^2
+             +
+             2 a_{\rm max} d_{\rm max} {\rm sign} \cdot X_{d}
+           }{
+             d_{\rm max} (1+s_{ra})
+             +
+             a_{\rm max} (1+s_{rd})
+           }
+         }
+     \nonumber \\
+     &\ &
+     \left(
+       \begin{array}{l}
+         X_d = x_f - x_0
+       \end{array}
+     \right)
+   \end{eqnarray}
+4. 符号変数 $\rm signA$ と $\rm signD$ を算出する。
+   \begin{eqnarray}
+     {\rm signA} =
+     \left\{ \begin{array}{cl}
+      -1 & (\hat{v}_{max} - \dot{x}_0 < 0) \\
+       1 & (\hat{v}_{max} - \dot{x}_0 \geq 0)
+     \end{array} \right. \nonumber \\
+     {\rm signD} =
+     \left\{ \begin{array}{cl}
+      -1 & (\hat{v}_{max} - \dot{x}_f < 0) \\
+       1 & (\hat{v}_{max} - \dot{x}_f \geq 0)
+     \end{array} \right. \nonumber
+   \end{eqnarray}
+5. 符号変数 $\rm signA$ 、 $\rm signD$ が $\rm sign$ と一致することが
+   最速軌道の前提条件であり、以下式で判別する。
+   - (If) :: 以下のいずれかに当てはまる場合、
+          \begin{eqnarray}
+            {\rm sign} \cdot {\rm signA} < 0 & & \ \ ({\rm signとsignAの符号が不一致}) \\
+            & &{\rm 　または　 } \nonumber \\
+            {\rm sign} \cdot {\rm signD} < 0 & & \ \ ({\rm signとsignDの符号が不一致})
+          \end{eqnarray}
+          $\Longrightarrow$ 
+          *{相図上の到達不可能領域 $L_1$ 〜 $L_4$ のいずれかに当てはまる}*
+   - (EndIf) :: 　
+6. 相図上到達不可能な $L_1$ の領域に入るか判定するための評価値を算出する。\\
+   $\Delta T'_1$ 、 $\Delta T'_2$ を計算する。
+   \begin{eqnarray}
+     \Delta T'_1 &=& s_{ra} \mid v'_{\rm max} - \dot{x}_0 \mid / a_{\rm max} \\
+     \Delta T'_2 &=& (1 - s_{ra}) \mid v'_{\rm max} - \dot{x}_0 \mid / a_{\rm max}
+   \end{eqnarray}
+   $\dot{x'}_1$ 、$x'_1$ を以下のように計算する。
+   \begin{eqnarray}
+        x'_1 &=& {\rm sign} \frac{3}{20} a_{\rm max} \Delta {T'}_1^2
+              + \dot{x}_0 \Delta T'_1 + x_0 \\
+  \dot{x'}_1 &=& {\rm sign} \frac{1}{2} a_{\rm max} \Delta T'_1 + \dot{x}_0
+   \end{eqnarray}
+   以下の評価値 $\dot{x'}_{\rm Step2}^2$ を算出する。
+   \begin{eqnarray}
+   \left\{ \dot{x'}_{\rm Step2}^2 \mid^{ v'_{\rm max}=\hat{v}_{\rm max} }_{ x=x_f } \right\}^2
+      = {\rm sign} \cdot 2 a_{\rm max} \left( x_f - x'_1 \right) + \dot{x'}_1^2
+   \end{eqnarray}
+7. 相図上到達不可能な $L_2$ 〜 $L_4$ の領域に入るか判定するための評価値を算出する。 \\
+   Step6軌道上の評価値を求めるため、
+   $\rm sign'$ 、 ${v'}_{\rm max}$ 、 ${x'}_f$ 、 $\dot{x'}_f$ を以下のように置く。
+   \begin{eqnarray}
+     \left\{ \begin{array}{l}
+       {\rm sign'} = \left\{ \begin{array}{cl}
+         -1 & (\dot{x}_0 < 0) \\
+          1 & (\dot{x}_0 \ge 0)
+       \end{array} \right. \\
+       {v'}_{\rm max} = \dot{x}_0 \\
+       {x'}_f = x_0 \\
+       \dot{x'}_f = - \dot{x}_0
+     \end{array} \right.
+   \end{eqnarray}
+   $\Delta T'_4$ 、 $\Delta T'_5$ を計算する。
+   \begin{eqnarray}
+     \Delta T'_4 &=& s_{rd} \mid v'_{\rm max} - \dot{x'}_f \mid / d_{\rm max} \\
+     \Delta T'_5 &=& (1 - s_{rd}) \mid v'_{\rm max} - \dot{x'}_f \mid / d_{\rm max}
+   \end{eqnarray}
+   $x'_6$ 、 $\dot{x'}_6$ を計算する。
+   \begin{eqnarray}
+     \dot{x'}_6 &=&  \dot{x'}_f + {\rm sign'} \frac{1}{2}  d_{\rm max} \Delta {T'}_4 \\
+           x'_6 &=&  x_f        + {\rm sign'} \frac{7}{20} d_{\rm max} \Delta {T'}_4^2
+                  - \dot{x'}_6 \Delta T_4
+   \end{eqnarray}
+   $x'_5$ 、 $\dot{x'}_5$ を計算する。
+   \begin{eqnarray}
+     \dot{x'}_5 &=& \dot{x'}_6 + {\rm sign'} \cdot  d_{\rm max}     \Delta {T'}_5 \\
+           x'_5 &=&       x'_6 + {\rm sign'}  \frac{d_{\rm max}}{2} \Delta {T'}_5^2 - \dot{x}_5 \Delta {T'}_5
+   \end{eqnarray}
+  以下の指標値 $x'_{\rm Step6}$ を算出する。
+   \begin{eqnarray}
+   \left\{ x'_{\rm Step6} \mid^{ v'_{\rm max}=\dot{x'}_0,\ x'_f=x_0,\ \dot{x'}_f=-\dot{x}_0 }_{ \dot{x}=0 } \right\}
+      = {\rm sign'} \frac{1}{2}
+       \frac{ \dot{x'}_5^2 }{ d_{\rm max} }
+       + x'_5
+   \end{eqnarray}
+   以下の評価値 $\dot{x'}_{\rm Step6}^2$ を算出する。
+   \begin{eqnarray}
+   \left\{ \dot{x'}_{\rm Step6} \mid^{ v'_{\rm max}=\dot{x'}_0,\ x'_f=x_0,\ \dot{x'}_f=-\dot{x}_0 }_{ x=x_f } \right\}^2
+      = {\rm sign'} \cdot 2 d_{\rm max} \left( x'_5 - x_f \right) + \dot{x'}_5^2
+   \end{eqnarray}
+8. 以下の条件により相図上到達不可能な領域 $L_1$ 〜 $L_4$ のどれに当てはまるか判別される。
+   - (If) :: 　\\
+           $\dot{x}_0 \dot{x}_f \geq 0$ \hspace{3mm} (開始速度 $\dot{x}_0$ と終端速度 $\dot{x}_f$ の正負が同じ), \\
+           　 *and* \\
+           $\dot{x}_f^2 \geq \left\{ \dot{x}'_{\rm Step2} \mid^{v'_{\rm max}=\hat{v}_{\rm max}}_{x=x_f} \right\}^2$ \hspace{3mm} ((7.126)式で導出した評価値), \\
+           　 *and* \\
+           ${\rm sgn}(x_f - x_0) \dot{x}_f \geq 0$ (終端点が開始点よりも正側の位置＆正の速度、もしくは負側の位置＆負の速度) \\
+           $\left( {\rm ただし} {\rm sgn}(p) = \left\{ \begin{array}{cl} -1 & (p < 0) \\ 1 & (p \geq 0)  \end{array} \
+                                 \right. \right)$ \\
+          $\Longrightarrow$
+          *{ $L_1$ の領域に当てはまる}*
+   - (ElseIf) :: 　\\
+                 $\dot{x}_0 \dot{x}_f \leq 0$ \hspace{3mm} (開始速度 $\dot{x}_0$ と終端速度 $\dot{x}_f$ の正負が異なる), \\
+                　 *and* \\
+                 $\dot{x}_f^2 \geq \left\{ \dot{x}'_{\rm Step6} \mid^{v'_{\rm max}=\hat{v}_{\rm max},\ \dot{x}'_f=-\dot{x}_0,\ {x}'_f=x_0}_{x=x_f} \right\}^2$ \hspace{3mm} ((7.135)式で導出した評価値), \\
+                　 *and* \\
+                 ${\rm sgn}(x_f - x_0) \dot{x}_f \geq 0$ (終端点が開始点よりも負側の位置＆負の速度、もしくは正側の位置＆正の速度) \\
+                 $\Longrightarrow$
+                 *{ $L_4$ の領域に当てはまる}*
+   - (ElseIf) :: 　\\
+                 $\dot{x}_f^2
+                  \leq \left\{ \dot{x}'_{\rm Step6} \mid^{v'_{\rm max}=\dot{x}_0,\ \dot{x}'_f=-\dot{x}_0,\ {x}'_f=x_0}_{x=x_f} \right\}^2$ \hspace{3mm} ((7.135)式で導出した評価値), \\
+               　 *and* \\
+                 $| x_f - x_0 | \ \leq \ \left| \left\{ {x'}_{\rm Step6} \mid^{v'_{\rm max}=\dot{x}_0,\ \dot{x}'_f=-\dot{x}_0,\ {x}'_f=x_0}_{\dot{x}=0} \right\} - x_0 \right|$ \hspace{3mm} ((7.134)式で導出した評価値) \\
+                 $\Longrightarrow$
+                 *{ $L_2$, $L_3$ の領域に当てはまる}* 
+   - (Else) :: 　\\
+               $\Longrightarrow$ *{到達可能。 $\hat{v}_{\rm max}$ の符号 $\rm sign$ は初期設定の正負と同じで反転しなくてよい}*
+   - (EndIf) :: 　\\
+9. 前項までの判別により $L_1$ 〜 $L_4$ の領域に当てはまる場合、
+   - エラーとして終了するか
+   - 最大速度 $\hat{v}_{\rm max}$ の符号変数 $\rm sign$ を反転させ3.以降を続行するか
+   設計仕様に応じて決定する。 \\
+   $\rm sign$ を反転させ続行する場合、3.と4.により最大速度 $\hat{v}_{\rm max}$ 、符号変数 $\rm signA$ 、 $\rm signD$ も算出し直す。\\
+   　
+10. 最速軌道時の各Stepの移動時間 $\Delta \hat{T}_1$ 、 $\Delta \hat{T}_2$ 、
+   $\Delta \hat{T}_4$ 、 $\Delta \hat{T}_5$ 、かつ最短移動時間  $\Delta \hat{T}_{\rm total}$ を算出する。
+   \begin{eqnarray}
+     \Delta \hat{T}_1           &=& s_{ra} \mid \hat{v}_{\rm max} - \dot{x}_0 \mid / a_{\rm max} \\
+     \Delta \hat{T}_2           &=& (1 - s_{ra}) \mid \hat{v}_{\rm max} - \dot{x}_0 \mid / a_{\rm max} \\
+     \Delta \hat{T}_4           &=& s_{rd} \mid \hat{v}_{\rm max} - \dot{x}_f \mid / d_{\rm max} \\
+     \Delta \hat{T}_5           &=& (1 - s_{rd}) \mid \hat{v}_{\rm max} - \dot{x}_f \mid / d_{\rm max} \\
+     \Delta \hat{T}_{\rm total} &=& 2 \Delta \hat{T}_1 + \Delta \hat{T}_2
+                                  + 2 \Delta \hat{T}_4 + \Delta \hat{T}_5
+   \end{eqnarray}
+11. もしも入力引数に終端時刻$t_f$ による移動時間 $t_f$ の指定がなく、最速軌道を選択していた場合、 \\
+   10.で算出した結果より $\Delta T_1=\Delta \hat{T}_1$ 、 $\Delta T_2=\Delta \hat{T}_2$ 、
+   $\Delta T_4=\Delta \hat{T}_4$ 、 $\Delta T_5=\Delta \hat{T}_5$ 、
+   $v_{\rm max} = \hat{v}_{\rm max}$ とし、\\
+   16.に進む。
+   もしも入力引数に終端時刻 $t_f$ の時間指定があった場合、次の12.以降に進む。\\
+   
+12. 初期位置 $x_0$ から見た終端位置 $x_f$ への移動距離 $X_d$ を算出する。
+   \begin{eqnarray}
+     X_d &=& x_f - x_0
+   \end{eqnarray}
+13. 開始時刻 $t_0$ 、終端時刻 $t_f$ の移動時間が指定された時、
+   - (If) :: 開始から終端までの移動時間 $(t_f - t_0)$ が
+             最速軌道の最短移動時間 $\Delta \hat{T}_{\rm total}$ より小さい場合、
+             \begin{eqnarray}
+             t_f - t_0 < \Delta \hat{T}_{\rm total}
+             \end{eqnarray}
+             $\Longrightarrow$ 
+             *{到達不可能としてエラーとする}*
+   - (EndIf) :: 　
+14. 最大速度 $v_{\rm max}$ 、等速移動時間 $\Delta T_3$ を以下の式より算出する。
+   \begin{eqnarray}
+     {\rm sign} &=& \left\{
+       \begin{array}{c}
+         -1 \\
+          1
+       \end{array}
+     \right.
+     \\
+     {\rm signA} &=& \left\{
+       \begin{array}{cc}
+         -{\rm sign} & (上式 {\rm sign} の2パターンいずれか) \\
+         {\rm sign}  & (同上)
+       \end{array}
+     \right.
+     \\
+     {\rm signD} &=& \left\{
+       \begin{array}{cc}
+         -{\rm sign} & (上式 {\rm sign} の2パターンいずれか) \\
+         {\rm sign}  & (同上)
+       \end{array}
+     \right.
+     \\
+     p_A &=& {\rm signA} \frac{ 1+s_{ra} }{ 2a_{\rm max} }
+            + {\rm signD} \frac{ 1+s_{rd} }{ 2d_{\rm max} }
+            \\
+     p_B &=& t_f - t_0
+            + {\rm signA} \frac{ 1+s_{ra} }{ a_{\rm max} } \dot{x}_0
+            + {\rm signD} \frac{ 1+s_{rd} }{ d_{\rm max} } \dot{x}_f
+            \\
+     p_C &=& X_d
+            + {\rm signA}\frac{ 1+s_{ra} }{ 2a_{\rm max} } \dot{x}_0^2
+            + {\rm signD}\frac{ 1+s_{rd} }{ 2d_{\rm max} } \dot{x}_f^2
+            \\
+     v_{\rm max} &=& \left\{
+       \begin{array}{cl}
+         p_C / p_B & ( p_A=0 かつ p_B \ne 0 ) \\
+         \frac{ p_B - \sqrt{ {p_B}^2 - 4p_A p_C } }{ 2p_A } & ( p_A \ne 0 かつ {p_B}^2 - 4p_A p_C >0 )
+       \end{array}
+       \right.
+       \\
+     \Delta T_3
+     &=& t_f - t_0
+       - {\rm signA} \frac{ (1 + s_{ra}) ( v_{\rm max} - \dot{x}_0 ) }{ a_{\rm max} }
+       - {\rm signD} \frac{ (1 + s_{rd}) ( v_{\rm max} - \dot{x}_f ) }{ d_{\rm max} }
+   \end{eqnarray}
+   
+   以下のパターンより試行的に $v_{\rm max}$ , $\Delta T_3$ を解く。
+   
+   1. 符号変数 $\rm sign$ を1, -1のいずれかに設定してみて、
+   2. $\rm signA$ を $\rm sign$ , $-{\rm sign}$ のいずれかに設定し、
+   3. $\rm signD$ を $\rm sign$ , $-{\rm sign}$ のいずれかに設定する。 
+   
+   この符号変数の組み合わせ計 $2^3=8$ パターンの中から得られた解のうち、絶対値を外す時の条件と一致し、かつ $\Delta T_3$ が正となるものを最終的な解とする。
+   \begin{eqnarray}
+   &\bullet& \ {\rm sign} \cdot v_{\rm max} > 0 \\
+   &\bullet& \ {\rm signA} ( v_{\rm max} - \dot{x}_0 ) > 0 \\
+   &\bullet& \ {\rm signD} ( v_{\rm max} - \dot{x}_f ) > 0 \\
+   &\bullet& \ \Delta T_3 > 0
+   \end{eqnarray}
+15. 各Stepの移動時間 $\Delta T_1$ 、 $\Delta T_2$ 、$\Delta T_3$ 、
+   $\Delta T_4$ 、 $\Delta T_5$ 、かつ合計移動時間  $\Delta T_{\rm total}$ を算出する。
+   \begin{eqnarray}
+     \Delta T_1           &=& s_{ra} \mid v_{\rm max} - \dot{x}_0 \mid / a_{\rm max} \\
+     \Delta T_2           &=& (1 - s_{ra}) \mid v_{\rm max} - \dot{x}_0 \mid / a_{\rm max} \\
+     \Delta T_4           &=& s_{rd} \mid v_{\rm max} - \dot{x}_f \mid / d_{\rm max} \\
+     \Delta T_5           &=& (1 - s_{rd}) \mid v_{\rm max} - \dot{x}_f \mid / d_{\rm max} \\
+     \Delta T_{\rm total} &=& 2 \Delta \hat{T}_1 + \Delta \hat{T}_2
+                                  + 2 \Delta \hat{T}_4 + \Delta \hat{T}_5
+   \end{eqnarray}
+16. Step1とStep2の境界点、速度 $\dot{x}_1$ と 位置 $x_1$ を算出する。
+   \begin{eqnarray}
+     \dot{x}_1 &=& {\rm signA} \cdot \frac{1}{2} a_{\rm max} \Delta T_1
+                   + \dot{x}_0 \\
+           x_1 &=& {\rm signA} \cdot \frac{3}{20} a_{\rm max} \Delta T_1^2
+                   + \dot{x}_0  \Delta T_1 + x_0
+   \end{eqnarray}
+17. Step2とStep3の境界点、速度 $\dot{x}_2$ と 位置 $x_2$ を算出する。
+   \begin{eqnarray}
+           x_2 &=& {\rm signA} \cdot \frac{a_{\rm max}}{2} \Delta T_2^2 + \dot{x}_1 \Delta T_2 + x_1 \\
+     \dot{x}_2 &=& {\rm signA} \cdot       a_{\rm max}     \Delta T_2   + \dot{x}_1
+   \end{eqnarray}
+18. Step3とStep4の境界点、速度 $\dot{x}_3$ と 位置 $x_3$ を算出する。
+   \begin{eqnarray}
+     \dot{x}_3 &=& {\rm signA}  \cdot \frac{1}{2} a_{\rm max} \Delta T_1
+                   + \dot{x}_2 \\
+           x_3 &=& {\rm signA} \cdot \frac{7}{20} a_{\rm max} \Delta T_1^2
+                   + \dot{x}_2 \Delta T_1 + x_2
+   \end{eqnarray}
+19. Step7とStep6の境界点、速度 $\dot{x}_6$ と 位置 $x_6$ を算出する。
+   \begin{eqnarray}
+     \dot{x}_6 &=&  \dot{x}_f + {\rm signD} \cdot \frac{1}{2}  d_{\rm max} \Delta T_4 \\
+           x_6 &=&  x_f       + {\rm signD} \cdot \frac{7}{20} d_{\rm max} \Delta T_4^2
+                              - \dot{x}_6 \Delta T_4
+   \end{eqnarray}
+20. Step6とStep5の境界点、速度 $\dot{x}_5$ と 位置 $x_5$ を算出する。
+   \begin{eqnarray}
+     \dot{x}_5 &=& \dot{x}_6 + {\rm signD} \cdot       d_{\rm max}     \Delta T_5 \\
+           x_5 &=&       x_6 + {\rm signD} \cdot \frac{d_{\rm max}}{2} \Delta T_5^2 - \dot{x}_5 \Delta T_5
+   \end{eqnarray}
+21. Step5とStep4の境界点、速度 $\dot{x}_4$ と 位置 $x_4$ を算出する。
+   \begin{eqnarray}
+     \dot{x}_4 &=& v_{\rm max} \\
+           x_4 &=&  x_5 + {\rm signD} \cdot \frac{3}{20} d_{\rm max} \Delta T_4^2
+                 - v_{\rm max} \Delta T_4
+   \end{eqnarray}
+22. Step1とStep2の境界時刻 $t_1$ を算出する。
+   \begin{eqnarray}
+     t_1 = t_0 + \Delta T_1
+   \end{eqnarray}
+23. Step2とStep3の境界時刻 $t_2$ を算出する。
+   \begin{eqnarray}
+     t_2 = t_1 + \Delta T_2
+   \end{eqnarray}
+24. Step3とStep4の境界時刻 $t_3$ を算出する。
+   \begin{eqnarray}
+     t_3 = t_2 + \Delta T_1
+   \end{eqnarray}
+25. Step4とStep5の境界時刻 $t_4$ を算出する。
+   ただし、終端時刻 $t_f$ による移動時間の指定がなく、
+   最速軌道が選択されていた場合、 $\Delta T_3 = 0$ として以下を算出する。
+   \begin{eqnarray}
+     t_4 = t_3 + \Delta T_3
+   \end{eqnarray}
+26. Step5とStep6の境界時刻 $t_5$ を算出する。
+   \begin{eqnarray}
+     t_5 = t_4 + \Delta T_4
+   \end{eqnarray}
+27. Step6とStep7の境界時刻 $t_6$ を算出する。
+   \begin{eqnarray}
+     t_6 = t_5 + \Delta T_5
+   \end{eqnarray}
+
+** 補間軌道生成
+
+| 入力     |   | 出力                                  |
+|----------+---+---------------------------------------|
+| 時刻 $t$ |   | 時刻 $t$ の軌道上補間点 位置 $x(t)$     |
+|          |   | 時刻 $t$ の軌道上補間点 速度 $\dot{x}(t)$ |
+|----------+---+---------------------------------------|
+
+
+　\\
+
+- (If) :: 入力時刻 $t$ がStep1の区間 $t_0 < t < t_1$ の場合、\\
+          位置 $x(t)$ 、速度 $\dot{x}(t)$ 、加速度 $\ddot{x}(t)$ を以下の軌道式 $x_{\rm Step1}(t)$ 、 $\dot{x}_{\rm Step1}(t)$ より算出。
+          \begin{eqnarray}
+                   x_{\rm Step1}(t) &=& - {\rm signA} \cdot \frac{1}{10}\frac{a_{\rm max}}{\Delta T_1^3}  (t-t_0)^5
+                                        +  {\rm signA} \cdot \frac{1}{4} \frac{a_{\rm max}}{\Delta T_1^2} (t-t_0)^4
+                                        + \dot{x}_0 (t-t_0) + x_0 \\
+             \dot{x}_{\rm Step1}(t) &=& - {\rm signA} \cdot \frac{1}{2} \frac{a_{\rm max}}{\Delta T_1^3} (t-t_0)^4
+                                       +  {\rm signA} \cdot \frac{a_{\rm max}}{\Delta T_1^2}            (t-t_0)^3
+                                       + \dot{x}_0 \\
+            \ddot{x}_{\rm Step1}(t) &=& - {\rm signA} \cdot 2 \frac{a_{\rm max}}{\Delta T_1^3} (t-t_0)^3
+                                       + {\rm signA} \cdot 3 \frac{a_{\rm max}}{\Delta T_1^2} (t-t_0)^2
+          \end{eqnarray}
+          　
+- (ElseIf) :: 入力時刻 $t$ がStep2の区間 $t_1 < t < t_2$ の場合、\\
+              位置 $x(t)$ 、速度 $\dot{x}(t)$ 、加速度 $\ddot{x}(t)$ を以下の軌道式 $x_{\rm Step2}(t)$ 、 $\dot{x}_{\rm Step2}(t)$ より算出。
+              \begin{eqnarray}
+                       x_{\rm Step2}(t) &=& {\rm signA} \cdot \frac{a_{\rm max}}{2} (t-t_1)^2 + \dot{x}_1 (t-t_1)    + x_1 \\
+                 \dot{x}_{\rm Step2}(t) &=& {\rm signA} \cdot       a_{\rm max} (t-t_1)       + \dot{x}_1 \\
+                \ddot{x}_{\rm Step2}(t) &=& {\rm signA} \cdot       a_{\rm max}
+              \end{eqnarray}
+              　
+- (ElseIf) :: 入力時刻 $t$ がStep3の区間 $t_2 < t < t_3$ の場合、\\
+              位置 $x(t)$ 、速度 $\dot{x}(t)$ 、加速度 $\ddot{x}(t)$ を以下の軌道式 $x_{\rm Step3}(t)$ 、 $\dot{x}_{\rm Step3}(t)$ より算出。
+              \begin{eqnarray}
+                       x_{\rm Step3}(t) &=&  {\rm signA} \frac{1}{10}\frac{a_{\rm max}}{\Delta T_1^3} (t-t_2)^5
+                                           - {\rm signA} \frac{1}{4} \frac{a_{\rm max}}{\Delta T_1^2} (t-t_2)^4
+                                           + {\rm signA} \frac{a_{\rm max}}{2} (t-t_2)^2
+                                           + \dot{x}_2 (t-t_2) + x_2 \nonumber \\
+                                             \\
+                 \dot{x}_{\rm Step3}(t) &=&  {\rm signA} \frac{1}{2} \frac{a_{\rm max}}{\Delta T_1^3} (t-t_2)^4
+                                           - {\rm signA}             \frac{a_{\rm max}}{\Delta T_1^2} (t-t_2)^3
+                                           + {\rm signA} \cdot a_{\rm max} (t-t_2)
+                                           + \dot{x}_2 \\
+                \ddot{x}_{\rm Step3}(t) &=&  {\rm signA} \cdot 2           \frac{a_{\rm max}}{\Delta T_1^3} (t-t_2)^3
+                                           - {\rm signA} \cdot 3           \frac{a_{\rm max}}{\Delta T_1^2} (t-t_2)^2
+                                           + {\rm signA} \cdot a_{\rm max}
+              \end{eqnarray}
+              　
+- (ElseIf) :: 入力時刻 $t$ がStep4の区間 $t_3 < t < t_4$ の場合、 \\
+              位置 $x(t)$ 、速度 $\dot{x}(t)$ 、加速度 $\ddot{x}(t)$ を以下の軌道式 $x_{\rm Step4}(t)$ 、 $\dot{x}_{\rm Step4}(t)$ より算出。
+              \begin{eqnarray}
+                       x_{\rm Step4}(t) &=& v_{\rm max} (t-t_3) + x_3 \\
+                 \dot{x}_{\rm Step4}(t) &=& v_{\rm max} \ ({\rm 一定}) \\
+                \ddot{x}_{\rm Step4}(t) &=& 0
+              \end{eqnarray}
+              　
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+{{{pagebreak}}}
+
+- (ElseIf) :: 入力時刻 $t$ がStep5の区間 $t_4 < t < t_5$ の場合、 \\
+              位置 $x(t)$ 、速度 $\dot{x}(t)$ 、加速度 $\ddot{x}(t)$ を以下の軌道式 $x_{\rm Step5}(t)$ 、 $\dot{x}_{\rm Step5}(t)$ より算出。
+              \begin{eqnarray}
+                       x_{\rm Step5}(t) &=&  {\rm signD} \frac{1}{10} \frac{d_{\rm max}}{\Delta T_4^3} (t-t_4)^5
+                                           - {\rm signD} \frac{1}{4} \frac{d_{\rm max}}{\Delta T_4^2} (t-t_4)^4
+                                           + {\rm signD} \frac{d_{\rm max}}{2} (t-t_4)^2
+                                           + \dot{x}_4 (t-t_4) + x_4 \nonumber \\
+                                             \\
+                 \dot{x}_{\rm Step5}(t) &=&  {\rm signD} \cdot \frac{1}{2} \frac{d_{\rm max}}{\Delta T_4^3} (t-t_4)^4
+                                           - {\rm signD} \cdot             \frac{d_{\rm max}}{\Delta T_4^2} (t-t_4)^3
+                                           + {\rm signD} \cdot d_{\rm max} (t-t_4)
+                                           + \dot{x}_4 \\
+                \ddot{x}_{\rm Step5}(t) &=&  {\rm signD} \cdot 2           \frac{d_{\rm max}}{\Delta T_4^3} (t-t_4)^3
+                                           - {\rm signD} \cdot 3           \frac{d_{\rm max}}{\Delta T_4^2} (t-t_4)^2
+              \end{eqnarray}
+              　
+- (ElseIf) :: 入力時刻 $t$ がStep6の区間 $t_5 < t < t_6$ の場合、 \\
+              位置 $x(t)$ 、速度 $\dot{x}(t)$ 、加速度 $\ddot{x}(t)$ を以下の軌道式 $x_{\rm Step6}(t)$ 、 $\dot{x}_{\rm Step6}(t)$ より算出。
+              \begin{eqnarray}
+                       x_{\rm Step6}(t) &=& - {\rm signD} \cdot \frac{d_{\rm max}}{2} (t-t_5)^2 + \dot{x}_5 (t-t_5)    + x_5 \\
+                 \dot{x}_{\rm Step6}(t) &=& - {\rm signD} \cdot       d_{\rm max} (t-t_5)       + \dot{x}_5 \\
+                \ddot{x}_{\rm Step6}(t) &=& - {\rm signD} \cdot       d_{\rm max}
+              \end{eqnarray}
+              　
+- (ElseIf) :: 入力時刻 $t$ がStep7の区間 $t_6 < t < t_f$ の場合、 \\
+              位置 $x(t)$ 、速度 $\dot{x}(t)$ 、加速度 $\ddot{x}(t)$ を以下の軌道式 $x_{\rm Step7}(t)$ 、 $\dot{x}_{\rm Step7}(t)$ より算出。
+              \begin{eqnarray}
+                       x_{\rm Step7}(t) &=& - {\rm signD} \cdot \frac{1}{10}\frac{d_{\rm max}}{\Delta T_4^3} (t-t_6)^5
+                                            + {\rm signD} \cdot \frac{1}{4} \frac{d_{\rm max}}{\Delta T_4^2} (t-t_6)^4
+                                            + \dot{x}_6 (t-t_6) + x_6 \\
+                 \dot{x}_{\rm Step7}(t) &=& - {\rm signD} \cdot \frac{1}{2} \frac{d_{\rm max}}{\Delta T_4^3} (t-t_6)^4
+                                            +  {\rm signD} \cdot            \frac{d_{\rm max}}{\Delta T_4^2} (t-t_6)^3
+                                            + \dot{x}_6 \\
+                \ddot{x}_{\rm Step7}(t) &=& - {\rm signD} \cdot 2           \frac{d_{\rm max}}{\Delta T_4^3} (t-t_6)^3
+                                            - {\rm signD} \cdot 3           \frac{d_{\rm max}}{\Delta T_4^2} (t-t_6)^2
+                                            - {\rm signD} \cdot d_{\rm max}
+              \end{eqnarray}
+              　
+- (ElseIf) :: 入力時刻 $t$ がそれ以外の時間範囲 $t < t_0 \ {\rm or} \ t_f < t$ の場合、 \\
+              無効な時間指定とし、エラーとする。
+- (EndIf) :: 　
+
+
+# \begin{eqnarray}
+
+# \end{eqnarray}
+
+
+
+
+\begin{flushright}
+以上
+\end{flushright}
+

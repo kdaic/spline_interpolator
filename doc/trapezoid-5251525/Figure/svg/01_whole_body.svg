@@ -1,0 +1,2341 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:ns0="http://www.iki.fi/pav/software/textext/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="320mm"
+   viewBox="0 0 210 320"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="01_whole_body.svg"
+   inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/00_whole_body.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="405.54965"
+     inkscape:cy="813.73531"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1853"
+     inkscape:window-height="1025"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <defs
+     id="defs2">
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker3321"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path3319"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker3149"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path3147"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker2465"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path2463"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker2305"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path2303"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1549"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1547" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1401"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mstart"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         transform="scale(0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path1399" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker15594"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path15592"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker15584"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path15582"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker14016"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14014"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker14006"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mstart">
+      <path
+         transform="scale(0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path14004"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker13816"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path13814"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker13806"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path13804"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker13060"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13058"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker13050"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mstart">
+      <path
+         transform="scale(0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path13048"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker11742"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path11740"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker11732"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path11730"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker11264"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11262"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker11254"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mstart"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path11252"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker11210"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path10942"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mstart"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path10957"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker3064"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path3062"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker2800"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path2798"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker2196"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path2194"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1278"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1276"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker996"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path994"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker858"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path856"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4855"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path4853"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="Arrow1Mend"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path4550"
+         inkscape:connector-curvature="0" />
+    </marker>
+  </defs>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,23)"
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="レイヤー 1">
+    <path
+       inkscape:connector-curvature="0"
+       id="path3732"
+       d="M 38.138752,68.820955 V 4.9429793"
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4855)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3734"
+       d="M 30.806017,62.848933 H 204.2215"
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2196)"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\nt\n\\end{eqnarray*}"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(1,0,0,-1,-180.70554,780.77361)"
+       id="content"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   id="path842"
+   d="m 385.58,711.1 h 0.94 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.88 c 0.36,1.41 0.41,1.61 0.41,1.67 0,0.16 -0.12,0.26 -0.29,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.19,0 -0.29,0 -0.29,-0.19 0,-0.12 0.07,-0.12 0.28,-0.12 h 0.87 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.59,1.45 1.59,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.43,-1.04 -0.96,-1.28 -1.3,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <path
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker858)"
+       d="M 38.138752,147.51565 V 83.637628"
+       id="path848"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2800)"
+       d="M 30.806017,137.31029 H 204.75067"
+       id="path850"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="g854"
+       transform="matrix(1,0,0,-1,-180.70554,855.23496)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\nt\n\\end{eqnarray*}"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 385.58,711.1 h 0.94 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.88 c 0.36,1.41 0.41,1.61 0.41,1.67 0,0.16 -0.12,0.26 -0.29,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.19,0 -0.29,0 -0.29,-0.19 0,-0.12 0.07,-0.12 0.28,-0.12 h 0.87 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.59,1.45 1.59,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.43,-1.04 -0.96,-1.28 -1.3,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   id="path852" />
+</g>    <path
+       inkscape:connector-curvature="0"
+       id="path986"
+       d="M 38.138752,218.27284 V 154.39486"
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker996)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path988"
+       d="M 30.806017,187.42985 H 205.27984"
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker3064)"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\nt\n\\end{eqnarray*}"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(1,0,0,-1,-180.70554,905.35452)"
+       id="g992"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   id="path990"
+   d="m 385.58,711.1 h 0.94 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.88 c 0.36,1.41 0.41,1.61 0.41,1.67 0,0.16 -0.12,0.26 -0.29,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.19,0 -0.29,0 -0.29,-0.19 0,-0.12 0.07,-0.12 0.28,-0.12 h 0.87 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.59,1.45 1.59,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.43,-1.04 -0.96,-1.28 -1.3,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <path
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1278)"
+       d="M 38.138752,289.03003 V 225.15205"
+       id="path1268"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="M 30.806017,258.18704 H 205.27984"
+       id="path1270"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="g1274"
+       transform="matrix(1,0,0,-1,-180.70554,976.11186)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\nt\n\\end{eqnarray*}"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 385.58,711.1 h 0.94 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.88 c 0.36,1.41 0.41,1.61 0.41,1.67 0,0.16 -0.12,0.26 -0.29,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.19,0 -0.29,0 -0.29,-0.19 0,-0.12 0.07,-0.12 0.28,-0.12 h 0.87 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.59,1.45 1.59,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.43,-1.04 -0.96,-1.28 -1.3,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   id="path1272" />
+</g>    <g
+       id="g1893"
+       transform="matrix(1,0,0,-1,-353.52269,711.86491)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\nx\n\\end{eqnarray*}"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 385.81,710.12 0.01,0.03 v 0.03 l 0.01,0.03 0.01,0.04 0.01,0.04 0.01,0.04 0.02,0.04 0.01,0.05 0.02,0.04 0.01,0.05 0.02,0.05 0.02,0.05 0.03,0.05 0.02,0.05 0.03,0.05 0.02,0.05 0.03,0.05 0.03,0.04 0.04,0.05 0.03,0.04 0.04,0.05 0.04,0.04 0.04,0.04 0.05,0.03 0.04,0.03 0.05,0.03 0.03,0.01 0.02,0.02 0.03,0.01 0.03,0.01 0.02,0.01 h 0.03 l 0.03,0.01 0.03,0.01 h 0.03 0.03 l 0.03,0.01 h 0.04 c 0.05,0 0.28,0 0.49,-0.13 -0.27,-0.05 -0.47,-0.3 -0.47,-0.54 0,-0.16 0.1,-0.35 0.38,-0.35 0.21,0 0.53,0.18 0.53,0.58 0,0.52 -0.59,0.66 -0.92,0.66 -0.58,0 -0.93,-0.53 -1.05,-0.76 -0.25,0.66 -0.79,0.76 -1.08,0.76 -1.04,0 -1.6,-1.29 -1.6,-1.53 0,-0.1 0.1,-0.1 0.12,-0.1 0.08,0 0.11,0.02 0.13,0.11 0.34,1.05 0.99,1.3 1.33,1.3 0.19,0 0.54,-0.09 0.54,-0.67 0,-0.31 -0.17,-0.97 -0.54,-2.36 -0.16,-0.62 -0.51,-1.04 -0.95,-1.04 -0.06,0 -0.29,0 -0.49,0.13 0.24,0.05 0.46,0.26 0.46,0.54 0,0.27 -0.22,0.35 -0.36,0.35 -0.3,0 -0.55,-0.26 -0.55,-0.58 0,-0.46 0.5,-0.65 0.93,-0.65 0.66,0 1.02,0.69 1.05,0.75 0.12,-0.37 0.48,-0.75 1.08,-0.75 1.03,0 1.59,1.28 1.59,1.53 0,0.1 -0.09,0.1 -0.12,0.1 -0.09,0 -0.1,-0.05 -0.13,-0.11 -0.32,-1.07 -1,-1.31 -1.32,-1.31 -0.39,0 -0.55,0.32 -0.55,0.66 0,0.22 0.06,0.44 0.17,0.87 z"
+   id="path1891" />
+</g>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\n\\dot{x}\n\\end{eqnarray*}"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(1,0,0,-1,-354.55955,791.62577)"
+       id="g1967"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   id="path1963"
+   d="m 386.13,713.24 v 0.03 0.02 0.03 l -0.01,0.02 v 0.03 l -0.01,0.02 -0.01,0.03 -0.01,0.02 -0.01,0.02 -0.01,0.02 -0.01,0.03 -0.02,0.02 -0.01,0.02 -0.02,0.02 -0.01,0.02 -0.02,0.02 -0.02,0.02 -0.02,0.01 -0.02,0.02 -0.02,0.01 -0.02,0.02 -0.02,0.01 -0.02,0.02 -0.03,0.01 -0.02,0.01 -0.03,0.01 h -0.02 l -0.03,0.01 h -0.02 l -0.03,0.01 h -0.03 -0.03 c -0.33,0 -0.53,-0.28 -0.53,-0.53 0,-0.26 0.23,-0.52 0.52,-0.52 0.34,0 0.54,0.28 0.54,0.52 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path1965"
+   d="m 385.81,710.12 0.01,0.03 v 0.03 l 0.01,0.03 0.01,0.04 0.01,0.04 0.01,0.04 0.02,0.04 0.01,0.05 0.02,0.04 0.01,0.05 0.02,0.05 0.02,0.05 0.03,0.05 0.02,0.05 0.03,0.05 0.02,0.05 0.03,0.05 0.03,0.04 0.04,0.05 0.03,0.04 0.04,0.05 0.04,0.04 0.04,0.04 0.05,0.03 0.04,0.03 0.05,0.03 0.03,0.01 0.02,0.02 0.03,0.01 0.03,0.01 0.02,0.01 h 0.03 l 0.03,0.01 0.03,0.01 h 0.03 0.03 l 0.03,0.01 h 0.04 c 0.05,0 0.28,0 0.49,-0.13 -0.27,-0.05 -0.47,-0.3 -0.47,-0.54 0,-0.16 0.1,-0.35 0.38,-0.35 0.21,0 0.53,0.18 0.53,0.58 0,0.52 -0.59,0.66 -0.92,0.66 -0.58,0 -0.93,-0.53 -1.05,-0.76 -0.25,0.66 -0.79,0.76 -1.08,0.76 -1.04,0 -1.6,-1.29 -1.6,-1.53 0,-0.1 0.1,-0.1 0.12,-0.1 0.08,0 0.11,0.02 0.13,0.11 0.34,1.05 0.99,1.3 1.33,1.3 0.19,0 0.54,-0.09 0.54,-0.67 0,-0.31 -0.17,-0.97 -0.54,-2.36 -0.16,-0.62 -0.51,-1.04 -0.95,-1.04 -0.06,0 -0.29,0 -0.49,0.13 0.24,0.05 0.46,0.26 0.46,0.54 0,0.27 -0.22,0.35 -0.36,0.35 -0.3,0 -0.55,-0.26 -0.55,-0.58 0,-0.46 0.5,-0.65 0.93,-0.65 0.66,0 1.02,0.69 1.05,0.75 0.12,-0.37 0.48,-0.75 1.08,-0.75 1.03,0 1.59,1.28 1.59,1.53 0,0.1 -0.09,0.1 -0.12,0.1 -0.09,0 -0.1,-0.05 -0.13,-0.11 -0.32,-1.07 -1,-1.31 -1.32,-1.31 -0.39,0 -0.55,0.32 -0.55,0.66 0,0.22 0.06,0.44 0.17,0.87 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       id="g2051"
+       transform="matrix(1,0,0,-1,-355.50128,867.15237)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\n\\ddot{x}\n\\end{eqnarray*}"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   d="m 385.14,713.27 -0.01,0.03 v 0.02 0.02 0.02 l -0.01,0.03 -0.01,0.02 v 0.02 l -0.01,0.02 -0.01,0.02 -0.01,0.02 -0.01,0.03 -0.01,0.02 -0.02,0.02 -0.01,0.01 -0.02,0.02 -0.01,0.02 -0.02,0.02 -0.02,0.02 -0.01,0.01 -0.02,0.02 -0.02,0.01 -0.03,0.01 -0.02,0.02 -0.02,0.01 -0.02,0.01 -0.03,0.01 h -0.02 l -0.03,0.01 h -0.02 l -0.03,0.01 h -0.03 -0.02 c -0.28,0 -0.5,-0.22 -0.5,-0.5 0,-0.27 0.22,-0.49 0.5,-0.49 0.3,0 0.5,0.26 0.5,0.49 z"
+   id="path2045"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   d="m 387.06,713.27 v 0.03 0.03 l -0.01,0.02 v 0.03 l -0.01,0.02 v 0.02 l -0.01,0.03 -0.01,0.02 -0.01,0.02 -0.01,0.02 -0.01,0.02 -0.01,0.02 -0.02,0.02 -0.01,0.02 -0.02,0.02 -0.01,0.02 -0.02,0.01 -0.02,0.02 -0.02,0.01 -0.02,0.02 -0.02,0.01 -0.02,0.01 -0.02,0.01 -0.02,0.01 -0.03,0.01 -0.02,0.01 -0.02,0.01 h -0.03 l -0.02,0.01 h -0.03 -0.02 -0.03 c -0.3,0 -0.5,-0.26 -0.5,-0.5 0,-0.23 0.2,-0.49 0.5,-0.49 0.28,0 0.5,0.22 0.5,0.49 z"
+   id="path2047"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   d="m 385.81,710.12 0.01,0.03 v 0.03 l 0.01,0.03 0.01,0.04 0.01,0.04 0.01,0.04 0.02,0.04 0.01,0.05 0.02,0.04 0.01,0.05 0.02,0.05 0.02,0.05 0.03,0.05 0.02,0.05 0.03,0.05 0.02,0.05 0.03,0.05 0.03,0.04 0.04,0.05 0.03,0.04 0.04,0.05 0.04,0.04 0.04,0.04 0.05,0.03 0.04,0.03 0.05,0.03 0.03,0.01 0.02,0.02 0.03,0.01 0.03,0.01 0.02,0.01 h 0.03 l 0.03,0.01 0.03,0.01 h 0.03 0.03 l 0.03,0.01 h 0.04 c 0.05,0 0.28,0 0.49,-0.13 -0.27,-0.05 -0.47,-0.3 -0.47,-0.54 0,-0.16 0.1,-0.35 0.38,-0.35 0.21,0 0.53,0.18 0.53,0.58 0,0.52 -0.59,0.66 -0.92,0.66 -0.58,0 -0.93,-0.53 -1.05,-0.76 -0.25,0.66 -0.79,0.76 -1.08,0.76 -1.04,0 -1.6,-1.29 -1.6,-1.53 0,-0.1 0.1,-0.1 0.12,-0.1 0.08,0 0.11,0.02 0.13,0.11 0.34,1.05 0.99,1.3 1.33,1.3 0.19,0 0.54,-0.09 0.54,-0.67 0,-0.31 -0.17,-0.97 -0.54,-2.36 -0.16,-0.62 -0.51,-1.04 -0.95,-1.04 -0.06,0 -0.29,0 -0.49,0.13 0.24,0.05 0.46,0.26 0.46,0.54 0,0.27 -0.22,0.35 -0.36,0.35 -0.3,0 -0.55,-0.26 -0.55,-0.58 0,-0.46 0.5,-0.65 0.93,-0.65 0.66,0 1.02,0.69 1.05,0.75 0.12,-0.37 0.48,-0.75 1.08,-0.75 1.03,0 1.59,1.28 1.59,1.53 0,0.1 -0.09,0.1 -0.12,0.1 -0.09,0 -0.1,-0.05 -0.13,-0.11 -0.32,-1.07 -1,-1.31 -1.32,-1.31 -0.39,0 -0.55,0.32 -0.55,0.66 0,0.22 0.06,0.44 0.17,0.87 z"
+   id="path2049"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\nx^{(3)}\n\\end{eqnarray*}"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(1,0,0,-1,-355.95484,938.66544)"
+       id="g2147"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   id="path2139"
+   d="m 380.46,710.12 0.01,0.03 v 0.03 l 0.01,0.03 0.01,0.04 0.01,0.04 0.01,0.04 0.02,0.04 0.01,0.05 0.02,0.04 0.02,0.05 0.01,0.05 0.03,0.05 0.02,0.05 0.02,0.05 0.03,0.05 0.02,0.05 0.03,0.05 0.04,0.04 0.03,0.05 0.03,0.04 0.04,0.05 0.04,0.04 0.04,0.04 0.05,0.03 0.04,0.03 0.05,0.03 0.03,0.01 0.02,0.02 0.03,0.01 0.03,0.01 0.03,0.01 h 0.02 l 0.03,0.01 0.03,0.01 h 0.03 0.03 l 0.04,0.01 h 0.03 c 0.05,0 0.29,0 0.5,-0.13 -0.28,-0.05 -0.48,-0.3 -0.48,-0.54 0,-0.16 0.11,-0.35 0.38,-0.35 0.22,0 0.54,0.18 0.54,0.58 0,0.52 -0.59,0.66 -0.93,0.66 -0.58,0 -0.93,-0.53 -1.05,-0.76 -0.25,0.66 -0.79,0.76 -1.08,0.76 -1.03,0 -1.6,-1.29 -1.6,-1.53 0,-0.1 0.1,-0.1 0.12,-0.1 0.08,0 0.11,0.02 0.13,0.11 0.34,1.05 1,1.3 1.33,1.3 0.19,0 0.54,-0.09 0.54,-0.67 0,-0.31 -0.17,-0.97 -0.54,-2.36 -0.16,-0.62 -0.51,-1.04 -0.94,-1.04 -0.06,0 -0.29,0 -0.5,0.13 0.25,0.05 0.47,0.26 0.47,0.54 0,0.27 -0.22,0.35 -0.37,0.35 -0.3,0 -0.55,-0.26 -0.55,-0.58 0,-0.46 0.5,-0.65 0.94,-0.65 0.66,0 1.01,0.69 1.04,0.75 0.12,-0.37 0.48,-0.75 1.08,-0.75 1.03,0 1.6,1.28 1.6,1.53 0,0.1 -0.09,0.1 -0.12,0.1 -0.09,0 -0.11,-0.05 -0.13,-0.11 -0.33,-1.07 -1.01,-1.31 -1.33,-1.31 -0.39,0 -0.55,0.32 -0.55,0.66 0,0.22 0.06,0.44 0.17,0.87 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path2141"
+   d="m 385.31,716.45 -0.13,-0.08 -0.11,-0.1 -0.11,-0.09 -0.11,-0.1 -0.1,-0.1 -0.09,-0.1 -0.09,-0.11 -0.09,-0.1 -0.08,-0.11 -0.07,-0.11 -0.07,-0.11 -0.07,-0.11 -0.06,-0.12 -0.06,-0.11 -0.05,-0.12 -0.05,-0.11 -0.05,-0.12 -0.04,-0.11 -0.04,-0.12 -0.03,-0.12 -0.03,-0.11 -0.03,-0.12 -0.02,-0.11 -0.03,-0.12 -0.02,-0.11 -0.01,-0.11 -0.01,-0.11 -0.01,-0.11 -0.01,-0.11 -0.01,-0.1 v -0.11 -0.1 c 0,-0.98 0.29,-2.5 1.68,-3.47 0.05,0 0.14,0 0.14,0.08 0,0.04 -0.03,0.06 -0.07,0.11 -0.93,0.83 -1.28,2.01 -1.28,3.28 0,1.87 0.72,2.79 1.3,3.31 0.02,0.03 0.05,0.05 0.05,0.08 0,0.08 -0.09,0.08 -0.14,0.08 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path2143"
+   d="m 387.85,713.56 h 0.05 0.05 l 0.05,-0.01 0.04,-0.01 0.05,-0.01 0.04,-0.01 0.05,-0.01 0.04,-0.02 0.04,-0.02 0.04,-0.02 0.04,-0.02 0.04,-0.03 0.04,-0.02 0.03,-0.03 0.04,-0.04 0.03,-0.03 0.03,-0.04 0.03,-0.03 0.02,-0.04 0.03,-0.05 0.02,-0.04 0.03,-0.05 0.02,-0.05 0.01,-0.05 0.02,-0.05 0.01,-0.06 0.02,-0.06 0.01,-0.06 v -0.06 l 0.01,-0.06 v -0.07 -0.07 c 0,-0.86 -0.5,-1.12 -0.91,-1.12 -0.28,0 -0.89,0.08 -1.19,0.49 0.33,0.01 0.41,0.24 0.41,0.39 0,0.22 -0.17,0.38 -0.38,0.38 -0.2,0 -0.39,-0.12 -0.39,-0.4 0,-0.66 0.72,-1.08 1.57,-1.08 0.97,0 1.64,0.65 1.64,1.34 0,0.54 -0.45,1.09 -1.22,1.25 0.74,0.26 1,0.78 1,1.21 0,0.55 -0.63,0.96 -1.41,0.96 -0.77,0 -1.37,-0.38 -1.37,-0.94 0,-0.23 0.15,-0.36 0.36,-0.36 0.22,0 0.36,0.16 0.36,0.35 0,0.2 -0.14,0.35 -0.36,0.36 0.25,0.31 0.73,0.39 0.99,0.39 0.32,0 0.76,-0.16 0.76,-0.76 0,-0.3 -0.1,-0.62 -0.28,-0.83 -0.23,-0.27 -0.43,-0.28 -0.78,-0.3 -0.18,-0.01 -0.19,-0.01 -0.22,-0.02 -0.02,0 -0.07,-0.02 -0.07,-0.09 0,-0.1 0.06,-0.1 0.18,-0.1 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path2145"
+   d="m 390.54,716.45 h -0.01 v 0 h -0.01 v 0 h -0.01 v 0 h -0.01 v 0 h -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,-0.01 v 0 h -0.01 v 0 l -0.01,-0.01 v 0 0 l -0.01,-0.01 v 0 0 0 -0.01 h -0.01 v 0 0 -0.01 0 0 0 -0.01 0 0 -0.01 0 -0.01 h -0.01 c 0,-0.03 0.03,-0.05 0.07,-0.1 0.6,-0.55 1.27,-1.49 1.27,-3.29 0,-1.45 -0.45,-2.55 -1.21,-3.23 -0.12,-0.12 -0.13,-0.12 -0.13,-0.16 0,-0.03 0.03,-0.08 0.1,-0.08 0.08,0 0.74,0.46 1.21,1.33 0.3,0.57 0.51,1.32 0.51,2.14 0,0.98 -0.3,2.5 -1.68,3.47 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <path
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 53.131564,58.077164 C 72.107699,58.611701 98.567384,47.65365 98.567384,47.65365 L 159.50485,23.064853 c 0,0 10.85541,-3.519429 21.38157,-6.954379 3.98757,-1.301245 5.59788,-1.976526 8.29819,-2.441046"
+       id="path3302"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccsc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       transform="translate(31.750001)"
+       id="g3310"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         sodipodi:nodetypes="ccsscscccc"
+         inkscape:connector-curvature="0"
+         id="path3304"
+         d="M 34.965109,131.6263 51.913334,97.951237 c 0,0 1.894741,-4.316747 7.101367,-5.394336 1.626461,-0.33662 3.739261,-0.813127 6.0229,-0.849591 16.946653,-0.270593 56.765299,-0.07863 63.671679,-0.07863 5.80263,-0.08579 6.78413,0.617266 8.3775,2.106003 0.85755,0.801242 1.57021,2.104748 1.57021,2.104748 1.13958,2.273116 10.55485,21.629759 12.48637,25.481409 0.34776,0.60906 1.1244,1.59082 2.20079,1.96353 0.58878,0.22263 1.9526,0.35999 4.07639,0.50503"
+         style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cccc"
+         inkscape:connector-curvature="0"
+         id="path3306"
+         d="m 34.965109,131.6263 c -0.767812,1.27573 -1.82051,2.09253 -2.976563,2.78758 -1.151824,0.69025 -2.270689,1.05381 -4.382896,1.84921 -2.939964,0.8018 -5.044303,0.83956 -5.044303,0.83956"
+         style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 53.728941,187.38902 c 0,0 3.994991,-1.13412 7.263619,-6.04866 3.268629,-4.91454 3.156033,-11.1152 3.834894,-14.12433 0.380414,-1.68622 0.607437,-4.52552 3.72679,-4.59268 2.325514,0.008 13.179377,0.12019 14.947211,0.11209 1.540848,0.13366 2.027868,1.89756 2.413081,3.36779 0.642018,2.0717 1.872667,11.40078 3.60047,14.51801 2.120395,3.82552 4.554235,6.69921 7.379118,6.96652"
+       id="path3312"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csscccsc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       sodipodi:nodetypes="csscccsc"
+       inkscape:connector-curvature="0"
+       id="path3314"
+       d="m 162.76176,187.43235 c 0,0 2.2834,-0.38142 3.10002,2.12651 1.3513,4.15 2.1415,12.45132 2.81635,15.27912 0.3718,1.55795 1.0048,6.24713 2.37311,6.0872 1.79159,0.12843 9.99589,0.071 11.11706,0.0788 0.97723,-0.12843 1.47457,-1.32754 1.9778,-2.78667 0.57004,-1.79322 2.10605,-13.50672 2.60473,-16.74241 0.26357,-1.71013 0.48021,-4.12951 2.76514,-4.02845"
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.35277778, 0.70555556;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 67.034951,-1.1653436 66.500413,290.05099"
+       id="path3316"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3318"
+       d="M 83.62715,-0.62006003 83.092612,290.59627"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.35277778, 0.70555556;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.35277778, 0.70555556;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 96.434599,-1.6998825 95.900061,289.51645"
+       id="path3320"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3322"
+       d="M 164.16796,-1.6998825 163.63342,289.51645"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.35277778, 0.70555556;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.35277778, 0.70555556;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 170.49905,-2.3613408 169.96451,288.85499"
+       id="path3326"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3328"
+       d="M 183.03446,-1.7943765 182.49992,289.42196"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.35277778, 0.70555556;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.35277778, 0.70555556;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 189.07661,-0.75494203 188.54207,290.46139"
+       id="path3330"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 53.672621,258.25744 c 0,0 0.839793,-8.36127 2.267857,-14.74107 1.55937,-6.9664 2.511215,-8.40522 3.918145,-8.39949 1.333238,0.0183 2.176388,1.00054 3.813529,8.05528 1.801933,7.76486 2.484701,12.02841 2.707544,15.12441"
+       id="path3338"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cscsc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       sodipodi:nodetypes="cscsc"
+       inkscape:connector-curvature="0"
+       id="path3340"
+       d="m 83.066897,258.08637 c 0,0 0.839793,8.36127 2.267857,14.74107 1.55937,6.9664 2.511215,8.40522 3.918145,8.39949 1.333238,-0.0183 2.176388,-1.00054 3.813529,-8.05528 1.801933,-7.76486 2.484701,-12.02841 2.707544,-15.12441"
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       sodipodi:nodetypes="cscsc"
+       inkscape:connector-curvature="0"
+       id="path3342"
+       d="m 182.25507,257.84316 c 0,0 0.43041,-11.37616 1.16234,-20.05641 0.79923,-9.47829 1.28706,-11.4359 2.00815,-11.42811 0.68332,0.0249 1.11546,1.36131 1.95454,10.95982 0.92355,10.56469 1.27348,16.36558 1.38769,20.57793"
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 163.58397,257.7105 c 0,0 0.43042,11.37617 1.16234,20.05638 0.79923,9.4783 1.28707,11.43593 2.00816,11.42815 0.68332,-0.0251 1.11546,-1.36135 1.95454,-10.95984 0.92355,-10.5647 1.27347,-16.36559 1.38769,-20.57791"
+       id="path3344"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cscsc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="g3420"
+       transform="matrix(0.8,0,0,-0.8,-275.97094,624.88635)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\nx_0\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 383.57,710.12 0.01,0.03 0.01,0.03 0.01,0.03 v 0.04 l 0.02,0.04 0.01,0.04 0.01,0.04 0.01,0.05 0.02,0.04 0.02,0.05 0.02,0.05 0.02,0.05 0.02,0.05 0.02,0.05 0.03,0.05 0.03,0.05 0.03,0.05 0.03,0.04 0.03,0.05 0.04,0.04 0.04,0.05 0.03,0.04 0.05,0.04 0.04,0.03 0.05,0.03 0.05,0.03 0.02,0.01 0.03,0.02 0.02,0.01 0.03,0.01 0.03,0.01 h 0.03 l 0.03,0.01 0.03,0.01 h 0.03 0.03 l 0.03,0.01 h 0.03 c 0.05,0 0.29,0 0.5,-0.13 -0.28,-0.05 -0.48,-0.3 -0.48,-0.54 0,-0.16 0.11,-0.35 0.38,-0.35 0.22,0 0.54,0.18 0.54,0.58 0,0.52 -0.59,0.66 -0.93,0.66 -0.58,0 -0.93,-0.53 -1.05,-0.76 -0.25,0.66 -0.78,0.76 -1.07,0.76 -1.04,0 -1.61,-1.29 -1.61,-1.53 0,-0.1 0.1,-0.1 0.12,-0.1 0.08,0 0.11,0.02 0.13,0.11 0.34,1.05 1,1.3 1.34,1.3 0.19,0 0.53,-0.09 0.53,-0.67 0,-0.31 -0.16,-0.97 -0.53,-2.36 -0.16,-0.62 -0.51,-1.04 -0.95,-1.04 -0.06,0 -0.29,0 -0.5,0.13 0.25,0.05 0.47,0.26 0.47,0.54 0,0.27 -0.22,0.35 -0.37,0.35 -0.3,0 -0.55,-0.26 -0.55,-0.58 0,-0.46 0.5,-0.65 0.94,-0.65 0.66,0 1.02,0.69 1.05,0.75 0.12,-0.37 0.47,-0.75 1.07,-0.75 1.03,0 1.6,1.28 1.6,1.53 0,0.1 -0.09,0.1 -0.12,0.1 -0.09,0 -0.11,-0.05 -0.13,-0.11 -0.33,-1.07 -1.01,-1.31 -1.33,-1.31 -0.38,0 -0.54,0.32 -0.54,0.66 0,0.22 0.05,0.44 0.16,0.87 z"
+   id="path3416" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 389.55,707.85 -0.01,0.14 v 0.14 l -0.01,0.13 v 0.12 l -0.02,0.13 -0.01,0.12 -0.02,0.11 -0.02,0.11 -0.03,0.11 -0.03,0.11 -0.03,0.1 -0.04,0.1 -0.04,0.1 -0.05,0.09 -0.05,0.1 -0.03,0.04 -0.03,0.05 c -0.21,0.32 -0.65,0.6 -1.21,0.6 v -0.2 c 0.38,0 0.74,-0.23 0.87,-0.63 0.11,-0.38 0.12,-0.88 0.12,-1.48 0,-0.52 0,-1.03 -0.09,-1.47 -0.14,-0.63 -0.62,-0.78 -0.9,-0.78 v 0 c -0.32,0 -0.75,0.18 -0.88,0.76 -0.1,0.4 -0.1,0.97 -0.1,1.49 0,0.51 0,1.04 0.1,1.42 0.15,0.55 0.6,0.69 0.88,0.69 v 0.2 c -1.62,0 -1.62,-1.9 -1.62,-2.4 0,-0.5 0,-2.36 1.62,-2.36 1.63,0 1.63,1.86 1.63,2.36 z"
+   id="path3418" />
+</g>    <path
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path3517"
+       d="M 37.870915,12.98663 189.18461,13.669428"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.35277778, 0.70555556;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\nx_f\n\\end{eqnarray*}"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.8,0,0,-0.8,-276.29152,579.38095)"
+       id="g3599"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   id="path3595"
+   d="m 383.23,710.12 v 0.03 l 0.01,0.03 0.01,0.03 0.01,0.04 0.01,0.04 0.01,0.04 0.01,0.04 0.02,0.05 0.01,0.04 0.02,0.05 0.02,0.05 0.02,0.05 0.02,0.05 0.03,0.05 0.02,0.05 0.03,0.05 0.03,0.05 0.03,0.04 0.04,0.05 0.03,0.04 0.04,0.05 0.04,0.04 0.04,0.04 0.04,0.03 0.05,0.03 0.05,0.03 0.02,0.01 0.03,0.02 0.03,0.01 0.02,0.01 0.03,0.01 h 0.03 l 0.03,0.01 0.03,0.01 h 0.03 0.03 l 0.03,0.01 h 0.03 c 0.05,0 0.29,0 0.5,-0.13 -0.28,-0.05 -0.48,-0.3 -0.48,-0.54 0,-0.16 0.11,-0.35 0.38,-0.35 0.22,0 0.54,0.18 0.54,0.58 0,0.52 -0.59,0.66 -0.93,0.66 -0.57,0 -0.92,-0.53 -1.04,-0.76 -0.25,0.66 -0.79,0.76 -1.08,0.76 -1.04,0 -1.61,-1.29 -1.61,-1.53 0,-0.1 0.1,-0.1 0.12,-0.1 0.08,0 0.11,0.02 0.13,0.11 0.34,1.05 1,1.3 1.34,1.3 0.19,0 0.54,-0.09 0.54,-0.67 0,-0.31 -0.17,-0.97 -0.54,-2.36 -0.16,-0.62 -0.51,-1.04 -0.95,-1.04 -0.06,0 -0.29,0 -0.5,0.13 0.25,0.05 0.47,0.26 0.47,0.54 0,0.27 -0.22,0.35 -0.37,0.35 -0.3,0 -0.55,-0.26 -0.55,-0.58 0,-0.46 0.5,-0.65 0.94,-0.65 0.66,0 1.02,0.69 1.05,0.75 0.12,-0.37 0.48,-0.75 1.08,-0.75 1.02,0 1.59,1.28 1.59,1.53 0,0.1 -0.09,0.1 -0.12,0.1 -0.09,0 -0.11,-0.05 -0.13,-0.11 -0.33,-1.07 -1,-1.31 -1.32,-1.31 -0.39,0 -0.55,0.32 -0.55,0.66 0,0.22 0.06,0.44 0.17,0.87 z" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   id="path3597"
+   d="m 388.44,708.38 h 0.68 c 0.14,0 0.23,0 0.23,0.15 0,0.1 -0.09,0.1 -0.21,0.1 h -0.66 c 0.16,0.88 0.22,1.2 0.28,1.4 0.03,0.16 0.19,0.3 0.35,0.3 0.01,0 0.2,0 0.33,-0.08 -0.28,-0.09 -0.3,-0.34 -0.3,-0.38 0,-0.16 0.11,-0.26 0.28,-0.26 0.18,0 0.39,0.16 0.39,0.42 0,0.32 -0.34,0.5 -0.7,0.5 -0.3,0 -0.65,-0.18 -0.84,-0.52 -0.13,-0.26 -0.19,-0.58 -0.34,-1.38 h -0.55 c -0.14,0 -0.23,0 -0.23,-0.16 0,-0.09 0.09,-0.09 0.22,-0.09 h 0.51 c 0,-0.04 -0.44,-2.55 -0.61,-3.29 -0.04,-0.15 -0.16,-0.68 -0.49,-0.68 -0.01,0 -0.18,0 -0.31,0.08 0.29,0.09 0.31,0.34 0.31,0.38 0,0.16 -0.12,0.26 -0.28,0.26 -0.19,0 -0.4,-0.16 -0.4,-0.42 0,-0.32 0.33,-0.5 0.68,-0.5 0.45,0 0.75,0.46 0.84,0.61 0.25,0.47 0.41,1.33 0.42,1.41 z" />
+</g>    <path
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.35277778, 0.70555556;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 38.138185,91.782789 58.18034,-0.375536"
+       id="path3676"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       id="g3764"
+       transform="matrix(0.8,0,0,-0.8,-281.36315,703.59029)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\n\\dot{x}_0\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 383.9,713.24 v 0.03 0.02 l -0.01,0.03 v 0.02 l -0.01,0.03 -0.01,0.02 v 0.03 l -0.01,0.02 -0.01,0.02 -0.01,0.02 -0.02,0.03 -0.01,0.02 -0.02,0.02 -0.01,0.02 -0.02,0.02 -0.01,0.02 -0.02,0.02 -0.02,0.01 -0.02,0.02 -0.02,0.01 -0.02,0.02 -0.03,0.01 -0.02,0.02 -0.02,0.01 -0.03,0.01 -0.02,0.01 h -0.03 l -0.02,0.01 h -0.03 l -0.03,0.01 h -0.02 -0.03 c -0.34,0 -0.54,-0.28 -0.54,-0.53 0,-0.26 0.23,-0.52 0.53,-0.52 0.34,0 0.54,0.28 0.54,0.52 z"
+   id="path3758" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 383.57,710.12 0.01,0.03 0.01,0.03 0.01,0.03 v 0.04 l 0.02,0.04 0.01,0.04 0.01,0.04 0.01,0.05 0.02,0.04 0.02,0.05 0.02,0.05 0.02,0.05 0.02,0.05 0.02,0.05 0.03,0.05 0.03,0.05 0.03,0.05 0.03,0.04 0.03,0.05 0.04,0.04 0.04,0.05 0.03,0.04 0.05,0.04 0.04,0.03 0.05,0.03 0.05,0.03 0.02,0.01 0.03,0.02 0.02,0.01 0.03,0.01 0.03,0.01 h 0.03 l 0.03,0.01 0.03,0.01 h 0.03 0.03 l 0.03,0.01 h 0.03 c 0.05,0 0.29,0 0.5,-0.13 -0.28,-0.05 -0.48,-0.3 -0.48,-0.54 0,-0.16 0.11,-0.35 0.38,-0.35 0.22,0 0.54,0.18 0.54,0.58 0,0.52 -0.59,0.66 -0.93,0.66 -0.58,0 -0.93,-0.53 -1.05,-0.76 -0.25,0.66 -0.78,0.76 -1.07,0.76 -1.04,0 -1.61,-1.29 -1.61,-1.53 0,-0.1 0.1,-0.1 0.12,-0.1 0.08,0 0.11,0.02 0.13,0.11 0.34,1.05 1,1.3 1.34,1.3 0.19,0 0.53,-0.09 0.53,-0.67 0,-0.31 -0.16,-0.97 -0.53,-2.36 -0.16,-0.62 -0.51,-1.04 -0.95,-1.04 -0.06,0 -0.29,0 -0.5,0.13 0.25,0.05 0.47,0.26 0.47,0.54 0,0.27 -0.22,0.35 -0.37,0.35 -0.3,0 -0.55,-0.26 -0.55,-0.58 0,-0.46 0.5,-0.65 0.94,-0.65 0.66,0 1.02,0.69 1.05,0.75 0.12,-0.37 0.47,-0.75 1.07,-0.75 1.03,0 1.6,1.28 1.6,1.53 0,0.1 -0.09,0.1 -0.12,0.1 -0.09,0 -0.11,-0.05 -0.13,-0.11 -0.33,-1.07 -1.01,-1.31 -1.33,-1.31 -0.38,0 -0.54,0.32 -0.54,0.66 0,0.22 0.05,0.44 0.16,0.87 z"
+   id="path3760" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 389.55,707.85 -0.01,0.14 v 0.14 l -0.01,0.13 v 0.12 l -0.02,0.13 -0.01,0.12 -0.02,0.11 -0.02,0.11 -0.03,0.11 -0.03,0.11 -0.03,0.1 -0.04,0.1 -0.04,0.1 -0.05,0.09 -0.05,0.1 -0.03,0.04 -0.03,0.05 c -0.21,0.32 -0.65,0.6 -1.21,0.6 v -0.2 c 0.38,0 0.74,-0.23 0.87,-0.63 0.11,-0.38 0.12,-0.88 0.12,-1.48 0,-0.52 0,-1.03 -0.09,-1.47 -0.14,-0.63 -0.62,-0.78 -0.9,-0.78 v 0 c -0.32,0 -0.75,0.18 -0.88,0.76 -0.1,0.4 -0.1,0.97 -0.1,1.49 0,0.51 0,1.04 0.1,1.42 0.15,0.55 0.6,0.69 0.88,0.69 v 0.2 c -1.62,0 -1.62,-1.9 -1.62,-2.4 0,-0.5 0,-2.36 1.62,-2.36 1.63,0 1.63,1.86 1.63,2.36 z"
+   id="path3762" />
+</g>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\nv_{\\rm max}\n\\end{eqnarray*}\n"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.8,0,0,-0.8,-279.61049,659.74513)"
+       id="g3940"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   id="path3932"
+   d="m 379.98,710.82 v 0.02 0.03 0.02 l -0.01,0.03 v 0.02 0.02 0.02 0.02 l -0.01,0.04 -0.01,0.04 -0.01,0.04 -0.01,0.04 -0.01,0.03 -0.01,0.03 -0.01,0.03 -0.01,0.03 -0.02,0.02 -0.01,0.03 -0.02,0.02 -0.02,0.02 -0.01,0.02 -0.02,0.02 -0.02,0.01 -0.01,0.02 -0.02,0.01 -0.02,0.01 -0.02,0.01 -0.02,0.01 -0.02,0.01 -0.01,0.01 h -0.02 l -0.02,0.01 h -0.02 -0.02 l -0.01,0.01 h -0.02 c -0.25,0 -0.49,-0.26 -0.49,-0.48 0,-0.13 0.05,-0.19 0.16,-0.3 0.21,-0.2 0.34,-0.46 0.34,-0.81 0,-0.42 -0.61,-2.7 -1.78,-2.7 -0.5,0 -0.73,0.35 -0.73,0.87 0,0.56 0.26,1.28 0.57,2.1 0.07,0.17 0.12,0.31 0.12,0.5 0,0.45 -0.32,0.82 -0.81,0.82 -0.94,0 -1.32,-1.44 -1.32,-1.53 0,-0.1 0.1,-0.1 0.12,-0.1 0.1,0 0.11,0.02 0.16,0.18 0.29,1 0.72,1.23 1.01,1.23 0.07,0 0.25,0 0.25,-0.32 0,-0.25 -0.1,-0.52 -0.18,-0.7 -0.43,-1.15 -0.56,-1.61 -0.56,-2.03 0,-1.08 0.87,-1.23 1.33,-1.23 1.68,0 2.25,3.28 2.25,3.8 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path3934"
+   d="m 385.89,707.74 v 0.05 l -0.01,0.06 v 0.05 l -0.01,0.05 -0.01,0.05 -0.01,0.05 -0.01,0.05 -0.01,0.04 -0.02,0.05 -0.02,0.04 -0.02,0.04 -0.02,0.04 -0.02,0.03 -0.03,0.04 -0.03,0.03 -0.03,0.03 -0.03,0.03 -0.03,0.03 -0.04,0.03 -0.04,0.02 -0.04,0.03 -0.05,0.02 -0.04,0.02 -0.05,0.01 -0.05,0.02 -0.06,0.01 -0.05,0.01 -0.06,0.01 -0.06,0.01 h -0.07 l -0.06,0.01 h -0.07 c -0.55,0 -0.93,-0.3 -1.12,-0.65 -0.14,0.49 -0.52,0.65 -1.03,0.65 -0.57,0 -0.94,-0.31 -1.14,-0.68 v 0 0.68 l -1.03,-0.08 v -0.25 c 0.47,0 0.52,-0.05 0.52,-0.39 v -1.8 c 0,-0.3 -0.07,-0.3 -0.52,-0.3 v -0.25 c 0.01,0 0.5,0.03 0.8,0.03 0.25,0 0.74,-0.02 0.8,-0.03 v 0.25 c -0.46,0 -0.53,0 -0.53,0.3 v 1.25 c 0,0.73 0.58,1.07 1.05,1.07 0.49,0 0.55,-0.38 0.55,-0.73 v -1.59 c 0,-0.3 -0.07,-0.3 -0.53,-0.3 v -0.25 c 0.02,0 0.51,0.03 0.8,0.03 0.26,0 0.74,-0.02 0.81,-0.03 v 0.25 c -0.46,0 -0.53,0 -0.53,0.3 v 1.25 c 0,0.73 0.58,1.07 1.04,1.07 0.49,0 0.55,-0.38 0.55,-0.73 v -1.59 c 0,-0.3 -0.06,-0.3 -0.52,-0.3 v -0.25 c 0.02,0 0.5,0.03 0.8,0.03 0.26,0 0.74,-0.02 0.8,-0.03 v 0.25 c -0.45,0 -0.52,0 -0.52,0.3 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path3936"
+   d="m 389.8,707.49 v 0.07 0.07 0.06 0.06 0.03 l -0.01,0.03 v 0.03 0.03 l -0.01,0.03 v 0.03 l -0.01,0.02 -0.01,0.03 -0.01,0.03 v 0.02 l -0.01,0.03 -0.02,0.03 -0.01,0.02 -0.01,0.03 -0.02,0.02 -0.01,0.03 -0.02,0.02 -0.02,0.03 -0.02,0.02 -0.02,0.03 -0.03,0.02 -0.02,0.03 -0.03,0.02 -0.03,0.03 c -0.28,0.23 -0.62,0.34 -1.03,0.34 -0.67,0 -1.14,-0.25 -1.14,-0.67 0,-0.22 0.16,-0.34 0.34,-0.34 0.19,0 0.33,0.14 0.33,0.32 0,0.12 -0.06,0.27 -0.25,0.32 0.25,0.18 0.66,0.18 0.7,0.18 0.39,0 0.82,-0.26 0.82,-0.84 v -0.22 -0.18 -0.69 c 0,-0.67 -0.59,-0.85 -0.9,-0.85 -0.36,0 -0.69,0.23 -0.69,0.57 0,0.39 0.33,0.92 1.59,0.97 v 0.18 c -0.38,-0.01 -0.85,-0.03 -1.36,-0.22 -0.62,-0.23 -0.82,-0.61 -0.82,-0.93 0,-0.6 0.73,-0.77 1.22,-0.77 0.56,0 0.89,0.31 1.04,0.59 0.03,-0.29 0.22,-0.55 0.54,-0.55 0.01,0 0.69,0 0.69,0.66 v 0.38 h -0.24 v -0.38 c 0,-0.07 0,-0.4 -0.26,-0.4 -0.26,0 -0.26,0.33 -0.26,0.42 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path3938"
+   d="m 393.03,707.19 v 0 0 0 0 h -0.01 v 0 0 0 0 0.01 0 0 0 h -0.01 v 0.01 0 0 H 393 v 0.01 0 l -0.01,0.01 v 0 0 l -0.01,0.01 v 0 0 0.01 0 0 h -0.01 v 0 0 0 0 0 0.01 0 0 0 0 0 c 0,0.02 0.46,0.51 0.52,0.58 0.25,0.27 0.49,0.53 1.05,0.54 v 0.25 c -0.2,-0.02 -0.4,-0.03 -0.59,-0.03 -0.21,0 -0.48,0.01 -0.69,0.03 v -0.25 c 0.12,-0.02 0.14,-0.1 0.14,-0.16 0,-0.02 0,-0.12 -0.11,-0.24 l -0.49,-0.55 -0.58,0.66 c -0.07,0.08 -0.07,0.11 -0.07,0.14 0,0.11 0.09,0.15 0.18,0.15 v 0.25 c -0.25,-0.02 -0.52,-0.03 -0.78,-0.03 -0.21,0 -0.47,0.01 -0.68,0.03 v -0.25 c 0.33,0 0.51,0 0.69,-0.21 l 0.87,-1 c 0.01,-0.01 0.06,-0.07 0.06,-0.07 0,-0.02 -0.53,-0.59 -0.6,-0.67 -0.25,-0.28 -0.49,-0.53 -1.05,-0.55 v -0.25 c 0.21,0.02 0.36,0.03 0.58,0.03 0.21,0 0.49,-0.01 0.7,-0.03 v 0.25 c -0.09,0.02 -0.14,0.06 -0.14,0.16 0,0.13 0.07,0.22 0.19,0.34 l 0.49,0.54 0.6,-0.69 c 0.14,-0.15 0.14,-0.16 0.14,-0.2 0,-0.14 -0.16,-0.15 -0.19,-0.15 v -0.25 c 0.06,0.01 0.56,0.03 0.79,0.03 0.22,0 0.45,-0.01 0.67,-0.03 v 0.25 c -0.47,0 -0.53,0.04 -0.69,0.22 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       id="g4124"
+       transform="matrix(0.8,0,0,-0.8,-111.4823,692.26517)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\n\\dot{x}_f\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 383.55,713.24 v 0.03 0.02 0.03 l -0.01,0.02 -0.01,0.03 v 0.02 l -0.01,0.03 -0.01,0.02 -0.01,0.02 -0.01,0.02 -0.01,0.03 -0.02,0.02 -0.01,0.02 -0.02,0.02 -0.01,0.02 -0.02,0.02 -0.02,0.02 -0.02,0.01 -0.02,0.02 -0.02,0.01 -0.02,0.02 -0.02,0.01 -0.03,0.02 -0.02,0.01 -0.02,0.01 -0.03,0.01 h -0.02 l -0.03,0.01 h -0.03 l -0.02,0.01 h -0.03 -0.03 c -0.34,0 -0.54,-0.28 -0.54,-0.53 0,-0.26 0.23,-0.52 0.53,-0.52 0.34,0 0.54,0.28 0.54,0.52 z"
+   id="path4118" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 383.23,710.12 v 0.03 l 0.01,0.03 0.01,0.03 0.01,0.04 0.01,0.04 0.01,0.04 0.01,0.04 0.02,0.05 0.01,0.04 0.02,0.05 0.02,0.05 0.02,0.05 0.02,0.05 0.03,0.05 0.02,0.05 0.03,0.05 0.03,0.05 0.03,0.04 0.04,0.05 0.03,0.04 0.04,0.05 0.04,0.04 0.04,0.04 0.04,0.03 0.05,0.03 0.05,0.03 0.02,0.01 0.03,0.02 0.03,0.01 0.02,0.01 0.03,0.01 h 0.03 l 0.03,0.01 0.03,0.01 h 0.03 0.03 l 0.03,0.01 h 0.03 c 0.05,0 0.29,0 0.5,-0.13 -0.28,-0.05 -0.48,-0.3 -0.48,-0.54 0,-0.16 0.11,-0.35 0.38,-0.35 0.22,0 0.54,0.18 0.54,0.58 0,0.52 -0.59,0.66 -0.93,0.66 -0.57,0 -0.92,-0.53 -1.04,-0.76 -0.25,0.66 -0.79,0.76 -1.08,0.76 -1.04,0 -1.61,-1.29 -1.61,-1.53 0,-0.1 0.1,-0.1 0.12,-0.1 0.08,0 0.11,0.02 0.13,0.11 0.34,1.05 1,1.3 1.34,1.3 0.19,0 0.54,-0.09 0.54,-0.67 0,-0.31 -0.17,-0.97 -0.54,-2.36 -0.16,-0.62 -0.51,-1.04 -0.95,-1.04 -0.06,0 -0.29,0 -0.5,0.13 0.25,0.05 0.47,0.26 0.47,0.54 0,0.27 -0.22,0.35 -0.37,0.35 -0.3,0 -0.55,-0.26 -0.55,-0.58 0,-0.46 0.5,-0.65 0.94,-0.65 0.66,0 1.02,0.69 1.05,0.75 0.12,-0.37 0.48,-0.75 1.08,-0.75 1.02,0 1.59,1.28 1.59,1.53 0,0.1 -0.09,0.1 -0.12,0.1 -0.09,0 -0.11,-0.05 -0.13,-0.11 -0.33,-1.07 -1,-1.31 -1.32,-1.31 -0.39,0 -0.55,0.32 -0.55,0.66 0,0.22 0.06,0.44 0.17,0.87 z"
+   id="path4120" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 388.44,708.38 h 0.68 c 0.14,0 0.23,0 0.23,0.15 0,0.1 -0.09,0.1 -0.21,0.1 h -0.66 c 0.16,0.88 0.22,1.2 0.28,1.4 0.03,0.16 0.19,0.3 0.35,0.3 0.01,0 0.2,0 0.33,-0.08 -0.28,-0.09 -0.3,-0.34 -0.3,-0.38 0,-0.16 0.11,-0.26 0.28,-0.26 0.18,0 0.39,0.16 0.39,0.42 0,0.32 -0.34,0.5 -0.7,0.5 -0.3,0 -0.65,-0.18 -0.84,-0.52 -0.13,-0.26 -0.19,-0.58 -0.34,-1.38 h -0.55 c -0.14,0 -0.23,0 -0.23,-0.16 0,-0.09 0.09,-0.09 0.22,-0.09 h 0.51 c 0,-0.04 -0.44,-2.55 -0.61,-3.29 -0.04,-0.15 -0.16,-0.68 -0.49,-0.68 -0.01,0 -0.18,0 -0.31,0.08 0.29,0.09 0.31,0.34 0.31,0.38 0,0.16 -0.12,0.26 -0.28,0.26 -0.19,0 -0.4,-0.16 -0.4,-0.42 0,-0.32 0.33,-0.5 0.68,-0.5 0.45,0 0.75,0.46 0.84,0.61 0.25,0.47 0.41,1.33 0.42,1.41 z"
+   id="path4122" />
+</g>    <path
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path4215"
+       d="m 38.138185,163.22042 29.047961,-0.10827"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.35277778, 0.70555556;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.35277778, 0.70555556;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 37.608948,210.84572 170.37357,210.73745"
+       id="path4217"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\na_{\\rm max}\n\\end{eqnarray*}\n"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.8,0,0,-0.8,-279.6427,730.88715)"
+       id="g4326"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   id="path4318"
+   d="m 378.81,710.88 -0.02,0.03 -0.01,0.04 -0.02,0.03 -0.02,0.03 -0.02,0.03 -0.02,0.03 -0.02,0.03 -0.02,0.03 -0.03,0.03 -0.02,0.03 -0.02,0.03 -0.03,0.02 -0.02,0.03 -0.03,0.02 -0.03,0.02 -0.03,0.03 -0.02,0.02 -0.03,0.02 -0.03,0.01 -0.04,0.02 -0.03,0.02 -0.03,0.01 -0.03,0.02 -0.04,0.01 -0.03,0.01 -0.04,0.01 -0.04,0.01 h -0.04 l -0.03,0.01 h -0.04 l -0.04,0.01 h -0.05 c -1.16,0 -2.4,-1.47 -2.4,-2.92 0,-0.93 0.55,-1.58 1.33,-1.58 l 0.02,0.21 c -0.5,0 -0.64,0.55 -0.64,0.94 0,0.49 0.32,1.72 0.55,2.17 0.31,0.59 0.76,0.96 1.15,0.96 0.65,0 0.79,-0.82 0.79,-0.88 0,-0.06 -0.02,-0.12 -0.03,-0.17 l -0.5,-1.94 c -0.05,-0.18 -0.05,-0.2 -0.2,-0.37 -0.44,-0.55 -0.84,-0.71 -1.12,-0.71 l -0.02,-0.21 c 0.2,0 0.7,0.03 1.29,0.74 0.08,-0.42 0.43,-0.74 0.91,-0.74 0.35,0 0.58,0.22 0.74,0.54 0.17,0.36 0.3,0.97 0.3,0.99 0,0.1 -0.09,0.1 -0.12,0.1 -0.1,0 -0.11,-0.05 -0.14,-0.18 -0.17,-0.65 -0.35,-1.24 -0.76,-1.24 -0.27,0 -0.3,0.26 -0.3,0.46 0,0.22 0.02,0.3 0.13,0.74 0.11,0.41 0.13,0.51 0.22,0.89 l 0.36,1.39 c 0.07,0.28 0.07,0.3 0.07,0.34 0,0.17 -0.12,0.27 -0.29,0.27 -0.24,0 -0.39,-0.22 -0.42,-0.44 z" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   id="path4320"
+   d="m 386.11,707.74 -0.01,0.05 v 0.06 0.05 l -0.01,0.05 -0.01,0.05 -0.01,0.05 -0.01,0.05 -0.01,0.04 -0.02,0.05 -0.02,0.04 -0.02,0.04 -0.02,0.04 -0.02,0.03 -0.03,0.04 -0.03,0.03 -0.03,0.03 -0.03,0.03 -0.04,0.03 -0.03,0.03 -0.04,0.02 -0.04,0.03 -0.05,0.02 -0.04,0.02 -0.05,0.01 -0.05,0.02 -0.06,0.01 -0.05,0.01 -0.06,0.01 -0.06,0.01 h -0.07 l -0.06,0.01 h -0.07 c -0.56,0 -0.93,-0.3 -1.12,-0.65 -0.14,0.49 -0.52,0.65 -1.03,0.65 -0.57,0 -0.94,-0.31 -1.14,-0.68 h -0.01 v 0.68 l -1.02,-0.08 v -0.25 c 0.46,0 0.52,-0.05 0.52,-0.39 v -1.8 c 0,-0.3 -0.07,-0.3 -0.52,-0.3 v -0.25 c 0.01,0 0.5,0.03 0.79,0.03 0.26,0 0.74,-0.02 0.81,-0.03 v 0.25 c -0.46,0 -0.53,0 -0.53,0.3 v 1.25 c 0,0.73 0.58,1.07 1.04,1.07 0.49,0 0.56,-0.38 0.56,-0.73 v -1.59 c 0,-0.3 -0.07,-0.3 -0.53,-0.3 v -0.25 c 0.02,0 0.51,0.03 0.8,0.03 0.26,0 0.74,-0.02 0.8,-0.03 v 0.25 c -0.45,0 -0.52,0 -0.52,0.3 v 1.25 c 0,0.73 0.58,1.07 1.04,1.07 0.49,0 0.55,-0.38 0.55,-0.73 v -1.59 c 0,-0.3 -0.07,-0.3 -0.52,-0.3 v -0.25 c 0.01,0 0.5,0.03 0.8,0.03 0.25,0 0.74,-0.02 0.8,-0.03 v 0.25 c -0.46,0 -0.52,0 -0.52,0.3 z" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   id="path4322"
+   d="m 390.02,707.49 v 0.07 0.07 0.06 0.06 l -0.01,0.03 v 0.03 0.03 l -0.01,0.03 v 0.03 l -0.01,0.03 v 0.02 l -0.01,0.03 -0.01,0.03 -0.01,0.02 -0.01,0.03 -0.01,0.03 -0.01,0.02 -0.01,0.03 -0.02,0.02 -0.01,0.03 -0.02,0.02 -0.02,0.03 -0.02,0.02 -0.02,0.03 -0.03,0.02 -0.02,0.03 -0.03,0.02 -0.03,0.03 c -0.29,0.23 -0.62,0.34 -1.03,0.34 -0.67,0 -1.14,-0.25 -1.14,-0.67 0,-0.22 0.16,-0.34 0.34,-0.34 0.19,0 0.33,0.14 0.33,0.32 0,0.12 -0.06,0.27 -0.25,0.32 0.25,0.18 0.66,0.18 0.7,0.18 0.39,0 0.82,-0.26 0.82,-0.84 v -0.22 -0.18 -0.69 c 0,-0.67 -0.59,-0.85 -0.9,-0.85 -0.36,0 -0.69,0.23 -0.69,0.57 0,0.39 0.33,0.92 1.59,0.97 v 0.18 c -0.39,-0.01 -0.85,-0.03 -1.36,-0.22 -0.63,-0.23 -0.82,-0.61 -0.82,-0.93 0,-0.6 0.73,-0.77 1.22,-0.77 0.56,0 0.89,0.31 1.04,0.59 0.02,-0.29 0.21,-0.55 0.53,-0.55 0.02,0 0.7,0 0.7,0.66 v 0.38 h -0.24 v -0.38 c 0,-0.07 0,-0.4 -0.26,-0.4 -0.26,0 -0.26,0.33 -0.26,0.42 z" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   id="path4324"
+   d="m 393.24,707.19 v 0 0 0 0 0 0 0 0 0 0.01 0 0 h -0.01 v 0 0.01 0 h -0.01 v 0 0.01 h -0.01 v 0.01 0 h -0.01 v 0.01 0 0 0.01 0 h -0.01 v 0 0 0 0 0 0 0.01 0 0 0 0 0 c 0,0.02 0.46,0.51 0.52,0.58 0.25,0.27 0.49,0.53 1.05,0.54 v 0.25 c -0.2,-0.02 -0.4,-0.03 -0.59,-0.03 -0.21,0 -0.49,0.01 -0.69,0.03 v -0.25 c 0.11,-0.02 0.13,-0.1 0.13,-0.16 0,-0.02 0,-0.12 -0.1,-0.24 l -0.49,-0.55 -0.58,0.66 c -0.07,0.08 -0.08,0.11 -0.08,0.14 0,0.11 0.1,0.15 0.19,0.15 v 0.25 c -0.26,-0.02 -0.52,-0.03 -0.78,-0.03 -0.21,0 -0.48,0.01 -0.68,0.03 v -0.25 c 0.32,0 0.51,0 0.69,-0.21 l 0.87,-1 c 0.01,-0.01 0.06,-0.07 0.06,-0.07 0,-0.02 -0.53,-0.59 -0.6,-0.67 -0.26,-0.28 -0.49,-0.53 -1.05,-0.55 v -0.25 c 0.21,0.02 0.36,0.03 0.58,0.03 0.21,0 0.49,-0.01 0.7,-0.03 v 0.25 c -0.09,0.02 -0.14,0.06 -0.14,0.16 0,0.13 0.07,0.22 0.19,0.34 l 0.48,0.54 0.61,-0.69 c 0.13,-0.15 0.13,-0.16 0.13,-0.2 0,-0.14 -0.16,-0.15 -0.18,-0.15 v -0.25 c 0.06,0.01 0.56,0.03 0.79,0.03 0.22,0 0.44,-0.01 0.67,-0.03 v 0.25 c -0.47,0 -0.53,0.04 -0.69,0.22 z" />
+</g>    <g
+       id="g4536"
+       transform="matrix(0.8,0,0,-0.8,-279.62889,776.59772)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\nd_{\\rm max}\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 380.28,713.91 v 0 0 0 0 0.01 0 0 0.01 0 0.01 h -0.01 v 0 0.01 0 0.01 h -0.01 v 0.01 0 l -0.01,0.01 v 0 0.01 h -0.01 v 0 0 0.01 h -0.01 v 0 0 h -0.01 v 0.01 0 h -0.01 v 0 h -0.01 v 0 0 h -0.01 v 0.01 h -0.01 v 0 h -0.01 v 0 h -0.01 -0.01 v 0 c -0.15,0 -1.1,-0.09 -1.27,-0.11 -0.08,-0.01 -0.14,-0.06 -0.14,-0.19 0,-0.12 0.09,-0.12 0.24,-0.12 0.48,0 0.5,-0.07 0.5,-0.17 l -0.03,-0.2 -0.6,-2.35 c -0.18,0.37 -0.47,0.64 -0.92,0.64 -1.16,0 -2.4,-1.47 -2.4,-2.92 0,-0.93 0.55,-1.58 1.33,-1.58 l 0.02,0.21 c -0.5,0 -0.64,0.55 -0.64,0.94 0,0.49 0.32,1.72 0.55,2.17 0.31,0.59 0.76,0.96 1.15,0.96 0.65,0 0.79,-0.82 0.79,-0.88 0,-0.06 -0.02,-0.12 -0.03,-0.17 l -0.5,-1.94 c -0.05,-0.18 -0.05,-0.2 -0.2,-0.37 -0.43,-0.55 -0.84,-0.71 -1.12,-0.71 l -0.02,-0.21 c 0.2,0 0.69,0.03 1.29,0.74 0.08,-0.42 0.43,-0.74 0.91,-0.74 0.35,0 0.58,0.22 0.74,0.54 0.17,0.36 0.3,0.97 0.3,0.99 0,0.1 -0.09,0.1 -0.12,0.1 -0.1,0 -0.11,-0.05 -0.14,-0.18 -0.17,-0.65 -0.35,-1.24 -0.76,-1.24 -0.27,0 -0.3,0.26 -0.3,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   id="path4528" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 386.07,707.74 -0.01,0.05 v 0.06 0.05 l -0.01,0.05 -0.01,0.05 -0.01,0.05 -0.01,0.05 -0.01,0.04 -0.02,0.05 -0.02,0.04 -0.02,0.04 -0.02,0.04 -0.02,0.03 -0.03,0.04 -0.03,0.03 -0.03,0.03 -0.03,0.03 -0.04,0.03 -0.03,0.03 -0.04,0.02 -0.04,0.03 -0.05,0.02 -0.04,0.02 -0.05,0.01 -0.05,0.02 -0.06,0.01 -0.05,0.01 -0.06,0.01 -0.06,0.01 h -0.07 l -0.06,0.01 h -0.07 c -0.56,0 -0.93,-0.3 -1.12,-0.65 -0.14,0.49 -0.52,0.65 -1.03,0.65 -0.57,0 -0.94,-0.31 -1.14,-0.68 h -0.01 v 0.68 l -1.02,-0.08 v -0.25 c 0.46,0 0.52,-0.05 0.52,-0.39 v -1.8 c 0,-0.3 -0.07,-0.3 -0.52,-0.3 v -0.25 c 0.01,0 0.5,0.03 0.79,0.03 0.26,0 0.74,-0.02 0.81,-0.03 v 0.25 c -0.46,0 -0.53,0 -0.53,0.3 v 1.25 c 0,0.73 0.58,1.07 1.04,1.07 0.49,0 0.56,-0.38 0.56,-0.73 v -1.59 c 0,-0.3 -0.07,-0.3 -0.53,-0.3 v -0.25 c 0.02,0 0.51,0.03 0.8,0.03 0.26,0 0.74,-0.02 0.8,-0.03 v 0.25 c -0.45,0 -0.52,0 -0.52,0.3 v 1.25 c 0,0.73 0.58,1.07 1.04,1.07 0.49,0 0.55,-0.38 0.55,-0.73 v -1.59 c 0,-0.3 -0.07,-0.3 -0.52,-0.3 v -0.25 c 0.01,0 0.5,0.03 0.8,0.03 0.25,0 0.74,-0.02 0.8,-0.03 v 0.25 c -0.45,0 -0.52,0 -0.52,0.3 z"
+   id="path4530" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 389.98,707.49 v 0.07 0.07 0.06 0.06 l -0.01,0.03 v 0.03 0.03 l -0.01,0.03 v 0.03 l -0.01,0.03 v 0.02 l -0.01,0.03 -0.01,0.03 -0.01,0.02 -0.01,0.03 -0.01,0.03 -0.01,0.02 -0.01,0.03 -0.02,0.02 -0.01,0.03 -0.02,0.02 -0.02,0.03 -0.02,0.02 -0.02,0.03 -0.03,0.02 -0.02,0.03 -0.03,0.02 -0.03,0.03 c -0.29,0.23 -0.62,0.34 -1.04,0.34 -0.66,0 -1.13,-0.25 -1.13,-0.67 0,-0.22 0.16,-0.34 0.34,-0.34 0.19,0 0.33,0.14 0.33,0.32 0,0.12 -0.06,0.27 -0.25,0.32 0.25,0.18 0.66,0.18 0.7,0.18 0.39,0 0.82,-0.26 0.82,-0.84 v -0.22 -0.18 -0.69 c 0,-0.67 -0.59,-0.85 -0.9,-0.85 -0.36,0 -0.7,0.23 -0.7,0.57 0,0.39 0.34,0.92 1.6,0.97 v 0.18 c -0.39,-0.01 -0.85,-0.03 -1.36,-0.22 -0.63,-0.23 -0.82,-0.61 -0.82,-0.93 0,-0.6 0.73,-0.77 1.22,-0.77 0.56,0 0.89,0.31 1.04,0.59 0.02,-0.29 0.21,-0.55 0.53,-0.55 0.02,0 0.7,0 0.7,0.66 v 0.38 h -0.24 v -0.38 c 0,-0.07 0,-0.4 -0.26,-0.4 -0.26,0 -0.26,0.33 -0.26,0.42 z"
+   id="path4532" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 393.2,707.19 v 0 0 0 0 0 0 0 0 0 0.01 0 0 h -0.01 v 0 0.01 0 h -0.01 v 0 0.01 h -0.01 v 0.01 0 h -0.01 v 0.01 0 0 0.01 0 h -0.01 v 0 0 0 0 0 0 0.01 0 0 0 0 0 c 0,0.02 0.46,0.51 0.52,0.58 0.25,0.27 0.49,0.53 1.04,0.54 v 0.25 c -0.19,-0.02 -0.39,-0.03 -0.58,-0.03 -0.21,0 -0.49,0.01 -0.7,0.03 v -0.25 c 0.12,-0.02 0.15,-0.1 0.15,-0.16 0,-0.02 0,-0.12 -0.11,-0.24 l -0.49,-0.55 -0.58,0.66 c -0.07,0.08 -0.08,0.11 -0.08,0.14 0,0.11 0.1,0.15 0.19,0.15 v 0.25 c -0.26,-0.02 -0.52,-0.03 -0.78,-0.03 -0.21,0 -0.48,0.01 -0.68,0.03 v -0.25 c 0.32,0 0.5,0 0.69,-0.21 l 0.87,-1 c 0.01,-0.01 0.06,-0.07 0.06,-0.07 0,-0.02 -0.53,-0.59 -0.6,-0.67 -0.26,-0.28 -0.49,-0.53 -1.05,-0.55 v -0.25 c 0.21,0.02 0.36,0.03 0.58,0.03 0.21,0 0.49,-0.01 0.7,-0.03 v 0.25 c -0.09,0.02 -0.14,0.06 -0.14,0.16 0,0.13 0.07,0.22 0.19,0.34 l 0.48,0.54 0.61,-0.69 c 0.14,-0.15 0.14,-0.16 0.14,-0.2 0,-0.14 -0.17,-0.15 -0.19,-0.15 v -0.25 c 0.06,0.01 0.56,0.03 0.79,0.03 0.22,0 0.44,-0.01 0.67,-0.03 v 0.25 c -0.47,0 -0.53,0.04 -0.69,0.22 z"
+   id="path4534" />
+</g>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,32.55181,-7.7678723)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot4639"
+       xml:space="preserve"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4641"><rect
+           y="171.18289"
+           x="82.832512"
+           height="53.538086"
+           width="94.954338"
+           id="rect4643" /></flowRegion><flowPara
+         style="font-size:24.00000191px"
+         id="flowPara4645">5次</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4653"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,48.426811,-7.7678723)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4649"><rect
+           id="rect4647"
+           width="94.954338"
+           height="53.538086"
+           x="82.832512"
+           y="171.18289" /></flowRegion><flowPara
+         id="flowPara4651"
+         style="font-size:24.00000191px">2次</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,62.714311,-7.7678723)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot4661"
+       xml:space="preserve"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4657"><rect
+           y="171.18289"
+           x="82.832512"
+           height="53.538086"
+           width="94.954338"
+           id="rect4655" /></flowRegion><flowPara
+         style="font-size:24.00000191px"
+         id="flowPara4659">5次</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4669"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,105.04765,-7.7678723)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4665"><rect
+           id="rect4663"
+           width="94.954338"
+           height="53.538086"
+           x="82.832512"
+           y="171.18289" /></flowRegion><flowPara
+         id="flowPara4667"
+         style="font-size:24.00000191px">1次</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4677"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,138.38517,-7.7678723)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4673"><rect
+           id="rect4671"
+           width="94.954338"
+           height="53.538086"
+           x="82.832512"
+           y="171.18289" /></flowRegion><flowPara
+         id="flowPara4675"
+         style="font-size:24.00000191px">5次</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,150.02682,-7.7678723)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot4685"
+       xml:space="preserve"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4681"><rect
+           y="171.18289"
+           x="82.832512"
+           height="53.538086"
+           width="94.954338"
+           id="rect4679" /></flowRegion><flowPara
+         style="font-size:24.00000191px"
+         id="flowPara4683">2次</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4693"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,162.19765,-7.7678723)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4689"><rect
+           id="rect4687"
+           width="94.954338"
+           height="53.538086"
+           x="82.832512"
+           y="171.18289" /></flowRegion><flowPara
+         id="flowPara4691"
+         style="font-size:24.00000191px">5次</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4701"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,32.55181,59.965464)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4697"><rect
+           id="rect4695"
+           width="94.954338"
+           height="53.538086"
+           x="82.832512"
+           y="171.18289" /></flowRegion><flowPara
+         id="flowPara4699"
+         style="font-size:24.00000191px">4次</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,48.426811,59.965464)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot4709"
+       xml:space="preserve"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4705"><rect
+           y="171.18289"
+           x="82.832512"
+           height="53.538086"
+           width="94.954338"
+           id="rect4703" /></flowRegion><flowPara
+         style="font-size:24.00000191px"
+         id="flowPara4707">1次</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4717"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,62.714311,59.965464)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4713"><rect
+           id="rect4711"
+           width="94.954338"
+           height="53.538086"
+           x="82.832512"
+           y="171.18289" /></flowRegion><flowPara
+         id="flowPara4715"
+         style="font-size:24.00000191px">4次</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,105.04765,59.965464)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot4725"
+       xml:space="preserve"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4721"><rect
+           y="171.18289"
+           x="82.832512"
+           height="53.538086"
+           width="94.954338"
+           id="rect4719" /></flowRegion><flowPara
+         style="font-size:24.00000191px"
+         id="flowPara4723">0次</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,138.38517,59.965464)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot4733"
+       xml:space="preserve"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4729"><rect
+           y="171.18289"
+           x="82.832512"
+           height="53.538086"
+           width="94.954338"
+           id="rect4727" /></flowRegion><flowPara
+         style="font-size:24.00000191px"
+         id="flowPara4731">4次</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4741"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,150.02682,59.965464)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4737"><rect
+           id="rect4735"
+           width="94.954338"
+           height="53.538086"
+           x="82.832512"
+           y="171.18289" /></flowRegion><flowPara
+         id="flowPara4739"
+         style="font-size:24.00000191px">1次</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,162.19765,59.965464)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot4749"
+       xml:space="preserve"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4745"><rect
+           y="171.18289"
+           x="82.832512"
+           height="53.538086"
+           width="94.954338"
+           id="rect4743" /></flowRegion><flowPara
+         style="font-size:24.00000191px"
+         id="flowPara4747">4次</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4757"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,30.413653,-55.61449)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4753"><rect
+           id="rect4751"
+           width="110.20815"
+           height="61.659924"
+           x="82.832512"
+           y="171.18289" /></flowRegion><flowPara
+         id="flowPara4755"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.00000191px;font-family:'Noto Serif CJK SC';-inkscape-font-specification:'Noto Serif CJK SC'">Step1</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,45.648018,-48.398213)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot4765"
+       xml:space="preserve"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4761"><rect
+           y="171.18289"
+           x="82.832512"
+           height="61.659924"
+           width="110.20815"
+           id="rect4759" /></flowRegion><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.00000191px;font-family:'Noto Serif CJK SC';-inkscape-font-specification:'Noto Serif CJK SC'"
+         id="flowPara4763">Step2</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4773"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,59.813303,-56.416299)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4769"><rect
+           id="rect4767"
+           width="110.20815"
+           height="61.659924"
+           x="82.832512"
+           y="171.18289" /></flowRegion><flowPara
+         id="flowPara4771"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.00000191px;font-family:'Noto Serif CJK SC';-inkscape-font-specification:'Noto Serif CJK SC'">Step3</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4781"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,98.567385,-48.398213)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4777"><rect
+           id="rect4775"
+           width="110.20815"
+           height="61.659924"
+           x="82.832512"
+           y="171.18289" /></flowRegion><flowPara
+         id="flowPara4779"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.00000191px;font-family:'Noto Serif CJK SC';-inkscape-font-specification:'Noto Serif CJK SC'">Step4</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,134.91606,-56.950838)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot4789"
+       xml:space="preserve"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4785"><rect
+           y="171.18289"
+           x="82.832512"
+           height="61.659924"
+           width="110.20815"
+           id="rect4783" /></flowRegion><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.00000191px;font-family:'Noto Serif CJK SC';-inkscape-font-specification:'Noto Serif CJK SC'"
+         id="flowPara4787">Step5</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4797"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,146.40865,-47.863674)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4793"><rect
+           id="rect4791"
+           width="110.20815"
+           height="61.659924"
+           x="82.832512"
+           y="171.18289" /></flowRegion><flowPara
+         id="flowPara4795"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.00000191px;font-family:'Noto Serif CJK SC';-inkscape-font-specification:'Noto Serif CJK SC'">Step6</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,157.63934,-56.68894)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot4805"
+       xml:space="preserve"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion4801"><rect
+           y="171.18289"
+           x="82.832512"
+           height="61.659924"
+           width="110.20815"
+           id="rect4799" /></flowRegion><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.00000191px;font-family:'Noto Serif CJK SC';-inkscape-font-specification:'Noto Serif CJK SC'"
+         id="flowPara4803">Step7</flowPara></flowRoot>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\nt_0\n\\end{eqnarray*}\n"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.8,0,0,-0.8,-256.23556,635.03695)"
+       id="g5770"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   id="path5766"
+   d="m 383.35,711.1 h 0.93 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.87 c 0.36,1.41 0.4,1.61 0.4,1.67 0,0.16 -0.12,0.26 -0.28,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.58,1.45 1.58,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.42,-1.04 -0.95,-1.28 -1.29,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   id="path5768"
+   d="m 388.5,707.85 v 0.14 l -0.01,0.14 v 0.13 l -0.01,0.12 -0.01,0.13 -0.02,0.12 -0.02,0.11 -0.02,0.11 -0.02,0.11 -0.03,0.11 -0.04,0.1 -0.04,0.1 -0.04,0.1 -0.05,0.09 -0.05,0.1 -0.03,0.04 -0.03,0.05 c -0.21,0.32 -0.65,0.6 -1.2,0.6 v -0.2 c 0.37,0 0.74,-0.23 0.86,-0.63 0.11,-0.38 0.12,-0.88 0.12,-1.48 0,-0.52 0,-1.03 -0.09,-1.47 -0.14,-0.63 -0.62,-0.78 -0.89,-0.78 v 0 c -0.33,0 -0.75,0.18 -0.89,0.76 -0.1,0.4 -0.1,0.97 -0.1,1.49 0,0.51 0,1.04 0.1,1.42 0.15,0.55 0.6,0.69 0.89,0.69 v 0.2 c -1.63,0 -1.63,-1.9 -1.63,-2.4 0,-0.5 0,-2.36 1.63,-2.36 1.62,0 1.62,1.86 1.62,2.36 z" />
+</g>    <g
+       id="g6156"
+       transform="matrix(0.8,0,0,-0.8,-114.41881,635.03695)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\nt_f\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 383,711.1 h 0.94 c 0.2,0 0.29,0 0.29,0.2 0,0.11 -0.09,0.11 -0.27,0.11 h -0.88 c 0.36,1.41 0.41,1.61 0.41,1.67 0,0.16 -0.12,0.26 -0.29,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.59,1.45 1.59,1.53 0,0.1 -0.09,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.43,-1.04 -0.96,-1.28 -1.3,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   id="path6152" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 387.39,708.38 h 0.68 c 0.14,0 0.23,0 0.23,0.15 0,0.1 -0.09,0.1 -0.21,0.1 h -0.65 c 0.16,0.88 0.21,1.2 0.27,1.4 0.03,0.16 0.19,0.3 0.36,0.3 0,0 0.19,0 0.32,-0.08 -0.28,-0.09 -0.3,-0.34 -0.3,-0.38 0,-0.16 0.11,-0.26 0.28,-0.26 0.18,0 0.39,0.16 0.39,0.42 0,0.32 -0.34,0.5 -0.69,0.5 -0.31,0 -0.65,-0.18 -0.84,-0.52 -0.14,-0.26 -0.2,-0.58 -0.35,-1.38 h -0.55 c -0.14,0 -0.23,0 -0.23,-0.16 0,-0.09 0.09,-0.09 0.22,-0.09 h 0.51 c 0,-0.04 -0.44,-2.55 -0.61,-3.29 -0.04,-0.15 -0.15,-0.68 -0.49,-0.68 -0.01,0 -0.18,0 -0.31,0.08 0.29,0.09 0.31,0.34 0.31,0.38 0,0.16 -0.12,0.26 -0.28,0.26 -0.19,0 -0.4,-0.16 -0.4,-0.42 0,-0.32 0.33,-0.5 0.68,-0.5 0.45,0 0.75,0.46 0.84,0.61 0.25,0.47 0.41,1.33 0.42,1.41 z"
+   id="path6154" />
+</g>    <g
+       id="g6353"
+       transform="matrix(0.8,0,0,-0.8,-256.23556,709.12048)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\nt_0\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 383.35,711.1 h 0.93 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.87 c 0.36,1.41 0.4,1.61 0.4,1.67 0,0.16 -0.12,0.26 -0.28,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.58,1.45 1.58,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.42,-1.04 -0.95,-1.28 -1.29,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   id="path6349" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 388.5,707.85 v 0.14 l -0.01,0.14 v 0.13 l -0.01,0.12 -0.01,0.13 -0.02,0.12 -0.02,0.11 -0.02,0.11 -0.02,0.11 -0.03,0.11 -0.04,0.1 -0.04,0.1 -0.04,0.1 -0.05,0.09 -0.05,0.1 -0.03,0.04 -0.03,0.05 c -0.21,0.32 -0.65,0.6 -1.2,0.6 v -0.2 c 0.37,0 0.74,-0.23 0.86,-0.63 0.11,-0.38 0.12,-0.88 0.12,-1.48 0,-0.52 0,-1.03 -0.09,-1.47 -0.14,-0.63 -0.62,-0.78 -0.89,-0.78 v 0 c -0.33,0 -0.75,0.18 -0.89,0.76 -0.1,0.4 -0.1,0.97 -0.1,1.49 0,0.51 0,1.04 0.1,1.42 0.15,0.55 0.6,0.69 0.89,0.69 v 0.2 c -1.63,0 -1.63,-1.9 -1.63,-2.4 0,-0.5 0,-2.36 1.63,-2.36 1.62,0 1.62,1.86 1.62,2.36 z"
+   id="path6351" />
+</g>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\nt_f\n\\end{eqnarray*}\n"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.8,0,0,-0.8,-114.41881,709.12048)"
+       id="g6359"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   id="path6355"
+   d="m 383,711.1 h 0.94 c 0.2,0 0.29,0 0.29,0.2 0,0.11 -0.09,0.11 -0.27,0.11 h -0.88 c 0.36,1.41 0.41,1.61 0.41,1.67 0,0.16 -0.12,0.26 -0.29,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.59,1.45 1.59,1.53 0,0.1 -0.09,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.43,-1.04 -0.96,-1.28 -1.3,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   id="path6357"
+   d="m 387.39,708.38 h 0.68 c 0.14,0 0.23,0 0.23,0.15 0,0.1 -0.09,0.1 -0.21,0.1 h -0.65 c 0.16,0.88 0.21,1.2 0.27,1.4 0.03,0.16 0.19,0.3 0.36,0.3 0,0 0.19,0 0.32,-0.08 -0.28,-0.09 -0.3,-0.34 -0.3,-0.38 0,-0.16 0.11,-0.26 0.28,-0.26 0.18,0 0.39,0.16 0.39,0.42 0,0.32 -0.34,0.5 -0.69,0.5 -0.31,0 -0.65,-0.18 -0.84,-0.52 -0.14,-0.26 -0.2,-0.58 -0.35,-1.38 h -0.55 c -0.14,0 -0.23,0 -0.23,-0.16 0,-0.09 0.09,-0.09 0.22,-0.09 h 0.51 c 0,-0.04 -0.44,-2.55 -0.61,-3.29 -0.04,-0.15 -0.15,-0.68 -0.49,-0.68 -0.01,0 -0.18,0 -0.31,0.08 0.29,0.09 0.31,0.34 0.31,0.38 0,0.16 -0.12,0.26 -0.28,0.26 -0.19,0 -0.4,-0.16 -0.4,-0.42 0,-0.32 0.33,-0.5 0.68,-0.5 0.45,0 0.75,0.46 0.84,0.61 0.25,0.47 0.41,1.33 0.42,1.41 z" />
+</g>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\nt_0\n\\end{eqnarray*}\n"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.8,0,0,-0.8,-256.23556,759.9205)"
+       id="g6365"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   id="path6361"
+   d="m 383.35,711.1 h 0.93 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.87 c 0.36,1.41 0.4,1.61 0.4,1.67 0,0.16 -0.12,0.26 -0.28,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.58,1.45 1.58,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.42,-1.04 -0.95,-1.28 -1.29,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path6363"
+   d="m 388.5,707.85 v 0.14 l -0.01,0.14 v 0.13 l -0.01,0.12 -0.01,0.13 -0.02,0.12 -0.02,0.11 -0.02,0.11 -0.02,0.11 -0.03,0.11 -0.04,0.1 -0.04,0.1 -0.04,0.1 -0.05,0.09 -0.05,0.1 -0.03,0.04 -0.03,0.05 c -0.21,0.32 -0.65,0.6 -1.2,0.6 v -0.2 c 0.37,0 0.74,-0.23 0.86,-0.63 0.11,-0.38 0.12,-0.88 0.12,-1.48 0,-0.52 0,-1.03 -0.09,-1.47 -0.14,-0.63 -0.62,-0.78 -0.89,-0.78 v 0 c -0.33,0 -0.75,0.18 -0.89,0.76 -0.1,0.4 -0.1,0.97 -0.1,1.49 0,0.51 0,1.04 0.1,1.42 0.15,0.55 0.6,0.69 0.89,0.69 v 0.2 c -1.63,0 -1.63,-1.9 -1.63,-2.4 0,-0.5 0,-2.36 1.63,-2.36 1.62,0 1.62,1.86 1.62,2.36 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       id="g6371"
+       transform="matrix(0.8,0,0,-0.8,-114.41881,759.9205)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\nt_f\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   d="m 383,711.1 h 0.94 c 0.2,0 0.29,0 0.29,0.2 0,0.11 -0.09,0.11 -0.27,0.11 h -0.88 c 0.36,1.41 0.41,1.61 0.41,1.67 0,0.16 -0.12,0.26 -0.29,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.59,1.45 1.59,1.53 0,0.1 -0.09,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.43,-1.04 -0.96,-1.28 -1.3,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   id="path6367"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   d="m 387.39,708.38 h 0.68 c 0.14,0 0.23,0 0.23,0.15 0,0.1 -0.09,0.1 -0.21,0.1 h -0.65 c 0.16,0.88 0.21,1.2 0.27,1.4 0.03,0.16 0.19,0.3 0.36,0.3 0,0 0.19,0 0.32,-0.08 -0.28,-0.09 -0.3,-0.34 -0.3,-0.38 0,-0.16 0.11,-0.26 0.28,-0.26 0.18,0 0.39,0.16 0.39,0.42 0,0.32 -0.34,0.5 -0.69,0.5 -0.31,0 -0.65,-0.18 -0.84,-0.52 -0.14,-0.26 -0.2,-0.58 -0.35,-1.38 h -0.55 c -0.14,0 -0.23,0 -0.23,-0.16 0,-0.09 0.09,-0.09 0.22,-0.09 h 0.51 c 0,-0.04 -0.44,-2.55 -0.61,-3.29 -0.04,-0.15 -0.15,-0.68 -0.49,-0.68 -0.01,0 -0.18,0 -0.31,0.08 0.29,0.09 0.31,0.34 0.31,0.38 0,0.16 -0.12,0.26 -0.28,0.26 -0.19,0 -0.4,-0.16 -0.4,-0.42 0,-0.32 0.33,-0.5 0.68,-0.5 0.45,0 0.75,0.46 0.84,0.61 0.25,0.47 0.41,1.33 0.42,1.41 z"
+   id="path6369"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       id="g6377"
+       transform="matrix(0.8,0,0,-0.8,-256.23556,830.82889)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\nt_0\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 383.35,711.1 h 0.93 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.87 c 0.36,1.41 0.4,1.61 0.4,1.67 0,0.16 -0.12,0.26 -0.28,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.58,1.45 1.58,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.42,-1.04 -0.95,-1.28 -1.29,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   id="path6373" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 388.5,707.85 v 0.14 l -0.01,0.14 v 0.13 l -0.01,0.12 -0.01,0.13 -0.02,0.12 -0.02,0.11 -0.02,0.11 -0.02,0.11 -0.03,0.11 -0.04,0.1 -0.04,0.1 -0.04,0.1 -0.05,0.09 -0.05,0.1 -0.03,0.04 -0.03,0.05 c -0.21,0.32 -0.65,0.6 -1.2,0.6 v -0.2 c 0.37,0 0.74,-0.23 0.86,-0.63 0.11,-0.38 0.12,-0.88 0.12,-1.48 0,-0.52 0,-1.03 -0.09,-1.47 -0.14,-0.63 -0.62,-0.78 -0.89,-0.78 v 0 c -0.33,0 -0.75,0.18 -0.89,0.76 -0.1,0.4 -0.1,0.97 -0.1,1.49 0,0.51 0,1.04 0.1,1.42 0.15,0.55 0.6,0.69 0.89,0.69 v 0.2 c -1.63,0 -1.63,-1.9 -1.63,-2.4 0,-0.5 0,-2.36 1.63,-2.36 1.62,0 1.62,1.86 1.62,2.36 z"
+   id="path6375" />
+</g>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\nt_f\n\\end{eqnarray*}\n"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.8,0,0,-0.8,-114.41881,830.82889)"
+       id="g6383"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   id="path6379"
+   d="m 383,711.1 h 0.94 c 0.2,0 0.29,0 0.29,0.2 0,0.11 -0.09,0.11 -0.27,0.11 h -0.88 c 0.36,1.41 0.41,1.61 0.41,1.67 0,0.16 -0.12,0.26 -0.29,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.59,1.45 1.59,1.53 0,0.1 -0.09,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.43,-1.04 -0.96,-1.28 -1.3,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   id="path6381"
+   d="m 387.39,708.38 h 0.68 c 0.14,0 0.23,0 0.23,0.15 0,0.1 -0.09,0.1 -0.21,0.1 h -0.65 c 0.16,0.88 0.21,1.2 0.27,1.4 0.03,0.16 0.19,0.3 0.36,0.3 0,0 0.19,0 0.32,-0.08 -0.28,-0.09 -0.3,-0.34 -0.3,-0.38 0,-0.16 0.11,-0.26 0.28,-0.26 0.18,0 0.39,0.16 0.39,0.42 0,0.32 -0.34,0.5 -0.69,0.5 -0.31,0 -0.65,-0.18 -0.84,-0.52 -0.14,-0.26 -0.2,-0.58 -0.35,-1.38 h -0.55 c -0.14,0 -0.23,0 -0.23,-0.16 0,-0.09 0.09,-0.09 0.22,-0.09 h 0.51 c 0,-0.04 -0.44,-2.55 -0.61,-3.29 -0.04,-0.15 -0.15,-0.68 -0.49,-0.68 -0.01,0 -0.18,0 -0.31,0.08 0.29,0.09 0.31,0.34 0.31,0.38 0,0.16 -0.12,0.26 -0.28,0.26 -0.19,0 -0.4,-0.16 -0.4,-0.42 0,-0.32 0.33,-0.5 0.68,-0.5 0.45,0 0.75,0.46 0.84,0.61 0.25,0.47 0.41,1.33 0.42,1.41 z" />
+</g>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,-16.304204,-23.86449)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot6499"
+       xml:space="preserve"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion6495"><rect
+           y="171.18289"
+           x="82.832512"
+           height="61.659924"
+           width="110.20815"
+           id="rect6493" /></flowRegion><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.00000191px;font-family:IPAゴシック;-inkscape-font-specification:IPAゴシック"
+         id="flowPara6497">位置</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6507"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,-15.170276,59.81944)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion6503"><rect
+           id="rect6501"
+           width="110.20815"
+           height="61.659924"
+           x="82.832512"
+           y="171.18289" /></flowRegion><flowPara
+         id="flowPara6505"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.00000191px;font-family:IPAゴシック;-inkscape-font-specification:IPAゴシック">速度</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,-20.461943,132.39087)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot6515"
+       xml:space="preserve"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion6511"><rect
+           y="171.18289"
+           x="82.832512"
+           height="61.659924"
+           width="110.20815"
+           id="rect6509" /></flowRegion><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.00000191px;font-family:IPAゴシック;-inkscape-font-specification:IPAゴシック"
+         id="flowPara6513">加速度</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6523"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,-17.816109,204.9623)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><flowRegion
+         id="flowRegion6519"><rect
+           id="rect6517"
+           width="110.20815"
+           height="61.659924"
+           x="82.832512"
+           y="171.18289" /></flowRegion><flowPara
+         id="flowPara6525"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.00000191px;font-family:IPAゴシック;-inkscape-font-specification:IPAゴシック">躍度</flowPara></flowRoot>    <g
+       id="g7224"
+       transform="matrix(0.59942303,0,0,-0.53660199,-170.74477,410.8278)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\n\\Delta T_1\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   d="m 380.44,714.06 -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 h -0.01 l -0.01,0.01 v 0 l -0.01,0.01 h -0.01 l -0.01,0.01 v 0 h -0.01 l -0.01,0.01 h -0.01 -0.01 -0.01 -0.01 l -0.02,0.01 h -0.01 -0.01 -0.02 -0.01 c -0.17,0 -0.19,-0.05 -0.26,-0.18 l -0.06,-0.82 2.68,-5.36 h -5.37 l 2.69,5.36 0.06,0.82 -3.37,-6.74 c -0.05,-0.09 -0.05,-0.11 -0.05,-0.12 0,-0.08 0.06,-0.08 0.22,-0.08 h 6.92 c 0.16,0 0.22,0 0.22,0.08 0,0.01 0,0.03 -0.05,0.12 z"
+   id="path7218"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   d="m 388.59,713.16 v 0.02 l 0.01,0.02 0.01,0.03 v 0.02 l 0.01,0.02 v 0.02 l 0.01,0.02 0.01,0.02 v 0.01 l 0.01,0.02 v 0.01 l 0.01,0.02 0.01,0.01 v 0.01 l 0.01,0.01 v 0.01 l 0.01,0.01 0.01,0.01 v 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 v 0.01 h 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 h 0.01 0.01 l 0.01,0.01 h 0.01 0.01 c 0.09,0.02 0.42,0.02 0.63,0.02 1,0 1.45,-0.04 1.45,-0.81 0,-0.15 -0.04,-0.54 -0.08,-0.8 -0.01,-0.04 -0.03,-0.16 -0.03,-0.19 0,-0.06 0.03,-0.13 0.12,-0.13 0.11,0 0.13,0.09 0.15,0.23 l 0.27,1.73 c 0.01,0.04 0.02,0.14 0.02,0.17 0,0.11 -0.1,0.11 -0.27,0.11 h -5.53 c -0.24,0 -0.25,-0.01 -0.32,-0.2 l -0.6,-1.75 c -0.01,-0.02 -0.06,-0.16 -0.06,-0.18 0,-0.06 0.05,-0.11 0.12,-0.11 0.1,0 0.11,0.05 0.17,0.21 0.54,1.54 0.8,1.72 2.27,1.72 h 0.39 c 0.28,0 0.28,-0.04 0.28,-0.12 0,-0.06 -0.03,-0.18 -0.04,-0.21 l -1.34,-5.3 c -0.09,-0.37 -0.12,-0.48 -1.18,-0.48 -0.36,0 -0.42,0 -0.42,-0.19 0,-0.12 0.11,-0.12 0.17,-0.12 0.27,0 0.55,0.03 0.82,0.03 0.27,0 0.56,0.01 0.84,0.01 0.28,0 0.56,-0.01 0.83,-0.01 0.29,0 0.59,-0.03 0.87,-0.03 0.1,0 0.22,0 0.22,0.2 0,0.11 -0.08,0.11 -0.34,0.11 -0.25,0 -0.38,0 -0.64,0.02 -0.29,0.03 -0.37,0.06 -0.37,0.22 0,0.01 0,0.06 0.04,0.21 z"
+   id="path7220"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   d="m 392.49,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 0.01 0 0.01 0 0.01 0 0.01 0 l -0.01,0.01 v 0.01 0.01 0 l -0.01,0.01 v 0.01 h -0.01 v 0.01 h -0.01 -0.01 v 0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 v 0.01 h -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 -0.01 v 0 c -0.45,-0.44 -1.09,-0.45 -1.38,-0.45 v -0.25 c 0.17,0 0.63,0 1.02,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.21,0 1.09,-0.02 1.25,-0.03 v 0.25 h -0.27 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
+   id="path7222"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\n\\Delta T_2\n\\end{eqnarray*}\n"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.59942303,0,0,-0.53660199,-155.9281,410.8278)"
+       id="g7696"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   id="path7690"
+   d="m 380.44,714.06 -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 h -0.01 l -0.01,0.01 v 0 l -0.01,0.01 h -0.01 l -0.01,0.01 v 0 h -0.01 l -0.01,0.01 h -0.01 -0.01 -0.01 -0.01 l -0.02,0.01 h -0.01 -0.01 -0.02 -0.01 c -0.17,0 -0.19,-0.05 -0.26,-0.18 l -0.06,-0.82 2.68,-5.36 h -5.37 l 2.69,5.36 0.06,0.82 -3.37,-6.74 c -0.05,-0.09 -0.05,-0.11 -0.05,-0.12 0,-0.08 0.06,-0.08 0.22,-0.08 h 6.92 c 0.16,0 0.22,0 0.22,0.08 0,0.01 0,0.03 -0.05,0.12 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path7692"
+   d="m 388.59,713.16 v 0.02 l 0.01,0.02 0.01,0.03 v 0.02 l 0.01,0.02 v 0.02 l 0.01,0.02 0.01,0.02 v 0.01 l 0.01,0.02 v 0.01 l 0.01,0.02 0.01,0.01 v 0.01 l 0.01,0.01 v 0.01 l 0.01,0.01 0.01,0.01 v 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 v 0.01 h 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 h 0.01 0.01 l 0.01,0.01 h 0.01 0.01 c 0.09,0.02 0.42,0.02 0.63,0.02 1,0 1.45,-0.04 1.45,-0.81 0,-0.15 -0.04,-0.54 -0.08,-0.8 -0.01,-0.04 -0.03,-0.16 -0.03,-0.19 0,-0.06 0.03,-0.13 0.12,-0.13 0.11,0 0.13,0.09 0.15,0.23 l 0.27,1.73 c 0.01,0.04 0.02,0.14 0.02,0.17 0,0.11 -0.1,0.11 -0.27,0.11 h -5.53 c -0.24,0 -0.25,-0.01 -0.32,-0.2 l -0.6,-1.75 c -0.01,-0.02 -0.06,-0.16 -0.06,-0.18 0,-0.06 0.05,-0.11 0.12,-0.11 0.1,0 0.11,0.05 0.17,0.21 0.54,1.54 0.8,1.72 2.27,1.72 h 0.39 c 0.28,0 0.28,-0.04 0.28,-0.12 0,-0.06 -0.03,-0.18 -0.04,-0.21 l -1.34,-5.3 c -0.09,-0.37 -0.12,-0.48 -1.18,-0.48 -0.36,0 -0.42,0 -0.42,-0.19 0,-0.12 0.11,-0.12 0.17,-0.12 0.27,0 0.55,0.03 0.82,0.03 0.27,0 0.56,0.01 0.84,0.01 0.28,0 0.56,-0.01 0.83,-0.01 0.29,0 0.59,-0.03 0.87,-0.03 0.1,0 0.22,0 0.22,0.2 0,0.11 -0.08,0.11 -0.34,0.11 -0.25,0 -0.38,0 -0.64,0.02 -0.29,0.03 -0.37,0.06 -0.37,0.22 0,0.01 0,0.06 0.04,0.21 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path7694"
+   d="m 393.68,706.9 h -0.23 c -0.03,-0.16 -0.1,-0.57 -0.19,-0.64 -0.05,-0.04 -0.59,-0.04 -0.69,-0.04 h -1.28 c 0.73,0.65 0.97,0.84 1.39,1.17 0.52,0.41 1,0.84 1,1.5 0,0.84 -0.74,1.36 -1.63,1.36 -0.87,0 -1.46,-0.61 -1.46,-1.25 0,-0.35 0.3,-0.39 0.37,-0.39 0.17,0 0.37,0.12 0.37,0.37 0,0.13 -0.04,0.37 -0.41,0.37 0.22,0.49 0.69,0.65 1.02,0.65 0.7,0 1.07,-0.54 1.07,-1.11 0,-0.6 -0.44,-1.08 -0.66,-1.33 l -1.69,-1.66 c -0.07,-0.06 -0.07,-0.07 -0.07,-0.27 h 2.88 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\n\\Delta T_1\n\\end{eqnarray*}\n"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.59942303,0,0,-0.53660199,-141.1114,410.8278)"
+       id="g8652"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   id="path8646"
+   d="m 380.44,714.06 -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 h -0.01 l -0.01,0.01 v 0 l -0.01,0.01 h -0.01 l -0.01,0.01 v 0 h -0.01 l -0.01,0.01 h -0.01 -0.01 -0.01 -0.01 l -0.02,0.01 h -0.01 -0.01 -0.02 -0.01 c -0.17,0 -0.19,-0.05 -0.26,-0.18 l -0.06,-0.82 2.68,-5.36 h -5.37 l 2.69,5.36 0.06,0.82 -3.37,-6.74 c -0.05,-0.09 -0.05,-0.11 -0.05,-0.12 0,-0.08 0.06,-0.08 0.22,-0.08 h 6.92 c 0.16,0 0.22,0 0.22,0.08 0,0.01 0,0.03 -0.05,0.12 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path8648"
+   d="m 388.59,713.16 v 0.02 l 0.01,0.02 0.01,0.03 v 0.02 l 0.01,0.02 v 0.02 l 0.01,0.02 0.01,0.02 v 0.01 l 0.01,0.02 v 0.01 l 0.01,0.02 0.01,0.01 v 0.01 l 0.01,0.01 v 0.01 l 0.01,0.01 0.01,0.01 v 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 v 0.01 h 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 h 0.01 0.01 l 0.01,0.01 h 0.01 0.01 c 0.09,0.02 0.42,0.02 0.63,0.02 1,0 1.45,-0.04 1.45,-0.81 0,-0.15 -0.04,-0.54 -0.08,-0.8 -0.01,-0.04 -0.03,-0.16 -0.03,-0.19 0,-0.06 0.03,-0.13 0.12,-0.13 0.11,0 0.13,0.09 0.15,0.23 l 0.27,1.73 c 0.01,0.04 0.02,0.14 0.02,0.17 0,0.11 -0.1,0.11 -0.27,0.11 h -5.53 c -0.24,0 -0.25,-0.01 -0.32,-0.2 l -0.6,-1.75 c -0.01,-0.02 -0.06,-0.16 -0.06,-0.18 0,-0.06 0.05,-0.11 0.12,-0.11 0.1,0 0.11,0.05 0.17,0.21 0.54,1.54 0.8,1.72 2.27,1.72 h 0.39 c 0.28,0 0.28,-0.04 0.28,-0.12 0,-0.06 -0.03,-0.18 -0.04,-0.21 l -1.34,-5.3 c -0.09,-0.37 -0.12,-0.48 -1.18,-0.48 -0.36,0 -0.42,0 -0.42,-0.19 0,-0.12 0.11,-0.12 0.17,-0.12 0.27,0 0.55,0.03 0.82,0.03 0.27,0 0.56,0.01 0.84,0.01 0.28,0 0.56,-0.01 0.83,-0.01 0.29,0 0.59,-0.03 0.87,-0.03 0.1,0 0.22,0 0.22,0.2 0,0.11 -0.08,0.11 -0.34,0.11 -0.25,0 -0.38,0 -0.64,0.02 -0.29,0.03 -0.37,0.06 -0.37,0.22 0,0.01 0,0.06 0.04,0.21 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path8650"
+   d="m 392.49,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 0.01 0 0.01 0 0.01 0 0.01 0 l -0.01,0.01 v 0.01 0.01 0 l -0.01,0.01 v 0.01 h -0.01 v 0.01 h -0.01 -0.01 v 0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 v 0.01 h -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 -0.01 v 0 c -0.45,-0.44 -1.09,-0.45 -1.38,-0.45 v -0.25 c 0.17,0 0.63,0 1.02,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.21,0 1.09,-0.02 1.25,-0.03 v 0.25 h -0.27 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       id="g9164"
+       transform="matrix(0.59942303,0,0,-0.53660199,-66.242384,410.37383)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\n\\Delta T_4\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   d="m 380.44,714.06 -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 h -0.01 l -0.01,0.01 v 0 l -0.01,0.01 h -0.01 l -0.01,0.01 v 0 h -0.01 l -0.01,0.01 h -0.01 -0.01 -0.01 -0.01 l -0.02,0.01 h -0.01 -0.01 -0.02 -0.01 c -0.17,0 -0.19,-0.05 -0.26,-0.18 l -0.06,-0.82 2.68,-5.36 h -5.37 l 2.69,5.36 0.06,0.82 -3.37,-6.74 c -0.05,-0.09 -0.05,-0.11 -0.05,-0.12 0,-0.08 0.06,-0.08 0.22,-0.08 h 6.92 c 0.16,0 0.22,0 0.22,0.08 0,0.01 0,0.03 -0.05,0.12 z"
+   id="path9158"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   d="m 388.59,713.16 v 0.02 l 0.01,0.02 0.01,0.03 v 0.02 l 0.01,0.02 v 0.02 l 0.01,0.02 0.01,0.02 v 0.01 l 0.01,0.02 v 0.01 l 0.01,0.02 0.01,0.01 v 0.01 l 0.01,0.01 v 0.01 l 0.01,0.01 0.01,0.01 v 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 v 0.01 h 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 h 0.01 0.01 l 0.01,0.01 h 0.01 0.01 c 0.09,0.02 0.42,0.02 0.63,0.02 1,0 1.45,-0.04 1.45,-0.81 0,-0.15 -0.04,-0.54 -0.08,-0.8 -0.01,-0.04 -0.03,-0.16 -0.03,-0.19 0,-0.06 0.03,-0.13 0.12,-0.13 0.11,0 0.13,0.09 0.15,0.23 l 0.27,1.73 c 0.01,0.04 0.02,0.14 0.02,0.17 0,0.11 -0.1,0.11 -0.27,0.11 h -5.53 c -0.24,0 -0.25,-0.01 -0.32,-0.2 l -0.6,-1.75 c -0.01,-0.02 -0.06,-0.16 -0.06,-0.18 0,-0.06 0.05,-0.11 0.12,-0.11 0.1,0 0.11,0.05 0.17,0.21 0.54,1.54 0.8,1.72 2.27,1.72 h 0.39 c 0.28,0 0.28,-0.04 0.28,-0.12 0,-0.06 -0.03,-0.18 -0.04,-0.21 l -1.34,-5.3 c -0.09,-0.37 -0.12,-0.48 -1.18,-0.48 -0.36,0 -0.42,0 -0.42,-0.19 0,-0.12 0.11,-0.12 0.17,-0.12 0.27,0 0.55,0.03 0.82,0.03 0.27,0 0.56,0.01 0.84,0.01 0.28,0 0.56,-0.01 0.83,-0.01 0.29,0 0.59,-0.03 0.87,-0.03 0.1,0 0.22,0 0.22,0.2 0,0.11 -0.08,0.11 -0.34,0.11 -0.25,0 -0.38,0 -0.64,0.02 -0.29,0.03 -0.37,0.06 -0.37,0.22 0,0.01 0,0.06 0.04,0.21 z"
+   id="path9160"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   d="m 393.85,706.77 v 0.25 h -0.77 v 3.1 c 0,0.15 0,0.2 -0.16,0.2 -0.08,0 -0.11,0 -0.18,-0.1 l -2.32,-3.2 v -0.25 h 2.06 l 0.05,0.25 h -1.85 l 1.85,2.55 v -2.55 l -0.05,-0.25 v -0.57 c 0,-0.23 0,-0.32 -0.57,-0.32 h -0.18 v -0.25 c 0.35,0.02 0.79,0.03 1.04,0.03 0.26,0 0.71,-0.01 1.06,-0.03 v 0.25 h -0.19 c -0.56,0 -0.56,0.09 -0.56,0.32 v 0.57 z"
+   id="path9162"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\n\\Delta T_5\n\\end{eqnarray*}\n"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.59942303,0,0,-0.53660199,-54.071549,410.37383)"
+       id="g9664"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   id="path9658"
+   d="m 380.44,714.06 -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 h -0.01 l -0.01,0.01 v 0 l -0.01,0.01 h -0.01 l -0.01,0.01 v 0 h -0.01 l -0.01,0.01 h -0.01 -0.01 -0.01 -0.01 l -0.02,0.01 h -0.01 -0.01 -0.02 -0.01 c -0.17,0 -0.19,-0.05 -0.26,-0.18 l -0.06,-0.82 2.68,-5.36 h -5.37 l 2.69,5.36 0.06,0.82 -3.37,-6.74 c -0.05,-0.09 -0.05,-0.11 -0.05,-0.12 0,-0.08 0.06,-0.08 0.22,-0.08 h 6.92 c 0.16,0 0.22,0 0.22,0.08 0,0.01 0,0.03 -0.05,0.12 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path9660"
+   d="m 388.59,713.16 v 0.02 l 0.01,0.02 0.01,0.03 v 0.02 l 0.01,0.02 v 0.02 l 0.01,0.02 0.01,0.02 v 0.01 l 0.01,0.02 v 0.01 l 0.01,0.02 0.01,0.01 v 0.01 l 0.01,0.01 v 0.01 l 0.01,0.01 0.01,0.01 v 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 v 0.01 h 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 h 0.01 0.01 l 0.01,0.01 h 0.01 0.01 c 0.09,0.02 0.42,0.02 0.63,0.02 1,0 1.45,-0.04 1.45,-0.81 0,-0.15 -0.04,-0.54 -0.08,-0.8 -0.01,-0.04 -0.03,-0.16 -0.03,-0.19 0,-0.06 0.03,-0.13 0.12,-0.13 0.11,0 0.13,0.09 0.15,0.23 l 0.27,1.73 c 0.01,0.04 0.02,0.14 0.02,0.17 0,0.11 -0.1,0.11 -0.27,0.11 h -5.53 c -0.24,0 -0.25,-0.01 -0.32,-0.2 l -0.6,-1.75 c -0.01,-0.02 -0.06,-0.16 -0.06,-0.18 0,-0.06 0.05,-0.11 0.12,-0.11 0.1,0 0.11,0.05 0.17,0.21 0.54,1.54 0.8,1.72 2.27,1.72 h 0.39 c 0.28,0 0.28,-0.04 0.28,-0.12 0,-0.06 -0.03,-0.18 -0.04,-0.21 l -1.34,-5.3 c -0.09,-0.37 -0.12,-0.48 -1.18,-0.48 -0.36,0 -0.42,0 -0.42,-0.19 0,-0.12 0.11,-0.12 0.17,-0.12 0.27,0 0.55,0.03 0.82,0.03 0.27,0 0.56,0.01 0.84,0.01 0.28,0 0.56,-0.01 0.83,-0.01 0.29,0 0.59,-0.03 0.87,-0.03 0.1,0 0.22,0 0.22,0.2 0,0.11 -0.08,0.11 -0.34,0.11 -0.25,0 -0.38,0 -0.64,0.02 -0.29,0.03 -0.37,0.06 -0.37,0.22 0,0.01 0,0.06 0.04,0.21 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path9662"
+   d="m 391.24,709.51 0.03,-0.01 h 0.03 l 0.03,-0.01 0.03,-0.01 h 0.03 l 0.03,-0.01 0.03,-0.01 h 0.03 l 0.02,-0.01 h 0.03 0.02 l 0.03,-0.01 h 0.02 0.02 l 0.03,-0.01 h 0.02 0.02 0.02 0.02 0.01 l 0.02,-0.01 h 0.02 0.02 0.01 0.02 0.01 0.01 0.02 0.01 0.01 0.01 0.01 c 0.93,0 1.47,0.63 1.47,0.73 0,0.08 -0.05,0.1 -0.08,0.1 -0.02,0 -0.03,0 -0.06,-0.02 -0.16,-0.07 -0.54,-0.2 -1.05,-0.2 -0.2,0 -0.57,0.01 -1.02,0.18 -0.07,0.04 -0.09,0.04 -0.09,0.04 -0.1,0 -0.1,-0.08 -0.1,-0.19 v -2.05 c 0,-0.12 0,-0.2 0.12,-0.2 0.06,0 0.07,0.01 0.14,0.1 0.3,0.38 0.72,0.43 0.97,0.43 0.42,0 0.61,-0.33 0.64,-0.39 0.13,-0.23 0.17,-0.49 0.17,-0.89 0,-0.21 0,-0.62 -0.21,-0.93 -0.18,-0.25 -0.48,-0.42 -0.82,-0.42 -0.45,0 -0.92,0.26 -1.1,0.71 0.27,-0.02 0.4,0.16 0.4,0.34 0,0.3 -0.26,0.36 -0.35,0.36 -0.01,0 -0.35,0 -0.35,-0.38 0,-0.62 0.58,-1.25 1.42,-1.25 0.89,0 1.67,0.66 1.67,1.54 0,0.78 -0.6,1.51 -1.47,1.51 -0.3,0 -0.67,-0.08 -0.97,-0.34 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       id="g10164"
+       transform="matrix(0.59942303,0,0,-0.53660199,-42.322153,410.70033)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\n\\Delta T_4\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   d="m 380.44,714.06 -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 h -0.01 l -0.01,0.01 v 0 l -0.01,0.01 h -0.01 l -0.01,0.01 v 0 h -0.01 l -0.01,0.01 h -0.01 -0.01 -0.01 -0.01 l -0.02,0.01 h -0.01 -0.01 -0.02 -0.01 c -0.17,0 -0.19,-0.05 -0.26,-0.18 l -0.06,-0.82 2.68,-5.36 h -5.37 l 2.69,5.36 0.06,0.82 -3.37,-6.74 c -0.05,-0.09 -0.05,-0.11 -0.05,-0.12 0,-0.08 0.06,-0.08 0.22,-0.08 h 6.92 c 0.16,0 0.22,0 0.22,0.08 0,0.01 0,0.03 -0.05,0.12 z"
+   id="path10158"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   d="m 388.59,713.16 v 0.02 l 0.01,0.02 0.01,0.03 v 0.02 l 0.01,0.02 v 0.02 l 0.01,0.02 0.01,0.02 v 0.01 l 0.01,0.02 v 0.01 l 0.01,0.02 0.01,0.01 v 0.01 l 0.01,0.01 v 0.01 l 0.01,0.01 0.01,0.01 v 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 v 0.01 h 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 h 0.01 0.01 l 0.01,0.01 h 0.01 0.01 c 0.09,0.02 0.42,0.02 0.63,0.02 1,0 1.45,-0.04 1.45,-0.81 0,-0.15 -0.04,-0.54 -0.08,-0.8 -0.01,-0.04 -0.03,-0.16 -0.03,-0.19 0,-0.06 0.03,-0.13 0.12,-0.13 0.11,0 0.13,0.09 0.15,0.23 l 0.27,1.73 c 0.01,0.04 0.02,0.14 0.02,0.17 0,0.11 -0.1,0.11 -0.27,0.11 h -5.53 c -0.24,0 -0.25,-0.01 -0.32,-0.2 l -0.6,-1.75 c -0.01,-0.02 -0.06,-0.16 -0.06,-0.18 0,-0.06 0.05,-0.11 0.12,-0.11 0.1,0 0.11,0.05 0.17,0.21 0.54,1.54 0.8,1.72 2.27,1.72 h 0.39 c 0.28,0 0.28,-0.04 0.28,-0.12 0,-0.06 -0.03,-0.18 -0.04,-0.21 l -1.34,-5.3 c -0.09,-0.37 -0.12,-0.48 -1.18,-0.48 -0.36,0 -0.42,0 -0.42,-0.19 0,-0.12 0.11,-0.12 0.17,-0.12 0.27,0 0.55,0.03 0.82,0.03 0.27,0 0.56,0.01 0.84,0.01 0.28,0 0.56,-0.01 0.83,-0.01 0.29,0 0.59,-0.03 0.87,-0.03 0.1,0 0.22,0 0.22,0.2 0,0.11 -0.08,0.11 -0.34,0.11 -0.25,0 -0.38,0 -0.64,0.02 -0.29,0.03 -0.37,0.06 -0.37,0.22 0,0.01 0,0.06 0.04,0.21 z"
+   id="path10160"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   d="m 393.85,706.77 v 0.25 h -0.77 v 3.1 c 0,0.15 0,0.2 -0.16,0.2 -0.08,0 -0.11,0 -0.18,-0.1 l -2.32,-3.2 v -0.25 h 2.06 l 0.05,0.25 h -1.85 l 1.85,2.55 v -2.55 l -0.05,-0.25 v -0.57 c 0,-0.23 0,-0.32 -0.57,-0.32 h -0.18 v -0.25 c 0.35,0.02 0.79,0.03 1.04,0.03 0.26,0 0.71,-0.01 1.06,-0.03 v 0.25 h -0.19 c -0.56,0 -0.56,0.09 -0.56,0.32 v 0.57 z"
+   id="path10162"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\n\\Delta T_3\n\\end{eqnarray*}\n"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.59942303,0,0,-0.53660199,-104.72516,410.81169)"
+       id="g10676"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   id="path10670"
+   d="m 380.44,714.06 -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 v 0.01 l -0.01,0.01 -0.01,0.01 v 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 h -0.01 l -0.01,0.01 v 0 l -0.01,0.01 h -0.01 l -0.01,0.01 v 0 h -0.01 l -0.01,0.01 h -0.01 -0.01 -0.01 -0.01 l -0.02,0.01 h -0.01 -0.01 -0.02 -0.01 c -0.17,0 -0.19,-0.05 -0.26,-0.18 l -0.06,-0.82 2.68,-5.36 h -5.37 l 2.69,5.36 0.06,0.82 -3.37,-6.74 c -0.05,-0.09 -0.05,-0.11 -0.05,-0.12 0,-0.08 0.06,-0.08 0.22,-0.08 h 6.92 c 0.16,0 0.22,0 0.22,0.08 0,0.01 0,0.03 -0.05,0.12 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path10672"
+   d="m 388.59,713.16 v 0.02 l 0.01,0.02 0.01,0.03 v 0.02 l 0.01,0.02 v 0.02 l 0.01,0.02 0.01,0.02 v 0.01 l 0.01,0.02 v 0.01 l 0.01,0.02 0.01,0.01 v 0.01 l 0.01,0.01 v 0.01 l 0.01,0.01 0.01,0.01 v 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 v 0.01 h 0.01 l 0.01,0.01 h 0.01 l 0.01,0.01 h 0.01 0.01 l 0.01,0.01 h 0.01 0.01 c 0.09,0.02 0.42,0.02 0.63,0.02 1,0 1.45,-0.04 1.45,-0.81 0,-0.15 -0.04,-0.54 -0.08,-0.8 -0.01,-0.04 -0.03,-0.16 -0.03,-0.19 0,-0.06 0.03,-0.13 0.12,-0.13 0.11,0 0.13,0.09 0.15,0.23 l 0.27,1.73 c 0.01,0.04 0.02,0.14 0.02,0.17 0,0.11 -0.1,0.11 -0.27,0.11 h -5.53 c -0.24,0 -0.25,-0.01 -0.32,-0.2 l -0.6,-1.75 c -0.01,-0.02 -0.06,-0.16 -0.06,-0.18 0,-0.06 0.05,-0.11 0.12,-0.11 0.1,0 0.11,0.05 0.17,0.21 0.54,1.54 0.8,1.72 2.27,1.72 h 0.39 c 0.28,0 0.28,-0.04 0.28,-0.12 0,-0.06 -0.03,-0.18 -0.04,-0.21 l -1.34,-5.3 c -0.09,-0.37 -0.12,-0.48 -1.18,-0.48 -0.36,0 -0.42,0 -0.42,-0.19 0,-0.12 0.11,-0.12 0.17,-0.12 0.27,0 0.55,0.03 0.82,0.03 0.27,0 0.56,0.01 0.84,0.01 0.28,0 0.56,-0.01 0.83,-0.01 0.29,0 0.59,-0.03 0.87,-0.03 0.1,0 0.22,0 0.22,0.2 0,0.11 -0.08,0.11 -0.34,0.11 -0.25,0 -0.38,0 -0.64,0.02 -0.29,0.03 -0.37,0.06 -0.37,0.22 0,0.01 0,0.06 0.04,0.21 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path10674"
+   d="m 392.06,707.95 h 0.05 0.05 l 0.05,-0.01 h 0.05 l 0.04,-0.01 0.05,-0.02 0.04,-0.01 0.05,-0.02 0.04,-0.02 0.04,-0.02 0.04,-0.02 0.04,-0.02 0.03,-0.03 0.04,-0.03 0.03,-0.03 0.03,-0.04 0.03,-0.03 0.03,-0.04 0.03,-0.04 0.03,-0.04 0.02,-0.05 0.02,-0.05 0.02,-0.05 0.02,-0.05 0.01,-0.05 0.02,-0.06 0.01,-0.05 0.01,-0.06 0.01,-0.07 v -0.06 L 393,706.9 v -0.07 c 0,-0.86 -0.51,-1.12 -0.91,-1.12 -0.28,0 -0.9,0.08 -1.19,0.49 0.33,0.02 0.41,0.25 0.41,0.39 0,0.22 -0.17,0.38 -0.39,0.38 -0.19,0 -0.39,-0.12 -0.39,-0.4 0,-0.65 0.73,-1.08 1.57,-1.08 0.98,0 1.65,0.65 1.65,1.34 0,0.55 -0.45,1.09 -1.22,1.25 0.73,0.26 1,0.78 1,1.21 0,0.55 -0.64,0.96 -1.41,0.96 -0.78,0 -1.37,-0.38 -1.37,-0.93 0,-0.24 0.15,-0.37 0.36,-0.37 0.22,0 0.36,0.16 0.36,0.35 0,0.2 -0.14,0.35 -0.36,0.36 0.25,0.31 0.73,0.39 0.99,0.39 0.31,0 0.75,-0.16 0.75,-0.76 0,-0.29 -0.1,-0.61 -0.28,-0.83 -0.23,-0.26 -0.43,-0.28 -0.77,-0.3 -0.18,-0.01 -0.19,-0.01 -0.23,-0.02 -0.01,0 -0.07,-0.01 -0.07,-0.09 0,-0.1 0.06,-0.1 0.18,-0.1 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow2Mstart);marker-end:url(#marker11210)"
+       d="m 53.453905,34.333152 13.351204,-0.06896"
+       id="path10931"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path11250"
+       d="M 83.314024,34.52214 96.665228,34.45318"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11254);marker-end:url(#marker11264)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11732);marker-end:url(#marker11742)"
+       d="m 67.712517,34.366807 15.467871,-0.06896"
+       id="path11728"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path13042"
+       d="m 164.30562,34.439927 5.94287,-0.06896"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13050);marker-end:url(#marker13060)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13806);marker-end:url(#marker13816)"
+       d="m 183.44877,34.404622 4.88453,-0.06896"
+       id="path13044"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path13046"
+       d="m 170.62673,34.473582 12.29287,-0.06896"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14006);marker-end:url(#marker14016)"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker15584);marker-end:url(#marker15594)"
+       d="M 96.665228,34.45318 163.46226,34.38422"
+       id="path15580"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path16500"
+       d="M 53.276618,-1.1653436 52.74208,290.05099"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.35277778, 0.70555556;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       sodipodi:nodetypes="cc" />
+    <path
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path16502"
+       d="m 38.77206,57.806356 14.259507,0.153631"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.35277778, 0.70555556;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       id="g16802"
+       transform="matrix(0.8,0,0,-0.8,-240.88966,635.03695)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\nt_1\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 383.35,711.1 h 0.93 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.87 c 0.36,1.41 0.4,1.61 0.4,1.67 0,0.16 -0.12,0.26 -0.28,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.58,1.45 1.58,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.42,-1.04 -0.95,-1.28 -1.29,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   id="path16798" />
+<path
+   style="fill:#000000;stroke-width:0"
+   inkscape:connector-curvature="0"
+   d="m 387.23,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 0.01 0 0.01 0 0.01 0 l -0.01,0.01 v 0 0.01 0.01 0.01 h -0.01 v 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0 h -0.01 l -0.01,0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0.01 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 c -0.45,-0.44 -1.08,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.02,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.21,0 1.09,-0.02 1.25,-0.03 v 0.25 h -0.27 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
+   id="path16800" />
+</g>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\nt_2\n\\end{eqnarray*}\n"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.8,0,0,-0.8,-224.48539,635.03695)"
+       id="g17398"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   id="path17394"
+   d="m 383.35,711.1 h 0.93 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.87 c 0.36,1.41 0.4,1.61 0.4,1.67 0,0.16 -0.12,0.26 -0.28,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.58,1.45 1.58,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.42,-1.04 -0.95,-1.28 -1.29,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path17396"
+   d="m 388.42,706.9 h -0.24 c -0.02,-0.16 -0.09,-0.57 -0.18,-0.64 -0.06,-0.04 -0.59,-0.04 -0.69,-0.04 h -1.29 c 0.74,0.65 0.98,0.84 1.4,1.17 0.52,0.41 1,0.84 1,1.5 0,0.84 -0.74,1.36 -1.64,1.36 -0.86,0 -1.45,-0.61 -1.45,-1.25 0,-0.35 0.3,-0.39 0.37,-0.39 0.17,0 0.37,0.12 0.37,0.37 0,0.13 -0.05,0.37 -0.41,0.37 0.22,0.49 0.69,0.65 1.02,0.65 0.7,0 1.06,-0.54 1.06,-1.11 0,-0.6 -0.43,-1.08 -0.66,-1.33 l -1.68,-1.66 c -0.07,-0.06 -0.07,-0.07 -0.07,-0.27 h 2.88 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       id="g18000"
+       transform="matrix(0.8,0,0,-0.8,-211.78531,635.03695)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\nt_3\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   d="m 383.35,711.1 h 0.93 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.87 c 0.36,1.41 0.4,1.61 0.4,1.67 0,0.16 -0.12,0.26 -0.28,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.58,1.45 1.58,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.42,-1.04 -0.95,-1.28 -1.29,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   id="path17996"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   d="m 386.8,707.95 h 0.05 0.05 l 0.05,-0.01 h 0.04 l 0.05,-0.01 0.05,-0.02 0.04,-0.01 0.04,-0.02 0.05,-0.02 0.04,-0.02 0.04,-0.02 0.03,-0.02 0.04,-0.03 0.04,-0.03 0.03,-0.03 0.03,-0.04 0.03,-0.03 0.03,-0.04 0.03,-0.04 0.02,-0.04 0.03,-0.05 0.02,-0.05 0.02,-0.05 0.02,-0.05 0.01,-0.05 0.02,-0.06 0.01,-0.05 0.01,-0.06 v -0.07 l 0.01,-0.06 v -0.07 -0.07 c 0,-0.86 -0.5,-1.12 -0.9,-1.12 -0.28,0 -0.9,0.08 -1.19,0.49 0.33,0.02 0.4,0.25 0.4,0.39 0,0.22 -0.16,0.38 -0.38,0.38 -0.2,0 -0.39,-0.12 -0.39,-0.4 0,-0.65 0.72,-1.08 1.57,-1.08 0.97,0 1.64,0.65 1.64,1.34 0,0.55 -0.44,1.09 -1.21,1.25 0.73,0.26 1,0.78 1,1.21 0,0.55 -0.64,0.96 -1.42,0.96 -0.77,0 -1.37,-0.38 -1.37,-0.93 0,-0.24 0.16,-0.37 0.37,-0.37 0.21,0 0.35,0.16 0.35,0.35 0,0.2 -0.14,0.35 -0.35,0.36 0.24,0.31 0.72,0.39 0.98,0.39 0.32,0 0.76,-0.16 0.76,-0.76 0,-0.29 -0.1,-0.61 -0.28,-0.83 -0.23,-0.26 -0.43,-0.28 -0.78,-0.3 -0.17,-0.01 -0.19,-0.01 -0.22,-0.02 -0.02,0 -0.07,-0.01 -0.07,-0.09 0,-0.1 0.06,-0.1 0.18,-0.1 z"
+   id="path17998"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\nt_4\n\\end{eqnarray*}\n"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.8,0,0,-0.8,-146.16859,635.03695)"
+       id="g18608"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   id="path18604"
+   d="m 383.35,711.1 h 0.93 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.87 c 0.36,1.41 0.4,1.61 0.4,1.67 0,0.16 -0.12,0.26 -0.28,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.58,1.45 1.58,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.42,-1.04 -0.95,-1.28 -1.29,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path18606"
+   d="m 388.59,706.77 v 0.25 h -0.78 v 3.1 c 0,0.15 0,0.2 -0.15,0.2 -0.09,0 -0.11,0 -0.18,-0.1 l -2.32,-3.2 v -0.25 h 2.06 l 0.05,0.25 h -1.85 l 1.85,2.55 v -2.55 l -0.05,-0.25 v -0.57 c 0,-0.23 0,-0.32 -0.57,-0.32 h -0.19 v -0.25 c 0.35,0.02 0.8,0.03 1.05,0.03 0.26,0 0.71,-0.01 1.06,-0.03 v 0.25 h -0.19 c -0.57,0 -0.57,0.09 -0.57,0.32 v 0.57 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       id="g19222"
+       transform="matrix(0.8,0,0,-0.8,-137.70187,635.03695)"
+       xml:space="preserve"
+       stroke-miterlimit="10.433"
+       font-style="normal"
+       font-variant="normal"
+       font-weight="normal"
+       font-stretch="normal"
+       font-size-adjust="none"
+       letter-spacing="normal"
+       word-spacing="normal"
+       ns0:text="\\begin{eqnarray*}\nt_5\n\\end{eqnarray*}\n"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   d="m 383.35,711.1 h 0.93 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.87 c 0.36,1.41 0.4,1.61 0.4,1.67 0,0.16 -0.12,0.26 -0.28,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.58,1.45 1.58,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.42,-1.04 -0.95,-1.28 -1.29,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   id="path19218"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   d="m 385.97,709.51 0.04,-0.01 h 0.03 l 0.03,-0.01 0.03,-0.01 h 0.03 l 0.03,-0.01 0.03,-0.01 h 0.02 l 0.03,-0.01 h 0.03 0.02 l 0.02,-0.01 h 0.03 0.02 l 0.02,-0.01 h 0.02 0.02 0.02 0.02 0.02 l 0.02,-0.01 h 0.02 0.01 0.02 0.01 0.02 0.01 0.01 0.02 0.01 0.01 0.01 c 0.92,0 1.47,0.63 1.47,0.73 0,0.08 -0.05,0.1 -0.08,0.1 -0.02,0 -0.03,0 -0.06,-0.02 -0.17,-0.07 -0.54,-0.2 -1.06,-0.2 -0.19,0 -0.56,0.01 -1.02,0.18 -0.07,0.04 -0.08,0.04 -0.09,0.04 -0.09,0 -0.09,-0.08 -0.09,-0.19 v -2.05 c 0,-0.12 0,-0.2 0.11,-0.2 0.07,0 0.07,0.01 0.14,0.1 0.3,0.38 0.73,0.43 0.98,0.43 0.41,0 0.6,-0.33 0.64,-0.39 0.12,-0.23 0.17,-0.49 0.17,-0.89 0,-0.21 0,-0.62 -0.21,-0.93 -0.18,-0.25 -0.48,-0.42 -0.82,-0.42 -0.46,0 -0.93,0.26 -1.1,0.71 0.27,-0.02 0.4,0.16 0.4,0.34 0,0.3 -0.26,0.36 -0.35,0.36 -0.01,0 -0.35,0 -0.35,-0.38 0,-0.62 0.57,-1.25 1.41,-1.25 0.9,0 1.68,0.66 1.68,1.54 0,0.78 -0.6,1.51 -1.47,1.51 -0.31,0 -0.67,-0.08 -0.98,-0.34 z"
+   id="path19220"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <g
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
+       ns0:text="\\begin{eqnarray*}\nt_6\n\\end{eqnarray*}\n"
+       word-spacing="normal"
+       letter-spacing="normal"
+       font-size-adjust="none"
+       font-stretch="normal"
+       font-weight="normal"
+       font-variant="normal"
+       font-style="normal"
+       stroke-miterlimit="10.433"
+       xml:space="preserve"
+       transform="matrix(0.8,0,0,-0.8,-125.53099,635.03695)"
+       id="g19842"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+<path
+   id="path19838"
+   d="m 383.35,711.1 h 0.93 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.87 c 0.36,1.41 0.4,1.61 0.4,1.67 0,0.16 -0.12,0.26 -0.28,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.02,0 1.58,1.45 1.58,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.42,-1.04 -0.95,-1.28 -1.29,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+<path
+   id="path19840"
+   d="m 385.94,707.91 v 0.1 0.11 0.1 l 0.01,0.1 0.01,0.1 0.01,0.1 0.01,0.1 0.02,0.09 0.01,0.1 0.03,0.09 0.02,0.09 0.03,0.09 0.02,0.04 0.01,0.05 0.02,0.04 0.02,0.04 0.02,0.04 0.02,0.04 0.03,0.04 0.02,0.04 c 0.24,0.38 0.62,0.64 1.07,0.64 0.2,0 0.48,-0.06 0.62,-0.25 -0.17,-0.01 -0.32,-0.13 -0.32,-0.33 0,-0.17 0.12,-0.33 0.33,-0.33 0.21,0 0.34,0.14 0.34,0.34 0,0.41 -0.3,0.77 -0.99,0.77 -1.01,0 -2.03,-0.92 -2.03,-2.41 0,-1.81 0.85,-2.35 1.62,-2.35 0.85,0 1.59,0.65 1.59,1.56 0,0.88 -0.7,1.54 -1.52,1.54 l -0.04,-0.2 c 0.32,0 0.54,-0.12 0.72,-0.38 0.16,-0.27 0.17,-0.56 0.17,-0.96 0,-0.4 0,-0.69 -0.19,-0.96 -0.17,-0.24 -0.39,-0.38 -0.73,-0.38 v 0 c -0.35,0 -0.62,0.21 -0.77,0.51 -0.1,0.21 -0.16,0.56 -0.16,0.98 0,0.67 0.4,1.19 0.96,1.19 l 0.04,0.2 c -0.56,0 -0.87,-0.37 -1.02,-0.68 z"
+   inkscape:connector-curvature="0"
+   style="fill:#000000;stroke-width:0" />
+</g>    <path
+       inkscape:export-ydpi="200"
+       inkscape:export-xdpi="200"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path1397"
+       d="m 53.831881,88.005771 41.926204,-0.06896"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker1401);marker-end:url(#marker1549)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker2305);marker-end:url(#marker2465)"
+       d="m 96.816419,87.936811 66.797051,-0.06896"
+       id="path2301"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker3149);marker-end:url(#marker3321)"
+       d="m 164.67181,87.867851 23.93453,-0.06896"
+       id="path3145"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="56.393867"
+       y="85.456177"
+       id="text4075"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><tspan
+         sodipodi:role="line"
+         id="tspan4073"
+         x="56.393867"
+         y="85.456177"
+         style="font-size:4.23333311px;stroke-width:0.26458332">第一加速(減速)区間</tspan></text>
+    <text
+       id="text4079"
+       y="85.055275"
+       x="118.7422"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><tspan
+         style="font-size:4.23333311px;stroke-width:0.26458332"
+         y="85.055275"
+         x="118.7422"
+         id="tspan4077"
+         sodipodi:role="line">等速区間</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="164.4453"
+       y="84.782631"
+       id="text4083"
+       inkscape:export-filename="/home/daishi/work/program/trajectory/trapezoid-5251525/doc/org/images/png/01_whole_body.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><tspan
+         sodipodi:role="line"
+         id="tspan4081"
+         x="164.4453"
+         y="84.782631"
+         style="font-size:4.23333311px;stroke-width:0.26458332">第二加速(減速)区間</tspan></text>
+  </g>
+</svg>
