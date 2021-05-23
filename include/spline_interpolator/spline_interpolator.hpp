@@ -51,8 +51,8 @@ public:
   /// If you don't give interval time(dT=0.0),
   /// Minmum interval time dT are internally calculated automatically. \n
   /// This means 100% mimum-time spline-path in the limitation.
-  virtual RetCode generate_path( const double& ts=0.0, const double& tf=0.0,
-                                 const double& xs=0.0, const double& xf=0.0,
+  virtual RetCode generate_path( const double& ts, const double& tf,
+                                 const double& xs, const double& xf,
                                  const double& vs=0.0, const double& vf=0.0,
                                  const double& as=0.0, const double& af=0.0 );
 
@@ -72,7 +72,7 @@ public:
   /// Interpolator sets start & finish velocity, acceleration,(and jerk) as zero,
   ///
   /// ```
-  /// (ts, xs, vs,   as, js=0),
+  /// (ts, xs, vs,   as=0, js=0),
   /// (t1, x1, v1=?, a1=?, j1=?),
   /// (t2, x2, v2=?, a2=?, j2=?),
   ///  ...,
@@ -90,19 +90,26 @@ public:
   /// - SPLINE_SUCCESS
   virtual RetCode generate_path( const TPVAQueue& target_tpva_queue )=0;
 
-  /// Generate a spline-path from Position(, Velocity) queue
-  /// @param[in] target_pv_queue target Position, Velocity queue
+  /// Generate a spline-path from Position(, Velocity, Acceleration) queue
+  /// @param[in] xs start position
+  /// @param[in] xf finish position
+  /// @param[in] vs start velocity (default: 0.0)
+  /// @param[in] vf finish velocity (default: 0.0)
+  /// @param[in] as start acceleration (default: 0.0)
+  /// @param[in] af finish acceleration (default: 0.0)
   /// @return
   /// - SPLINE_SUCCESS and total interval time (tf - ts)
-  /// you only give start position & velocity & acceleration and don't give time. \n
+  /// you only give position & velocity & acceleration and don't give time. \n
   ///
   /// ```
-  /// (xs, vs, as), (x1, v1, a1), (x2, v2, a2),..., (xf, vf, af)
+  /// (xs, vs, as), (xf, vf, af)
   /// ```
   ///
-  /// Minmum interval time -> ts=0, t1, t2,..., tf are internally calculated automatically. \n
+  /// Minmum interval time -> dT(ts=0, tf) are internally calculated automatically. \n
   /// This means 100% mimum-time spline-path in the limitation.
-  virtual RetCode generate_path( const PVAQueue& target_pva_queue )=0;
+  virtual RetCode generate_path_from_pva( const double& xs,     const double& xf,
+                                          const double& vs,     const double& vf,
+                                          const double& as=0.0, const double& af=0.0 )=0;
 
   /// Pop the position and velocity at the input-time from generated tragectory
   /// @param[in] t input time

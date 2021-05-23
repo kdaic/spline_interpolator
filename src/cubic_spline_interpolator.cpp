@@ -151,8 +151,10 @@ RetCode CubicSplineInterpolator::generate_path(
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-RetCode CubicSplineInterpolator::generate_path(
-                 const PVAQueue& target_pva_queue ) {
+RetCode CubicSplineInterpolator::generate_path_from_pva(
+                                 const double& xs, const double& xf,
+                                 const double& vs, const double& vf,
+                                 const double& as, const double& af) {
   THROW( UndefSplineException,
          "CubicSplineInterpolator not supports this type - 100 per path generation" );
   return SPLINE_NOT_DEF_100PER_PATH;

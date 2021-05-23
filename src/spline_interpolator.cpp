@@ -57,7 +57,9 @@ RetCode SplineInterpolator::generate_path(
     target_pva_queue.push_back(pvas);
     target_pva_queue.push_back(pvaf);
 
-    return generate_path( target_pva_queue );
+    return generate_path_from_pva( xs, xf,
+                                   vs, vf,
+                                   as, af );
 
   } else {
 
