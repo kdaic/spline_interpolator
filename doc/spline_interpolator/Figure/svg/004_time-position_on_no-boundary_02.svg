@@ -28,14 +28,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="198.24118"
+     inkscape:cx="315.74118"
      inkscape:cy="194.42764"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1562"
      inkscape:window-height="812"
-     inkscape:window-x="690"
+     inkscape:window-x="358"
      inkscape:window-y="177"
      inkscape:window-maximized="0" />
   <defs
@@ -223,6 +223,13 @@
      inkscape:groupmode="layer"
      inkscape:label="レイヤー 1"
      transform="translate(0,-237)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       id="rect1000"
+       width="160.60208"
+       height="59.53125"
+       x="0"
+       y="236.93959" />
     <path
        d="m 89.358185,259.64754 a 1.0205041,0.8018086 0 0 1 -0.997117,0.81953 1.0205041,0.8018086 0 0 1 -1.043366,-0.78318 1.0205041,0.8018086 0 0 1 0.996465,-0.82001 1.0205041,0.8018086 0 0 1 1.043989,0.78266"
        sodipodi:open="true"
@@ -459,12 +466,5 @@
            y="24.237213"
            style="font-size:26.66666603px" /></flowRegion><flowPara
          id="flowPara1092-9"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Century Schoolbook L';-inkscape-font-specification:'Century Schoolbook L'">?</flowPara></flowRoot>    <rect
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
-       id="rect1000"
-       width="160.60208"
-       height="59.53125"
-       x="0"
-       y="236.93959" />
-  </g>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Century Schoolbook L';-inkscape-font-specification:'Century Schoolbook L'">?</flowPara></flowRoot>  </g>
 </svg>

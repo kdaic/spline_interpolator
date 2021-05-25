@@ -28,14 +28,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.90509668"
-     inkscape:cx="535.75339"
+     inkscape:cx="577.18543"
      inkscape:cy="306.74881"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1853"
      inkscape:window-height="1025"
-     inkscape:window-x="690"
+     inkscape:window-x="67"
      inkscape:window-y="27"
      inkscape:window-maximized="1" />
   <defs
@@ -209,6 +209,13 @@
      inkscape:groupmode="layer"
      inkscape:label="レイヤー 1"
      transform="translate(0,-217)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       id="rect1104"
+       width="299.92651"
+       height="79.805008"
+       x="0.29232603"
+       y="216.61034" />
     <path
        d="m 163.21231,266.29683 a 1.0205041,0.8018086 0 0 1 -0.99712,0.81953 1.0205041,0.8018086 0 0 1 -1.04336,-0.78318 1.0205041,0.8018086 0 0 1 0.99646,-0.82001 1.0205041,0.8018086 0 0 1 1.04399,0.78266"
        sodipodi:open="true"
@@ -843,13 +850,6 @@
        d="m 72.467096,256.55144 11.158523,-3.22848"
        id="path972-0"
        inkscape:connector-curvature="0" />
-    <rect
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
-       id="rect1104"
-       width="299.92651"
-       height="79.805008"
-       x="0.29232603"
-       y="216.61034" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 85.573753,262.66469 -14.725366,0.0218 -0.0019,-13.85705 14.936429,0.21447 -0.0379,4.86334 23.817054,7.14401 0.86596,-5.13154 3.47271,7.97741 -7.20962,4.10474 2.04413,-4.05673 -23.07065,-6.28457 z"

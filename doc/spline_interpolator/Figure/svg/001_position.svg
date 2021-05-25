@@ -28,14 +28,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="49.492322"
+     inkscape:cx="28.026581"
      inkscape:cy="84.183618"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1853"
      inkscape:window-height="1025"
-     inkscape:window-x="690"
+     inkscape:window-x="67"
      inkscape:window-y="27"
      inkscape:window-maximized="1" />
   <defs
@@ -64,7 +64,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -73,6 +73,16 @@
      inkscape:groupmode="layer"
      inkscape:label="レイヤー 1"
      transform="translate(0,-277)">
+    <rect
+       style="fill:#ffffff;fill-opacity:0.90751445;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       id="rect824"
+       width="79.976891"
+       height="19.765476"
+       x="-0.016212609"
+       y="277.1171"
+       inkscape:export-filename="../png/rect824.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
     <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
@@ -111,12 +121,5 @@
        sodipodi:end="6.0609525"
        sodipodi:open="true"
        d="m 42.671808,290.40903 a 1.0690781,0.8018086 0 0 1 -1.009713,0.80057 1.0690781,0.8018086 0 0 1 -1.12185,-0.71166 1.0690781,0.8018086 0 0 1 0.885121,-0.87961 1.0690781,0.8018086 0 0 1 1.220151,0.61397" />
-    <rect
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
-       id="rect824"
-       width="79.976891"
-       height="19.765476"
-       x="-0.016212609"
-       y="277.1171" />
   </g>
 </svg>

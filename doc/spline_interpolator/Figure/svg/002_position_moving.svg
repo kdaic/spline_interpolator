@@ -28,14 +28,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284273"
-     inkscape:cx="55.533743"
+     inkscape:cx="139.50267"
      inkscape:cy="13.5859"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1562"
      inkscape:window-height="812"
-     inkscape:window-x="690"
+     inkscape:window-x="358"
      inkscape:window-y="125"
      inkscape:window-maximized="0" />
   <defs
@@ -95,7 +95,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -104,6 +104,13 @@
      inkscape:groupmode="layer"
      inkscape:label="レイヤー 1"
      transform="translate(0,-277)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       id="rect890"
+       width="79.771866"
+       height="19.976034"
+       x="0.13229166"
+       y="277.15625" />
     <g
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="\\begin{eqnarray}\nx \\nonumber\n\\end{eqnarray}"
@@ -232,12 +239,5 @@
        id="path5354"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccc" />
-    <rect
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
-       id="rect890"
-       width="79.771866"
-       height="19.976034"
-       x="0.13229166"
-       y="277.15625" />
   </g>
 </svg>
