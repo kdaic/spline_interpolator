@@ -689,3 +689,43 @@ const double Trapezoid5251525::finish_time() {
 const double Trapezoid5251525::v_limit() {
   return v_limit_;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+TrapezoidalInterpolator::TrapezoidalInterpolator() :
+  SplineInterpolator() {
+  is_v_limit_ = true;
+}
+
+TrapezoidalInterpolator::~TrapezoidalInterpolator() {
+}
+
+
+RetCode TrapezoidalInterpolator::generate_path(
+                                 const TPQueue& target_tp_queue,
+                                 const double vs, const double vf,
+                                 const double as, const double af ) {
+  return SPLINE_SUCCESS;
+}
+
+RetCode TrapezoidalInterpolator::generate_path(
+                                 const TPVAQueue& target_tpva_queue ) {
+  return SPLINE_SUCCESS;
+}
+
+RetCode TrapezoidalInterpolator::generate_path_from_pva(
+                                 const double& xs, const double& xf,
+                                 const double& vs, const double& vf,
+                                 const double& as, const double& af ) {
+  return SPLINE_SUCCESS;
+}
+
+const TimePVA TrapezoidalInterpolator::pop( const double& t ) {
+  TimePVA ret( t, PosVelAcc(0, 0, 0) );
+
+  return ret;
+}
+
+
+
+
