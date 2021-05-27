@@ -291,8 +291,6 @@ struct TimeVal {
 template
 struct TimeVal<double>;
 
-/////////////////////////////////////////////////////////////////////////////////////////
-
 // /// type definition of Time-Position struct data derived from TimeVal<T>
 typedef TimeVal<double> TimePosition;
 
@@ -301,11 +299,7 @@ typedef TimeVal<double> TimePosition;
 template
 struct TimeVal<PosVelAcc>;
 
-/////////////////////////////////////////////////////////////////////////////////////////
-
 typedef TimeVal<PosVelAcc> TimePVA;
-
-/////////////////////////////////////////////////////////////////////////////////////////
 
 template
 struct TimeVal<PVAList>;
@@ -557,6 +551,61 @@ public:
 
 /// Position & Velocity Queue buffer class
 typedef std::deque<PosVelAcc> PVAQueue;
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/// 台形型5251525次軌道の構成パラメータ
+struct TrapezoidConfig {
+public:
+  /// コンストラクタ
+  TrapezoidConfig() :
+    a_limit(1200), d_limit(1200),
+    v_limit(170),
+    asr(0.8), dsr(0.8),
+    ratio_acc_dec(0.5) {
+  };
+
+  /// コンストラクタ
+  /// @param[in] _a_limit 加速度(第一加速度)リミットの参照
+  /// @param[in] _d_limit 減速度(第一減速度)リミットの参照
+  /// @param[in] _v_limit 速度リミットの参照
+  /// @param[in] _asr 加速側(第一加速側)丸め率の参照
+  /// @param[in] _dsr 減速側(第二減速側)丸め率の参照
+  /// @param[in] _ratio_acc_dec 第一＆第二加速度上限値に対する下限値の比率の参照
+  TrapezoidConfig( const double& _a_limit,
+                   const double& _d_limit,
+                   const double& _v_limit,
+                   const double& _asr,
+                   const double& _dsr,
+                   const double& _ratio_acc_dec );
+
+  /// コピーコンストラクタ
+  /// @param[in] src コピー元TrapezoidConfigの参照
+  TrapezoidConfig( const TrapezoidConfig& src );
+
+  /// 代入演算子
+  /// @param[in] src コピー元TrapezoidConfig参照
+  /// @return *athis
+  TrapezoidConfig operator=( const TrapezoidConfig& src );
+
+  /// 加速度(第一加速度)リミット
+  double a_limit;
+  /// 減速度(第一減速度)リミット
+  double d_limit;
+  /// 速度リミット
+  double v_limit;
+  /// 加速側(第一加速側)丸め率
+  double asr;
+  /// 減速側(第二減速側)丸め率
+  double dsr;
+  /// 第一＆第二加速度上限値に対する下限値の比率
+  double ratio_acc_dec;
+};
+
+ /////////////////////////////////////////////////////////////////////////////////////////
+
+/// 台形型5251525次軌道の構成パラメータのキュー
+typedef std::deque<TrapezoidConfig> TrapezoidConfigQueue;
 
 /////////////////////////////////////////////////////////////////////////////////////////
 

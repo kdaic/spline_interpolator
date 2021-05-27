@@ -22,12 +22,12 @@ class Trapezoid5251525 {
 public:
 
   /// コンストラクタ
-  /// @param a_limit 第一加速(減速)度上限値
-  /// @param d_limit 第二加速(減速)度上限値
-  /// @param v_limit 最大速度リミット
-  /// @param asr 第一丸め率
-  /// @param dsr 第二丸め率
-  /// @param ratio_acc_dec 第一＆第二加速度上限値に対する下限値の比率
+  /// @param[in] a_limit 第一加速(減速)度上限値
+  /// @param[in] d_limit 第二加速(減速)度上限値
+  /// @param[in] v_limit 最大速度リミット
+  /// @param[in] asr 第一丸め率
+  /// @param[in] dsr 第二丸め率
+  /// @param[in] ratio_acc_dec 第一＆第二加速度上限値に対する下限値の比率
   Trapezoid5251525 (const double& a_limit=1200,
                     const double& d_limit=1200,
                     const double& v_limit=170,
@@ -36,12 +36,12 @@ public:
                     const double& ratio_acc_dec=0.5);
 
   /// 軌道生成
-  /// @param t0 開始時刻(初期値0)
-  /// @param tf 目標到達時刻
-  /// @param x0 初期位置
-  /// @param xf 終端位置
-  /// @param v0 初期速度
-  /// @param vf 終端速度
+  /// @param[in] t0 開始時刻(初期値0)
+  /// @param[in] tf 目標到達時刻
+  /// @param[in] x0 初期位置
+  /// @param[in] xf 終端位置
+  /// @param[in] v0 初期速度
+  /// @param[in] vf 終端速度
   /// @brief 軌道パラメータを算出する
   /// @detail 以下の計算を順に行う @n
   /// 1. 最大速度方向の初期設定 @n
@@ -56,7 +56,7 @@ public:
   ~Trapezoid5251525(){};
 
   /// 軌道出力
-  /// @param t 入力時刻
+  /// @param[in] t 入力時刻
   /// @return 入力時刻のときの位置・速度・加速度
   /// @exception 軌道生成が実施されていない
   int pop(const double& t, double& xt, double& vt, double& at);
@@ -89,10 +89,11 @@ private:
   void calc_acceleration_with_ratio();
 
   /// 正方向のv_max算出
-  /// @param signA 第一加速(減速)度方向
-  /// @param signD 第二加速(減速)度方向
-  /// @param ret 成功:true/失敗:false
-  /// @return v_max
+  /// @param[in] signA 第一加速(減速)度方向
+  /// @param[in] signD 第二加速(減速)度方向
+  /// @@aram[out] dT3 等速区間の時間
+  /// @param[out] ret 成功:true/失敗:false
+  /// @return v_max 等速度
   double internal_calc_v_max_and_dT3(const double& signA, const double& signD,
                                      double& dT3, bool& ret);
 
@@ -269,7 +270,21 @@ class TrapezoidalInterpolator : public SplineInterpolator
 {
 public:
   /// コンストラクタ
-  TrapezoidalInterpolator();
+  TrapezoidalInterpolator( TrapezoidConfigQueue& );
+
+  /// コンストラクタ
+  /// @param[in] a_limit 第一加速(減速)度上限値の参照
+  /// @param[in] d_limit 第二加速(減速)度上限値の参照
+  /// @param[in] v_limit 最大速度リミットの参照
+  /// @param[in] asr 第一丸め率の参照
+  /// @param[in] dsr 第二丸め率の参照
+  /// @param[in] ratio_acc_dec 第一＆第二加速度上限値に対する下限値の比率の参照
+  TrapezoidalInterpolator( const double& a_limit,
+                           const double& d_limit,
+                           const double& v_limit,
+                           const double& asr,
+                           const double& dsr,
+                           const double& ratio_acc_dec );
 
   /// デストラクタ
   ~TrapezoidalInterpolator();

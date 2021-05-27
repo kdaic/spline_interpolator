@@ -365,3 +365,39 @@ RetCode TPVAListQueue::dump( std::string& dest_queue_dump ) {
   dest_queue_dump = ss.str();
   return SPLINE_SUCCESS;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+TrapezoidConfig::TrapezoidConfig(
+                 const double& _a_limit,
+                 const double& _d_limit,
+                 const double& _v_limit,
+                 const double& _asr,
+                 const double& _dsr,
+                 const double& _ratio_acc_dec ) :
+  a_limit(_a_limit), d_limit(_d_limit),
+  v_limit(_v_limit),
+  asr(_asr), dsr(_dsr),
+  ratio_acc_dec(_ratio_acc_dec) {
+}
+
+TrapezoidConfig::TrapezoidConfig(
+                 const TrapezoidConfig& src ) :
+  a_limit(src.a_limit), d_limit(src.d_limit),
+  v_limit(src.v_limit),
+  asr(src.asr), dsr(src.dsr),
+  ratio_acc_dec(src.ratio_acc_dec) {
+}
+
+TrapezoidConfig TrapezoidConfig::operator=(
+                                 const TrapezoidConfig& src ) {
+  TrapezoidConfig dest( src );
+  this->a_limit = dest.a_limit;
+  this->d_limit = dest.d_limit;
+  this->v_limit = dest.v_limit;
+  this->asr = dest.asr;
+  this->dsr = dest.dsr;
+  this->ratio_acc_dec = dest.ratio_acc_dec;
+  return *this;
+}
+

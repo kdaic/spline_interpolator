@@ -690,9 +690,16 @@ const double Trapezoid5251525::v_limit() {
   return v_limit_;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////
 
-TrapezoidalInterpolator::TrapezoidalInterpolator() :
+TrapezoidalInterpolator::TrapezoidalInterpolator(
+                         const double& a_limit,
+                         const double& d_limit,
+                         const double& v_limit,
+                         const double& asr,
+                         const double& dsr,
+                         const double& ratio_acc_dec) :
   SplineInterpolator() {
   is_v_limit_ = true;
 }
@@ -705,6 +712,7 @@ RetCode TrapezoidalInterpolator::generate_path(
                                  const TPQueue& target_tp_queue,
                                  const double vs, const double vf,
                                  const double as, const double af ) {
+
   return SPLINE_SUCCESS;
 }
 
