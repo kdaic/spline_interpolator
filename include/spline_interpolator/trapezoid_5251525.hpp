@@ -20,20 +20,45 @@ namespace interp {
 /// 台形型5251525次軌道生成クラス
 class Trapezoid5251525 {
 public:
+  /// コンストラクタ
+  Trapezoid5251525 ();
 
   /// コンストラクタ
+  /// @param[in] a_limit 第一加速(減速)度上限値
+  /// @param[in] d_limit 第二加速(減速)度上限値
+  /// @param[in] v_limit 最大速度リミット
+  /// @param[in] asr 第一丸め率 (default : 0.8)
+  /// @param[in] dsr 第二丸め率 (default : 0.8)
+  /// @param[in] ratio_acc_dec 第一＆第二加速度上限値に対する下限値の比率 (default : 0.5)
+  Trapezoid5251525 (const double& a_limit,
+                    const double& d_limit,
+                    const double& v_limit,
+                    const double& asr=0.8,
+                    const double& dsr=0.8,
+                    const double& ratio_acc_dec=0.5);
+
+  /// コピーコンストラクタ
+  /// @param[in] src コピー元Trapezoid5251525クラスオブジェクト
+  Trapezoid5251525(const Trapezoid5251525& src);
+
+  /// 代入演算子
+  /// @param[in] src コピー元Trapezoid5251525クラスオブジェクト
+  /// @return *this
+  Trapezoid5251525 operator=(const Trapezoid5251525& src);
+
+  /// 構成パラメータの初期化
   /// @param[in] a_limit 第一加速(減速)度上限値
   /// @param[in] d_limit 第二加速(減速)度上限値
   /// @param[in] v_limit 最大速度リミット
   /// @param[in] asr 第一丸め率
   /// @param[in] dsr 第二丸め率
   /// @param[in] ratio_acc_dec 第一＆第二加速度上限値に対する下限値の比率
-  Trapezoid5251525 (const double& a_limit=1200,
-                    const double& d_limit=1200,
-                    const double& v_limit=170,
-                    const double& asr=0.8,
-                    const double& dsr=0.8,
-                    const double& ratio_acc_dec=0.5);
+  void initialize (const double& a_limit=1200,
+                   const double& d_limit=1200,
+                   const double& v_limit=170,
+                   const double& asr=0.8,
+                   const double& dsr=0.8,
+                   const double& ratio_acc_dec=0.5);
 
   /// 軌道生成
   /// @param[in] t0 開始時刻(初期値0)
@@ -64,10 +89,6 @@ public:
   /// 終端時刻
   /// @return 終端時刻
   const double finish_time();
-
-  /// リミット速度
-  /// @return リミット速度
-  const double v_limit();
 
 private:
   /// 0. 入力範囲のチェック
@@ -128,28 +149,28 @@ private:
   /// 既存値 ////////////////////////////////////////////////////////////////
 
   /// 第一加速(減速)度リミット上限値
-  const double a_limit_;
+  double a_limit_;
 
   /// 第二加速(減速)度リミット上限値
-  const double d_limit_;
+  double d_limit_;
 
   /// 第一＆第二加速度上限値に対する下限値の比率
-  const double ratio_acc_dec_;
+  double ratio_acc_dec_;
 
   /// 第一加速(減速)度リミット下限値(=上限値*ratio_acc_dec_)
-  const double a_lower_limit_;
+  double a_lower_limit_;
 
   /// 第二加速(減速)度リミット下限値(=上限値*ratio_acc_dec_)
-  const double d_lower_limit_;
+  double d_lower_limit_;
 
   /// 最大速度リミット
-  const double v_limit_;
+  double v_limit_;
 
   /// 第一丸め率
-  const double asr_;
+  double asr_;
 
   /// 第二丸め率
-  const double dsr_;
+  double dsr_;
 
 
   /// 制御値 ////////////////////////////////////////////////////////////////
@@ -256,11 +277,176 @@ private:
   /// 最速軌道の最短時間
   double tf_fastest_;
 
+  /// 初期化済み(構成パラメータ設定済み)フラグ(済みならtrue)
+  bool is_initialized_;
+
   /// 軌道生成済みフラグ(生成済みならtrue)
   bool is_generated_;
 
   /// 移動なしフラグ(速度0のまま同じ位置に停止していたらtrue)
   bool no_movement_;
+
+public:
+  /// 入力値の取得 ////////////////////////////////////////////////////////////////
+
+  /// 初期位置の取得
+  const double x0() const;
+
+  /// 初期速度の取得
+  const double v0() const;
+
+  /// 終端位置の取得
+  const double xf() const;
+
+  /// 終端速度の取得
+  const double vf() const;
+
+  /// 開始時間の取得
+  const double t0() const;
+
+  /// 目標到達時間の取得
+  const double tf() const;
+
+  /// 既存値の取得 ////////////////////////////////////////////////////////////////
+
+  /// 第一加速(減速)度リミット上限値の取得
+  const double a_limit() const;
+
+  /// 第二加速(減速)度リミット上限値の取得
+  const double d_limit() const;
+
+  /// 第一＆第二加速度上限値に対する下限値の比率の取得
+  const double ratio_acc_dec() const;
+
+  /// 第一加速(減速)度リミット下限値(=上限値*ratio_acc_dec_)の取得
+  const double a_lower_limit() const;
+
+  /// 第二加速(減速)度リミット下限値(=上限値*ratio_acc_dec_)の取得
+  const double d_lower_limit() const;
+
+  /// 最大速度リミットの取得
+  const double v_limit() const;
+
+  /// 第一丸め率の取得
+  const double asr() const;
+
+  /// 第二丸め率の取得
+  const double dsr() const;
+
+
+  /// 制御値の取得 ////////////////////////////////////////////////////////////////
+
+  /// 第一加速(減速)度の取得
+  const double a_max() const;
+
+  /// 第二加速(減速)度の取得
+  const double d_max() const;
+
+  /// 最大速度方向の取得
+  const double sign() const;
+
+  /// 第一加速(減速)度方向の取得
+  const double signA() const;
+
+  /// 第二加速(減速)度方向の取得
+  const double signD() const;
+
+  /// 最大速度の取得
+  const double v_max() const;
+
+  /// 移動距離の取得
+  const double xd() const;
+
+  /// Step1,3移動時間の取得
+  const double dT1() const;
+
+  /// Step2移動時間の取得
+  const double dT2() const;
+
+  /// Step4移動時間の取得
+  const double dT3() const;
+
+  /// Step5,7移動時間の取得
+  const double dT4() const;
+
+  /// Step6移動時間の取得
+  const double dT5() const;
+
+  /// 合計時間の取得
+  const double dT_total() const;
+
+  /// Step1終端時刻＆Step2開始時刻の取得
+  const double t1() const;
+
+  /// Step1終端位置＆Step2開始位置の取得
+  const double x1() const;
+
+  /// Step1終端速度＆Step2開始速度の取得
+  const double v1() const;
+
+  /// Step2終端時刻＆Step3開始時刻の取得
+  const double t2() const;
+
+  /// Step2終端位置＆Step3開始位置の取得
+  const double x2() const;
+
+  /// Step2終端速度＆Step3開始速度の取得
+  const double v2() const;
+
+  /// Step3終端時刻＆Step4開始時刻の取得
+  const double t3() const;
+
+  /// Step3終端位置＆Step4開始位置の取得
+  const double x3() const;
+
+  /// Step3終端速度＆Step4開始速度の取得
+  const double v3() const;
+
+  /// Step4終端時刻＆Step5開始時刻の取得
+  const double t4() const;
+
+  /// Step4終端位置＆Step5開始位置の取得
+  const double x4() const;
+
+  /// Step4終端速度＆Step5開始速度の取得
+  const double v4() const;
+
+  /// Step5終端時刻＆Step6開始時刻の取得
+  const double t5() const;
+
+  /// Step5終端位置＆Step6開始位置の取得
+  const double x5() const;
+
+  /// Step5終端速度＆Step6開始速度の取得
+  const double v5() const;
+
+  /// Step6終端時刻＆Step7開始時刻の取得
+  const double t6() const;
+
+  /// Step6終端位置＆Step7開始位置の取得
+  const double x6() const;
+
+  /// Step6終端速度＆Step7開始速度の取得
+  const double v6() const;
+
+  /// Step7終端時刻の取得
+  const double t7() const;
+
+  /// 最速軌道の最大速度の取得
+  const double v_max_fastest() const;
+
+  /// 最速軌道の最短時間の取得
+  const double tf_fastest() const;
+
+  /// 初期化済み(構成パラメータ設定済み)フラグ(済みならtrue)の取得
+  const bool is_initialized() const;
+
+  /// 軌道生成済みフラグ(生成済みならtrue)の取得
+  const bool is_generated() const;
+
+  /// 移動なしフラグ(速度0のまま同じ位置に停止していたらtrue)の取得
+  const bool no_movement() const;
+
 };
 
 
@@ -270,7 +456,15 @@ class TrapezoidalInterpolator : public SplineInterpolator
 {
 public:
   /// コンストラクタ
-  TrapezoidalInterpolator( TrapezoidConfigQueue& );
+  /// @param[in] trpzd_config_que 台形型5251525次軌道の構成データのキュー  
+  ///                             補間点区間の数と同じサイズ。以下が構成要素。
+  ///                             - a_limit 第一加速(減速)度上限値
+  ///                             - d_limit 第二加速(減速)度上限値
+  ///                             - v_limit 最大速度リミット
+  ///                             - asr 第一丸め率
+  ///                             - dsr 第二丸め率
+  ///                             - ratio_acc_dec 第一＆第二加速度上限値に対する下限値の比率
+  TrapezoidalInterpolator( const TrapezoidConfigQueue& trapzd_config_que );
 
   /// コンストラクタ
   /// @param[in] a_limit 第一加速(減速)度上限値の参照
@@ -352,6 +546,12 @@ public:
   /// - TimeOutOfRange : time is not within the range of generated spline-path
   virtual const TimePVA pop( const double& t );
 
+private:
+  /// 台形型5251525次軌道の構成データ
+  TrapezoidConfigQueue trapzd_config_que_;
+
+  /// 台形型5251525次軌道(＆補間器)
+  Trapezoid5251525 trapzd_trajectory_;
 };
 
 }

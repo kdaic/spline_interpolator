@@ -5,21 +5,159 @@
 
 using namespace interp;
 
+Trapezoid5251525::Trapezoid5251525 () :
+  a_limit_(1200),
+  d_limit_(1200),
+  ratio_acc_dec_(0.5),
+  a_lower_limit_ (a_limit_ * ratio_acc_dec_),
+  d_lower_limit_ (d_limit_ * ratio_acc_dec_),
+  v_limit_(170),
+  asr_(0.8),
+  dsr_(0.8),
+  is_initialized_(false),
+  is_generated_(false),
+  no_movement_(false) {
+}
 
 Trapezoid5251525::Trapezoid5251525 (const double& a_limit,
                                     const double& d_limit,
                                     const double& v_limit,
                                     const double& asr,
                                     const double& dsr,
-                                    const double& ratio_acc_dec) :
-  a_limit_(a_limit), d_limit_(d_limit),
-  ratio_acc_dec_(ratio_acc_dec),
-  a_lower_limit_ (a_limit * ratio_acc_dec),
-  d_lower_limit_ (d_limit * ratio_acc_dec),
-  v_limit_(v_limit),
-  asr_(asr), dsr_(dsr),
-  is_generated_(false), no_movement_(false) {
+                                    const double& ratio_acc_dec) {
+  initialize(a_limit,
+             d_limit,
+             v_limit,
+             asr,
+             dsr,
+             ratio_acc_dec);
+}
 
+Trapezoid5251525::Trapezoid5251525(const Trapezoid5251525& src) :
+  x0_( src.x0() ),
+  v0_( src.v0() ),
+  xf_( src.xf() ),
+  vf_( src.vf() ),
+  t0_( src.t0() ),
+  tf_( src.tf() ),
+  a_limit_      ( src.a_limit()       ),
+  d_limit_      ( src.d_limit()       ),
+  ratio_acc_dec_( src.ratio_acc_dec() ),
+  a_lower_limit_( src.a_lower_limit() ),
+  d_lower_limit_( src.d_lower_limit() ),
+  v_limit_      ( src.v_limit()       ),
+  asr_          ( src.asr()           ),
+  dsr_          ( src.dsr()           ),
+  a_max_( src.a_max() ),
+  d_max_( src.d_max() ),
+  sign_ ( src.sign()  ),
+  signA_( src.signA() ),
+  signD_( src.signD() ),
+  v_max_( src.v_max() ),
+  xd_ ( src.xd()  ),
+  dT1_( src.dT1() ),
+  dT2_( src.dT2() ),
+  dT3_( src.dT3() ),
+  dT4_( src.dT4() ),
+  dT5_( src.dT5() ),
+  dT_total_( src.dT_total() ),
+  t1_( src.t1() ),
+  x1_( src.x1() ),
+  v1_( src.v1() ),
+  t2_( src.t2() ),
+  x2_( src.x2() ),
+  v2_( src.v2() ),
+  t3_( src.t3() ),
+  x3_( src.x3() ),
+  v3_( src.v3() ),
+  t4_( src.t4() ),
+  x4_( src.x4() ),
+  v4_( src.v4() ),
+  t5_( src.t5() ),
+  x5_( src.x5() ),
+  v5_( src.v5() ),
+  t6_( src.t6() ),
+  x6_( src.x6() ),
+  v6_( src.v6() ),
+  t7_( src.t7() ),
+  v_max_fastest_ ( src.v_max_fastest()  ),
+  tf_fastest_    ( src.tf_fastest()     ),
+  is_initialized_( src.is_initialized() ),
+  is_generated_  ( src.is_generated()   ),
+  no_movement_   ( src.no_movement()    ) {
+}
+
+Trapezoid5251525 Trapezoid5251525::operator=(const Trapezoid5251525& src) {
+  Trapezoid5251525 dest(src);
+  this->x0_ = dest.x0();
+  this->v0_ = dest.v0();
+  this->xf_ = dest.xf();
+  this->vf_ = dest.vf();
+  this->t0_ = dest.t0();
+  this->tf_ = dest.tf();
+  this->a_limit_       = dest.a_limit();
+  this->d_limit_       = dest.d_limit();
+  this->ratio_acc_dec_ = dest.ratio_acc_dec();
+  this->a_lower_limit_ = dest.a_lower_limit();
+  this->d_lower_limit_ = dest.d_lower_limit();
+  this->v_limit_       = dest.v_limit();
+  this->asr_           = dest.asr();
+  this->dsr_           = dest.dsr();
+  this->a_max_ = dest.a_max();
+  this->d_max_ = dest.d_max();
+  this->sign_  = dest.sign();
+  this->signA_ = dest.signA();
+  this->signD_ = dest.signD();
+  this->v_max_ = dest.v_max();
+  this->xd_  = dest.xd();
+  this->dT1_ = dest.dT1();
+  this->dT2_ = dest.dT2();
+  this->dT3_ = dest.dT3();
+  this->dT4_ = dest.dT4();
+  this->dT5_ = dest.dT5();
+  this->dT_total_ = dest.dT_total();
+  this->t1_ = dest.t1();
+  this->x1_ = dest.x1();
+  this->v1_ = dest.v1();
+  this->t2_ = dest.t2();
+  this->x2_ = dest.x2();
+  this->v2_ = dest.v2();
+  this->t3_ = dest.t3();
+  this->x3_ = dest.x3();
+  this->v3_ = dest.v3();
+  this->t4_ = dest.t4();
+  this->x4_ = dest.x4();
+  this->v4_ = dest.v4();
+  this->t5_ = dest.t5();
+  this->x5_ = dest.x5();
+  this->v5_ = dest.v5();
+  this->t6_ = dest.t6();
+  this->x6_ = dest.x6();
+  this->v6_ = dest.v6();
+  this->t7_ = dest.t7();
+  this->v_max_fastest_  = dest.v_max_fastest();
+  this->tf_fastest_     = dest.tf_fastest();
+  this->is_initialized_ = dest.is_initialized();
+  this->is_generated_   = dest.is_generated();
+  this->no_movement_    = dest.no_movement();
+  return *this;
+}
+
+void Trapezoid5251525::initialize(const double& a_limit,
+                                  const double& d_limit,
+                                  const double& v_limit,
+                                  const double& asr,
+                                  const double& dsr,
+                                  const double& ratio_acc_dec) {
+  a_limit_       = a_limit;
+  d_limit_       = d_limit;
+  ratio_acc_dec_ = ratio_acc_dec;
+  a_lower_limit_ = a_limit * ratio_acc_dec;
+  d_lower_limit_ = d_limit * ratio_acc_dec;
+  v_limit_       = v_limit;
+  asr_           = asr;
+  dsr_           = dsr;
+  //
   if(v_limit_ <= 0.0) {
     // 速度リミットが0.0以下(負)ならばエラー
     std::stringstream ss;
@@ -33,11 +171,23 @@ Trapezoid5251525::Trapezoid5251525 (const double& a_limit,
     throw std::invalid_argument("ratio_acc_dec must be from 0,0 to 1.0. ratio_acc_dec: "
                                 + ss.str());
   }
+  //
+  is_initialized_ = true;
+  //
+  // 軌道構成パラメータを初期化したため,軌道未生成状態へリセット.
+  // pop()を禁止させる
+  is_generated_ = false;
+  no_movement_  = false;
 }
 
 double Trapezoid5251525::generate_path(const double& ts, const double& tf,
                                        const double& xs, const double& xf,
                                        const double& vs, const double& vf ) {
+  // if ( !is_initialized_ ) {
+  //   // 軌道構成パラメータが与えられてない
+  //   throw std::runtime_error("Not initialized config parameter yet.");
+  // }
+
   no_movement_ = false;
   is_generated_ = false;
   t0_ = ts;
@@ -686,12 +836,66 @@ const double Trapezoid5251525::finish_time() {
   return t7_;
 }
 
-const double Trapezoid5251525::v_limit() {
-  return v_limit_;
-}
-
+const double Trapezoid5251525::x0() const { return x0_; }
+const double Trapezoid5251525::v0() const { return v0_; }
+const double Trapezoid5251525::xf() const { return xf_; }
+const double Trapezoid5251525::vf() const { return vf_; }
+const double Trapezoid5251525::t0() const { return t0_; }
+const double Trapezoid5251525::tf() const { return tf_; }
+const double Trapezoid5251525::a_limit() const { return a_limit_; }
+const double Trapezoid5251525::d_limit() const { return d_limit_; }
+const double Trapezoid5251525::ratio_acc_dec() const { return ratio_acc_dec_; }
+const double Trapezoid5251525::a_lower_limit() const { return a_lower_limit_; }
+const double Trapezoid5251525::d_lower_limit() const { return d_lower_limit_; }
+const double Trapezoid5251525::v_limit() const { return v_limit_; }
+const double Trapezoid5251525::asr() const { return asr_; }
+const double Trapezoid5251525::dsr() const { return dsr_; }
+const double Trapezoid5251525::a_max() const { return a_max_; }
+const double Trapezoid5251525::d_max() const { return d_max_; }
+const double Trapezoid5251525::sign()  const { return sign_; }
+const double Trapezoid5251525::signA() const { return signA_; }
+const double Trapezoid5251525::signD() const { return signD_; }
+const double Trapezoid5251525::v_max() const { return v_max_; }
+const double Trapezoid5251525::xd()  const { return xd_; }
+const double Trapezoid5251525::dT1() const { return dT1_; }
+const double Trapezoid5251525::dT2() const { return dT2_; }
+const double Trapezoid5251525::dT3() const { return dT3_; }
+const double Trapezoid5251525::dT4() const { return dT4_; }
+const double Trapezoid5251525::dT5() const { return dT5_; }
+const double Trapezoid5251525::dT_total() const { return dT_total_; }
+const double Trapezoid5251525::t1() const { return t1_; }
+const double Trapezoid5251525::x1() const { return x1_; }
+const double Trapezoid5251525::v1() const { return v1_; }
+const double Trapezoid5251525::t2() const { return t2_; }
+const double Trapezoid5251525::x2() const { return x2_; }
+const double Trapezoid5251525::v2() const { return v2_; }
+const double Trapezoid5251525::t3() const { return t3_; }
+const double Trapezoid5251525::x3() const { return x3_; }
+const double Trapezoid5251525::v3() const { return v3_; }
+const double Trapezoid5251525::t4() const { return t4_; }
+const double Trapezoid5251525::x4() const { return x4_; }
+const double Trapezoid5251525::v4() const { return v4_; }
+const double Trapezoid5251525::t5() const { return t5_; }
+const double Trapezoid5251525::x5() const { return x5_; }
+const double Trapezoid5251525::v5() const { return v5_; }
+const double Trapezoid5251525::t6() const { return t6_; }
+const double Trapezoid5251525::x6() const { return x6_; }
+const double Trapezoid5251525::v6() const { return v6_; }
+const double Trapezoid5251525::t7() const { return t7_; }
+const double Trapezoid5251525::v_max_fastest() const { return v_max_fastest_;  }
+const double Trapezoid5251525::tf_fastest()    const { return tf_fastest_;     }
+const bool Trapezoid5251525::is_initialized()  const { return is_initialized_; }
+const bool Trapezoid5251525::is_generated()    const { return is_generated_;   }
+const bool Trapezoid5251525::no_movement()     const { return no_movement_;    }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+TrapezoidalInterpolator::TrapezoidalInterpolator(
+                         const TrapezoidConfigQueue& trapzd_config_que ) :
+  SplineInterpolator(),
+  trapzd_config_que_(trapzd_config_que) {
+  is_v_limit_ = true;
+}
 
 TrapezoidalInterpolator::TrapezoidalInterpolator(
                          const double& a_limit,
@@ -702,6 +906,11 @@ TrapezoidalInterpolator::TrapezoidalInterpolator(
                          const double& ratio_acc_dec) :
   SplineInterpolator() {
   is_v_limit_ = true;
+  TrapezoidConfig trapzd_config( a_limit, d_limit,
+                                 v_limit,
+                                 asr,  dsr,
+                                 ratio_acc_dec );
+  trapzd_config_que_.push_back(trapzd_config);
 }
 
 TrapezoidalInterpolator::~TrapezoidalInterpolator() {
