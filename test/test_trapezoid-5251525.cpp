@@ -1,6 +1,7 @@
 #include "trapezoid_5251525.hpp"
 #include "non_uniform_rounding_spline.hpp"
 #include "test/util/gnuplot_realtime.hpp"
+#include "test/util/test_graph_plot.hpp"
 #include <deque>
 #include <ctime>
 #include <time.h>
@@ -84,41 +85,20 @@ public:
 
   /// 軌道生成＆グラフプロット
   /// @param start_set 開始点の位置-時間-速度のセット
-  /// @param goalgoal._set 終端点の位置-時間-速度のセット
+  /// @param goal_set 終端点の位置-時間-速度のセット
   /// @details 各セットの軌道を生成し、
   /// 時間-位置,時間-速度,位置-速度のグラフを出力 @n
   void plot(const std::vector<TimePVA>& start_set,
             const std::vector<TimePVA>& goal_set) {
     // 描画入力目標点のバッファ
-    std::deque<std::pair<double, double> > target;
-    std::deque<std::pair<double, double> > target_v;
-    std::deque<std::pair<double, double> > target_phase;
+    TPVAQueue target_tpva;
+
     // 描画軌道補間点のバッファ
-    std::deque<std::pair<double, double> > path;
-    std::deque<std::pair<double, double> > path_v;
-    std::deque<std::pair<double, double> > path_phase;
-    // 入力目標点の描画オプション
-    plot_options_t options_target;
-    options_target["with"] = "point";
-    options_target["ps"] = "5.0";
-    plot_options_t options;
-    options["with"] = "lp";
-    // 目標値描画データ
-    std::vector<std::pair<double, double> >target_plot_data;
-    std::vector<std::pair<double, double> >target_plot_data_v;
-    std::vector<std::pair<double, double> >target_plot_data_phase;
-    // 補間点描画データ
-    std::vector<std::pair<double, double> >path_plot_data;
-    std::vector<std::pair<double, double> >path_plot_data_v;
-    std::vector<std::pair<double, double> >path_plot_data_phase;
-    // 入力文字列
-    std::stringstream numstr;
-    // gnuplot
-    GnuplotServer gpserver;
-    // 描画点データ(時間に対する目標点列、時間に対する軌道補間点列)
-    container_t multi_data;
-    container_t multi_data_v;
-    container_t multi_data_phase;
+    TPVAQueue interp_path_tpva;
+
+    // gnuplot描画クラス
+    TestGraphPlot test_gp;
+
     // 軌道１セット分の開始点
     TimePVA start;
     // 軌道１セット分の目標到達点
@@ -126,7 +106,7 @@ public:
     /// 各軌道セットについて軌道生成＆出力
     for(unsigned int index=0; index < start_set.size(); index++) {
       start = start_set[index];
-      goal = goal_set[index];
+      goal  = goal_set[index];
       // 軌道生成
       Trapezoid5251525 tg(acc_limit_, acc_limit_,
                           vel_limit_,
@@ -135,176 +115,48 @@ public:
                                          start.P.pos, goal.P.pos,
                                          start.P.vel, goal.P.vel );
       std::cout << "dT_total:" << dT_total;
+
+      // 開始目標点
+      target_tpva.push( TimePVA(
+                          start.time,
+                          PosVelAcc(start.P.pos, start.P.vel, start.P.acc) ) );
+
+      // 終端目標点
+      target_tpva.push( TimePVA(
+                          start.time + dT_total,
+                          PosVelAcc(goal.P.pos, goal.P.vel, goal.P.acc) ) );
+
       double xt, vt, at;
 
-      target.push_back( std::make_pair(start.time,            start.P.pos) );
-      target.push_back( std::make_pair(start.time + dT_total, goal.P.pos) );
-
-      target_v.push_back( std::make_pair(start.time,            start.P.vel) );
-      target_v.push_back( std::make_pair(start.time + dT_total, goal.P.vel) );
-
-      target_phase.push_back( std::make_pair(start.P.pos, start.P.vel) );
-      target_phase.push_back( std::make_pair(goal.P.pos,  goal.P.vel) );
-
-      // データログ出力用意
-      // 左0詰め2桁設定
-      numstr << "images/trapezoid-5251525/reachable/"
-             << std::setfill('0') << std::setw(2) << index << "_time_position_velocity.csv";
-      // ディレクトリ生成
-      FILE* mkdir = popen("mkdir -p images/trapezoid-5251525/reachable", "re");
-      pclose(mkdir);
-      std::fstream cfstrm(numstr.str().c_str(), std::ios::out);
-      numstr.str("");
-      if (cfstrm.fail()) {
-        std::cerr << "cannot open output temporary file."<< std::endl;
-        FAIL();
-      }
-      // ログ桁固定
-      cfstrm << std::fixed << std::setprecision(8);
-
-      // プロットデータにキュー
+      // 生成した軌道をプロットデータにキュー
       for(double t=start.time; t < tg.finish_time(); t+=cycle_) {
+
         tg.pop(t, xt, vt, at);
-        /////////////////////////////////////////////////////////////////////////
-        /// 時間-位置-速度データファイル出力
-        /////////////////////////////////////////////////////////////////////////
-        {
-          cfstrm << t << "," << xt << "," << vt << std::endl;
-        }
         // 描画軌道補間点のバッファ追加
-        path.push_back(std::make_pair(t, xt));
-        path_v.push_back(std::make_pair(t, vt));
-        path_phase.push_back(std::make_pair(xt, vt));
+        interp_path_tpva.push( TimePVA( t, PosVelAcc(xt, vt, at) ) );
       }
       // 最後に目標到達点データを加える
       tg.pop(tg.finish_time(), xt, vt, at);
-      {
-        cfstrm << tg.finish_time() << "," << xt << "," << vt << std::endl;
-      }
-      cfstrm.close();
-      path.push_back(std::make_pair(tg.finish_time(), xt));
-      path_v.push_back(std::make_pair(tg.finish_time(), vt));
-      path_phase.push_back(std::make_pair(xt, vt));
+      interp_path_tpva.push( TimePVA( tg.finish_time(), PosVelAcc(xt, vt, at) ) );
 
-      // 時間-位置描画のバッファ追加
-      for(std::deque<std::pair<double, double> >::iterator it = target.begin();
-          it < target.end();
-          it++) {
-        target_plot_data.push_back(*it);
-      }
-      for(std::deque<std::pair<double, double> >::iterator it = path.begin();
-          it < path.end();
-          it++) {
-        path_plot_data.push_back(*it);
-      }
-      multi_data.push_back(std::make_pair(target_plot_data, options_target));
-      multi_data.push_back(std::make_pair(path_plot_data, options));
+      // ディレクトリ生成
+      const std::string mkdir_str = "mkdir -p " + output_path_;
+      FILE* mkdir = popen( mkdir_str.c_str(), "re" );
+      pclose(mkdir);
+      // データログ出力
+      test_gp.dump_csv( interp_path_tpva,
+                        output_path_,
+                        index );
 
-      // 時間-速度描画のバッファ追加
-      for(std::deque<std::pair<double, double> >::iterator it = target_v.begin();
-          it < target_v.end();
-          it++) {
-        target_plot_data_v.push_back(*it);
-      }
-      for(std::deque<std::pair<double, double> >::iterator it = path_v.begin();
-          it < path_v.end();
-          it++) {
-        path_plot_data_v.push_back(*it);
-      }
-      multi_data_v.push_back(std::make_pair(target_plot_data_v, options_target));
-      multi_data_v.push_back(std::make_pair(path_plot_data_v, options));
-
-      // 位置-速度描画のバッファ追加
-      for(std::deque<std::pair<double, double> >::iterator it = target_phase.begin();
-          it < target_phase.end();
-          it++) {
-        target_plot_data_phase.push_back(*it);
-      }
-      for(std::deque<std::pair<double, double> >::iterator it = path_phase.begin();
-          it < path_phase.end();
-          it++) {
-        path_plot_data_phase.push_back(*it);
-      }
-      multi_data_phase.push_back(std::make_pair(target_plot_data_phase, options_target));
-      multi_data_phase.push_back(std::make_pair(path_plot_data_phase, options));
-
-      /////////////////////////////////////////////////////////////////////////
-      /// 時間-位置プロット
-      /////////////////////////////////////////////////////////////////////////
-      // 左0詰め2桁設定
-      numstr << "'" << output_path_
-             << std::setfill('0') << std::setw(2) << index << "_time-position_graph.png'";
-      std::cerr << "drawing " << numstr.str() << "..." << std::endl;
-      gpserver.set("output " +  numstr.str());
-      numstr.str("");
-      gpserver.set("style data lp");
-      gpserver.set("xzeroaxis");
-      // gpserver.set("noautoscale");
-      gpserver.set("xlabel 'time'");
-      gpserver.set("ylabel 'position'");
-      gpserver.set("nokey");
-      gpserver.flush();
       // プロット
-      gpserver.plot(multi_data);
-      gpserver.flush();
-      // クリア
-      target.clear();
-      path.clear();
-      target_plot_data.clear();
-      path_plot_data.clear();
-      multi_data.clear();
+      test_gp.plot(target_tpva,
+                   interp_path_tpva,
+                   output_path_,
+                   index );
 
-      /////////////////////////////////////////////////////////////////////////
-      /// 時間-速度プロット
-      /////////////////////////////////////////////////////////////////////////
-      // 左0詰め2桁設定
-      numstr << "'" << output_path_
-             << std::setfill('0') << std::setw(2) << index << "_time-velocity_graph.png'";
-      std::cerr << "drawing " << numstr.str() << "..." << std::endl;
-      gpserver.set("output " +  numstr.str());
-      numstr.str("");
-      gpserver.set("style data lp");
-      gpserver.set("xzeroaxis");
-      // gpserver.set("noautoscale");
-      gpserver.set("xlabel 'time'");
-      gpserver.set("ylabel 'velocity'");
-      gpserver.set("nokey");
-      gpserver.flush();
-      // プロット
-      gpserver.plot(multi_data_v);
-      gpserver.flush();
-      // クリア
-      target_v.clear();
-      path_v.clear();
-      target_plot_data_v.clear();
-      path_plot_data_v.clear();
-      multi_data_v.clear();
-
-      /////////////////////////////////////////////////////////////////////////
-      /// 位置-速度プロット
-      /////////////////////////////////////////////////////////////////////////
-      // 左0詰め2桁設定
-      numstr << "'" << output_path_
-             << std::setfill('0') << std::setw(2) << index << "_phase_diagram.png'";
-      std::cerr << "drawing " << numstr.str() << "..." << std::endl;
-      gpserver.set("output " +  numstr.str());
-      numstr.str("");
-      gpserver.set("style data lp");
-      gpserver.set("xzeroaxis");
-      // gpserver.set("noautoscale");
-      gpserver.set("xlabel 'position'");
-      gpserver.set("ylabel 'velocity'");
-      gpserver.set("nokey");
-      gpserver.flush();
-      // プロット
-      gpserver.plot(multi_data_phase);
-      gpserver.flush();
-      // クリア
-      target_phase.clear();
-      path_phase.clear();
-      target_plot_data_phase.clear();
-      path_plot_data_phase.clear();
-      multi_data_phase.clear();
+      // PtoP ２点間の１セットごとにクリア
+      target_tpva.clear();
+      interp_path_tpva.clear();
     }
     usleep(0.01*1e6);
   };
@@ -459,9 +311,9 @@ TEST(TrackingTest, reachable) {
   PlotPtoPGraph plot_ptop_graph("images/trapezoid-5251525/reachable/", 0.001);
 
   // 既に存在するデータ&画像を削除
-  FILE* rm_time_position_velocity_log = popen("rm images/trapezoid-5251525/reachable/*.csv", "re");
+  FILE* rm_time_position_velocity_log = popen("rm -f images/trapezoid-5251525/reachable/*.csv", "re");
   pclose(rm_time_position_velocity_log);
-  FILE* rm_images = popen("rm images/trapezoid-5251525/reachable/*.png", "re");
+  FILE* rm_images = popen("rm -f images/trapezoid-5251525/reachable/*.png", "re");
   pclose(rm_images);
 
   // 軌道生成＆グラフ出力
@@ -511,7 +363,7 @@ TEST(TrackingTest, reachable2) {
   FILE* mkdir = popen("mkdir -p images/trapezoid-5251525/reachable2", "re");
   pclose(mkdir);
   // 既に存在する画像を削除
-  FILE* rm_images = popen("rm images/trapezoid-5251525/reachable2/*.png", "re");
+  FILE* rm_images = popen("rm -f images/trapezoid-5251525/reachable2/*.png", "re");
   pclose(rm_images);
 
   // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
@@ -569,7 +421,7 @@ TEST(TrackingTest, reachable3) {
   pclose(mkdir);
 
   // 既に存在する画像を削除
-  FILE* rm_time_position_images = popen("rm images/trapezoid-5251525/reachable3/*.png", "re");
+  FILE* rm_time_position_images = popen("rm -f images/trapezoid-5251525/reachable3/*.png", "re");
   pclose(rm_time_position_images);
 
   // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
@@ -606,6 +458,9 @@ TEST(TrackingTest, reachable_L1) {
   // ディレクトリ作成
   FILE* mkdir = popen("mkdir -p images/trapezoid-5251525/reachable_L1", "re");
   pclose(mkdir);
+  // 既に存在する画像を削除
+  FILE* rm_time_position_images = popen("rm -f images/trapezoid-5251525/reachable_L1/*.png", "re");
+  pclose(rm_time_position_images);
   // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
   PlotPtoPGraph plot_ptop_graph("images/trapezoid-5251525/reachable_L1/",
                                 0.01,
@@ -664,24 +519,24 @@ TEST(TrackingTest, speed_limit) {
 /// 軌道生成の結果を連番画像で出力する @n
 TEST(TrackingTest, random_plot) {
   // 描画入力目標点の数
-  const unsigned int target_num = 5;
+  const unsigned int target_tp_num = 5;
   // 描画軌道補間点の数
-  const unsigned int path_num = static_cast<unsigned int>((target_num)*PATH_CYCLE/CYCLE);
+  const unsigned int path_num = static_cast<unsigned int>((target_tp_num)*PATH_CYCLE/CYCLE);
   // 描画入力目標点のバッファ
-  std::deque<std::pair<double, double> > target;
-  std::deque<std::pair<double, double> > target_v;
-  // 描画軌道補間点のバッファ
-  std::deque<std::pair<double, double> > path;
-  std::deque<std::pair<double, double> > path_v;
+  std::deque<std::pair<double, double> > target_tp;
+  std::deque<std::pair<double, double> > target_tv;
+  // 描画軌道補間点のバッフ
+  std::deque<std::pair<double, double> > path_tp;
+  std::deque<std::pair<double, double> > path_tv;
   // 入力目標点の描画オプション
-  plot_options_t options_target;
-  options_target["with"] = "point";
-  options_target["ps"] = "5.0";
+  plot_options_t options_target_tp;
+  options_target_tp["with"] = "point";
+  options_target_tp["ps"] = "5.0";
   plot_options_t options;
   options["with"] = "lp";
   // 目標値描画データ
-  std::vector<std::pair<double, double> >target_plot_data;
-  std::vector<std::pair<double, double> >target_plot_data_v;
+  std::vector<std::pair<double, double> >target_plot_data_tp;
+  std::vector<std::pair<double, double> >target_plot_data_tv;
   // 補間点描画データ
   std::vector<std::pair<double, double> >path_plot_data;
   std::vector<std::pair<double, double> >path_plot_data_v;
@@ -700,9 +555,9 @@ TEST(TrackingTest, random_plot) {
   pclose(mkdir_v);
 
   // 既に存在する画像を削除
-  FILE* rm_time_position_images = popen("rm images/trapezoid-5251525/random_plot/time_position/*.png", "re");
+  FILE* rm_time_position_images = popen("rm -f images/trapezoid-5251525/random_plot/time_position/*.png", "re");
   pclose(rm_time_position_images);
-  FILE* rm_time_velocity_images = popen("rm images/trapezoid-5251525/random_plot/time_velocity/*.png", "re");
+  FILE* rm_time_velocity_images = popen("rm -f  images/trapezoid-5251525/random_plot/time_velocity/*.png", "re");
   pclose(rm_time_velocity_images);
 
   // 目標位置(初期化=0.0)
@@ -727,17 +582,17 @@ TEST(TrackingTest, random_plot) {
       nusv.push(PATH_CYCLE, target_position);
     }
 
-    target.push_back( std::make_pair(pindex * PATH_CYCLE, target_position) );
+    target_tp.push_back( std::make_pair(pindex * PATH_CYCLE, target_position) );
 
     if(pindex == 2) {
       start = nusv.pop();
-      target_v.push_back( std::make_pair((pindex-2) * PATH_CYCLE, start.P.vel) );
+      target_tv.push_back( std::make_pair((pindex-2) * PATH_CYCLE, start.P.vel) );
       continue;
     }
 
     if(nusv.size() > 2) {
       goal = nusv.pop();
-      target_v.push_back( std::make_pair((pindex-2) * PATH_CYCLE, goal.P.vel) );
+      target_tv.push_back( std::make_pair((pindex-2) * PATH_CYCLE, goal.P.vel) );
 
       // 軌道生成
       Trapezoid5251525 tg;
@@ -748,22 +603,22 @@ TEST(TrackingTest, random_plot) {
       // プロットデータにキュー
       for(double t=start_time; t <= tg.finish_time()+1e-12; t+=CYCLE, index++) {
         tg.pop(t, xt, vt, at);
-        if(path.size() > path_num) {
-          path.pop_front();
+        if(path_tp.size() > path_num) {
+          path_tp.pop_front();
         }
-        if(path_v.size() > path_num) {
-          path_v.pop_front();
+        if(path_tv.size() > path_num) {
+          path_tv.pop_front();
         }
         // 描画軌道補間点のバッファ追加
-        path.push_back(std::make_pair(t, xt));
-        path_v.push_back(std::make_pair(t, vt));
+        path_tp.push_back(std::make_pair(t, xt));
+        path_tv.push_back(std::make_pair(t, vt));
 
         // 描画入力目標点のバッファ除去
-        if(target.front().first < path.front().first) {
-          target.pop_front();
+        if(target_tp.front().first < path_tp.front().first) {
+          target_tp.pop_front();
         }
-        if(target_v.front().first < path_v.front().first) {
-          target_v.pop_front();
+        if(target_tv.front().first < path_tv.front().first) {
+          target_tv.pop_front();
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -782,24 +637,24 @@ TEST(TrackingTest, random_plot) {
         // gpserver.set("noautoscale");
         gpserver.set("xlabel 'time'");
         gpserver.set("ylabel 'position'");
-        numstr << path.front().first << ":" << (path.front().first + (target_num+4)*PATH_CYCLE) ;
+        numstr << path_tp.front().first << ":" << (path_tp.front().first + (target_tp_num+4)*PATH_CYCLE) ;
         gpserver.set("xrange ["+ numstr.str() + "]");
         numstr.str("");
         gpserver.set("yrange [-30:30]");
         gpserver.set("nokey");
         gpserver.flush();
 
-        for(std::deque<std::pair<double, double> >::iterator it = target.begin();
-            it < target.end();
+        for(std::deque<std::pair<double, double> >::iterator it = target_tp.begin();
+            it < target_tp.end();
             it++) {
-          target_plot_data.push_back(*it);
+          target_plot_data_tp.push_back(*it);
         }
-        for(std::deque<std::pair<double, double> >::iterator it = path.begin();
-            it < path.end();
+        for(std::deque<std::pair<double, double> >::iterator it = path_tp.begin();
+            it < path_tp.end();
             it++) {
           path_plot_data.push_back(*it);
         }
-        multi_data.push_back(std::make_pair(target_plot_data, options_target));
+        multi_data.push_back(std::make_pair(target_plot_data_tp, options_target_tp));
         multi_data.push_back(std::make_pair(path_plot_data, options));
 
         gpserver.plot(multi_data);
@@ -820,7 +675,7 @@ TEST(TrackingTest, random_plot) {
         // gpserver.set("noautoscale");
         gpserver.set("xlabel 'time'");
         gpserver.set("ylabel 'velocity'");
-        numstr << path_v.front().first << ":" << (path_v.front().first + (target_num+4)*PATH_CYCLE) ;
+        numstr << path_tv.front().first << ":" << (path_tv.front().first + (target_tp_num+4)*PATH_CYCLE) ;
         gpserver.set("xrange ["+ numstr.str() + "]");
         numstr.str("");
         numstr << -tg.v_limit()*0.7 << ":" << tg.v_limit()*0.7 ;
@@ -829,28 +684,28 @@ TEST(TrackingTest, random_plot) {
         gpserver.set("nokey");
         gpserver.flush();
 
-        for(std::deque<std::pair<double, double> >::iterator it = target_v.begin();
-            it < target_v.end();
+        for(std::deque<std::pair<double, double> >::iterator it = target_tv.begin();
+            it < target_tv.end();
             it++) {
-          target_plot_data_v.push_back(*it);
+          target_plot_data_tv.push_back(*it);
         }
-        for(std::deque<std::pair<double, double> >::iterator it = path_v.begin();
-            it < path_v.end();
+        for(std::deque<std::pair<double, double> >::iterator it = path_tv.begin();
+            it < path_tv.end();
             it++) {
           path_plot_data_v.push_back(*it);
         }
 
-        multi_data_v.push_back(std::make_pair(target_plot_data_v, options_target));
+        multi_data_v.push_back(std::make_pair(target_plot_data_tv, options_target_tp));
         multi_data_v.push_back(std::make_pair(path_plot_data_v, options));
 
         gpserver.plot(multi_data_v);
         gpserver.flush();
 
-        target_plot_data.clear();
+        target_plot_data_tp.clear();
         path_plot_data.clear();
         multi_data.clear();
 
-        target_plot_data_v.clear();
+        target_plot_data_tv.clear();
         path_plot_data_v.clear();
         multi_data_v.clear();
         usleep(0.01*1e6);
@@ -903,9 +758,9 @@ TEST(TrackingTest, plot_xy) {
   std::deque<std::pair<double, double> > path_y;
   std::deque<std::pair<double, double> > path_vy;
   // 入力目標点の描画オプション
-  plot_options_t options_target;
-  options_target["with"] = "point";
-  options_target["ps"] = "5.0";
+  plot_options_t options_target_tp;
+  options_target_tp["with"] = "point";
+  options_target_tp["ps"] = "5.0";
   plot_options_t options;
   options["with"] = "lp";
   // 目標値描画データ
@@ -959,11 +814,11 @@ TEST(TrackingTest, plot_xy) {
   // 桁固定
   cfstrm << std::fixed << std::setprecision(8);
   // 既に存在する画像を削除
-  FILE* rm_time_position_images = popen("rm images/trapezoid-5251525/xy_plot/time_position/*.png", "re");
+  FILE* rm_time_position_images = popen("rm -f images/trapezoid-5251525/xy_plot/time_position/*.png", "re");
   pclose(rm_time_position_images);
-  FILE* rm_time_velocity_images = popen("rm images/trapezoid-5251525/xy_plot/time_velocity/*.png", "re");
+  FILE* rm_time_velocity_images = popen("rm -f images/trapezoid-5251525/xy_plot/time_velocity/*.png", "re");
   pclose(rm_time_velocity_images);
-  FILE* rm_xy_images = popen("rm images/trapezoid-5251525/xy_plot/xy/*.png", "re");
+  FILE* rm_xy_images = popen("rm -f images/trapezoid-5251525/xy_plot/xy/*.png", "re");
   pclose(rm_xy_images);
 
   // 目標点生成のサイクル
@@ -1074,7 +929,7 @@ TEST(TrackingTest, plot_xy) {
               it++) {
             path_plot_data.push_back(*it);
           }
-          multi_data.push_back(std::make_pair(target_plot_data, options_target));
+          multi_data.push_back(std::make_pair(target_plot_data, options_target_tp));
           multi_data.push_back(std::make_pair(path_plot_data, options));
 
           gpserver.plot(multi_data);
@@ -1134,8 +989,8 @@ TEST(TrackingTest, plot_xy) {
             path_plot_data_x.push_back(*path_it_x);
             path_plot_data_y.push_back(*path_it_y);
           }
-          multi_data.push_back(std::make_pair(target_plot_data_x, options_target));
-          multi_data.push_back(std::make_pair(target_plot_data_y, options_target));
+          multi_data.push_back(std::make_pair(target_plot_data_x, options_target_tp));
+          multi_data.push_back(std::make_pair(target_plot_data_y, options_target_tp));
           multi_data.push_back(std::make_pair(path_plot_data_x, options));
           multi_data.push_back(std::make_pair(path_plot_data_y, options));
 
@@ -1190,8 +1045,8 @@ TEST(TrackingTest, plot_xy) {
             path_plot_data_vx.push_back(*path_it_vx);
             path_plot_data_vy.push_back(*path_it_vy);
           }
-          multi_data.push_back(std::make_pair(target_plot_data_vx, options_target));
-          multi_data.push_back(std::make_pair(target_plot_data_vy, options_target));
+          multi_data.push_back(std::make_pair(target_plot_data_vx, options_target_tp));
+          multi_data.push_back(std::make_pair(target_plot_data_vy, options_target_tp));
           multi_data.push_back(std::make_pair(path_plot_data_vx, options));
           multi_data.push_back(std::make_pair(path_plot_data_vy, options));
 
@@ -1287,9 +1142,9 @@ TEST(TrackingTest, datafile_xy) {
   std::deque<std::pair<double, double> > path_y;
   std::deque<std::pair<double, double> > path_vy;
   // 入力目標点の描画オプション
-  plot_options_t options_target;
-  options_target["with"] = "point";
-  options_target["ps"] = "5.0";
+  plot_options_t options_target_tp;
+  options_target_tp["with"] = "point";
+  options_target_tp["ps"] = "5.0";
   plot_options_t options;
   options["with"] = "lp";
   // 目標値描画データ
@@ -1344,11 +1199,11 @@ TEST(TrackingTest, datafile_xy) {
   // 桁固定
   cfstrm << std::fixed << std::setprecision(8);
   // 既に存在する画像を削除
-  FILE* rm_time_position_images = popen("rm images/trapezoid-5251525/datafile_xy/time_position/*.png", "re");
+  FILE* rm_time_position_images = popen("rm -f images/trapezoid-5251525/datafile_xy/time_position/*.png", "re");
   pclose(rm_time_position_images);
-  FILE* rm_time_velocity_images = popen("rm images/trapezoid-5251525/datafile_xy/time_velocity/*.png", "re");
+  FILE* rm_time_velocity_images = popen("rm -f images/trapezoid-5251525/datafile_xy/time_velocity/*.png", "re");
   pclose(rm_time_velocity_images);
-  FILE* rm_xy_images = popen("rm images/trapezoid-5251525/datafile_xy/xy/*.png", "re");
+  FILE* rm_xy_images = popen("rm -f images/trapezoid-5251525/datafile_xy/xy/*.png", "re");
   pclose(rm_xy_images);
 
 
@@ -1444,7 +1299,7 @@ TEST(TrackingTest, datafile_xy) {
               it++) {
             path_plot_data.push_back(*it);
           }
-          multi_data.push_back(std::make_pair(target_plot_data, options_target));
+          multi_data.push_back(std::make_pair(target_plot_data, options_target_tp));
           multi_data.push_back(std::make_pair(path_plot_data, options));
 
           gpserver.plot(multi_data);
@@ -1507,8 +1362,8 @@ TEST(TrackingTest, datafile_xy) {
             path_plot_data_x.push_back(*path_it_x);
             path_plot_data_y.push_back(*path_it_y);
           }
-          multi_data.push_back(std::make_pair(target_plot_data_x, options_target));
-          multi_data.push_back(std::make_pair(target_plot_data_y, options_target));
+          multi_data.push_back(std::make_pair(target_plot_data_x, options_target_tp));
+          multi_data.push_back(std::make_pair(target_plot_data_y, options_target_tp));
           multi_data.push_back(std::make_pair(path_plot_data_x, options));
           multi_data.push_back(std::make_pair(path_plot_data_y, options));
 
@@ -1562,8 +1417,8 @@ TEST(TrackingTest, datafile_xy) {
             path_plot_data_vx.push_back(*path_it_vx);
             path_plot_data_vy.push_back(*path_it_vy);
           }
-          multi_data.push_back(std::make_pair(target_plot_data_vx, options_target));
-          multi_data.push_back(std::make_pair(target_plot_data_vy, options_target));
+          multi_data.push_back(std::make_pair(target_plot_data_vx, options_target_tp));
+          multi_data.push_back(std::make_pair(target_plot_data_vy, options_target_tp));
           multi_data.push_back(std::make_pair(path_plot_data_vx, options));
           multi_data.push_back(std::make_pair(path_plot_data_vy, options));
 
