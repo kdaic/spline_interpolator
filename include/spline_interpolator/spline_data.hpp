@@ -362,7 +362,7 @@ public:
   /// - SPLINE_SUCCESS: no error
   /// @exception
   /// - SPLINE_QUEUE_SIZE_EMPTY: buffer size is not enough to pop and dlete.
-   RetCode pop_delete();
+  RetCode pop_delete();
 
   /// Get a value at the index
   /// @return constant a value at the index

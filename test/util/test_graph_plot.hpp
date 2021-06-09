@@ -38,6 +38,7 @@ public:
     // prepare output data log
     // set 2 digit lefty embeded 0
     numstr << output_dir
+           << "/"
            << std::setfill('0')
            << std::setw(4)
            << path_index << "_time_position_velocity.csv";
@@ -52,12 +53,13 @@ public:
     ofstrm << std::fixed << std::setprecision(8);
 
     /////////////////////////////////////////////////////////////////////////
-    /// output time-position-velocity data into the text file
+    /// output time-position-velocity-acceleration data into the text file
     /////////////////////////////////////////////////////////////////////////
     for(std::size_t i=0; i < interp_path_tpva.size(); i++) {
       ofstrm << interp_path_tpva.get(i).time      << ","
              << interp_path_tpva.get(i).value.pos << ","
-             << interp_path_tpva.get(i).value.vel << std::endl;
+             << interp_path_tpva.get(i).value.vel << ","
+             << interp_path_tpva.get(i).value.acc << std::endl;
     }
 
     numstr.str("");
@@ -89,10 +91,16 @@ public:
       target_tpva.push( target_tp.get(i).time,
                         PosVelAcc( target_tp.get(i).value ) );
     }
+    std::vector<std::string> empty_list;
     plot( target_tpva,
           interp_path_tpva,
           output_dir,
+          output_dir,
+          output_dir,
           path_index,
+          empty_list,
+          empty_list,
+          empty_list,
           false );
   }
 
@@ -109,16 +117,27 @@ public:
   ///                             (ts+2dT, path(ts+2dT)),
   ///                             ... ,
   ///                             (tf,     path(tf))
-  /// @param[in] output_dir       destination path of plotted graph image(.png)
+  /// @param[in] output_dir_tp    destination path of time-position graph image(.png)
+  /// @param[in] output_dir_tv    destination path of time-velocity graph image(.png)
+  /// @param[in] output_dir_pv    destination path of position-velocity graph image(.png)
   /// @param[in] path_index       prefix index of destination path of plotted graph
+  /// @param[in] gp_set_list_tp   gnuplot set options before plot for time-position graph.
+  /// @param[in] gp_set_list_tv   gnuplot set options before plot for time-position graph.
+  /// @param[in] gp_set_list_pv   gnuplot set options before plot for position-velocity graph.
   /// @param[in] is_target_vel    wether target velocity data exists. default: true(exists)
   /// @details generate path of each set
   /// plot graph of time-position, time-velocity, position-velocity \n
   void plot( const TPVAQueue& target_tpva,
              const TPVAQueue& interp_path_tpva,
-             const std::string& output_dir="./",
+             const std::string& output_dir_tp="./",
+             const std::string& output_dir_tv="./",
+             const std::string& output_dir_pv="./",
              const int path_index = 0,
-             bool  is_target_vel=true ) {
+             const std::vector<std::string>& gp_set_list_tp = std::vector<std::string>(),
+             const std::vector<std::string>& gp_set_list_tv = std::vector<std::string>(),
+             const std::vector<std::string>& gp_set_list_pv = std::vector<std::string>(),
+             bool  is_target_vel=true
+           ) {
 
     // target point plot data (ts, t1, t2, ... , tf)
     // (ts, target_s),
@@ -222,7 +241,8 @@ public:
 
     // set 2 digit lefty embeded 0
     numstr << "'"
-           << output_dir
+           << output_dir_tp
+           << "/"
            << std::setfill('0')
            << std::setw(4)
            << path_index << "_time-position_graph.png"
@@ -236,6 +256,12 @@ public:
     // gpserver_.set("noautoscale");
     gpserver_.set("xlabel 'time'");
     gpserver_.set("ylabel 'position'");
+    if( gp_set_list_tp.size() > 0 ) {
+      for( std::size_t i=0; i<gp_set_list_tp.size(); i++ )
+      {
+        gpserver_.set( gp_set_list_tp[i] );
+      }
+    }
     gpserver_.set("nokey");
     gpserver_.flush();
     // plot
@@ -252,7 +278,8 @@ public:
 
     // set 2 digit lefty embeded 0
     numstr << "'"
-           << output_dir
+           << output_dir_tv
+           << "/"
            << std::setfill('0')
            << std::setw(4)
            << path_index << "_time-velocity_graph.png"
@@ -266,6 +293,12 @@ public:
     // gpserver_.set("noautoscale");
     gpserver_.set("xlabel 'time'");
     gpserver_.set("ylabel 'velocity'");
+    if( gp_set_list_tv.size() > 0 ) {
+      for( std::size_t i=0; i<gp_set_list_tv.size(); i++ )
+      {
+        gpserver_.set( gp_set_list_tv[i] );
+      }
+    }
     gpserver_.set("nokey");
     gpserver_.flush();
     // plot
@@ -282,7 +315,8 @@ public:
 
     // set 2 digit lefty embeded 0
     numstr << "'"
-           << output_dir
+           << output_dir_pv
+           << "/"
            << std::setfill('0')
            << std::setw(4)
            << path_index << "_position-velocity_diagram.png"
@@ -296,6 +330,12 @@ public:
     // gpserver_.set("noautoscale");
     gpserver_.set("xlabel 'position'");
     gpserver_.set("ylabel 'velocity'");
+    if( gp_set_list_pv.size() > 0 ) {
+      for( std::size_t i=0; i<gp_set_list_pv.size(); i++ )
+      {
+        gpserver_.set( gp_set_list_pv[i] );
+      }
+    }
     gpserver_.set("nokey");
     gpserver_.flush();
     // plot

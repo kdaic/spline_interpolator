@@ -9,6 +9,9 @@ namespace interp {
 class NonUniformRoundingSpline {
 public:
   /// Constructor
+  NonUniformRoundingSpline();
+
+  /// Constructor
   /// @param[in] init_position start position(initial value)
   /// @param[in] init_velocity start velocity(if necessary. default 0.0)
   /// @brief create initial state of time=0.0、position=input argument、velocity=0.
@@ -19,17 +22,27 @@ public:
   ~NonUniformRoundingSpline();
 
   /// push(queue) the date next to the last index
-  /// @param[in] time     target time
-  /// @param[in] position target position
+  /// @param[in] clock_time  target clock time
+  /// @param[in] position    target position
   /// @details
   /// If the queue has time-position data greater than or equal to 3 (>=3),
   /// this function calculates internally the interploated velocity
   /// by means of a non-Uniform rounding spline
   /// and adds a new time-position-Velocity data into the queue.
-  void push(const double& time, const double& position);
+  void push(const double& clock_time, const double& position);
+
+  /// push(queue) the date next to the last index
+  /// @param[in] interval_time  interval time between now and post target
+  /// @param[in] position       target position
+  /// @details
+  /// If the queue has time-position data greater than or equal to 3 (>=3),
+  /// this function calculates internally the interploated velocity
+  /// by means of a non-Uniform rounding spline
+  /// and adds a new time-position-Velocity data into the queue.
+  void push_dT(const double& interval_time, const double& position);
 
   /// pop the Time-Position-Velocity data
-  /// @param[out] output TimePVA(Time-Position-Velocity-(Acceleration~)) structure data.
+  /// @param[out] output ouput TimePVA(Time-Position-Velocity-(Acceleration=0)) structure data.
   /// @brief
   /// pop the oldest Time-Position-Velocity data in the queue (FIFO)
   /// @return
