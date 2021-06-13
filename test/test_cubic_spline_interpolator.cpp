@@ -195,7 +195,9 @@ TEST_F( CubicSplineTest, pop1 ) {
   pclose(rm_outdir_images);
 
   TestGraphPlot test_gp;
-  test_gp.plot( tp_queue, interpolated_path_tpva, output_dir );
+  test_gp.plot_tp_tv_pv( tp_queue,
+                         interpolated_path_tpva,
+                         output_dir );
   test_gp.dump_csv( interpolated_path_tpva, output_dir );
 #endif // #ifdef __QNX__
 

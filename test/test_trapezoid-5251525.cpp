@@ -150,12 +150,12 @@ public:
                         index );
 
       // グラフプロット
-      test_gp.plot(target_tpva,
-                   interp_path_tpva,
-                   output_path_,
-                   output_path_,
-                   output_path_,
-                   index );
+      test_gp.plot_tp_tv_pv(target_tpva,
+                            interp_path_tpva,
+                            output_path_,
+                            output_path_,
+                            output_path_,
+                            index );
 
       // PtoP ２点間１セットごとにクリア
       target_tpva.clear();
@@ -658,17 +658,18 @@ TEST(TrackingTest, random_plot) {
       numstr.str("");
 
       // グラフプロット
-      test_gp.plot(target_tpva,
-                   interp_path_tpva,
-                   output_dir_tp,
-                   output_dir_tv,
-                   output_dir_pv,
-                   index,
-                   gpserver_set_list_tp,
-                   gpserver_set_list_tv,
-                   gpserver_set_list_pv,
-                   true
-                  );
+      test_gp.plot_tp_tv_pv(target_tpva,
+                            interp_path_tpva,
+                            output_dir_tp,
+                            output_dir_tv,
+                            output_dir_pv,
+                            index,
+                            gpserver_set_list_tp,
+                            gpserver_set_list_tv,
+                            gpserver_set_list_pv,
+                            "",
+                            true
+                           );
 
       gpserver_set_list_tp.clear();
       gpserver_set_list_tv.clear();
@@ -707,7 +708,7 @@ TEST(TrackingTest, plot_xy) {
   const unsigned int path_num = static_cast<unsigned int>((target_num)*PATH_CYCLE/CYCLE);
   const unsigned int path_time_num = static_cast<unsigned int>((target_time_num)*PATH_CYCLE/CYCLE);
   // 描画入力目標点のバッファ
-  std::deque<std::pair<double, double> > target;
+  std::deque<std::pair<double, double> > target_tp;
   std::deque<std::pair<double, double> > target_x;
   std::deque<std::pair<double, double> > target_vx;
   std::deque<std::pair<double, double> > target_y;
@@ -792,7 +793,7 @@ TEST(TrackingTest, plot_xy) {
       nusv_y.push_dT(PATH_CYCLE, target_position_y[tpindex]);
     }
 
-    target.push_back( std::make_pair(target_position_x[tpindex], target_position_y[tpindex]) );
+    target_tp.push_back( std::make_pair(target_position_x[tpindex], target_position_y[tpindex]) );
     target_x.push_back( std::make_pair(tpindex * PATH_CYCLE, target_position_x[tpindex]) );
     target_y.push_back( std::make_pair(tpindex * PATH_CYCLE, target_position_y[tpindex]) );
 
@@ -844,8 +845,8 @@ TEST(TrackingTest, plot_xy) {
         path_vy.push_back(std::make_pair(t, v_yt));
 
         // 描画入力目標点のバッファ除去
-        if(target.front().first < path.front().first) {
-          target.pop_front();
+        if(target_tp.front().first < path.front().first) {
+          target_tp.pop_front();
         }
         if(target_x.front().first < path_x.front().first) {
           target_x.pop_front();
@@ -880,8 +881,8 @@ TEST(TrackingTest, plot_xy) {
           gpserver.set("nokey");
           gpserver.flush();
 
-          for(std::deque<std::pair<double, double> >::iterator it = target.begin();
-              it < target.end();
+          for(std::deque<std::pair<double, double> >::iterator it = target_tp.begin();
+              it < target_tp.end();
               it++) {
             target_plot_data.push_back(*it);
           }
