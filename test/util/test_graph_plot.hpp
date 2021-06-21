@@ -28,9 +28,11 @@ public:
   ///                             (tf,     path(tf))
   /// @param[in] output_dir       destination directory of plotted graph image(.png)
   /// @param[in] path_index       prefix index of destination path of plotted graph
+  /// @param[in] prefix_pva_label prefix label of destination path of plotted graph
   void dump_csv( const TPVAQueue& interp_path_tpva,
                  const std::string& output_dir="./",
-                 const int path_index = 0 ) {
+                 const int path_index = 0,
+                 const std::string& prefix_pva_label = "" ) {
 
     // input character into the graph
     std::stringstream numstr;
@@ -41,7 +43,7 @@ public:
            << "/"
            << std::setfill('0')
            << std::setw(4)
-           << path_index << "_time_position_velocity.csv";
+           << path_index << "_time_"<< prefix_pva_label <<"position_velocity.csv";
 
     std::ofstream ofstrm( numstr.str().c_str(), std::ios::out );
     if (ofstrm.fail()) {
@@ -81,6 +83,7 @@ public:
   ///                             (tf,     path(tf))
   /// @param[in] output_dir       destination path of plotted graph image(.png)
   /// @param[in] path_index       prefix index of destination path of plotted graph
+  /// @param[in] prefix_pva_label prefix label of destination path of plotted graph
   void plot_tp_tv_pv( const TPQueue&     target_tp,
                       const TPVAQueue&   interp_path_tpva,
                       const std::string& output_dir="./",
@@ -105,7 +108,7 @@ public:
                    empty_list,
                    prefix_pva_label,
                    false );
-  }
+  };
 
   /// plot time-position, time-velocity, position-velocity graph
   /// @param[in] target_tpva      plotting target time-position-velocity data
@@ -144,56 +147,127 @@ public:
          bool  is_target_vel=true
        ) {
 
+    std::vector<TPVAQueue> target_tpva_list;
+    target_tpva_list.push_back( target_tpva );
+
+    std::vector<TPVAQueue> interp_path_tpva_list;
+    interp_path_tpva_list.push_back( interp_path_tpva );
+
+    plot_tp_tv_pv( target_tpva_list,
+                   interp_path_tpva_list,
+                   output_dir_tp,
+                   output_dir_tv,
+                   output_dir_pv,
+                   path_index,
+                   gp_set_list_tp,
+                   gp_set_list_tv,
+                   gp_set_list_pv,
+                   prefix_pva_label,
+                   is_target_vel );
+  };
+
+
+  /// plot time-position, time-velocity, position-velocity graph
+  /// @param[in] target_tpva      plotting target time-position-velocity data
+  ///                             (ts, target_tpva[0]_s), (ts, target_tpva[1]_s),
+  ///                             (t1, target_tpva[0]_1), (t1, target_tpva[1]_1),
+  ///                              ... ,
+  ///                             (tf, target_tpva[0]_f), (tf, target_tpva[1]_f),
+  ///
+  /// @param[in] interp_path_tpva plotting interpolated path
+  ///                             of time-position-velocity with cycletime dT.
+  ///                             (ts,     path[0](ts)),     (ts,     path[1]](ts)),
+  ///                             (ts+dT,  path[0](ts+dT)),  (ts+dT,  path[1]](ts+dT)),
+  ///                             (ts+2dT, path[0](ts+2dT)), (ts+2dT, path[1](ts+2dT)),
+  ///                             ... ,
+  ///                             (tf,     path[0](tf)),     (tf,     path[1](tf))
+  /// @param[in] output_dir_tp    destination path of time-position graph image(.png)
+  /// @param[in] output_dir_tv    destination path of time-velocity graph image(.png)
+  /// @param[in] output_dir_pv    destination path of position-velocity graph image(.png)
+  /// @param[in] path_index       prefix index of destination path of plotted graph
+  /// @param[in] gp_set_list_tp   gnuplot set options before plot for time-position graph.
+  /// @param[in] gp_set_list_tv   gnuplot set options before plot for time-position graph.
+  /// @param[in] gp_set_list_pv   gnuplot set options before plot for position-velocity graph.
+  /// @param[in] is_target_vel    wether target velocity data exists. default: true(exists)
+  /// @details generate path of each set
+  /// plot graph of time-position, time-velocity, position-velocity \n
+  void plot_tp_tv_pv(
+         const std::vector<TPVAQueue>& target_tpva_list,
+         const std::vector<TPVAQueue>& interp_path_tpva_list,
+         const std::string& output_dir_tp="./",
+         const std::string& output_dir_tv="./",
+         const std::string& output_dir_pv="./",
+         const int path_index = 0,
+         const std::vector<std::string>& gp_set_list_tp = std::vector<std::string>(),
+         const std::vector<std::string>& gp_set_list_tv = std::vector<std::string>(),
+         const std::vector<std::string>& gp_set_list_pv = std::vector<std::string>(),
+         const std::string& prefix_pva_label = "",
+         bool  is_target_vel=true
+       ) {
+
     // target point plot data (ts, t1, t2, ... , tf)
-    // (ts, target_s),
-    // (t1, target_1),
+    // (ts, target[0]_s), (ts, target[1]_s)
+    // (t1, target[0]_1), (t1, target[1]_1)
     //  ... ,
-    // (tf, target_f)
-    std::vector<std::pair<double, double> >target_plot_data_tp;
-    std::vector<std::pair<double, double> >target_plot_data_tv;
-    std::vector<std::pair<double, double> >target_plot_data_pv;
+    // (tf, target[0]_f), (tf, target[1]_f)
+    std::vector<std::vector<std::pair<double, double> > >target_plot_data_tp_list;
+    std::vector<std::vector<std::pair<double, double> > >target_plot_data_tv_list;
+    std::vector<std::vector<std::pair<double, double> > >target_plot_data_pv_list;
 
     // interpolated point plot data (ts, ts+dT, ts+2dT, ... , tf)
-    // (ts, path(s)),
-    // (ts+dT, path(ts+dT)),
+    // (ts,    path[0](s)),     (ts,    path[1](s)),
+    // (ts+dT, path[0](ts+dT)), (ts+dT, path[1](ts+dT)),
     //  ... ,
-    // (tf, path(tf))
-    std::vector<std::pair<double, double> >path_plot_data_tp;
-    std::vector<std::pair<double, double> >path_plot_data_tv;
-    std::vector<std::pair<double, double> >path_plot_data_pv;
+    // (tf,    path[0](tf))     (tf,    path[1](tf))
+    std::vector<std::vector<std::pair<double, double> > >path_plot_data_tp_list;
+    std::vector<std::vector<std::pair<double, double> > >path_plot_data_tv_list;
+    std::vector<std::vector<std::pair<double, double> > >path_plot_data_pv_list;
 
-    for(std::size_t i=0; i<target_tpva.size(); i++) {
-      // add target of time-position into plotting buffer
-      target_plot_data_tp.push_back(
-                            std::make_pair( target_tpva.get(i).time,
-                                            target_tpva.get(i).value.pos ) );
-      if( is_target_vel ) {
-        // add target of time-velocity into plotting buffer
-        target_plot_data_tv.push_back(
-                              std::make_pair( target_tpva.get(i).time,
-                                              target_tpva.get(i).value.vel ) );
-        // add position-velocity (phase diagram) into plotting buffer
-        target_plot_data_pv.push_back(
-                              std::make_pair( target_tpva.get(i).value.pos,
-                                              target_tpva.get(i).value.vel ) );
-      }
-    }
+
+    target_plot_data_tp_list.resize( target_tpva_list.size() );
+    target_plot_data_tv_list.resize( target_tpva_list.size() );
+    target_plot_data_pv_list.resize( target_tpva_list.size() );
+
+    for(std::size_t elem_idx=0; elem_idx<target_tpva_list.size(); elem_idx++) {
+      for(std::size_t i=0; i<target_tpva_list[elem_idx].size(); i++) {
+        // add target of time-position into plotting buffer
+        target_plot_data_tp_list[elem_idx].push_back(
+          std::make_pair( target_tpva_list[elem_idx].get(i).time,
+                          target_tpva_list[elem_idx].get(i).value.pos ) );
+        if( is_target_vel ) {
+          // add target of time-velocity into plotting buffer
+          target_plot_data_tv_list[elem_idx].push_back(
+            std::make_pair( target_tpva_list[elem_idx].get(i).time,
+                            target_tpva_list[elem_idx].get(i).value.vel ) );
+          // add position-velocity (phase diagram) into plotting buffer
+          target_plot_data_pv_list[elem_idx].push_back(
+            std::make_pair( target_tpva_list[elem_idx].get(i).value.pos,
+                            target_tpva_list[elem_idx].get(i).value.vel ) );
+        }
+      } // End of for loop i= 0 -> target_tpva_list[elem_idx].size()
+    } // End of for loop elem_idx= 0 -> target_tpva_list.size()
+
+    path_plot_data_tp_list.resize( interp_path_tpva_list.size() );
+    path_plot_data_tv_list.resize( interp_path_tpva_list.size() );
+    path_plot_data_pv_list.resize( interp_path_tpva_list.size() );
 
     // add interpolated_path of
     //     time-position,
     //     time-velocity,
     //     position-velocity into plotting buffer
-    for(std::size_t i=0; i<interp_path_tpva.size(); i++) {
-      path_plot_data_tp.push_back(
-                         std::make_pair( interp_path_tpva.get(i).time,
-                                         interp_path_tpva.get(i).value.pos ) );
-      path_plot_data_tv.push_back(
-                          std::make_pair( interp_path_tpva.get(i).time,
-                                          interp_path_tpva.get(i).value.vel ) );
-      path_plot_data_pv.push_back(
-                          std::make_pair( interp_path_tpva.get(i).value.pos,
-                                          interp_path_tpva.get(i).value.vel ) );
-    }
+    for(std::size_t elem_idx=0; elem_idx<interp_path_tpva_list.size(); elem_idx++) {
+      for(std::size_t i=0; i<interp_path_tpva_list[elem_idx].size(); i++) {
+        path_plot_data_tp_list[elem_idx].push_back(
+          std::make_pair( interp_path_tpva_list[elem_idx].get(i).time,
+                          interp_path_tpva_list[elem_idx].get(i).value.pos ) );
+        path_plot_data_tv_list[elem_idx].push_back(
+          std::make_pair( interp_path_tpva_list[elem_idx].get(i).time,
+                          interp_path_tpva_list[elem_idx].get(i).value.vel ) );
+        path_plot_data_pv_list[elem_idx].push_back(
+          std::make_pair( interp_path_tpva_list[elem_idx].get(i).value.pos,
+                          interp_path_tpva_list[elem_idx].get(i).value.vel ) );
+      } // End of for loop i=0 -> interp_path_tpva[elem_idx].size()
+    } // End of for loop elem_idx= 0 -> interp_path_tpva_list.size()
 
     /////////////////////////////////////////////////////////////////////////
     // prepare plotting
@@ -220,22 +294,28 @@ public:
 
     // final plot data of time-position
     container_t multi_data_tp;
-    multi_data_tp.push_back( std::make_pair( target_plot_data_tp,
-                                             options_target ) );
-    multi_data_tp.push_back( std::make_pair( path_plot_data_tp,
-                                             options ) );
     // final plot data of time-velocity
     container_t multi_data_tv;
-    multi_data_tv.push_back( std::make_pair( target_plot_data_tv,
-                                             options_target ) );
-    multi_data_tv.push_back( std::make_pair( path_plot_data_tv,
-                                             options ) );
     // final plot data of position-velocity(phase diagram)
     container_t multi_data_pv;
-    multi_data_pv.push_back( std::make_pair( target_plot_data_pv,
-                                             options_target ) );
-    multi_data_pv.push_back( std::make_pair( path_plot_data_pv,
-                                             options ) );
+
+    for(std::size_t elem_idx=0; elem_idx<target_tpva_list.size(); elem_idx++) {
+      multi_data_tp.push_back( std::make_pair( target_plot_data_tp_list[elem_idx],
+                                               options_target ) );
+      multi_data_tv.push_back( std::make_pair( target_plot_data_tv_list[elem_idx],
+                                               options_target ) );
+      multi_data_pv.push_back( std::make_pair( target_plot_data_pv_list[elem_idx],
+                                               options_target ) );
+    }
+
+    for(std::size_t elem_idx=0; elem_idx<interp_path_tpva_list.size(); elem_idx++) {
+      multi_data_tp.push_back( std::make_pair( path_plot_data_tp_list[elem_idx],
+                                               options ) );
+      multi_data_tv.push_back( std::make_pair( path_plot_data_tv_list[elem_idx],
+                                               options ) );
+      multi_data_pv.push_back( std::make_pair( path_plot_data_pv_list[elem_idx],
+                                               options ) );
+    }
 
     // input character into the graph
     std::stringstream numstr;
@@ -273,8 +353,8 @@ public:
     gpserver_.plot(multi_data_tp);
     gpserver_.flush();
     // clear
-    target_plot_data_tp.clear();
-    path_plot_data_tp.clear();
+    target_plot_data_tp_list.clear();
+    path_plot_data_tp_list.clear();
     multi_data_tp.clear();
 
     /////////////////////////////////////////////////////////////////////////
@@ -310,8 +390,8 @@ public:
     gpserver_.plot(multi_data_tv);
     gpserver_.flush();
     // clear
-    target_plot_data_tv.clear();
-    path_plot_data_tv.clear();
+    target_plot_data_tv_list.clear();
+    path_plot_data_tv_list.clear();
     multi_data_tv.clear();
 
     /////////////////////////////////////////////////////////////////////////
@@ -347,8 +427,8 @@ public:
     gpserver_.plot(multi_data_pv);
     gpserver_.flush();
     // clear
-    target_plot_data_pv.clear();
-    path_plot_data_pv.clear();
+    target_plot_data_pv_list.clear();
+    path_plot_data_pv_list.clear();
     multi_data_pv.clear();
 
     // sleep 10[ms]
@@ -374,10 +454,10 @@ public:
   /// @param[in] gp_set_list      gnuplot set options before plot a graph.
   /// @details generate path of each set
   /// plot graph of input target_x & _y and interp_path_x & _y \n
-  void plot( const std::vector<double>&      target_x,
-             const std::vector<double>&      target_y,
-             const std::vector<double>&      interp_path_x,
-             const std::vector<double>&      interp_path_y,
+  void plot( const std::deque<double>&      target_x,
+             const std::deque<double>&      target_y,
+             const std::deque<double>&      interp_path_x,
+             const std::deque<double>&      interp_path_y,
              const std::string&              output_dir      = "./",
              const std::string&              output_filename = "graph",
              const int                       path_index      = 0,
@@ -386,6 +466,7 @@ public:
              const std::string&              ylabel          = "yaxis",
              bool  is_target_vel                             = true
            ) {
+
     if( target_x.size() != target_y.size() ) {
       std::cerr << "the size of x-axis and y-axis plotting target data is different"
                 << std::endl;
