@@ -482,8 +482,8 @@ public:
   /// - SPLINE_INVALID_INPUT_TIME: the time is less than the one of previous index
   RetCode push( const double& time,
                 const double& position,
-                const double& velocity,
-                const double& acceleration );
+                const double& velocity=0.0,
+                const double& acceleration=0.0 );
 
   /// Set TimePVA value at the input-index (overload)
   /// @param[in] index     the index for setting TPV data
