@@ -11,6 +11,10 @@ public:
   /// Constructor
   NonUniformRoundingSpline();
 
+  /// Copy Constructor
+  /// @param[in] src source of NonUniformRoundingSpline object,
+  NonUniformRoundingSpline( const NonUniformRoundingSpline& src );
+
   /// Constructor
   /// @param[in] init_position start position(initial value)
   /// @param[in] init_velocity start velocity(if necessary. default 0.0)
@@ -20,6 +24,11 @@ public:
 
   /// Destructor
   ~NonUniformRoundingSpline();
+
+  /// copy operator
+  /// @param[in] src source of NonUniformRoundingSpline object,
+  /// @return *this
+  NonUniformRoundingSpline operator=( const NonUniformRoundingSpline& src );
 
   /// push(queue) the date next to the last index
   /// @param[in] clock_time  target clock time
@@ -41,6 +50,14 @@ public:
   /// and adds a new time-position-Velocity data into the queue.
   void push_dT(const double& interval_time, const double& position);
 
+  /// get the tpva_buffer_
+  /// @return tpva_buffer_
+  const TPVAQueue tpva_queue() const;
+
+  /// get the TimePVA at the index of the tpva_buffer_
+  /// @return TimePVA reference at the index of tpva_buffer_
+  const TimePVA get( const std::size_t& index ) const;
+
   /// pop the Time-Position-Velocity data
   /// @param[out] output ouput TimePVA(Time-Position-Velocity-(Acceleration=0)) structure data.
   /// @brief
@@ -57,6 +74,13 @@ public:
   /// @brief Returns the size of the stored Time-Position-Velocity buffer data.
   /// @return queue size.
   unsigned int size();
+
+  /// Get dT at the input-index
+  /// @param[in] index the index getting dT from queue
+  /// @return dT at the input-index
+  /// @exception If invalid index is accessed.
+  const double dT( const std::size_t& index ) const;
+
 
 private:
   /// velocity calculating
