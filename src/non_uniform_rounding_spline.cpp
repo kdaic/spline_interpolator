@@ -2,6 +2,9 @@
 
 using namespace interp;
 
+NonUniformRoundingSpline::NonUniformRoundingSpline() {
+}
+
 NonUniformRoundingSpline::NonUniformRoundingSpline(const double& init_position,
                                                    const double& init_velocity) {
   TimePosition tp(0.0, init_position);
@@ -19,8 +22,9 @@ NonUniformRoundingSpline::~NonUniformRoundingSpline() {
 };
 
 
-void NonUniformRoundingSpline::push(const double& time, const double& position) {
-  TimePosition tp( tp_buffer_.back().time + time, position );
+void NonUniformRoundingSpline::push(const double& clock_time, const double& position) {
+
+  TimePosition tp( clock_time, position );
   tp_buffer_.push(tp);
 
   TimePVA init_tpv( tp.time,
@@ -38,6 +42,15 @@ void NonUniformRoundingSpline::push(const double& time, const double& position) 
     // delete front(oldest) data
     tp_buffer_.pop_delete();
   }
+}
+
+
+void NonUniformRoundingSpline::push_dT(const double& interval_time, const double& position) {
+  double pre_time = 0.0;
+  if( tp_buffer_.size() > 0 ) {
+    pre_time = tp_buffer_.back().time;
+  }
+  this->push( pre_time + interval_time, position );
 }
 
 double NonUniformRoundingSpline::calculate_velocity() {

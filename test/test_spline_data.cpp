@@ -612,3 +612,145 @@ TEST(TPVAListQueueTest, dump) {
   std::cout << buf;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////
+
+TEST(TrapezoidConfigTest, constructor1 ) {
+  TrapezoidConfig trpzd_conf;
+  EXPECT_NE(0.0, trpzd_conf.a_limit);
+  EXPECT_NE(0.0, trpzd_conf.d_limit);
+  EXPECT_NE(0.0, trpzd_conf.v_limit);
+  EXPECT_NE(0.0, trpzd_conf.asr);
+  EXPECT_NE(0.0, trpzd_conf.dsr);
+  EXPECT_NE(0.0, trpzd_conf.ratio_acc_dec);
+}
+
+
+TEST(TrapezoidConfigTest, constructor2 ) {
+  const double a_limit = 1345;
+  const double d_limit = 1456;
+  const double v_limit = 222;
+  const double asr = 0.333;
+  const double dsr = 0.444;
+  const double ratio_acc_dec = 0.99;
+  //
+  TrapezoidConfig trpzd_conf( a_limit, d_limit,
+                              v_limit,
+                              asr,  dsr,
+                              ratio_acc_dec );
+  EXPECT_EQ(a_limit,       trpzd_conf.a_limit);
+  EXPECT_EQ(d_limit,       trpzd_conf.d_limit);
+  EXPECT_EQ(v_limit,       trpzd_conf.v_limit);
+  EXPECT_EQ(asr,           trpzd_conf.asr);
+  EXPECT_EQ(dsr,           trpzd_conf.dsr);
+  EXPECT_EQ(ratio_acc_dec, trpzd_conf.ratio_acc_dec);
+  //
+  // copy_constructor
+  TrapezoidConfig trpzd_conf2( trpzd_conf );
+  EXPECT_EQ(trpzd_conf.a_limit,       trpzd_conf2.a_limit);
+  EXPECT_EQ(trpzd_conf.d_limit,       trpzd_conf2.d_limit);
+  EXPECT_EQ(trpzd_conf.v_limit,       trpzd_conf2.v_limit);
+  EXPECT_EQ(trpzd_conf.asr,           trpzd_conf2.asr);
+  EXPECT_EQ(trpzd_conf.dsr,           trpzd_conf2.dsr);
+  EXPECT_EQ(trpzd_conf.ratio_acc_dec, trpzd_conf2.ratio_acc_dec);
+}
+
+TEST(TrapezoidConfigTest, copy ) {
+  const double a_limit = 1543;
+  const double d_limit = 1654;
+  const double v_limit = 189;
+  const double asr = 0.555;
+  const double dsr = 0.666;
+  const double ratio_acc_dec = 0.98;
+  //
+  TrapezoidConfig trpzd_conf( a_limit, d_limit,
+                              v_limit,
+                              asr,  dsr,
+                              ratio_acc_dec );
+  // copy_constructor
+  TrapezoidConfig trpzd_conf2 = trpzd_conf;
+  EXPECT_EQ(trpzd_conf.a_limit,       trpzd_conf2.a_limit);
+  EXPECT_EQ(trpzd_conf.d_limit,       trpzd_conf2.d_limit);
+  EXPECT_EQ(trpzd_conf.v_limit,       trpzd_conf2.v_limit);
+  EXPECT_EQ(trpzd_conf.asr,           trpzd_conf2.asr);
+  EXPECT_EQ(trpzd_conf.dsr,           trpzd_conf2.dsr);
+  EXPECT_EQ(trpzd_conf.ratio_acc_dec, trpzd_conf2.ratio_acc_dec);
+}
+
+
+TEST(TrapezoidConfigTest, queue ) {
+  TrapezoidConfig trpzd_conf1( 1100, 1200,
+                               234,
+                               0.3, 0.5,
+                               0.9 );
+  TrapezoidConfig trpzd_conf2( 1412, 1326,
+                               211,
+                               0.1, 0.01,
+                               0.89 );
+  TrapezoidConfig trpzd_conf3( 1337, 1274,
+                               308,
+                               0.2, 0.05,
+                               0.95 );
+  TrapezoidConfigQueue trpzd_conf_que;
+  trpzd_conf_que.push_back(trpzd_conf1);
+  trpzd_conf_que.push_back(trpzd_conf2);
+  trpzd_conf_que.push_back(trpzd_conf3);
+  //
+  EXPECT_EQ( trpzd_conf1.a_limit,       trpzd_conf_que.front().a_limit );
+  EXPECT_EQ( trpzd_conf1.d_limit,       trpzd_conf_que.front().d_limit );
+  EXPECT_EQ( trpzd_conf1.v_limit,       trpzd_conf_que.front().v_limit );
+  EXPECT_EQ( trpzd_conf1.asr,           trpzd_conf_que.front().asr );
+  EXPECT_EQ( trpzd_conf1.dsr,           trpzd_conf_que.front().dsr );
+  EXPECT_EQ( trpzd_conf1.ratio_acc_dec, trpzd_conf_que.front().ratio_acc_dec );
+  //
+  EXPECT_EQ( trpzd_conf1.a_limit,       trpzd_conf_que[0].a_limit );
+  EXPECT_EQ( trpzd_conf1.d_limit,       trpzd_conf_que[0].d_limit );
+  EXPECT_EQ( trpzd_conf1.v_limit,       trpzd_conf_que[0].v_limit );
+  EXPECT_EQ( trpzd_conf1.asr,           trpzd_conf_que[0].asr );
+  EXPECT_EQ( trpzd_conf1.dsr,           trpzd_conf_que[0].dsr );
+  EXPECT_EQ( trpzd_conf1.ratio_acc_dec, trpzd_conf_que[0].ratio_acc_dec );
+  //
+  EXPECT_EQ( trpzd_conf2.a_limit,       trpzd_conf_que[1].a_limit );
+  EXPECT_EQ( trpzd_conf2.d_limit,       trpzd_conf_que[1].d_limit );
+  EXPECT_EQ( trpzd_conf2.v_limit,       trpzd_conf_que[1].v_limit );
+  EXPECT_EQ( trpzd_conf2.asr,           trpzd_conf_que[1].asr );
+  EXPECT_EQ( trpzd_conf2.dsr,           trpzd_conf_que[1].dsr );
+  EXPECT_EQ( trpzd_conf2.ratio_acc_dec, trpzd_conf_que[1].ratio_acc_dec );
+  //
+  EXPECT_EQ( trpzd_conf3.a_limit,       trpzd_conf_que[2].a_limit );
+  EXPECT_EQ( trpzd_conf3.d_limit,       trpzd_conf_que[2].d_limit );
+  EXPECT_EQ( trpzd_conf3.v_limit,       trpzd_conf_que[2].v_limit );
+  EXPECT_EQ( trpzd_conf3.asr,           trpzd_conf_que[2].asr );
+  EXPECT_EQ( trpzd_conf3.dsr,           trpzd_conf_que[2].dsr );
+  EXPECT_EQ( trpzd_conf3.ratio_acc_dec, trpzd_conf_que[2].ratio_acc_dec );
+  //
+  // copy
+  TrapezoidConfigQueue trpzd_conf_que2 = trpzd_conf_que;
+  //
+  // clear original data
+  trpzd_conf_que.clear();
+  //
+  EXPECT_EQ( trpzd_conf1.a_limit,       trpzd_conf_que2[0].a_limit );
+  EXPECT_EQ( trpzd_conf1.d_limit,       trpzd_conf_que2[0].d_limit );
+  EXPECT_EQ( trpzd_conf1.v_limit,       trpzd_conf_que2[0].v_limit );
+  EXPECT_EQ( trpzd_conf1.asr,           trpzd_conf_que2[0].asr );
+  EXPECT_EQ( trpzd_conf1.dsr,           trpzd_conf_que2[0].dsr );
+  EXPECT_EQ( trpzd_conf1.ratio_acc_dec, trpzd_conf_que2[0].ratio_acc_dec );
+  //
+  EXPECT_EQ( trpzd_conf2.a_limit,       trpzd_conf_que2[1].a_limit );
+  EXPECT_EQ( trpzd_conf2.d_limit,       trpzd_conf_que2[1].d_limit );
+  EXPECT_EQ( trpzd_conf2.v_limit,       trpzd_conf_que2[1].v_limit );
+  EXPECT_EQ( trpzd_conf2.asr,           trpzd_conf_que2[1].asr );
+  EXPECT_EQ( trpzd_conf2.dsr,           trpzd_conf_que2[1].dsr );
+  EXPECT_EQ( trpzd_conf2.ratio_acc_dec, trpzd_conf_que2[1].ratio_acc_dec );
+  //
+  EXPECT_EQ( trpzd_conf3.a_limit,       trpzd_conf_que2[2].a_limit );
+  EXPECT_EQ( trpzd_conf3.d_limit,       trpzd_conf_que2[2].d_limit );
+  EXPECT_EQ( trpzd_conf3.v_limit,       trpzd_conf_que2[2].v_limit );
+  EXPECT_EQ( trpzd_conf3.asr,           trpzd_conf_que2[2].asr );
+  EXPECT_EQ( trpzd_conf3.dsr,           trpzd_conf_que2[2].dsr );
+  EXPECT_EQ( trpzd_conf3.ratio_acc_dec, trpzd_conf_que2[2].ratio_acc_dec );
+
+}
+
+
+

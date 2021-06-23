@@ -183,10 +183,22 @@ TEST_F( CubicSplineTest, pop1 ) {
   TPVAQueue interpolated_path_tpva
     = g_generate_path_and_cycletime_queue(tp_queue, 0.005, -0.0, 0.0 );
 
-  TestGraphPlot test_gp;
-  test_gp.plot( tp_queue, interpolated_path_tpva, "./images/" );
-  test_gp.dump_csv( interpolated_path_tpva, "./images/" );
+  /// ディレクトリ作成
+  const std::string output_dir = "./images/cubic_spline";
+  const std::string mkdir_outdir_str = "mkdir -p " + output_dir;
+  FILE* mkdir_outdir = popen(mkdir_outdir_str.c_str(), "re");
+  pclose(mkdir_outdir);
 
+  // 既に存在する画像を削除
+  const std::string rm_outdir_images_str = "rm -f " + output_dir + "/*.png";
+  FILE* rm_outdir_images = popen(rm_outdir_images_str.c_str(), "re");
+  pclose(rm_outdir_images);
+
+  TestGraphPlot test_gp;
+  test_gp.plot_tp_tv_pv( tp_queue,
+                         interpolated_path_tpva,
+                         output_dir );
+  test_gp.dump_csv( interpolated_path_tpva, output_dir );
 #endif // #ifdef __QNX__
 
 }

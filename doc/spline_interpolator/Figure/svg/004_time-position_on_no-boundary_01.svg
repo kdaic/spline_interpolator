@@ -23,14 +23,14 @@
   <sodipodi:namedview
      inkscape:window-maximized="1"
      inkscape:window-y="27"
-     inkscape:window-x="690"
+     inkscape:window-x="67"
      inkscape:window-height="1025"
      inkscape:window-width="1853"
      showgrid="false"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
      inkscape:cy="152.09279"
-     inkscape:cx="256.85024"
+     inkscape:cx="255.24552"
      inkscape:zoom="1.5579084"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -109,7 +109,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -118,6 +118,13 @@
      inkscape:groupmode="layer"
      inkscape:label="レイヤー 1"
      transform="translate(0,-237)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       id="rect890"
+       width="160.15196"
+       height="59.441341"
+       x="0"
+       y="237.04916" />
     <path
        d="m 88.855622,261.31234 a 1.0205041,0.8018086 0 0 1 -0.997117,0.81952 1.0205041,0.8018086 0 0 1 -1.043367,-0.78317 1.0205041,0.8018086 0 0 1 0.996466,-0.82002 1.0205041,0.8018086 0 0 1 1.043989,0.78267"
        sodipodi:open="true"
@@ -293,12 +300,5 @@
    d="m 386.3,706.45 v -0.02 l -0.01,-0.02 -0.01,-0.03 v -0.02 l -0.01,-0.02 v -0.01 l -0.01,-0.02 v -0.02 l -0.01,-0.02 v -0.02 -0.01 -0.01 l -0.01,-0.01 v -0.01 -0.01 -0.02 -0.01 -0.01 -0.01 c 0,-0.32 0.28,-0.59 0.66,-0.59 0.7,0 1.01,0.96 1.01,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.1,-0.05 -0.13,-0.12 -0.16,-0.56 -0.47,-0.84 -0.74,-0.84 -0.14,0 -0.18,0.09 -0.18,0.24 0,0.16 0.05,0.29 0.11,0.45 0.07,0.18 0.15,0.37 0.23,0.55 0.06,0.17 0.31,0.8 0.34,0.88 0.02,0.07 0.04,0.16 0.04,0.23 0,0.32 -0.28,0.59 -0.66,0.59 -0.7,0 -1.02,-0.95 -1.02,-1.07 0,-0.09 0.1,-0.09 0.12,-0.09 0.1,0 0.11,0.04 0.13,0.11 0.18,0.6 0.49,0.85 0.75,0.85 0.11,0 0.17,-0.05 0.17,-0.24 0,-0.16 -0.04,-0.27 -0.22,-0.7 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <rect
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
-       id="rect890"
-       width="160.15196"
-       height="59.441341"
-       x="0"
-       y="237.04916" />
-  </g>
+</g>  </g>
 </svg>

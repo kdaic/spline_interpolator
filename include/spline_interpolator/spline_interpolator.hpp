@@ -90,7 +90,7 @@ public:
   /// - SPLINE_SUCCESS
   virtual RetCode generate_path( const TPVAQueue& target_tpva_queue )=0;
 
-  /// Generate a spline-path from Position(, Velocity, Acceleration) queue
+  /// Generate a spline-path from start and finish Position(, Velocity, Acceleration) queue
   /// @param[in] xs start position
   /// @param[in] xf finish position
   /// @param[in] vs start velocity (default: 0.0)
