@@ -5,6 +5,14 @@ using namespace interp;
 NonUniformRoundingSpline::NonUniformRoundingSpline() {
 }
 
+NonUniformRoundingSpline::NonUniformRoundingSpline(
+                           const NonUniformRoundingSpline& src ) :
+  tp_buffer_ ( src.tp_buffer_  ),
+  tpva_buffer_( src.tpva_buffer_ )
+{
+}
+
+
 NonUniformRoundingSpline::NonUniformRoundingSpline(const double& init_position,
                                                    const double& init_velocity) {
   TimePosition tp(0.0, init_position);
@@ -20,6 +28,15 @@ NonUniformRoundingSpline::NonUniformRoundingSpline(const double& init_position,
 NonUniformRoundingSpline::~NonUniformRoundingSpline() {
   this->clear();
 };
+
+NonUniformRoundingSpline NonUniformRoundingSpline::operator=(
+                           const NonUniformRoundingSpline& src
+                         ) {
+  NonUniformRoundingSpline dest(src);
+  tp_buffer_   = dest.tp_buffer_;
+  tpva_buffer_ = dest.tpva_buffer_;
+  return *this;
+}
 
 
 void NonUniformRoundingSpline::push(const double& clock_time, const double& position) {
@@ -84,6 +101,14 @@ double NonUniformRoundingSpline::calculate_velocity() {
   return dx / dt;
 }
 
+const TPVAQueue NonUniformRoundingSpline::tpva_queue() const {
+  return tpva_buffer_;
+}
+
+const TimePVA NonUniformRoundingSpline::get( const std::size_t& index ) const {
+  return tpva_buffer_.get(index);
+}
+
 const TimePVA NonUniformRoundingSpline::pop() {
   return tpva_buffer_.pop();
 }
@@ -100,3 +125,8 @@ void NonUniformRoundingSpline::clear() {
 unsigned int NonUniformRoundingSpline::size() {
   return tpva_buffer_.size();
 }
+
+const double NonUniformRoundingSpline::dT( const std::size_t& index ) const {
+  return tpva_buffer_.dT(index);
+}
+
