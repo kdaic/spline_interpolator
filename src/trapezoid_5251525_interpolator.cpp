@@ -198,14 +198,32 @@ RetCode TrapezoidalInterpolator::generate_path_from_pva(
 const TimePVA TrapezoidalInterpolator::pop( const double& t ) {
   double xt, vt, at;
   std::size_t trajectory_idx = 0;
+  bool is_out_of_range       = true;
 
   for( std::size_t idx=0; idx<target_tpva_queue_.size() - 1; idx++) {
 
     if( target_tpva_queue_.get( idx ).time <= t
         && t < target_tpva_queue_.get( idx+1 ).time ) {
       trajectory_idx = idx;
+      is_out_of_range  = false;
     }
+  }
 
+  if( is_out_of_range )
+  {
+    std::stringstream ss1;
+    std::size_t finish_index = target_tpva_queue_.size() - 1;
+    ss1 << std::fixed << std::setprecision(15);
+    ss1 << "time value = "
+        << t
+        << " is out of range between time of start index[0] t0(="
+        << target_tpva_queue_.get( 0 ).time
+        << ") and time of finish index["
+        << finish_index
+        << "] tf(="
+        << target_tpva_queue_.get( finish_index ).time
+        << ").";
+    std::out_of_range( ss1.str() );
   }
 
   trapzd_trajectory_que_[trajectory_idx].pop( t, xt, vt, at );
