@@ -75,12 +75,16 @@ public:
   /// @return queue size.
   unsigned int size();
 
-  /// Get dT at the input-index
+  /// Get interval time at the input-index
   /// @param[in] index the index getting dT from queue
   /// @return dT at the input-index
   /// @exception If invalid index is accessed.
-  const double dT( const std::size_t& index ) const;
+  const double dT( const std::size_t& index ) const
+        throw(InvalidIndexAccess);
 
+  /// Get total interval time summarized each dT in tpva_queue
+  /// @return total_dT();
+  const double total_dT() const;
 
 private:
   /// velocity calculating

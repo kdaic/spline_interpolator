@@ -126,7 +126,14 @@ unsigned int NonUniformRoundingSpline::size() {
   return tpva_buffer_.size();
 }
 
-const double NonUniformRoundingSpline::dT( const std::size_t& index ) const {
+const double NonUniformRoundingSpline::dT( const std::size_t& index ) const
+  throw(InvalidIndexAccess) {
+
   return tpva_buffer_.dT(index);
 }
+
+const double NonUniformRoundingSpline::total_dT() const {
+  return tpva_buffer_.total_dT();
+}
+
 
