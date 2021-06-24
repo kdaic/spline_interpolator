@@ -5,7 +5,8 @@ using namespace interp;
 /////////////////////////////////////////////////////////////////////////////////////////
 
 template<typename T>
-TimeQueue<T>::TimeQueue() {
+TimeQueue<T>::TimeQueue() :
+  total_dT_(0.0) {
 }
 
 template<typename T>
@@ -36,6 +37,7 @@ RetCode TimeQueue<T>::push( const TimeVal<T>& newval ) {
   if ( last_index >= 1 ) {
     double dT = calc_dT( last_index );
     dT_queue_.push_back(dT);
+    total_dT_ += dT;
   }
   return SPLINE_SUCCESS;
 }
@@ -58,6 +60,7 @@ RetCode TimeQueue<T>::push_on_clocktime(
   if ( last_index >= 1 ) {
     double dT = calc_dT( last_index );
     dT_queue_.push_back(dT);
+    total_dT_ += dT;
   }
   return SPLINE_SUCCESS;
 }
@@ -72,6 +75,7 @@ const TimeVal<T> TimeQueue<T>::pop() {
   queue_buffer_.pop_front();
   if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 1) ) {
     dT_queue_.pop_front();
+    total_dT_ -= output.time;
   }
   return output;
 }
@@ -81,9 +85,11 @@ RetCode TimeQueue<T>::pop_delete() {
   if( queue_buffer_.empty() ) {
     THROW( QueueSizeEmpty, "the size of time queue is empty" );
   }
+  double pop_time = queue_buffer_.front().time;
   queue_buffer_.pop_front();
   if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 1) ) {
     dT_queue_.pop_front();
+    total_dT_ -= pop_time;
   }
   return SPLINE_SUCCESS;
 }
@@ -108,6 +114,7 @@ RetCode TimeQueue<T>::push_on_dT(
   if ( last_index >= 1 ) {
     double dT = calc_dT( last_index );
     dT_queue_.push_back(dT);
+    total_dT_ += dT;
   }
   return SPLINE_SUCCESS;
 }
@@ -161,12 +168,16 @@ RetCode TimeQueue<T>::set( const std::size_t& index,
   // front intervaltime(dT)
   if( index >= 1 ){
     dT = calc_dT( index );
+    total_dT_ -= dT_queue_.at( index - 1 );
     dT_queue_.at( index - 1 ) = dT;
+    total_dT_ += dT;
   }
   // back intervaltime(dT)
   if( queue_buffer_.size() > index + 1 ) {
     dT = calc_dT( index + 1 );
+    total_dT_ -= dT_queue_.at( index );
     dT_queue_.at( index ) = dT;
+    total_dT_ += dT;
   }
 
   return SPLINE_SUCCESS;
@@ -176,6 +187,7 @@ template<typename T>
 void TimeQueue<T>::clear() {
   queue_buffer_.clear();
   dT_queue_.clear();
+  total_dT_ = 0.0;
 }
 
 template<typename T>
@@ -195,6 +207,11 @@ const double TimeQueue<T>::dT( const std::size_t& index ) const
     THROW( InvalidIndexAccess, "Queue size is empty" );
   }
   return dT_queue_[index];
+}
+
+template<typename T>
+const double TimeQueue<T>::total_dT() const {
+  return total_dT_;
 }
 
 template<typename T>
@@ -401,3 +418,4 @@ TrapezoidConfig TrapezoidConfig::operator=(
   return *this;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////

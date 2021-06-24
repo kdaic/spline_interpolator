@@ -25,7 +25,8 @@ enum RetCode{
   SPLINE_INVALID_MATRIX_ARGUMENT_VALUE_ZERO,
   SPLINE_NOT_DEF_100PER_PATH,
   SPLINE_NOT_DEF_FUNCTION,
-  SPLINE_NOT_RETURN
+  SPLINE_NOT_RETURN,
+  SPLINE_FAIL_TO_GENERATE_PATH
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -409,6 +410,10 @@ public:
   const double dT( const std::size_t& index ) const
         throw(InvalidIndexAccess);
 
+  /// Get total interval time summarized each dT in tpva_queue
+  /// @return total_dT();
+  const double total_dT() const;
+
 protected:
   /// calculate the interval time(t[index] - t[index-1]) internally at push() or set()
   /// @param[in] index the index calculating intervaltime(dT)
@@ -421,6 +426,9 @@ protected:
   /// The intervaltime(dT) (t[index] - t[index-1]) queue
   ///   calculated internally & automatically at the push()
   std::deque<double> dT_queue_;
+
+  /// total interval time summarized each dT in dT_queue_
+  double total_dT_;
 
 }; // End of class TPVQueue
 
@@ -495,7 +503,7 @@ public:
   virtual RetCode set( const std::size_t& index, const TimePVA& newval );
 
   /// dump all queue list
-  /// @param[out] dest_queue_dump output of all queue data as string.  
+  /// @param[out] dest_queue_dump output of all queue data as string.
   virtual RetCode dump( std::string& dest_queue_dump );
 
 }; // End of class TPVQueue
@@ -602,14 +610,12 @@ public:
   double ratio_acc_dec;
 };
 
- /////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 
 /// 台形型5251525次軌道の構成パラメータのキュー
 typedef std::deque<TrapezoidConfig> TrapezoidConfigQueue;
 
-/////////////////////////////////////////////////////////////////////////////////////////
 
-
-}; // End of class SplineInterpolator
+}; // End of namespace interp
 
 #endif // end of INCLUDE_SPLINE_DATA_HPP_
