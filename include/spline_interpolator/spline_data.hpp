@@ -26,7 +26,8 @@ enum RetCode{
   SPLINE_NOT_DEF_100PER_PATH,
   SPLINE_NOT_DEF_FUNCTION,
   SPLINE_NOT_RETURN,
-  SPLINE_FAIL_TO_GENERATE_PATH
+  SPLINE_FAIL_TO_GENERATE_PATH,
+  SPLINE_UNINITIALIZED_INTERPOLATOR
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////
