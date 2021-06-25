@@ -41,6 +41,32 @@ public:
   /// デストラクタ
   ~TrapezoidalInterpolator();
 
+  /// 初期化
+  /// @param[in] trpzd_config_que 台形型5251525次軌道の構成データのキュー。
+  ///                             補間点区間の数と同じサイズ。以下が構成要素。
+  ///                             - a_limit 第一加速(減速)度上限値
+  ///                             - d_limit 第二加速(減速)度上限値
+  ///                             - v_limit 最大速度リミット
+  ///                             - asr 第一丸め率
+  ///                             - dsr 第二丸め率
+  ///                             - ratio_acc_dec 第一＆第二加速度上限値に対する下限値の比率
+  void initialize( const TrapezoidConfigQueue& trapzd_config_que );
+
+  /// 初期化
+  /// @param[in] a_limit 第一加速(減速)度上限値の参照
+  /// @param[in] d_limit 第二加速(減速)度上限値の参照
+  /// @param[in] v_limit 最大速度リミットの参照
+  /// @param[in] asr 第一丸め率の参照
+  /// @param[in] dsr 第二丸め率の参照
+  /// @param[in] ratio_acc_dec 第一＆第二加速度上限値に対する下限値の比率の参照
+  void initialize( const double& a_limit,
+                   const double& d_limit,
+                   const double& v_limit,
+                   const double& asr,
+                   const double& dsr,
+                   const double& ratio_acc_dec );
+
+
   /// 時刻, 位置キューのスプライン軌道の生成
   /// @param[in] target_tp_queue 目標時刻, 位置キュー
   /// @param[in] vs              開始速度 (default: 0.0)

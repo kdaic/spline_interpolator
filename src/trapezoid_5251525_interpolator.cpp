@@ -45,14 +45,11 @@ TrapezoidalInterpolator::TrapezoidalInterpolator (
                          const double& ratio_acc_dec) :
   SplineInterpolator() {
   is_v_limit_ = true;
-  TrapezoidConfig trapzd_config( a_limit,
-                                 d_limit,
-                                 v_limit,
-                                 asr,  dsr,
-                                 ratio_acc_dec );
-  trapzd_config_que_.push_back( trapzd_config );
-
-  create_trapzd_trajectory_que();
+  initialize( a_limit,
+              d_limit,
+              v_limit,
+              asr,  dsr,
+              ratio_acc_dec );
 }
 
 
@@ -60,10 +57,41 @@ TrapezoidalInterpolator::~TrapezoidalInterpolator() {
 }
 
 
+void TrapezoidalInterpolator::initialize(
+                              const TrapezoidConfigQueue& trapzd_config_que ) {
+  trapzd_config_que_.clear();
+  trapzd_config_que_ = trapzd_config_que;
+  trapzd_trajectory_que_.clear();
+  create_trapzd_trajectory_que();
+}
+
+
+void TrapezoidalInterpolator::initialize(
+                              const double& a_limit,
+                              const double& d_limit,
+                              const double& v_limit,
+                              const double& asr,
+                              const double& dsr,
+                              const double& ratio_acc_dec ) {
+  trapzd_config_que_.clear();
+  TrapezoidConfig trapzd_config( a_limit,
+                                 d_limit,
+                                 v_limit,
+                                 asr,  dsr,
+                                 ratio_acc_dec );
+  trapzd_config_que_.push_back( trapzd_config );
+  trapzd_trajectory_que_.clear();
+  create_trapzd_trajectory_que();
+}
+
+
 RetCode TrapezoidalInterpolator::generate_path (
                                  const TPQueue& target_tp_queue,
                                  const double vs, const double vf,
                                  const double as, const double af ) {
+  if( trapzd_trajectory_que_.size() == 0 ) {
+    return SPLINE_UNINITIALIZED_INTERPOLATOR;
+  }
 
   std::size_t target_tp_queue_size = target_tp_queue.size();
   if( target_tp_queue_size < 2
@@ -178,6 +206,9 @@ RetCode TrapezoidalInterpolator::generate_path_from_pva(
                                  const double& xs, const double& xf,
                                  const double& vs, const double& vf,
                                  const double& as, const double& af ) {
+  if( trapzd_trajectory_que_.size() == 0 ) {
+    return SPLINE_UNINITIALIZED_INTERPOLATOR;
+  }
 
   Trapezoid5251525& ref_trapzd = trapzd_trajectory_que_.at(0);
   double dT_total = ref_trapzd.generate_path( 0.0,  0.0,
