@@ -435,10 +435,10 @@ TEST(TPQueueTest, push_get_intervaltime_size_clear) {
   EXPECT_EQ( tp_queue.dT(2), tp3.time - tp2.time );
   EXPECT_THROW( tp_queue.dT(3), InvalidIndexAccess );
   // size()
-  EXPECT_EQ( tp_queue.size(), 4 );
+  EXPECT_EQ( (int)tp_queue.size(), 4 );
   // clear()
   tp_queue.clear();
-  EXPECT_EQ( tp_queue.size(), 0 );
+  EXPECT_EQ( (int)tp_queue.size(), 0 );
   //
   TPQueue tp_queue2;
   // push time, position directly
@@ -456,9 +456,9 @@ TEST(TPQueueTest, push_get_intervaltime_size_clear) {
   EXPECT_EQ( tp_queue2.get(2).value, tp2.value );
   EXPECT_EQ( tp_queue2.get(3).value, tp3.value );
   //
-  EXPECT_EQ( tp_queue2.size(), 4 );
+  EXPECT_EQ( (int)tp_queue2.size(), 4 );
   tp_queue2.clear();
-  EXPECT_EQ( tp_queue2.size(), 0 );
+  EXPECT_EQ( (int)tp_queue2.size(), 0 );
 }
 
 TEST(TPQueueTest, insert_operator){
