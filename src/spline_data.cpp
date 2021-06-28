@@ -14,7 +14,7 @@ TimeQueue<T>::~TimeQueue() {
 }
 
 template<typename T>
-TimeQueue<T> TimeQueue<T>::operator=(const TimeQueue<T>& src) {
+TimeQueue<T>& TimeQueue<T>::operator=(const TimeQueue<T>& src) {
   if( src.size() < 1 ) {
     THROW( InvalidIndexAccess, "source queue size is empty." );
   }
@@ -73,7 +73,7 @@ const TimeVal<T> TimeQueue<T>::pop() {
   }
   TimeVal<T> output = queue_buffer_.front();
   queue_buffer_.pop_front();
-  if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 1) ) {
+  if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 0) ) {
     dT_queue_.pop_front();
     total_dT_ -= output.time;
   }
@@ -87,7 +87,7 @@ RetCode TimeQueue<T>::pop_delete() {
   }
   double pop_time = queue_buffer_.front().time;
   queue_buffer_.pop_front();
-  if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 1) ) {
+  if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 0) ) {
     dT_queue_.pop_front();
     total_dT_ -= pop_time;
   }
@@ -204,7 +204,10 @@ template<typename T>
 const double TimeQueue<T>::dT( const std::size_t& index ) const
   throw(InvalidIndexAccess) {
   if( index < 0 || index > dT_queue_.size() - 1 ) {
-    THROW( InvalidIndexAccess, "Queue size is empty" );
+    std::stringstream ss;
+    ss << "the index=" << index
+       << "is out of range between >=0 and < dT_queue size()-1=" << (dT_queue_.size() - 1);
+    THROW( InvalidIndexAccess, ss.str() );
   }
   return dT_queue_[index];
 }
@@ -217,10 +220,10 @@ const double TimeQueue<T>::total_dT() const {
 template<typename T>
 const double TimeQueue<T>::calc_dT( const std::size_t & index ) {
   if( queue_buffer_.size() < 2 ) {
-    THROW( InvalidArgumentSize, "queue size must be >=2 for calculating intervaltime(dT) list.");
+    THROW( InvalidArgumentSize, "queue size must be >=2 for calculating interval time(dT) list.");
   }
   if( index < 1 ) {
-    THROW( InvalidArgumentValue, "index must be >=1 for calculating intervaltime(dT).");
+    THROW( InvalidArgumentValue, "index must be >=1 for calculating interval time(dT).");
   }
   return queue_buffer_[index].time - queue_buffer_[index-1].time;
 }
@@ -406,7 +409,7 @@ TrapezoidConfig::TrapezoidConfig(
   ratio_acc_dec(src.ratio_acc_dec) {
 }
 
-TrapezoidConfig TrapezoidConfig::operator=(
+TrapezoidConfig& TrapezoidConfig::operator=(
                                  const TrapezoidConfig& src ) {
   TrapezoidConfig dest( src );
   this->a_limit = dest.a_limit;
