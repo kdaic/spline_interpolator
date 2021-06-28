@@ -104,7 +104,7 @@ public:
 
   /// Copy operator
   /// @param[in] src source of copy which is type of PosVelAcc
-  PosVelAcc operator=( const PosVelAcc& src ) {
+  PosVelAcc& operator=( const PosVelAcc& src ) {
     // against self copy
     PosVelAcc dest( src.pos,
                     src.vel,
@@ -171,7 +171,7 @@ struct PVAList {
   /// Copy operator
   /// @param[in] src source of copy which is type of PVAList
   /// @return *this
-  PVAList operator=( const PVAList& src ) {
+  PVAList& operator=( const PVAList& src ) {
     // for self copy
     PVAList dest( src );
     this->pvalist.clear();
@@ -184,7 +184,7 @@ struct PVAList {
   /// Copy operator
   /// @param[in] src the source of copy which is type of PVAList
   /// @return *this
-  PVAList operator=( const std::vector<PosVelAcc>& src ) {
+  PVAList& operator=( const std::vector<PosVelAcc>& src ) {
     // for self copy
     std::vector<PosVelAcc> dest = src;
     this->pvalist.clear();
@@ -272,7 +272,7 @@ struct TimeVal {
 
   /// Copy operator
   /// @param[in] src source which is TimeVal type
-  TimeVal operator=( const TimeVal<T>& src ) {
+  TimeVal& operator=( const TimeVal<T>& src ) {
     // against self copy
     TimeVal<T> dest( src.time, src.value );
     this->time  = dest.time;
@@ -325,7 +325,7 @@ public:
   /// Copy operator
   /// @param[in] src TimeQueue<T> source for copy
   /// @return copied instance of TimeQueue<T>
-  TimeQueue<T> operator=( const TimeQueue<T>& src );
+  TimeQueue<T>& operator=( const TimeQueue<T>& src );
 
   /// Push TimeVal<T> data into buffer queue(FIFO)
   /// @param[in] newval TimVal<T> value source
@@ -595,7 +595,7 @@ public:
   /// 代入演算子
   /// @param[in] src コピー元TrapezoidConfig参照
   /// @return *athis
-  TrapezoidConfig operator=( const TrapezoidConfig& src );
+  TrapezoidConfig& operator=( const TrapezoidConfig& src );
 
   /// 加速度(第一加速度)リミット
   double a_limit;

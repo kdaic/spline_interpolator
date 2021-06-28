@@ -14,7 +14,7 @@ TimeQueue<T>::~TimeQueue() {
 }
 
 template<typename T>
-TimeQueue<T> TimeQueue<T>::operator=(const TimeQueue<T>& src) {
+TimeQueue<T>& TimeQueue<T>::operator=(const TimeQueue<T>& src) {
   if( src.size() < 1 ) {
     THROW( InvalidIndexAccess, "source queue size is empty." );
   }
@@ -406,7 +406,7 @@ TrapezoidConfig::TrapezoidConfig(
   ratio_acc_dec(src.ratio_acc_dec) {
 }
 
-TrapezoidConfig TrapezoidConfig::operator=(
+TrapezoidConfig& TrapezoidConfig::operator=(
                                  const TrapezoidConfig& src ) {
   TrapezoidConfig dest( src );
   this->a_limit = dest.a_limit;
