@@ -25,15 +25,15 @@ public:
   /// @param[in] a_limit 第一加速(減速)度上限値
   /// @param[in] d_limit 第二加速(減速)度上限値
   /// @param[in] v_limit 最大速度リミット
-  /// @param[in] asr 第一丸め率 (default : 0.8)
-  /// @param[in] dsr 第二丸め率 (default : 0.8)
-  /// @param[in] ratio_acc_dec 第一＆第二加速度上限値に対する下限値の比率 (default : 0.5)
+  /// @param[in] asr 第一丸め率 (default : 0.0)
+  /// @param[in] dsr 第二丸め率 (default : 0.0)
+  /// @param[in] ratio_acc_dec 第一＆第二加速度上限値に対する下限値の比率 (default : 1.0)
   Trapezoid5251525 (const double& a_limit,
                     const double& d_limit,
                     const double& v_limit,
-                    const double& asr=0.8,
-                    const double& dsr=0.8,
-                    const double& ratio_acc_dec=0.5);
+                    const double& asr=0.0,
+                    const double& dsr=0.0,
+                    const double& ratio_acc_dec=1.0);
 
   /// コピーコンストラクタ
   /// @param[in] src コピー元Trapezoid5251525クラスオブジェクト

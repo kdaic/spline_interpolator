@@ -8,15 +8,17 @@
 
 namespace interp {
 
-/// graph plot class
-class TestGraphPlot {
+
+/// class of dumping time data to csv
+class TestDumpCSV {
 public:
   /// constructor
-  TestGraphPlot() {
+  TestDumpCSV() {
   };
 
   /// destructor
-  ~TestGraphPlot() {};
+  ~TestDumpCSV() {
+  };
 
   /// dump csv as "{path_index}_time_position_velocity.csv"
   /// @param[in] interp_path_tpva plotting interpolated path
@@ -43,11 +45,11 @@ public:
            << "/"
            << std::setfill('0')
            << std::setw(4)
-           << path_index << "_time_"<< prefix_pva_label <<"position_velocity.csv";
+           << path_index << "_time_"<< prefix_pva_label <<"position_velocity_acceleration.csv";
 
     std::ofstream ofstrm( numstr.str().c_str(), std::ios::out );
     if (ofstrm.fail()) {
-      std::cerr << "cannot open output temporary file."<< std::endl;
+      std::cerr << "cannot open output file: "<< numstr.str() << "." << std::endl;
       FAIL();
     }
 
@@ -66,6 +68,40 @@ public:
 
     numstr.str("");
     ofstrm.close();
+  }; // End of dump_csv()
+}; // End of class TestDumpCSV
+
+
+/// graph plot class
+class TestGraphPlot {
+public:
+  /// constructor
+  TestGraphPlot() {
+  };
+
+  /// destructor
+  ~TestGraphPlot() {};
+
+  /// dump csv as "{path_index}_time_position_velocity.csv"
+  /// @param[in] interp_path_tpva plotting interpolated path
+  ///                             of time-position-velocity-acceleration with cycletime dT.
+  ///                             (ts,     path(s)),
+  ///                             (ts+dT,  path(ts+dT)),
+  ///                             (ts+2dT, path(ts+2dT)),
+  ///                             ... ,
+  ///                             (tf,     path(tf))
+  /// @param[in] output_dir       destination directory of plotted graph image(.png)
+  /// @param[in] path_index       prefix index of destination path of plotted graph
+  /// @param[in] prefix_pva_label prefix label of destination path of plotted graph
+  void dump_csv( const TPVAQueue& interp_path_tpva,
+                 const std::string& output_dir="./",
+                 const int path_index = 0,
+                 const std::string& prefix_pva_label = "" ) {
+
+    test_dump_.dump_csv( interp_path_tpva,
+                         output_dir,
+                         path_index,
+                         prefix_pva_label );
   };
 
   /// plot time-position, time-velocity, position-velocity graph (overload)
@@ -582,6 +618,9 @@ public:
     usleep(0.01*1e6);
 
   };
+
+  // dump csv
+  TestDumpCSV test_dump_;
 
   // gnuplot
   GnuplotServer gpserver_;
