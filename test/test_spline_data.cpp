@@ -619,8 +619,8 @@ TEST(TrapezoidConfigTest, constructor1 ) {
   EXPECT_NE(0.0, trpzd_conf.a_limit);
   EXPECT_NE(0.0, trpzd_conf.d_limit);
   EXPECT_NE(0.0, trpzd_conf.v_limit);
-  EXPECT_NE(0.0, trpzd_conf.asr);
-  EXPECT_NE(0.0, trpzd_conf.dsr);
+  EXPECT_NE(1.0, trpzd_conf.asr);
+  EXPECT_NE(1.0, trpzd_conf.dsr);
   EXPECT_NE(0.0, trpzd_conf.ratio_acc_dec);
 }
 
