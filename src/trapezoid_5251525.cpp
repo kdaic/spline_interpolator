@@ -8,12 +8,12 @@ using namespace interp;
 Trapezoid5251525::Trapezoid5251525 () :
   a_limit_(1200),
   d_limit_(1200),
-  ratio_acc_dec_(0.5),
+  ratio_acc_dec_(1.0),
   a_lower_limit_ (a_limit_ * ratio_acc_dec_),
   d_lower_limit_ (d_limit_ * ratio_acc_dec_),
   v_limit_(170),
-  asr_(0.8),
-  dsr_(0.8),
+  asr_(0.0),
+  dsr_(0.0),
   is_initialized_(false),
   is_generated_(false),
   no_movement_(false) {

@@ -317,22 +317,51 @@ template<class T>
 class TimeQueue {
 public:
   /// Constructor
-  TimeQueue();
+  TimeQueue() :
+    total_dT_(0.0) {
+  };
 
   /// Destructor
-  virtual ~TimeQueue();
+  virtual ~TimeQueue() {
+  };
 
   /// Copy operator
   /// @param[in] src TimeQueue<T> source for copy
   /// @return copied instance of TimeQueue<T>
-  TimeQueue<T>& operator=( const TimeQueue<T>& src );
+  TimeQueue<T>& operator=( const TimeQueue<T>& src ) {
+
+    if( src.size() < 1 ) {
+      THROW( InvalidIndexAccess, "source queue size is empty." );
+    }
+    this->clear();
+    queue_buffer_ = src.queue_buffer_;
+    return *this;
+  };
 
   /// Push TimeVal<T> data into buffer queue(FIFO)
   /// @param[in] newval TimVal<T> value source
   /// @brief push data TimVal<T> into the queue_buffer_
   /// @return
   /// - SPLINE_SUCCESS: no error
-  virtual RetCode push( const TimeVal<T>& newval );
+  virtual RetCode push( const TimeVal<T>& newval ) {
+
+    if( queue_buffer_.size() > 0
+        && newval.time <= queue_buffer_.back().time ) {
+      return SPLINE_INVALID_INPUT_TIME;
+    }
+
+    queue_buffer_.push_back(newval);
+
+    std::size_t last_index = queue_buffer_.size() - 1;
+    // calculate intervaltime(dT) if the queue left >= 1.
+    if ( last_index >= 1 ) {
+      double dT = calc_dT( last_index );
+      dT_queue_.push_back(dT);
+      total_dT_ += dT;
+    }
+    return SPLINE_SUCCESS;
+  };
+
 
   /// Push clock time and value data into buffer queue(FIFO)
   /// @param[in] clocktime  clock time of TimVal<T> value source
@@ -341,7 +370,25 @@ public:
   /// @return
   /// - SPLINE_SUCCESS: no error
   virtual RetCode push_on_clocktime( const double& clocktime,
-                                     const T& value );
+                                     const T& value ) {
+
+    if( queue_buffer_.size() > 0
+        && clocktime <= queue_buffer_.back().time ) {
+      return SPLINE_INVALID_INPUT_TIME;
+    }
+
+    TimeVal<T> newval(clocktime, value);
+    queue_buffer_.push_back(newval);
+
+    std::size_t last_index = queue_buffer_.size() - 1;
+    // calculate intervaltime(dT) if the queue left >= 1.
+    if ( last_index >= 1 ) {
+      double dT = calc_dT( last_index );
+      dT_queue_.push_back(dT);
+      total_dT_ += dT;
+    }
+    return SPLINE_SUCCESS;
+  };
 
   /// Push interval time(dT) and value data into buffer queue(FIFO)
   /// @param[in] dT    interval time of TimVal<T> value source
@@ -350,40 +397,101 @@ public:
   /// @return
   /// - SPLINE_SUCCESS: no error
   virtual RetCode push_on_dT( const double& dT,
-                              const T& value );
+                              const T& value ) {
+    double clocktime = 0.0;
+    if( queue_buffer_.size() > 0 ) {
+      clocktime = queue_buffer_.back().time + dT;
+    } else {
+      clocktime = dT;
+    }
+
+    TimeVal<T> newval(clocktime, value);
+    queue_buffer_.push_back(newval);
+
+    std::size_t last_index = queue_buffer_.size() - 1;
+    // calculate intervaltime(dT) if the queue left >= 1.
+    if ( last_index >= 1 ) {
+      double dT = calc_dT( last_index );
+      dT_queue_.push_back(dT);
+      total_dT_ += dT;
+    }
+    return SPLINE_SUCCESS;
+  };
 
   /// Pop T (oldest) data from buffer queue(FIFO)
   /// @brief delete the pop data from queue_buffer_
   /// @return output oldest T data
   /// @exception
   /// - SPLINE_QUEUE_SIZE_EMPTY: buffer size is not enough to pop.
-  const TimeVal<T> pop();
+  const TimeVal<T> pop() {
+
+    if( queue_buffer_.empty() ) {
+      THROW( QueueSizeEmpty, "the size of time queue is empty" );
+    }
+    TimeVal<T> output = queue_buffer_.front();
+    queue_buffer_.pop_front();
+    if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 0) ) {
+      dT_queue_.pop_front();
+      total_dT_ -= output.time;
+    }
+    return output;
+  };
 
   /// delete T front(oldest) data from buffer queue(FIFO)
   /// @return
   /// - SPLINE_SUCCESS: no error
   /// @exception
   /// - SPLINE_QUEUE_SIZE_EMPTY: buffer size is not enough to pop and dlete.
-  RetCode pop_delete();
+  RetCode pop_delete() {
+
+    if( queue_buffer_.empty() ) {
+      THROW( QueueSizeEmpty, "the size of time queue is empty" );
+    }
+    double pop_time = queue_buffer_.front().time;
+    queue_buffer_.pop_front();
+    if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 0) ) {
+      dT_queue_.pop_front();
+      total_dT_ -= pop_time;
+    }
+    return SPLINE_SUCCESS;
+  };
 
   /// Get a value at the index
   /// @return constant a value at the index
   /// @exception If invalid index is accessed.
   const TimeVal<T> get( const std::size_t& index ) const
-    throw(InvalidIndexAccess);
+    throw(InvalidIndexAccess) {
+
+    if( index < 0 || index > queue_buffer_.size() -1 ) {
+      THROW( InvalidIndexAccess, "Queue index is invalid." );
+    }
+    return queue_buffer_.at(index);
+  };
 
   /// Get a value at the first inputted index(oldest data)
   /// @return constant a value at the first index
   /// @exception If invalid index is accessed.
   const TimeVal<T> front() const
-    throw(InvalidIndexAccess);
+    throw(InvalidIndexAccess) {
 
+    if( queue_buffer_.empty() ) {
+      THROW( InvalidIndexAccess, "Queue size is empty." );
+    }
+    return queue_buffer_.front();
+  };
 
   /// Get a value at the last inputted index(newest data)
   /// @return constant a value at the last index
   /// @exception If invalid index is accessed.
   const TimeVal<T> back() const
-    throw(InvalidIndexAccess);
+    throw(InvalidIndexAccess) {
+
+    if( queue_buffer_.empty() ) {
+      THROW( InvalidIndexAccess, "Queue size is empty." );
+    }
+
+    return queue_buffer_.back();
+  };
 
   /// Set T value at the input-index
   /// @param[in] the index for setting T data
@@ -392,34 +500,97 @@ public:
   /// - SPLINE_SUCCESS: No error
   /// - SPLINE_INVALID_INPUT_INDEX: Not exist input-index
   virtual RetCode set( const std::size_t& index,
-                       const TimeVal<T> newval );
+                       const TimeVal<T> newval ) {
+
+    if( index < 0 || index > queue_buffer_.size() -1 ) {
+      return SPLINE_INVALID_INPUT_INDEX;
+    }
+
+    if( ( index >= 1
+          && newval.time <= queue_buffer_[index-1].time )
+        || ( index < queue_buffer_.size()-1
+             && newval.time >= queue_buffer_[index+1].time ) ) {
+      return SPLINE_INVALID_INPUT_TIME;
+    }
+    //
+    queue_buffer_.at(index) = newval;
+    //
+    double dT;
+    // front intervaltime(dT)
+    if( index >= 1 ){
+      dT = calc_dT( index );
+      total_dT_ -= dT_queue_.at( index - 1 );
+      dT_queue_.at( index - 1 ) = dT;
+      total_dT_ += dT;
+    }
+    // back intervaltime(dT)
+    if( queue_buffer_.size() > index + 1 ) {
+      dT = calc_dT( index + 1 );
+      total_dT_ -= dT_queue_.at( index );
+      dT_queue_.at( index ) = dT;
+      total_dT_ += dT;
+    }
+
+    return SPLINE_SUCCESS;
+  };
 
   /// Clear all data of queue buffer
-  void clear();
+  void clear() {
+    queue_buffer_.clear();
+    dT_queue_.clear();
+    total_dT_ = 0.0;
+  };
 
   /// Get queue size
   /// @return size of queue_buffer_
-  const std::size_t size() const;
+  const std::size_t size() const {
+    return queue_buffer_.size();
+  };
 
   // dump all queue list
-  virtual RetCode dump( const std::string& queue_dump );
+  // @param[in] queue_dump the target string to dump
+  virtual RetCode dump( const std::string& queue_dump ) {
+    return SPLINE_SUCCESS;
+  };
 
   /// Get dT at the input-index
   /// @param[in] index the index getting dT from queue
   /// @return dT at the input-index
   /// @exception If invalid index is accessed.
   const double dT( const std::size_t& index ) const
-        throw(InvalidIndexAccess);
+        throw(InvalidIndexAccess) {
+
+    if( index < 0 || index > dT_queue_.size() - 1 ) {
+      std::stringstream ss;
+      ss << "the index=" << index
+         << " is out of range between 0<= and < dT_queue size()-1=" << (dT_queue_.size() - 1);
+      THROW( InvalidIndexAccess, ss.str() );
+    }
+    return dT_queue_[index];
+  };
 
   /// Get total interval time summarized each dT in tpva_queue
   /// @return total_dT();
-  const double total_dT() const;
+  const double total_dT() const {
+    return total_dT_;
+  };
 
 protected:
+
   /// calculate the interval time(t[index] - t[index-1]) internally at push() or set()
   /// @param[in] index the index calculating intervaltime(dT)
   /// @return calculated dT
-  virtual const double calc_dT( const std::size_t & index );
+  virtual const double calc_dT( const std::size_t & index ) {
+
+    if( queue_buffer_.size() < 2 ) {
+      THROW( InvalidArgumentSize, "queue size must be >=2 for calculating interval time(dT) list.");
+    }
+    if( index < 1 ) {
+      THROW( InvalidArgumentValue, "index must be >=1 for calculating interval time(dT).");
+    }
+    return queue_buffer_[index].time - queue_buffer_[index-1].time;
+  };
+
 
   /// The buffer instance
   std::deque<TimeVal<T> > queue_buffer_;
@@ -570,8 +741,8 @@ public:
   TrapezoidConfig() :
     a_limit(1200), d_limit(1200),
     v_limit(170),
-    asr(0.8), dsr(0.8),
-    ratio_acc_dec(0.5) {
+    asr(0.0), dsr(0.0),
+    ratio_acc_dec(1.0) {
   };
 
   /// コンストラクタ
