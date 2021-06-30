@@ -30,7 +30,30 @@ public:
   /// @return *this
   NonUniformRoundingSpline operator=( const NonUniformRoundingSpline& src );
 
-  /// push(queue) the date next to the last index
+  /// velocity calculating
+  /// @param[in] tp0 time-position point0.
+  /// @param[in] tp1 time-position point1. this is target to calurate & get veloctiy.
+  /// @param[in] tp2 time-position point2.
+  /// @return velocity
+  double calculate_velocity( TimePosition tp0,
+                             TimePosition tp1,
+                             TimePosition tp2 );
+
+  /// push(queue) the data next to the last index
+  /// @param[in] clock_time  target clock time
+  /// @param[in] position    target position
+  /// @details
+  /// adds a new time-position-Velocity data into the queue with velocity no changed.
+  void push_with_velocity_no_change( const double& clock_time,
+                                     const double& position );
+
+  /// push(queue) the data next to the last index
+  /// @param[in] time_pva  target time-position-velocity-acceleration
+  /// @details
+  /// adds a new time-position-Velocity data into the queue with velocity no changed.
+  void push_with_velocity_no_change( const TimePVA& time_pva );
+
+  /// push(queue) the data next to the last index
   /// @param[in] clock_time  target clock time
   /// @param[in] position    target position
   /// @details
@@ -38,9 +61,26 @@ public:
   /// this function calculates internally the interploated velocity
   /// by means of a non-Uniform rounding spline
   /// and adds a new time-position-Velocity data into the queue.
-  void push(const double& clock_time, const double& position);
+  void push( const double& clock_time, const double& position) ;
 
-  /// push(queue) the date next to the last index
+  /// push(queue) the data next to the last index
+  /// @param[in] time_pva target time-position-velocity-acceleration
+  /// @details
+  /// If the queue has time-position data greater than or equal to 3 (>=3),
+  /// this function calculates internally the interploated velocity
+  /// by means of a non-Uniform rounding spline
+  /// and adds a new time-position-Velocity data into the queue.
+  void push( const TimePVA& time_pva );
+
+  /// push(queue) the data next to the last index
+  /// @param[in] interval_time  interval time between now and post target
+  /// @param[in] position       target position
+  /// @details
+  /// adds a new time-position-Velocity data into the queue with velocity no changed.
+  void push_dT_with_velocity_no_change(
+         const double& interval_time, const double& position );
+
+  /// push(queue) the data next to the last index
   /// @param[in] interval_time  interval time between now and post target
   /// @param[in] position       target position
   /// @details
@@ -48,7 +88,7 @@ public:
   /// this function calculates internally the interploated velocity
   /// by means of a non-Uniform rounding spline
   /// and adds a new time-position-Velocity data into the queue.
-  void push_dT(const double& interval_time, const double& position);
+  void push_dT( const double& interval_time, const double& position );
 
   /// get the tpva_buffer_
   /// @return tpva_buffer_
@@ -87,9 +127,6 @@ public:
   const double total_dT() const;
 
 private:
-  /// velocity calculating
-  /// @return velocity
-  double calculate_velocity();
 
   /// inputted time, position
   TPQueue tp_buffer_;
