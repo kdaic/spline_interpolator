@@ -69,22 +69,29 @@ public:
   /// @param output_path グラフ＆データファイルの出力先パス
   /// @param cycle プロット周期(デフォルト:0.05)
   /// @param acc_limit 最大加速度リミット(デフォルト:1200)
+  /// @param dec_limit 最大減速度リミット(デフォルト:1200)
   /// @param vel_limit 最大速度リミット(デフォルト:170)
   /// @param smoothing_rate 丸め率(デフォルト:0.8)
   PlotPtoPGraph(const std::string& output_path="./",
                 const double cycle=0.05,
                 const double acc_limit=1200,
+                const double dec_limit=1200,
                 const double vel_limit=170,
-                const double smoothing_rate=0.8) :
-    output_path_(output_path), cycle_(cycle),
-    acc_limit_(acc_limit), vel_limit_(vel_limit),
-    smoothing_rate_(smoothing_rate) {};
+                const double smoothing_rate=0.8,
+                const std::string& label= "") :
+    output_path_(output_path),
+    cycle_(cycle),
+    acc_limit_(acc_limit), dec_limit_(dec_limit),
+    vel_limit_(vel_limit),
+    smoothing_rate_(smoothing_rate),
+    label_(label) {};
 
   /// デストラクタ
   ~PlotPtoPGraph(){};
 
   /// 軌道生成＆グラフプロット
   /// @param start_set 開始点の位置-時間-速度のセット
+
   /// @param goal_set 終端点の位置-時間-速度のセット
   /// @details 各セットの軌道を生成し、
   /// 時間-位置,時間-速度,位置-速度のグラフを出力 @n
@@ -99,6 +106,10 @@ public:
     // gnuplot描画クラス
     TestGraphPlot test_gp;
 
+    std::vector<std::string> gpserver_set_list_tp;
+    std::vector<std::string> gpserver_set_list_tv;
+    std::vector<std::string> gpserver_set_list_pv;
+
     // 軌道１セット分の開始点
     TimePVA start;
     // 軌道１セット分の目標到達点
@@ -108,7 +119,7 @@ public:
       start = start_set[index];
       goal  = goal_set[index];
       // 軌道生成
-      Trapezoid5251525 tg(acc_limit_, acc_limit_,
+      Trapezoid5251525 tg(acc_limit_, dec_limit_,
                           vel_limit_,
                           smoothing_rate_, smoothing_rate_);
       double dT_total = tg.generate_path(start.time,  goal.time,
@@ -155,7 +166,12 @@ public:
                             output_path_,
                             output_path_,
                             output_path_,
-                            index );
+                            index,
+                            gpserver_set_list_tp,
+                            gpserver_set_list_tv,
+                            gpserver_set_list_pv,
+                            label_
+                            );
 
       // PtoP ２点間１セットごとにクリア
       target_tpva.clear();
@@ -170,10 +186,14 @@ public:
   const double cycle_;
   /// 最大加速リミット
   const double acc_limit_;
+  /// 最大減速リミット
+  const double dec_limit_;
   /// 最大速度リミット
   const double vel_limit_;
   /// 丸め率
   const double smoothing_rate_;
+  /// ラベル
+  const std::string label_;
 };
 
 
@@ -374,10 +394,11 @@ TEST(TrackingTest, reachable2) {
 
   // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
   PlotPtoPGraph plot_ptop_graph("images/trapezoid-5251525/reachable2",
-                                0.01,
-                                31.415926535897931,
-                                3.1415926535897931,
-                                0.8);
+                                0.01,               // cycle
+                                31.415926535897931, // acc_limit
+                                31.415926535897931, // dec_limit
+                                3.1415926535897931, // v_limit
+                                0.8);               // smoothing_rate
   // 軌道生成＆グラフ出力
   plot_ptop_graph.plot(start_set, goal_set);
 }
@@ -432,10 +453,11 @@ TEST(TrackingTest, reachable3) {
 
   // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
   PlotPtoPGraph plot_ptop_graph("images/trapezoid-5251525/reachable3",
-                                0.01,
-                                13.17723585,
-                                6.44026494,
-                                0.01);
+                                0.01,        // cycle
+                                13.17723585, // acc_limit
+                                13.17723585, // dec_limit
+                                6.44026494,  // v_limit
+                                0.01);       // smoothing_rate
   // 軌道生成＆グラフ出力
   plot_ptop_graph.plot(start_set, goal_set);
 }
@@ -461,6 +483,7 @@ TEST(TrackingTest, reachable_L1) {
   goal.P.pos = 0.0;
   goal.P.vel = 0.211391674843979;
   goal_set.push_back(goal);
+
   // ディレクトリ作成
   FILE* mkdir = popen("mkdir -p images/trapezoid-5251525/reachable_L1", "re");
   pclose(mkdir);
@@ -469,13 +492,142 @@ TEST(TrackingTest, reachable_L1) {
   pclose(rm_time_position_images);
   // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
   PlotPtoPGraph plot_ptop_graph("images/trapezoid-5251525/reachable_L1",
-                                0.01,
-                                1.2,
-                                1.0,
-                                0.8);
+                                0.01, // cycle
+                                1.2,  // acc_limit
+                                1.2,  // dec_limit
+                                1.0,  // v_limit
+                                0.8); // smoothing_rate
+
   // 軌道生成＆グラフ出力
   plot_ptop_graph.plot(start_set, goal_set);
 }
+
+
+
+
+TEST(TrackingTest, reachable4) {
+  // 開始-目標到達の軌道セット
+  std::vector<TimePVA> start_set;
+  std::vector<TimePVA> goal_set;
+  // 軌道１セット分の開始点
+  TimePVA start;
+  // 軌道１セット分の目標到達点
+  TimePVA goal;
+
+  // 0.
+  start.time  = 0.0;
+  start.P.pos = 0.37;
+  start.P.vel = 0.0;
+  start_set.push_back(start);
+  goal.time  = 0.0;
+  // goal.time  = 0.290472121528706;
+  goal.P.pos = 0.375;
+  goal.P.vel = -0.005862398499446;
+  goal_set.push_back(goal);
+
+  // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
+  PlotPtoPGraph plot_ptop_graph("images/trapezoid-5251525/reachable4",
+                                0.001,               // cycle
+                                0.923349448054940,  // acc_limit
+                                0.921556254253312,  // dec_limit
+                                0.131365013138030,  // v_limit
+                                0.00,               // smoothing_rate
+                                "test01-");         // label
+  // ディレクトリ作成
+  FILE* mkdir = popen("mkdir -p images/trapezoid-5251525/reachable4", "re");
+  pclose(mkdir);
+
+  // 既に存在する画像を削除
+  FILE* rm_time_position_images = popen("rm -f images/trapezoid-5251525/reachable4/*.png", "re");
+  pclose(rm_time_position_images);
+
+  // 軌道生成＆グラフ出力
+  plot_ptop_graph.plot(start_set, goal_set);
+
+  // -----------------------------------------------
+  start_set.clear();
+  goal_set.clear();
+
+
+  // // 3. 01
+  start.time = 0.0;
+  start.P.pos = 1.000000000000000;
+  start.P.vel = 0.000000000000000;
+  start_set.push_back(start);
+  goal.time  = 0.290472121528706;
+  // goal.time  = 0.290472121528706;
+  goal.P.pos = 0.970691715357122;
+  goal.P.vel = -0.089127359654605;
+  goal_set.push_back(goal);
+  // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
+  PlotPtoPGraph plot_ptop_graph3_01("images/trapezoid-5251525/reachable4",
+                                 0.001,               // cycle
+                                 5.412357689687719,  // acc_limit
+                                 5.401846602816129,  // dec_limit
+                                 2.400179894310761,  // v_limit
+                                 0.00,               // smoothing_rate
+                                 "test02-01-");      // label
+
+  // 軌道生成＆グラフ出力
+  plot_ptop_graph3_01.plot(start_set, goal_set);
+
+  //
+  start_set.clear();
+  goal_set.clear();
+
+
+  // // 3. 01
+  start.time = 0.290472121528706;
+  start.P.pos = 0.970691715357122;
+  start.P.vel = -0.089127359654605;
+  start_set.push_back(start);
+  goal.time  = 0.926451701915314;
+  // goal.time  = 0.290472121528706;
+  goal.P.pos = 0.974642595936322;
+  goal.P.vel = 0.000000000000000;
+  goal_set.push_back(goal);
+  // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
+  PlotPtoPGraph plot_ptop_graph3_02("images/trapezoid-5251525/reachable4",
+                                 0.005,              // cycle
+                                 0.454701321864866,  // acc_limit
+                                 0.296208475089815,  // dec_limit
+                                 2.254393935200920,  // v_limit
+                                 0.00,               // smoothing_rate
+                                 "test02-02-");      // label
+
+  // 軌道生成＆グラフ出力
+  plot_ptop_graph3_02.plot(start_set, goal_set);
+
+  // -----------------------------------------------
+  start_set.clear();
+  goal_set.clear();
+
+  // // 6.
+  start.time = 0.0;
+  start.P.pos = 0.0;
+  start.P.vel = 0.0;
+  start_set.push_back(start);
+  goal.time  = 0.0;
+  // goal.time  = 0.290472121528706;
+  goal.P.pos = 0.182710741389627;
+  goal.P.vel = 0.024900462983757;
+  goal_set.push_back(goal);
+
+  // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
+  PlotPtoPGraph plot_ptop_graph6("images/trapezoid-5251525/reachable4",
+                                 0.001,              // cycle
+                                 33.741172443164139, // acc_limit
+                                 33.675645289374003, // dec_limit
+                                 2.400179894310761,  // v_limit
+                                 0.00,               // smoothing_rate
+                                 "test03-");         // label
+
+  // 軌道生成＆グラフ出力
+  plot_ptop_graph6.plot(start_set, goal_set);
+
+}
+
+
 
 
 /// @test 速度リミット @n

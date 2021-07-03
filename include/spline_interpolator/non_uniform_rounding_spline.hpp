@@ -35,23 +35,23 @@ public:
   /// @param[in] tp1 time-position point1. this is target to calurate & get veloctiy.
   /// @param[in] tp2 time-position point2.
   /// @return velocity
-  double calculate_velocity( TimePosition tp0,
-                             TimePosition tp1,
-                             TimePosition tp2 );
+  double calculate_velocity( const TimePosition& tp0,
+                             const TimePosition& tp1,
+                             const TimePosition& tp2 );
 
   /// push(queue) the data next to the last index
   /// @param[in] clock_time  target clock time
   /// @param[in] position    target position
   /// @details
   /// adds a new time-position-Velocity data into the queue with velocity no changed.
-  void push_with_velocity_no_change( const double& clock_time,
+  void push_without_velocity_change( const double& clock_time,
                                      const double& position );
 
   /// push(queue) the data next to the last index
   /// @param[in] time_pva  target time-position-velocity-acceleration
   /// @details
   /// adds a new time-position-Velocity data into the queue with velocity no changed.
-  void push_with_velocity_no_change( const TimePVA& time_pva );
+  void push_without_velocity_change( const TimePVA& time_pva );
 
   /// push(queue) the data next to the last index
   /// @param[in] clock_time  target clock time
@@ -77,8 +77,16 @@ public:
   /// @param[in] position       target position
   /// @details
   /// adds a new time-position-Velocity data into the queue with velocity no changed.
-  void push_dT_with_velocity_no_change(
+  void push_dT_without_velocity_change(
          const double& interval_time, const double& position );
+
+  /// push(queue) the data next to the last index
+  /// @param[in] interval_time  interval time between now and post target
+  /// @param[in] pva            target position-velocity-acceleration
+  /// @details
+  /// adds a new time-position-Velocity data into the queue with velocity no changed.
+  void push_dT_without_velocity_change(
+         const double& interval_time, const PosVelAcc& pva );
 
   /// push(queue) the data next to the last index
   /// @param[in] interval_time  interval time between now and post target
@@ -90,6 +98,16 @@ public:
   /// and adds a new time-position-Velocity data into the queue.
   void push_dT( const double& interval_time, const double& position );
 
+  /// push(queue) the data next to the last index
+  /// @param[in] interval_time  interval time between now and post target
+  /// @param[in] pva            target position-velocity-acceleration
+  /// @details
+  /// If the queue has time-position data greater than or equal to 3 (>=3),
+  /// this function calculates internally the interploated velocity
+  /// by means of a non-Uniform rounding spline
+  /// and adds a new time-position-Velocity data into the queue.
+  void push_dT( const double& interval_time, const PosVelAcc& pva );
+
   /// get the tpva_buffer_
   /// @return tpva_buffer_
   const TPVAQueue tpva_queue() const;
@@ -98,6 +116,14 @@ public:
   /// @return TimePVA reference at the index of tpva_buffer_
   const TimePVA get( const std::size_t& index ) const;
 
+  /// get the TimePVA at the last index of the tpva_buffer_
+  /// @return TimePVA reference at the last index of tpva_buffer_
+  const TimePVA front() const;
+
+  /// get the TimePVA at the first index of the tpva_buffer_
+  /// @return TimePVA reference at the first index of tpva_buffer_
+  const TimePVA back() const;
+
   /// pop the Time-Position-Velocity data
   /// @param[out] output ouput TimePVA(Time-Position-Velocity-(Acceleration=0)) structure data.
   /// @brief
@@ -105,6 +131,14 @@ public:
   /// @return
   /// - SPLINE_QUEUE_SIZE_EMPTY : calculated buffer size is empty yet.
   const TimePVA pop();
+
+  /// pop back the Time-Position-Velocity data
+  /// @param[out] output ouput TimePVA(Time-Position-Velocity-(Acceleration=0)) structure data.
+  /// @brief
+  /// pop the newest Time-Position-Velocity data in the queue (LO)
+  /// @return
+  /// - SPLINE_QUEUE_SIZE_EMPTY : calculated buffer size is empty yet.
+  const TimePVA pop_back();
 
   /// clear all data from the queue.
   /// @brief clear the all stored data from the queue.

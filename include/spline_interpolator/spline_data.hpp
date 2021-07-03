@@ -429,13 +429,33 @@ public:
       THROW( QueueSizeEmpty, "the size of time queue is empty" );
     }
     TimeVal<T> output = queue_buffer_.front();
-    queue_buffer_.pop_front();
     if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 0) ) {
       dT_queue_.pop_front();
       total_dT_ -= output.time;
     }
+    queue_buffer_.pop_front();
     return output;
   };
+
+  /// Pop T (oldest) data from buffer queue(FIFO)
+  /// @brief delete the pop data from queue_buffer_
+  /// @return output oldest T data
+  /// @exception
+  /// - SPLINE_QUEUE_SIZE_EMPTY: buffer size is not enough to pop.
+  const TimeVal<T> pop_back() {
+
+    if( queue_buffer_.empty() ) {
+      THROW( QueueSizeEmpty, "the size of time queue is empty" );
+    }
+    TimeVal<T> output = queue_buffer_.back();
+    if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 0) ) {
+      dT_queue_.pop_back();
+      total_dT_ -= output.time;
+    }
+    queue_buffer_.pop_back();
+    return output;
+  };
+
 
   /// delete T front(oldest) data from buffer queue(FIFO)
   /// @return
@@ -448,11 +468,11 @@ public:
       THROW( QueueSizeEmpty, "the size of time queue is empty" );
     }
     double pop_time = queue_buffer_.front().time;
-    queue_buffer_.pop_front();
     if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 0) ) {
       dT_queue_.pop_front();
       total_dT_ -= pop_time;
     }
+    queue_buffer_.pop_front();
     return SPLINE_SUCCESS;
   };
 

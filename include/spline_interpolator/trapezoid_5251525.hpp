@@ -97,9 +97,10 @@ private:
   double calc_initial_v_max_direction_sign();
 
   /// 2. 最速軌道の最大速度と最短時間の算出
-  /// @pararm 最速軌道を構成する第一加速度
-  /// @pararm 最速軌道を構成する第二加速度
-  void calc_fastest_parameter(const double& a_max, const double& d_max);
+  /// @param a_max          最速軌道を構成する第一加速度
+  /// @param d_max          最速軌道を構成する第二加速度
+  void calc_fastest_parameter( const double& a_max,
+                               const double& d_max );
 
   /// 3. 到達限界・速度反転領域の判定
   void judge_reach_limitation();
@@ -284,6 +285,9 @@ private:
   /// 移動なしフラグ(速度0のまま同じ位置に停止していたらtrue)
   bool no_movement_;
 
+  /// 最速軌道のフラグ(最速軌道ならtrue)
+  bool is_fastest_;
+
 public:
   /// 入力値の取得 ////////////////////////////////////////////////////////////////
 
@@ -444,6 +448,9 @@ public:
 
   /// 移動なしフラグ(速度0のまま同じ位置に停止していたらtrue)の取得
   const bool no_movement() const;
+
+  /// 最速軌道のフラグ(最速軌道ならtrue)の取得
+  const bool is_fastest() const;
 
 };
 
