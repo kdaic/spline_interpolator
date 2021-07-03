@@ -81,12 +81,12 @@ Trapezoid5251525::Trapezoid5251525(const Trapezoid5251525& src) :
   x6_( src.x6() ),
   v6_( src.v6() ),
   t7_( src.t7() ),
-  v_max_fastest_  ( src.v_max_fastest()            ),
-  tf_fastest_     ( src.tf_fastest()               ),
-  is_initialized_ ( src.is_initialized()           ),
-  is_generated_   ( src.is_generated()             ),
-  no_movement_    ( src.no_movement()              ),
-  is_fastest_     ( src.is_fastest()               ) {
+  v_max_fastest_  ( src.v_max_fastest()  ),
+  tf_fastest_     ( src.tf_fastest()     ),
+  is_initialized_ ( src.is_initialized() ),
+  is_generated_   ( src.is_generated()   ),
+  no_movement_    ( src.no_movement()    ),
+  is_fastest_     ( src.is_fastest()     ) {
 }
 
 Trapezoid5251525 Trapezoid5251525::operator=(const Trapezoid5251525& src) {
@@ -179,9 +179,9 @@ void Trapezoid5251525::initialize(const double& a_limit,
   //
   // 軌道構成パラメータを初期化したため,軌道未生成状態へリセット.
   // pop()を禁止させる
-  is_generated_  = false;
-  no_movement_   = false;
-  is_fastest_    = false;
+  is_generated_ = false;
+  no_movement_  = false;
+  is_fastest_   = false;
 }
 
 double Trapezoid5251525::generate_path(const double& ts, const double& tf,
@@ -192,9 +192,9 @@ double Trapezoid5251525::generate_path(const double& ts, const double& tf,
   //   throw std::runtime_error("Not initialized config parameter yet.");
   // }
 
-  is_generated_  = false;
-  no_movement_   = false;
-  is_fastest_    = false;
+  is_generated_ = false;
+  no_movement_  = false;
+  is_fastest_   = false;
   t0_ = ts;
   tf_ = tf;
   x0_ = xs;
@@ -406,7 +406,7 @@ void Trapezoid5251525::calc_fastest_parameter( const double& a_max,
        || ((tf_ - tf_fastest_ >= 0.0) && (tf_ - tf_fastest_ <= 1.0e-12)) ) {
 
     if ( is_fastest_) {
-      tf_    = (tf_ < tf_fastest_) ? tf_fastest_ : tf_;
+      tf_  = (tf_ < tf_fastest_) ? tf_fastest_ : tf_;
     }
     v_max_ = v_max_fastest_;
     dT3_   = dT3_fastest;

@@ -532,7 +532,7 @@ TEST(TrackingTest, reachable4) {
                                 0.921556254253312,  // dec_limit
                                 0.131365013138030,  // v_limit
                                 0.00,               // smoothing_rate
-                                "test00_");         // label
+                                "test01-");         // label
   // ディレクトリ作成
   FILE* mkdir = popen("mkdir -p images/trapezoid-5251525/reachable4", "re");
   pclose(mkdir);
@@ -566,7 +566,7 @@ TEST(TrackingTest, reachable4) {
                                  5.401846602816129,  // dec_limit
                                  2.400179894310761,  // v_limit
                                  0.00,               // smoothing_rate
-                                 "test03-01-");      // label
+                                 "test02-01-");      // label
 
   // 軌道生成＆グラフ出力
   plot_ptop_graph3_01.plot(start_set, goal_set);
@@ -593,7 +593,7 @@ TEST(TrackingTest, reachable4) {
                                  0.296208475089815,  // dec_limit
                                  2.254393935200920,  // v_limit
                                  0.00,               // smoothing_rate
-                                 "test03-02-");      // label
+                                 "test02-02-");      // label
 
   // 軌道生成＆グラフ出力
   plot_ptop_graph3_02.plot(start_set, goal_set);
@@ -620,7 +620,7 @@ TEST(TrackingTest, reachable4) {
                                  33.675645289374003, // dec_limit
                                  2.400179894310761,  // v_limit
                                  0.00,               // smoothing_rate
-                                 "test06_");         // label
+                                 "test03-");         // label
 
   // 軌道生成＆グラフ出力
   plot_ptop_graph6.plot(start_set, goal_set);
