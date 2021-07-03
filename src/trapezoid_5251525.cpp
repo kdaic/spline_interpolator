@@ -15,8 +15,9 @@ Trapezoid5251525::Trapezoid5251525 () :
   asr_(0.0),
   dsr_(0.0),
   is_initialized_(false),
-  is_generated_(false),
-  no_movement_(false) {
+  is_generated_  (false),
+  no_movement_   (false),
+  is_fastest_    (false) {
 }
 
 Trapezoid5251525::Trapezoid5251525 (const double& a_limit,
@@ -80,11 +81,12 @@ Trapezoid5251525::Trapezoid5251525(const Trapezoid5251525& src) :
   x6_( src.x6() ),
   v6_( src.v6() ),
   t7_( src.t7() ),
-  v_max_fastest_ ( src.v_max_fastest()  ),
-  tf_fastest_    ( src.tf_fastest()     ),
-  is_initialized_( src.is_initialized() ),
-  is_generated_  ( src.is_generated()   ),
-  no_movement_   ( src.no_movement()    ) {
+  v_max_fastest_  ( src.v_max_fastest()            ),
+  tf_fastest_     ( src.tf_fastest()               ),
+  is_initialized_ ( src.is_initialized()           ),
+  is_generated_   ( src.is_generated()             ),
+  no_movement_    ( src.no_movement()              ),
+  is_fastest_     ( src.is_fastest()               ) {
 }
 
 Trapezoid5251525 Trapezoid5251525::operator=(const Trapezoid5251525& src) {
@@ -140,6 +142,7 @@ Trapezoid5251525 Trapezoid5251525::operator=(const Trapezoid5251525& src) {
   this->is_initialized_ = dest.is_initialized();
   this->is_generated_   = dest.is_generated();
   this->no_movement_    = dest.no_movement();
+  this->is_fastest_     = dest.is_fastest();
   return *this;
 }
 
@@ -172,12 +175,13 @@ void Trapezoid5251525::initialize(const double& a_limit,
                                 + ss.str());
   }
   //
-  is_initialized_ = true;
+  is_initialized_= true;
   //
   // 軌道構成パラメータを初期化したため,軌道未生成状態へリセット.
   // pop()を禁止させる
-  is_generated_ = false;
-  no_movement_  = false;
+  is_generated_  = false;
+  no_movement_   = false;
+  is_fastest_    = false;
 }
 
 double Trapezoid5251525::generate_path(const double& ts, const double& tf,
@@ -188,8 +192,9 @@ double Trapezoid5251525::generate_path(const double& ts, const double& tf,
   //   throw std::runtime_error("Not initialized config parameter yet.");
   // }
 
-  no_movement_ = false;
-  is_generated_ = false;
+  is_generated_  = false;
+  no_movement_   = false;
+  is_fastest_    = false;
   t0_ = ts;
   tf_ = tf;
   x0_ = xs;
@@ -213,6 +218,7 @@ double Trapezoid5251525::generate_path(const double& ts, const double& tf,
   double sign_init = calc_initial_v_max_direction_sign();
 
 #ifdef DEBUG_
+  std::cout << std::fixed << std::setprecision(15);
   std::cout << "\n ==== Tragectory Generator ====\n";
   std::cout << "accleration_limit: " << a_limit_ << std::endl;
   std::cout << "decceleration_limit: " << d_limit_ << std::endl;
@@ -246,17 +252,18 @@ double Trapezoid5251525::generate_path(const double& ts, const double& tf,
 #ifdef DEBUG_
     std::cout << "recalculate v_max_fastest." << std::endl;
 #endif
+
     // 反転符号で再度最速軌道の最大速度を再計算
     this->calc_fastest_parameter(a_limit_, d_limit_);
   }
 
 
   // 最終到達時刻が与えられている場合 = 最速軌道でない場合
-  if (tf_ != 0.0 ) {
+  // 最速軌道でも、上で時間＆パラメータを求めた後、以降4, 5の計算で再度パラメータ値を確定させる
+  {
     // 加速度を、最短時間に対する目標移動時間の比率により、上限値と下限値の内分をとって算出
     calc_acceleration_with_ratio();
 
-    sign_ = sign_init;
     // 新しい加速度による、最速軌道の最大速度と最短時間の算出
     this->calc_fastest_parameter(a_max_, d_max_);
     // 新しい加速度による、到達限界・速度反転領域の判定
@@ -304,7 +311,7 @@ void Trapezoid5251525::input_check() {
     ss2 << tf_;
     throw std::invalid_argument("t0 exceeds tf (t0 > tf) : " + ss1.str() + " > " + ss2.str());
   }
-  if(fabs(v0_) > v_limit_ || fabs(vf_) > v_limit_) {
+  if((fabs(v0_) > v_limit_) || (fabs(vf_) > v_limit_)) {
     // 初期速度、終端速度が速度リミットを超えていたらエラー
     std::stringstream ss1, ss2, ss3;
     ss1 << fabs(v0_);
@@ -314,8 +321,13 @@ void Trapezoid5251525::input_check() {
                                 + ") exceeds v_limit (" + ss3.str() +  ")");
   }
   // 開始と終了地点が同じでかつ開始と終了の速度0.0ならば移動なしフラグを立てる
-  if ( fabs(x0_-xf_)<= 1e-12 && fabs(v0_)<= 1e-12 && fabs(vf_)<= 1e-12) {
+  if ( fabs(x0_-xf_)<= 1.0e-13 && fabs(v0_)<= 1.0e-15 && fabs(vf_)<= 1.0e-15) {
       no_movement_ = true;
+  }
+  // 終了時刻が0.0の場合、最速軌道フラグを立てる
+  if( tf_ == 0.0 )
+  {
+    is_fastest_ = true;
   }
 
 }
@@ -324,8 +336,8 @@ void Trapezoid5251525::input_check() {
 double Trapezoid5251525::calc_initial_v_max_direction_sign() {
   sign_ = (xf_ - x0_ > 0) ? 1 : -1;
   // 位置が同じ場合,
-  if (fabs(x0_-xf_) <= 1.0e-12) {
-    if (tf_ == 0.0) {
+  if (fabs(x0_-xf_) <= 1.0e-13) {
+    if ( is_fastest_ ) {
       // 最速軌道ならば,
       // 最大速度を開始-終端速度の絶対値の大きい方の符号をとる(等しい場合は開始側の符号)
       sign_ = ( fabs(v0_) < fabs(vf_) ) ? SIGNV(vf_) : SIGNV(v0_);
@@ -342,7 +354,8 @@ double Trapezoid5251525::calc_initial_v_max_direction_sign() {
 }
 
 /// 2.
-void Trapezoid5251525::calc_fastest_parameter(const double& a_max, const double& d_max)  {
+void Trapezoid5251525::calc_fastest_parameter( const double& a_max,
+                                               const double& d_max ) {
   // 移動距離
   xd_ = sign_ * (xf_-x0_);
 
@@ -382,17 +395,22 @@ void Trapezoid5251525::calc_fastest_parameter(const double& a_max, const double&
   tf_fastest_ = t0_ + 2*dT1_fastest + dT2_fastest + dT3_fastest + 2*dT4_fastest + dT5_fastest;
 
 #ifdef DEBUG_
+  std::cout << "is_fastest_ : " << is_fastest_ << std::endl;
   std::cout << "v_max_fastest : " << v_max_fastest_ << std::endl;
   std::cout << "dT3_fastest : " << dT3_fastest << std::endl;
   std::cout << "tf_fastest : " << tf_fastest_ << std::endl;
 #endif
 
   // tf_の時刻がtf_fastest_とほぼ同じ場合、最速軌道動作とする
-  if ( tf_ == 0.0
-       || ((tf_ - tf_fastest_ >= 0.0) && (tf_ - tf_fastest_ <= 1.0e-15)) ) {
-    tf_ = 0.0;
+  if ( (is_fastest_)
+       || ((tf_ - tf_fastest_ >= 0.0) && (tf_ - tf_fastest_ <= 1.0e-12)) ) {
+
+    if ( is_fastest_) {
+      tf_    = (tf_ < tf_fastest_) ? tf_fastest_ : tf_;
+    }
     v_max_ = v_max_fastest_;
-    dT3_ = dT3_fastest;
+    dT3_   = dT3_fastest;
+
   } else if ( tf_ < tf_fastest_ ) {
     std::stringstream ss1, ss2;
     ss1 << std::fixed << std::setprecision(15);
@@ -403,6 +421,7 @@ void Trapezoid5251525::calc_fastest_parameter(const double& a_max, const double&
     throw std::invalid_argument( "unreachable parameter. tf < fastest time: "
                                  + ss1.str() + " < " + ss2.str() );
   }
+
 }
 
 /// 3.
@@ -425,6 +444,9 @@ void Trapezoid5251525::judge_reach_limitation() {
   double xf_L2L3    = x0_;
   double vf_L2L3    = (-1.0) * v0_;
   double sign_L2L3   = (v0_ >= 0.0) ? 1 : -1;
+  if(v0_ == 0.0) {
+    sign_L2L3 = (vf_>= 0.0) ? -1 : 1;
+  }
 #ifdef DEBUG_
   std::cout << "sign_L2L3 : " << sign_L2L3 << std::endl;
 #endif
@@ -452,12 +474,13 @@ void Trapezoid5251525::judge_reach_limitation() {
                  && fabs(vf_) >= fabs(v_max_L1) ))
        && sign_*vf_ >=0 ) {
 #ifdef DEBUG_
-    std::cout << "(region L1 : vf^2 < v_step2_square_x_eq_xf) :"
+    std::cout << ">>>> (region L1 : vf^2 < v_step2_square_x_eq_xf) :"
               << (vf_*vf_) << " < " << v_step2_square_x_eq_xf << std::endl;
 #endif
     // 到達不能領域L1
     // 速度を反転する
     sign_ = (-1) * sign_;
+
     // if (tf_ != 0.0) {
     //   // 終端時刻を指定した場合、加速度リミットエラーとする
     //   std::stringstream ss1, ss2;
@@ -473,15 +496,13 @@ void Trapezoid5251525::judge_reach_limitation() {
               && ( fabs(vf_) > fabs(v0_) )
               && sign_*vf_ >= 0.0 ) {
 #ifdef DEBUG_
-    std::cout << "(region L4 : vf^2 < v_step6_square_x_eq_xf) :"
-              << (vf_*vf_) << " < " << v_step6_square_x_eq_xf << std::endl;
+    std::cout << ">>>> (region L4 : vf^2 < v_step6_square_x_eq_xf) :"
+              << (vf_*vf_) << " >= " << v_step6_square_x_eq_xf << std::endl;
 #endif
     // // 到達不能領域L4
-    if ( tf_ == 0.0 ) {
-      // 最速軌道を指定した場合、速度を反転する
-      sign_ = (-1) * sign_;
-    }
-    // else {
+    sign_ = (-1) * sign_;
+
+    // if (tf_ != 0.0) {
     //   // 終端時刻を指定した場合、加速度リミットエラーとする
     //   std::stringstream ss1, ss2;
     //   ss1 << (vf_*vf_);
@@ -495,14 +516,13 @@ void Trapezoid5251525::judge_reach_limitation() {
               && vf_*vf_<= v_step6_square_x_eq_xf
               && xd_ <= fabs(x_step6_v_eq_0 - x0_) ) {
 #ifdef DEBUG_
-      std::cout << "(region L2,L3 : xd < |x_step6_v_eq_0 - x0|) :"
-                << xd_ << " < " << fabs(x_step6_v_eq_0 - x0_) << std::endl;
+    std::cout << ">>>> (region L2,L3 : xd < |x_step6_v_eq_0 - x0|) :"
+              << xd_ << " < " << fabs(x_step6_v_eq_0 - x0_) << std::endl;
 #endif
-    if ( tf_ == 0.0 ) {
-      // 最速軌道を指定した場合、速度を反転する
-      sign_ = (-1) * sign_;
-    }
-    // else {
+    // 速度を反転する
+    sign_ = (-1) * sign_;
+
+    // if (tf_ != 0.0) {
     //   // 終端時刻を指定した場合、加速度リミットエラーとする
     //   std::stringstream ss1, ss2;
     //   ss1 << xd_;
@@ -532,8 +552,8 @@ void Trapezoid5251525::calc_acceleration_with_ratio() {
 
 /// 5.
 double Trapezoid5251525::internal_calc_v_max_and_dT3(const double& signA,
-                                                        const double& signD,
-                                                        double& dT3, bool& ret) {
+                                                     const double& signD,
+                                                     double& dT3, bool& ret) {
   double pA = signA*0.5*(1.0+asr_)/a_max_
             + signD*0.5*(1.0+dsr_)/d_max_;
   double pB = tf_-t0_ + signA*(1.0+asr_)*v0_/a_max_
@@ -553,9 +573,15 @@ double Trapezoid5251525::internal_calc_v_max_and_dT3(const double& signA,
     std::cout << "Case 2,3" << std::endl;
 #endif
 
-  } else if (pD < 0.0) {
-    // ２次方程式の判別式が0未満なら解なしで終了
-    ret = false;
+  } else if (pD < 0.0 ) {
+
+    if(!is_fastest_) {
+      // ２次方程式の判別式が0未満で最速軌道でなければ解なしで終了
+      ret = false;
+    }
+    v_max = v_max_fastest_;
+    dT3 = 0.0;
+
 #ifdef DEBUG_
     std::cout << std::endl;
     std::cout << "pD no solution" << std::endl;
@@ -576,7 +602,7 @@ double Trapezoid5251525::internal_calc_v_max_and_dT3(const double& signA,
   if(sign_*v_max <= -1.0e-15
      || signA*(v_max - v0_) < 0.0
      || signD*(v_max - vf_) < 0.0
-     || fabs(xd - xd_) > 1.0e-12
+     || fabs(xd - xd_) > 1.0e-13
      || dT3 < 0.0) {
     ret = false;
 #ifdef DEBUG_
@@ -599,10 +625,10 @@ double Trapezoid5251525::internal_calc_v_max_and_dT3(const double& signA,
   std::cout << "dT3 : " << dT3 << std::endl;
   std::cout << "xd_ : " << xd_ << std::endl;
   std::cout << "xd : " << xd << std::endl;
-  std::cout << "sign_*v_max < 0.0 : " << (sign_*v_max < 0.0) << std::endl;
-  std::cout << "signA*(v_max - v0_) < 0.0 : " << (signA*(v_max - v0_) < 0.0) << std::endl;
-  std::cout << "signD*(v_max - vf_) < 0.0 : " << (signD*(v_max - vf_) < 0.0) << std::endl;
-  std::cout << "fabs(xd - xd_) > 1.0e-14 : " << (fabs(xd - xd_) > 1.0e-14) << std::endl;
+  std::cout << "sign_*v_max(="<<(sign_*v_max)<<") < 0.0 : " << (sign_*v_max < 0.0) << std::endl;
+  std::cout << "signA*(v_max - v0_)(="<<(signA*(v_max - v0_))<<") < 0.0 : " << (signA*(v_max - v0_) < 0.0) << std::endl;
+  std::cout << "signD*(v_max - vf_)(="<<(signD*(v_max - vf_))<<") < 0.0 : " << (signD*(v_max - vf_) < 0.0) << std::endl;
+  std::cout << "fabs(xd - xd_)(="<<(fabs(xd - xd_))<< ") > 1.0e-13 : " << (fabs(xd - xd_) > 1.0e-13) << std::endl;
   std::cout << "dT3 < 0.0 : " << (dT3 < 0.0) << std::endl;
 #endif
   return v_max;
@@ -613,6 +639,30 @@ void Trapezoid5251525::calc_v_max_and_dT3() {
   signA_ = sign_;
   signD_ = sign_;
   v_max_ = this->internal_calc_v_max_and_dT3(signA_, signD_, dT3_, ret);
+  if ( !ret ) {
+    signA_ = (-1)*sign_;
+    signD_ = sign_;
+    v_max_ = this->internal_calc_v_max_and_dT3(signA_, signD_, dT3_, ret);
+  }
+  if ( !ret ) {
+    signA_ = sign_;
+    signD_ = (-1)*sign_;
+    v_max_ = this->internal_calc_v_max_and_dT3(signA_, signD_, dT3_, ret);
+  }
+  if ( !ret ) {
+    signA_ = (-1)*sign_;
+    signD_ = (-1)*sign_;
+    v_max_ = this->internal_calc_v_max_and_dT3(signA_, signD_, dT3_, ret);
+  }
+
+  ////
+
+  if ( !ret ) {
+    sign_ = (-1)*sign_;
+    signA_ = sign_;
+    signD_ = sign_;
+    v_max_ = this->internal_calc_v_max_and_dT3(signA_, signD_, dT3_, ret);
+  }
   if ( !ret ) {
     signA_ = (-1)*sign_;
     signD_ = sign_;
@@ -644,8 +694,14 @@ void Trapezoid5251525::calc_v_max_and_dT3() {
         << "   - goal_velocity(vf)="<< vf_ << std::endl;
     throw std::runtime_error(ss1.str());
   }
-  if (fabs(v_max_) > fabs(v_limit_)) {
-    throw std::runtime_error("unreachable parameter. solved v_max exceeds v_limit.");
+  if (fabs(v_max_) > fabs(v_limit_)+1.0e-15) {
+    std::stringstream ss2;
+    ss2 << std::fixed << std::setprecision(15)
+        << "unreachable parameter. solved v_max(="
+        << fabs(v_max_)
+        << ") exceeds v_limit(="
+        << fabs(v_limit_) << ").";
+    throw std::runtime_error( ss2.str() );
   }
 }
 
@@ -799,7 +855,7 @@ int Trapezoid5251525::pop(const double& t, double& xt, double& vt, double& at) {
 
     at = signD_ * (-d_max_);
 
-  } else if ( t6_ <= t && t <= t7_+1e-12) {
+  } else if ( t6_ <= t && t <= t7_+1.0e-12) {
     // Step7
     xt = signD_ * (-0.1) * d_max_/(dT4_ * dT4_ * dT4_)
           * (t-t6_) * (t-t6_) * (t-t6_) * (t-t6_) * (t-t6_)
@@ -824,7 +880,7 @@ int Trapezoid5251525::pop(const double& t, double& xt, double& vt, double& at) {
     std::stringstream ss1;
     ss1 << std::fixed << std::setprecision(15);
     ss1 << "time value is out of range between t0(=" << t0_
-        << ") and tf(t7)+1e-12(=" << t7_+1e-12 << ").";
+        << ") and tf(t7)+1.0e-12(=" << t7_+1.0e-12 << ").";
     std::out_of_range(ss1.str());
   }
 
@@ -882,11 +938,12 @@ const double Trapezoid5251525::t6() const { return t6_; }
 const double Trapezoid5251525::x6() const { return x6_; }
 const double Trapezoid5251525::v6() const { return v6_; }
 const double Trapezoid5251525::t7() const { return t7_; }
-const double Trapezoid5251525::v_max_fastest() const { return v_max_fastest_;  }
-const double Trapezoid5251525::tf_fastest()    const { return tf_fastest_;     }
-const bool Trapezoid5251525::is_initialized()  const { return is_initialized_; }
-const bool Trapezoid5251525::is_generated()    const { return is_generated_;   }
-const bool Trapezoid5251525::no_movement()     const { return no_movement_;    }
+const double Trapezoid5251525::v_max_fastest() const { return v_max_fastest_;   }
+const double Trapezoid5251525::tf_fastest()    const { return tf_fastest_;      }
+const bool Trapezoid5251525::is_initialized()  const { return is_initialized_;  }
+const bool Trapezoid5251525::is_generated()    const { return is_generated_;    }
+const bool Trapezoid5251525::no_movement()     const { return no_movement_;     }
+const bool Trapezoid5251525::is_fastest()      const { return is_fastest_;      }
 
 ///////////////////////////////////////////////////////////////////////////////
 
