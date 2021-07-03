@@ -38,9 +38,9 @@ NonUniformRoundingSpline NonUniformRoundingSpline::operator=(
   return *this;
 }
 
-double NonUniformRoundingSpline::calculate_velocity( TimePosition tp0,
-                                                     TimePosition tp1,
-                                                     TimePosition tp2 ) {
+double NonUniformRoundingSpline::calculate_velocity( const TimePosition& tp0,
+                                                     const TimePosition& tp1,
+                                                     const TimePosition& tp2 ) {
   double t0 = tp0.time;
   double x0 = tp0.value; // position
 
@@ -72,7 +72,7 @@ double NonUniformRoundingSpline::calculate_velocity( TimePosition tp0,
 }
 
 
-void NonUniformRoundingSpline::push_with_velocity_no_change(
+void NonUniformRoundingSpline::push_without_velocity_change(
                                  const double& clock_time,
                                  const double& position ) {
   TimePosition tp( clock_time, position );
@@ -90,12 +90,13 @@ void NonUniformRoundingSpline::push_with_velocity_no_change(
 }
 
 
-void NonUniformRoundingSpline::push_with_velocity_no_change (
+void NonUniformRoundingSpline::push_without_velocity_change (
                                  const TimePVA& time_pva ) {
   TimePosition tp( time_pva.time, time_pva.P.pos);
   tp_buffer_.push(tp);
 
   tpva_buffer_.push(time_pva);
+
   if ( tp_buffer_.size() >= 3) {
     // delete front(oldest) data
     tp_buffer_.pop_delete();
@@ -149,22 +150,40 @@ void NonUniformRoundingSpline::push( const TimePVA& time_pva ) {
 }
 
 
-void NonUniformRoundingSpline::push_dT_with_velocity_no_change(
-                                 const double& interval_time, const double& position) {
+void NonUniformRoundingSpline::push_dT_without_velocity_change(
+                                 const double& interval_time, const double& position ) {
   double pre_time = 0.0;
   if( tp_buffer_.size() > 0 ) {
     pre_time = tp_buffer_.back().time;
   }
-  this->push_with_velocity_no_change( pre_time + interval_time, position );
+  this->push_without_velocity_change( pre_time + interval_time, position );
+}
+
+void NonUniformRoundingSpline::push_dT_without_velocity_change(
+                                 const double& interval_time, const PosVelAcc& pva ) {
+  double pre_time = 0.0;
+  if( tp_buffer_.size() > 0 ) {
+    pre_time = tp_buffer_.back().time;
+  }
+
+  this->push_without_velocity_change( TimePVA( (pre_time + interval_time), pva ) );
 }
 
 
-void NonUniformRoundingSpline::push_dT(const double& interval_time, const double& position) {
+void NonUniformRoundingSpline::push_dT( const double& interval_time, const double& position ) {
   double pre_time = 0.0;
   if( tp_buffer_.size() > 0 ) {
     pre_time = tp_buffer_.back().time;
   }
   this->push( pre_time + interval_time, position );
+}
+
+void NonUniformRoundingSpline::push_dT( const double& interval_time, const PosVelAcc& pva ) {
+  double pre_time = 0.0;
+  if( tp_buffer_.size() > 0 ) {
+    pre_time = tp_buffer_.back().time;
+  }
+  this->push( TimePVA( (pre_time + interval_time), pva ) );
 }
 
 
@@ -176,8 +195,22 @@ const TimePVA NonUniformRoundingSpline::get( const std::size_t& index ) const {
   return tpva_buffer_.get(index);
 }
 
+const TimePVA NonUniformRoundingSpline::front() const {
+  return tpva_buffer_.front();
+}
+
+const TimePVA NonUniformRoundingSpline::back() const {
+  return tpva_buffer_.back();
+}
+
 const TimePVA NonUniformRoundingSpline::pop() {
+  tp_buffer_.pop_delete();
   return tpva_buffer_.pop();
+}
+
+const TimePVA NonUniformRoundingSpline::pop_back() {
+  tp_buffer_.pop_back();
+  return tpva_buffer_.pop_back();
 }
 
 void NonUniformRoundingSpline::clear() {
