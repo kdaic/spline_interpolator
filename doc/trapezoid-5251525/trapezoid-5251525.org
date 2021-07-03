@@ -1092,12 +1092,12 @@ $v'_{\rm max}=\hat{v}_{\rm max}$ とし、
 \end{eqnarray}
 
 ここで $(t-t_1)$ を消去して相図上の判定のために $\dot{x'}_{\rm Step2}^2$ を導く。 \\
-(6.81)式より $(t-t_1)$ は以下となる(符号変数 $\rm sign$ は逆数にしても同じ)。
+(6.92)式より $(t-t_1)$ は以下となる(符号変数 $\rm sign$ は逆数にしても同じ)。
 \begin{eqnarray}
   t-t_1 = {\rm sign} \frac{ \dot{x'}_{\rm Step2}(t) - \dot{x'}_1 }{ a_{\rm max} }
 \end{eqnarray}
 
-これを(6.80)式に代入する(因数カッコ $(t)$ は省略、符号変数 $\rm sign$ は２乗すると1になる)。
+これを(6.91)式に代入する(因数カッコ $(t)$ は省略、符号変数 $\rm sign$ は２乗すると1になる)。
 \begin{eqnarray}
   {x'}_{\rm Step2} 
   &=& {\rm sign} \frac{ a_{\rm max} }{2}
@@ -1149,8 +1149,8 @@ ${x'}_{\rm Step2} = x_f$ とすると、以下の評価値が導ける。
 \begin{eqnarray}
   \left\{ \begin{array}{l}
     {\rm sign'} = \left\{ \begin{array}{cl}
-      -1 & (\dot{x}_0 < 0) \\
-       1 & (\dot{x}_0 \ge 0)
+      -1 & (( \dot{x}_0 < 0 )\ {\rm or}\ ( \dot{x}_0 = 0 かつ \dot{x}_f \ge 0 )) \\
+       1 & (( \dot{x}_0 > 0 )\ {\rm or}\ ( \dot{x}_0 = 0 かつ \dot{x}_f < 0 ))
     \end{array} \right. \\
     {v'}_{\rm max} = \dot{x}_0 \\
     {x'}_f = x_0 \\
@@ -1184,12 +1184,12 @@ ${x'}_{\rm Step2} = x_f$ とすると、以下の評価値が導ける。
 \end{eqnarray}
 
 ここで $(t-t_5)$ を消去して相図上の判定のために $x'_{\rm Step6}$ 、 $\dot{x'}_{\rm Step6}^2$ の評価値を導く。 \\
-(6.92)式より $(t-t_5)$ は以下となる(符号変数 $\rm sign'$ は逆数にしても同じ)。
+(6.103)式より $(t-t_5)$ は以下となる(符号変数 $\rm sign'$ は逆数にしても同じ)。
 \begin{eqnarray}
   t-t_5 = {\rm sign'} \frac{ \dot{x'}_5 - \dot{x'}_{\rm Step6}(t) }{ d_{\rm max} }
 \end{eqnarray}
 
-これを(6.91)式に代入する(因数カッコ $(t)$ は省略、符号変数 $\rm sign'$ は２乗すると1になる)。
+これを(6.102)式に代入する(因数カッコ $(t)$ は省略、符号変数 $\rm sign'$ は２乗すると1になる)。
 \begin{eqnarray}
   {x'}_{\rm Step6} &=& - {\rm sign'} \frac{ d_{\rm max} }{2} 
     \left(  {\rm sign'} \frac{ \dot{x'}_5 - \dot{x'}_{\rm Step6} }{ d_{\rm max} } \right)^2
@@ -1329,7 +1329,7 @@ ${x'}_{\rm Step6} = x_f$ とすると、以下の評価値が導ける。
 - (If) :: 　\\
         $\dot{x}_0 \dot{x}_f \geq 0$ \hspace{3mm} (開始速度 $\dot{x}_0$ と終端速度 $\dot{x}_f$ の正負が同じ), \\
         　 *and* \\
-        $\dot{x}_f^2 \geq \left\{ \dot{x}'_{\rm Step2} \mid^{v'_{\rm max}=\hat{v}_{\rm max}}_{x=x_f} \right\}^2$ \hspace{3mm} ((6.83)式で導出した評価値), \\
+        $\dot{x}_f^2 \geq \left\{ \dot{x}'_{\rm Step2} \mid^{v'_{\rm max}=\hat{v}_{\rm max}}_{x=x_f} \right\}^2$ \hspace{3mm} ((6.94)式で導出した評価値), \\
         　 *and* \\
         ${\rm sgn}(x_f - x_0) \dot{x}_f \geq 0$ (終端点が開始点よりも正側の位置＆正の速度、もしくは負側の位置＆負の速度) \\
         $\left( {\rm ただし} {\rm sgn}(p) = \left\{ \begin{array}{cl} -1 & (p < 0) \\ 1 & (p \geq 0)  \end{array} \
@@ -1339,16 +1339,16 @@ ${x'}_{\rm Step6} = x_f$ とすると、以下の評価値が導ける。
 - (ElseIf) :: 　\\
               $\dot{x}_0 \dot{x}_f \leq 0$ \hspace{3mm} (開始速度 $\dot{x}_0$ と終端速度 $\dot{x}_f$ の正負が異なる), \\
              　 *and* \\
-              $\dot{x}_f^2 \geq \left\{ \dot{x}'_{\rm Step6} \mid^{v'_{\rm max}=\hat{v}_{\rm max},\ \dot{x}'_f=-\dot{x}_0,\ {x}'_f=x_0}_{x=x_f} \right\}^2$ \hspace{3mm} ((6.96)式で導出した評価値), \\
+              $\dot{x}_f^2 \geq \left\{ \dot{x}'_{\rm Step6} \mid^{v'_{\rm max}=\hat{v}_{\rm max},\ \dot{x}'_f=-\dot{x}_0,\ {x}'_f=x_0}_{x=x_f} \right\}^2$ \hspace{3mm} ((6.107)式で導出した評価値), \\
              　 *and* \\
               ${\rm sgn}(x_f - x_0) \dot{x}_f \geq 0$ (終端点が開始点よりも負側の位置＆負の速度、もしくは正側の位置＆正の速度) \\
               $\Longrightarrow$
               *{ $L_4$ の領域に当てはまる}*
 - (ElseIf) :: 　\\
               $\dot{x}_f^2
-               \leq \left\{ \dot{x}'_{\rm Step6} \mid^{v'_{\rm max}=\dot{x}_0,\ \dot{x}'_f=-\dot{x}_0,\ {x}'_f=x_0}_{x=x_f} \right\}^2$ \hspace{3mm} ((6.96)式で導出した評価値), \\
+               \leq \left\{ \dot{x}'_{\rm Step6} \mid^{v'_{\rm max}=\dot{x}_0,\ \dot{x}'_f=-\dot{x}_0,\ {x}'_f=x_0}_{x=x_f} \right\}^2$ \hspace{3mm} ((6.107)式で導出した評価値), \\
             　 *and* \\
-              $| x_f - x_0 | \ \leq \ \left| \left\{ {x'}_{\rm Step6} \mid^{v'_{\rm max}=\dot{x}_0,\ \dot{x}'_f=-\dot{x}_0,\ {x}'_f=x_0}_{\dot{x}=0} \right\} - x_0 \right|$ \hspace{3mm} ((6.95)式で導出した評価値) \\
+              $| x_f - x_0 | \ \leq \ \left| \left\{ {x'}_{\rm Step6} \mid^{v'_{\rm max}=\dot{x}_0,\ \dot{x}'_f=-\dot{x}_0,\ {x}'_f=x_0}_{\dot{x}=0} \right\} - x_0 \right|$ \hspace{3mm} ((6.106)式で導出した評価値) \\
               $\Longrightarrow$
               *{ $L_2$, $L_3$ の領域に当てはまる}* 
 - (Else) :: 　\\
@@ -2029,8 +2029,8 @@ ${p_B}^2 - 4p_A p_C > 0$ の時、この2次方程式は以下のようにも表
    \begin{eqnarray}
      \left\{ \begin{array}{l}
        {\rm sign'} = \left\{ \begin{array}{cl}
-         -1 & (\dot{x}_0 < 0) \\
-          1 & (\dot{x}_0 \ge 0)
+        -1 & (( \dot{x}_0 < 0 )\ {\rm or}\ ( \dot{x}_0 = 0 かつ \dot{x}_f \ge 0 )) \\
+         1 & (( \dot{x}_0 > 0 )\ {\rm or}\ ( \dot{x}_0 = 0 かつ \dot{x}_f < 0 ))
        \end{array} \right. \\
        {v'}_{\rm max} = \dot{x}_0 \\
        {x'}_f = x_0 \\
