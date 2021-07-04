@@ -703,7 +703,7 @@ void Trapezoid5251525::calc_v_max_and_dT3() {
         << "unreachable parameter. solved v_max(="
         << fabs(v_max_)
         << ") exceeds v_limit+1.0e-13(="
-        << fabs(v_limit_) << ").";
+        << fabs(v_limit_)+1.0e-13 << ").";
     throw std::runtime_error( ss2.str() );
   }
 }
