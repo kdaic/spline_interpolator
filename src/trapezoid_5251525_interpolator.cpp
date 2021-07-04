@@ -234,7 +234,7 @@ const TimePVA TrapezoidalInterpolator::pop( const double& t ) {
   for( std::size_t idx=0; idx<target_tpva_queue_.size() - 1; idx++) {
 
     if( target_tpva_queue_.get( idx ).time <= t
-        && t < target_tpva_queue_.get( idx+1 ).time ) {
+        && t <= target_tpva_queue_.get( idx+1 ).time ) {
       trajectory_idx = idx;
       is_out_of_range  = false;
     }
