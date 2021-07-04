@@ -335,6 +335,8 @@ public:
     }
     this->clear();
     queue_buffer_ = src.queue_buffer_;
+    dT_queue_     = src.dT_queue_;
+    total_dT_     = src.total_dT_;
     return *this;
   };
 
@@ -429,9 +431,12 @@ public:
       THROW( QueueSizeEmpty, "the size of time queue is empty" );
     }
     TimeVal<T> output = queue_buffer_.front();
-    if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 0) ) {
+    std::size_t last_index = queue_buffer_.size() - 1;
+    // calculate intervaltime(dT) if the queue left >= 1.
+    if ( last_index >= 1 && (dT_queue_.size() > 0) ) {
+      double dT = calc_dT( 1 );
       dT_queue_.pop_front();
-      total_dT_ -= output.time;
+      total_dT_ -= dT;
     }
     queue_buffer_.pop_front();
     return output;
@@ -447,10 +452,14 @@ public:
     if( queue_buffer_.empty() ) {
       THROW( QueueSizeEmpty, "the size of time queue is empty" );
     }
+
     TimeVal<T> output = queue_buffer_.back();
-    if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 0) ) {
+    std::size_t last_index = queue_buffer_.size() - 1;
+    // calculate intervaltime(dT) if the queue left >= 1.
+    if ( last_index >= 1 && (dT_queue_.size() > 0) ) {
+      double dT = calc_dT( last_index );
       dT_queue_.pop_back();
-      total_dT_ -= output.time;
+      total_dT_ -= dT;
     }
     queue_buffer_.pop_back();
     return output;
@@ -467,10 +476,12 @@ public:
     if( queue_buffer_.empty() ) {
       THROW( QueueSizeEmpty, "the size of time queue is empty" );
     }
-    double pop_time = queue_buffer_.front().time;
-    if( (queue_buffer_.size() >= 2) && (dT_queue_.size() > 0) ) {
+    std::size_t last_index = queue_buffer_.size() - 1;
+    // calculate intervaltime(dT) if the queue left >= 1.
+    if ( last_index >= 1 && (dT_queue_.size() > 0) ) {
+      double dT = calc_dT( 1 );
       dT_queue_.pop_front();
-      total_dT_ -= pop_time;
+      total_dT_ -= dT;
     }
     queue_buffer_.pop_front();
     return SPLINE_SUCCESS;
@@ -538,15 +549,16 @@ public:
     double dT;
     // front intervaltime(dT)
     if( index >= 1 ){
-      dT = calc_dT( index );
       total_dT_ -= dT_queue_.at( index - 1 );
+      dT = calc_dT( index );
       dT_queue_.at( index - 1 ) = dT;
       total_dT_ += dT;
     }
     // back intervaltime(dT)
-    if( queue_buffer_.size() > index + 1 ) {
-      dT = calc_dT( index + 1 );
+    if( index >= 1
+        && (index < queue_buffer_.size()-1) ) {
       total_dT_ -= dT_queue_.at( index );
+      dT = calc_dT( index + 1 );
       dT_queue_.at( index ) = dT;
       total_dT_ += dT;
     }

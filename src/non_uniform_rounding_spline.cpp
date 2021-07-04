@@ -143,7 +143,7 @@ void NonUniformRoundingSpline::push( const TimePVA& time_pva ) {
                                                        tp_buffer_.get(1),
                                                        tp_buffer_.get(2) ),
                              0.0 ) );
-    tpva_buffer_.set( tpva_buffer_.size()-2, tpva);
+    tpva_buffer_.set( tpva_buffer_.size()-2, tpva );
     // delete front(oldest) data
     tp_buffer_.pop_delete();
   }
