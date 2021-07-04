@@ -405,11 +405,10 @@ void Trapezoid5251525::calc_fastest_parameter( const double& a_max,
   if ( (is_fastest_)
        || ((tf_ - tf_fastest_ >= 0.0) && (tf_ - tf_fastest_ <= 1.0e-12)) ) {
 
-    if ( is_fastest_) {
-      tf_  = (tf_ < tf_fastest_) ? tf_fastest_ : tf_;
-    }
+    tf_    = (tf_ < tf_fastest_) ? tf_fastest_ : tf_;
     v_max_ = v_max_fastest_;
     dT3_   = dT3_fastest;
+    is_fastest_ = true;
 
   } else if ( tf_ < tf_fastest_ ) {
     std::stringstream ss1, ss2;
@@ -678,6 +677,9 @@ void Trapezoid5251525::calc_v_max_and_dT3() {
     signD_ = (-1)*sign_;
     v_max_ = this->internal_calc_v_max_and_dT3(signA_, signD_, dT3_, ret);
   }
+
+  ///
+
   if ( !ret ) {
     std::stringstream ss1;
     ss1 << std::fixed << std::setprecision(15);
@@ -694,13 +696,14 @@ void Trapezoid5251525::calc_v_max_and_dT3() {
         << "   - goal_velocity(vf)="<< vf_ << std::endl;
     throw std::runtime_error(ss1.str());
   }
-  if (fabs(v_max_) > fabs(v_limit_)+1.0e-15) {
+
+  if (fabs(v_max_) > fabs(v_limit_)+1.0e-13) {
     std::stringstream ss2;
     ss2 << std::fixed << std::setprecision(15)
         << "unreachable parameter. solved v_max(="
         << fabs(v_max_)
-        << ") exceeds v_limit(="
-        << fabs(v_limit_) << ").";
+        << ") exceeds v_limit+1.0e-13(="
+        << fabs(v_limit_)+1.0e-13 << ").";
     throw std::runtime_error( ss2.str() );
   }
 }
