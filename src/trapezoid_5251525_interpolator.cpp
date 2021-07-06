@@ -21,11 +21,22 @@ void TrapezoidalInterpolator::create_trapzd_trajectory_que()
   } // End of for i=0 -> trapzd_config_que_.size()
 }
 
+
 TrapezoidalInterpolator::TrapezoidalInterpolator () :
   SplineInterpolator() {
   is_v_limit_ = true;
 }
 
+
+TrapezoidalInterpolator::TrapezoidalInterpolator(
+                           const TrapezoidalInterpolator& src ) :
+  SplineInterpolator(     src.is_path_generated_,
+                          src.is_v_limit_,
+                          src.v_limit_,
+                          src.target_tpva_queue_     ),
+  trapzd_config_que_    ( src.trapzd_config_que_     ),
+  trapzd_trajectory_que_( src.trapzd_trajectory_que_ ) {
+}
 
 TrapezoidalInterpolator::TrapezoidalInterpolator (
                          const TrapezoidConfigQueue& trapzd_config_que ) :
@@ -54,6 +65,19 @@ TrapezoidalInterpolator::TrapezoidalInterpolator (
 
 
 TrapezoidalInterpolator::~TrapezoidalInterpolator() {
+}
+
+
+TrapezoidalInterpolator& TrapezoidalInterpolator::operator=(
+                           const TrapezoidalInterpolator& src ) {
+  TrapezoidalInterpolator dest(src);
+  is_path_generated_     = dest.is_path_generated_;
+  is_v_limit_            = dest.is_v_limit_;
+  v_limit_               = dest.v_limit_;
+  target_tpva_queue_     = dest.target_tpva_queue_;
+  trapzd_config_que_     = dest.trapzd_config_que_;
+  trapzd_trajectory_que_ = dest.trapzd_trajectory_que_;
+  return *this;
 }
 
 

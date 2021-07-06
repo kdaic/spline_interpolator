@@ -13,6 +13,10 @@ public:
   /// デフォルトコンストラクタ
   TrapezoidalInterpolator();
 
+  /// コピーコンストラクタ
+  /// @param[in] src コピー元
+  TrapezoidalInterpolator( const TrapezoidalInterpolator& src );
+
   /// コンストラクタ
   /// @param[in] trpzd_config_que 台形型5251525次軌道の構成データのキュー。
   ///                             補間点区間の数と同じサイズ。以下が構成要素。
@@ -40,6 +44,11 @@ public:
 
   /// デストラクタ
   ~TrapezoidalInterpolator();
+
+  /// 代入演算子
+  /// @param[in] src コピー元
+  /// @return *this
+  TrapezoidalInterpolator& operator=( const TrapezoidalInterpolator& src );
 
   /// 初期化
   /// @param[in] trpzd_config_que 台形型5251525次軌道の構成データのキュー。

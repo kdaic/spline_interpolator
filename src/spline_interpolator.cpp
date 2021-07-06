@@ -11,7 +11,27 @@ SplineInterpolator::SplineInterpolator() :
 SplineInterpolator::~SplineInterpolator() {
 }
 
-const double SplineInterpolator::total_dT() {
+SplineInterpolator::SplineInterpolator( const SplineInterpolator& src ) :
+  is_path_generated_ ( src.is_path_generated_ ),
+  is_v_limit_        ( src.is_v_limit_        ),
+  v_limit_           ( src.v_limit_           ),
+  target_tpva_queue_ ( src.target_tpva_queue_ ) {
+}
+
+
+SplineInterpolator::SplineInterpolator(
+                      const bool&      is_path_generated,
+                      const bool&      is_v_limit,
+                      const double&    v_limit,
+                      const TPVAQueue& target_tpva_queue ) :
+  is_path_generated_ ( is_path_generated ),
+  is_v_limit_        ( is_v_limit        ),
+  v_limit_           ( v_limit           ),
+  target_tpva_queue_ ( target_tpva_queue ) {
+}
+
+
+const double SplineInterpolator::total_dT() const {
   if( !is_path_generated_ ) {
     THROW( NotSplineGenerated,
            "total dT not exists -- spline-path has not be generated yet.");
@@ -21,7 +41,7 @@ const double SplineInterpolator::total_dT() {
   return out_dT;
 }
 
-const double SplineInterpolator::v_limit() {
+const double SplineInterpolator::v_limit() const {
   if( !is_v_limit_ ) {
     THROW( NoVelocityLimit,
            "velocity limits is not defined in this type of path interpolator.");
@@ -29,7 +49,15 @@ const double SplineInterpolator::v_limit() {
   return v_limit_;
 }
 
-const double SplineInterpolator::finish_time() {
+const double SplineInterpolator::start_time() const {
+  if( !is_path_generated_ ) {
+    THROW( NotSplineGenerated,
+           "start time not exists -- spline-path has not be generated yet.");
+  }
+  return target_tpva_queue_.get( 0 ).time;
+}
+
+const double SplineInterpolator::finish_time() const {
   if( !is_path_generated_ ) {
     THROW( NotSplineGenerated,
            "finish time not exists -- spline-path has not be generated yet.");

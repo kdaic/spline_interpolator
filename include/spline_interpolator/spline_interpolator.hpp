@@ -15,25 +15,43 @@ public:
   /// Destructor
   virtual ~SplineInterpolator();
 
+  /// Copy Constructor
+  /// @param[in] src source to copy SplineInterpolator
+  SplineInterpolator( const SplineInterpolator& src );
+
+  /// Copy Constructor - value copy
+  /// @param[in] is_path_generated   flag if the spline-path is generated
+  /// @param[in] is_v_limitation    flag if velocity limit (v_limit) is defined or not
+  /// @param[in] v_limit            limit velocity [m/s, rad/s, ...etc.]
+  /// @param[in] target_tpva_queue  target TPVQueue
+  SplineInterpolator( const bool&      is_path_generated,
+                      const bool&      is_v_limit,
+                      const double&    v_limit,
+                      const TPVAQueue& target_tpva_queue );
+
   /// Get total interval time
   /// @return total interval time of spline-path
   /// @exception
   /// - NotSplineGenerated : spline-path is not genrated
-  const double total_dT();
+  const double total_dT() const;
 
   /// Get limit of velocity( if exists )
   /// @return limit velocity
   /// @exception
   /// - NoVelocityLimit : velocity limit is not defined
-  const double v_limit();
+  const double v_limit() const;
 
-  /// Get finish v_limit( );
+  /// Get start time
+  /// @return start time
+  /// @exception
+  /// - NotSplineGenerated : spline-path is not genrated
+  const double start_time() const;
 
   /// Get finish time
   /// @return finish time
   /// @exception
   /// - NotSplineGenerated : spline-path is not genrated
-  const double finish_time();
+  const double finish_time() const;
 
   /// Genrate a spline-path from initial-finish point
   /// @paran[in] ts start time (default: 0.0)
