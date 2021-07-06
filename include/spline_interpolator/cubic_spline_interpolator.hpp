@@ -8,7 +8,7 @@ namespace interp{
 /// @details Cubic spline is defined as.
 ///
 /// ```
-/// x_n(t) = a_n (t-t_n)^3 + b_n (t-t_n)^2 + c_n (t-t_n) + d_n
+/// x_n(t) = a_n (t - t_n)^3 + b_n (t - t_n)^2 + c_n (t - t_n) + d_n
 /// ```
 class CubicSplineInterpolator : public SplineInterpolator {
   friend class CubicSplineTest;
@@ -18,6 +18,16 @@ public:
 
   /// Destructor
   virtual ~CubicSplineInterpolator();
+
+  /// Copy Constructor
+  /// @param[in] src source of the copy CubicSplineInterpolator
+  CubicSplineInterpolator( const CubicSplineInterpolator& src );
+
+
+  /// Copy(insert) Operator
+  /// @param[in] src source of the copy CubicSplineInterpolator
+  /// @return *this
+  CubicSplineInterpolator& operator=( const CubicSplineInterpolator& src );
 
   /// Generate a cubic-spline-path from Time, Position queue
   /// @param[in] target_tp_queue target Time,Position queue
@@ -48,7 +58,7 @@ public:
                                  const double as=0.0, const double af=0.0 );
 
   /// Generate a cubic-spline-path from Time, Position(, Velocity) queue
-  /// @param[in] target_tpva_queue target Time,Position(, Velocity, Acceleration) queue
+  /// @param[in] target_tpva_queue target Time, Position(, Velocity, Acceleration) queue
   /// @return
   /// - SPLINE_SUCCESS: no error
   virtual RetCode generate_path( const TPVAQueue& target_tpva_queue );

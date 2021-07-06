@@ -87,6 +87,8 @@ void TrapezoidalInterpolator::initialize(
   trapzd_config_que_ = trapzd_config_que;
   trapzd_trajectory_que_.clear();
   create_trapzd_trajectory_que();
+  //
+  is_path_generated_ = false; // reset
 }
 
 
@@ -106,6 +108,8 @@ void TrapezoidalInterpolator::initialize(
   trapzd_config_que_.push_back( trapzd_config );
   trapzd_trajectory_que_.clear();
   create_trapzd_trajectory_que();
+  //
+  is_path_generated_ = false; // reset
 }
 
 
@@ -185,7 +189,9 @@ RetCode TrapezoidalInterpolator::generate_path (
     target_start = target_goal;
 
   } // End of for trajectory_idx=0 -> trapzd_trajectory_que_.size()
-
+  //
+  is_path_generated_ = true;
+  //
   return SPLINE_SUCCESS;
 }
 
@@ -221,7 +227,9 @@ RetCode TrapezoidalInterpolator::generate_path(
     //
     target_start = target_goal;
   }
-
+  //
+  is_path_generated_ = true;
+  //
   return SPLINE_SUCCESS;
 }
 
@@ -246,6 +254,9 @@ RetCode TrapezoidalInterpolator::generate_path_from_pva(
   target_tpva_queue_.clear();
   target_tpva_queue_.push( 0.0,      xs, vs, as );
   target_tpva_queue_.push( dT_total, xf, vf, af );
+  //
+  is_path_generated_ = true;
+  //
   return SPLINE_SUCCESS;
 }
 
