@@ -8,6 +8,57 @@ CubicSplineInterpolator::CubicSplineInterpolator() {
 CubicSplineInterpolator::~CubicSplineInterpolator() {
 }
 
+CubicSplineInterpolator::CubicSplineInterpolator(
+                           const CubicSplineInterpolator& src ) :
+  SplineInterpolator( src.is_path_generated_,
+                      src.is_v_limit_,
+                      src.v_limit_,
+                      src.target_tpva_queue_  ) {
+  this->a_.clear();
+  this->b_.clear();
+  this->c_.clear();
+  this->d_.clear();
+
+  this->a_.resize( src.a_.size() );
+  this->b_.resize( src.b_.size() );
+  this->c_.resize( src.c_.size() );
+  this->d_.resize( src.d_.size() );
+
+  std::copy( src.a_.begin(), src.a_.end(), this->a_.begin() );
+  std::copy( src.b_.begin(), src.b_.end(), this->b_.begin() );
+  std::copy( src.c_.begin(), src.c_.end(), this->c_.begin() );
+  std::copy( src.d_.begin(), src.d_.end(), this->d_.begin() );
+}
+
+CubicSplineInterpolator& CubicSplineInterpolator::operator=(
+                           const CubicSplineInterpolator& src ) {
+
+  CubicSplineInterpolator dest( src );
+
+  this->is_path_generated_ = dest.is_path_generated_;
+  this->is_v_limit_        = dest.is_v_limit_;
+  this->v_limit_           = dest.v_limit_;
+  this->target_tpva_queue_ = dest.target_tpva_queue_;
+
+  this->a_.clear();
+  this->b_.clear();
+  this->c_.clear();
+  this->d_.clear();
+
+  this->a_.resize( dest.a_.size() );
+  this->b_.resize( dest.b_.size() );
+  this->c_.resize( dest.c_.size() );
+  this->d_.resize( dest.d_.size() );
+
+  std::copy( dest.a_.begin(), dest.a_.end(), this->a_.begin() );
+  std::copy( dest.b_.begin(), dest.b_.end(), this->b_.begin() );
+  std::copy( dest.c_.begin(), dest.c_.end(), this->c_.begin() );
+  std::copy( dest.d_.begin(), dest.d_.end(), this->d_.begin() );
+
+  return *this;
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 RetCode CubicSplineInterpolator::generate_path(
