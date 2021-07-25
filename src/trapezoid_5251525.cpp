@@ -164,15 +164,20 @@ void Trapezoid5251525::initialize(const double& a_limit,
   if(v_limit_ <= 0.0) {
     // 速度リミットが0.0以下(負)ならばエラー
     std::stringstream ss;
-    ss << v_limit_;
-    throw std::invalid_argument("v_limit_ must be positive. v_limit_: " + ss.str());
+    ss << "v_limit_ must be positive. v_limit_: "
+       << std::fixed << std::setprecision(15)
+       << v_limit_;
+    std::cerr << ss.str() << std::endl;
+    throw std::invalid_argument( ss.str() );
   }
   if(ratio_acc_dec_ < 0.0 || 1.0 < ratio_acc_dec_) {
     // 下限値の比率が0.0〜1.0の範囲を超えていればエラー
     std::stringstream ss;
-    ss << ratio_acc_dec_;
-    throw std::invalid_argument("ratio_acc_dec must be from 0,0 to 1.0. ratio_acc_dec: "
-                                + ss.str());
+    ss << "ratio_acc_dec must be from 0,0 to 1.0. ratio_acc_dec: "
+       << std::fixed << std::setprecision(15)
+       << ratio_acc_dec_;
+    std::cerr << ss.str() << std::endl;
+    throw std::invalid_argument( ss.str() );
   }
   //
   is_initialized_= true;
@@ -298,27 +303,31 @@ double Trapezoid5251525::generate_path(const double& ts, const double& tf,
 void Trapezoid5251525::input_check() {
   if(t0_ < 0.0 || tf_ < 0.0){
     // 開始時刻もしくは終了時刻が負の場合エラー
-    std::stringstream ss1, ss2;
-    ss1 << t0_;
-    ss2 << tf_;
-    throw std::invalid_argument("t0 < 0.0 or tf < 0.0\n : t0 = "
-                                + ss1.str() + "\n   tf = " + ss2.str());
+    std::stringstream ss;
+    ss << "t0 < 0.0 or tf < 0.0\n : t0 = "
+       << std::fixed << std::setprecision(15)
+       << t0_ << "\n   tf = " << tf_;
+    std::cerr << ss.str() << std::endl;
+    throw std::invalid_argument( ss.str() );
   }
   if (tf_ != 0.0 && t0_ > tf_) {
     // 開始時刻が終端時刻を超えていたらエラー
-    std::stringstream ss1, ss2;
-    ss1 << t0_;
-    ss2 << tf_;
-    throw std::invalid_argument("t0 exceeds tf (t0 > tf) : " + ss1.str() + " > " + ss2.str());
+    std::stringstream ss;
+    ss << "t0 exceeds tf (t0 > tf) : "
+       << std::fixed << std::setprecision(15)
+       << t0_ << " > " << tf_;
+    std::cerr << ss.str() << std::endl;
+    throw std::invalid_argument( ss.str() );
   }
   if((fabs(v0_) > v_limit_) || (fabs(vf_) > v_limit_)) {
     // 初期速度、終端速度が速度リミットを超えていたらエラー
-    std::stringstream ss1, ss2, ss3;
-    ss1 << fabs(v0_);
-    ss2 << fabs(vf_);
-    ss3 << v_limit_;
-    throw std::invalid_argument("|v0| or |v1| (" + ss1.str() + " or " + ss2.str()
-                                + ") exceeds v_limit (" + ss3.str() +  ")");
+    std::stringstream ss;
+    ss << "|v0| or |v1| ("
+       << std::fixed << std::setprecision(15)
+       << fabs(v0_) << " or " << fabs(vf_)
+       << ") exceeds v_limit (" << v_limit_ <<  ")";
+    std::cerr << ss.str() << std::endl;
+    throw std::invalid_argument( ss.str() );
   }
   // 開始と終了地点が同じでかつ開始と終了の速度0.0ならば移動なしフラグを立てる
   if ( fabs(x0_-xf_)<= 1.0e-13 && fabs(v0_)<= 1.0e-15 && fabs(vf_)<= 1.0e-15) {
@@ -403,7 +412,9 @@ void Trapezoid5251525::calc_fastest_parameter( const double& a_max,
 
   // tf_の時刻がtf_fastest_とほぼ同じ場合、最速軌道動作とする
   if ( (is_fastest_)
-       || ((tf_ - tf_fastest_ >= 0.0) && (tf_ - tf_fastest_ <= 1.0e-12)) ) {
+       || ((tf_ - tf_fastest_ >= 0.0) && (tf_ - tf_fastest_ <= 1.0e-12))
+       || (fabs(tf_ - tf_fastest_) <= 1.0e-15)
+     ) {
 
     tf_    = (tf_ < tf_fastest_) ? tf_fastest_ : tf_;
     v_max_ = v_max_fastest_;
@@ -411,14 +422,13 @@ void Trapezoid5251525::calc_fastest_parameter( const double& a_max,
     is_fastest_ = true;
 
   } else if ( tf_ < tf_fastest_ ) {
-    std::stringstream ss1, ss2;
-    ss1 << std::fixed << std::setprecision(15);
-    ss2 << std::fixed << std::setprecision(15);
-    ss1 << tf_;
-    ss2 << tf_fastest_;
+    std::stringstream ss;
+    ss << "unreachable parameter. tf < fastest time: "
+       << std::fixed << std::setprecision(15)
+       << tf_ << " < " << tf_fastest_;
+    std::cerr << ss.str() << std::endl;
     // 到達不可能！エラー！
-    throw std::invalid_argument( "unreachable parameter. tf < fastest time: "
-                                 + ss1.str() + " < " + ss2.str() );
+    throw std::invalid_argument( ss.str() );
   }
 
 }
@@ -512,6 +522,7 @@ void Trapezoid5251525::judge_reach_limitation() {
     // }
 
   } else if ( v0_ != 0.0
+              && SIGNV(v0_) * SIGNV(xf_-x0_) > 0 
               && vf_*vf_<= v_step6_square_x_eq_xf
               && xd_ <= fabs(x_step6_v_eq_0 - x0_) ) {
 #ifdef DEBUG_
@@ -601,7 +612,7 @@ double Trapezoid5251525::internal_calc_v_max_and_dT3(const double& signA,
   if(sign_*v_max <= -1.0e-15
      || signA*(v_max - v0_) < 0.0
      || signD*(v_max - vf_) < 0.0
-     || fabs(xd - xd_) > 1.0e-13
+     || fabs(xd - xd_) > 1.0e-12
      || dT3 < 0.0) {
     ret = false;
 #ifdef DEBUG_
@@ -627,7 +638,7 @@ double Trapezoid5251525::internal_calc_v_max_and_dT3(const double& signA,
   std::cout << "sign_*v_max(="<<(sign_*v_max)<<") < 0.0 : " << (sign_*v_max < 0.0) << std::endl;
   std::cout << "signA*(v_max - v0_)(="<<(signA*(v_max - v0_))<<") < 0.0 : " << (signA*(v_max - v0_) < 0.0) << std::endl;
   std::cout << "signD*(v_max - vf_)(="<<(signD*(v_max - vf_))<<") < 0.0 : " << (signD*(v_max - vf_) < 0.0) << std::endl;
-  std::cout << "fabs(xd - xd_)(="<<(fabs(xd - xd_))<< ") > 1.0e-13 : " << (fabs(xd - xd_) > 1.0e-13) << std::endl;
+  std::cout << "fabs(xd - xd_)(="<<(fabs(xd - xd_))<< ") > 1.0e-12 : " << (fabs(xd - xd_) > 1.0e-12) << std::endl;
   std::cout << "dT3 < 0.0 : " << (dT3 < 0.0) << std::endl;
 #endif
   return v_max;
@@ -694,16 +705,18 @@ void Trapezoid5251525::calc_v_max_and_dT3() {
         << "   - start_velocity(v0)="<< v0_ << std::endl
         << "   - goal_position(xf)="<< xf_ << std::endl
         << "   - goal_velocity(vf)="<< vf_ << std::endl;
-    throw std::runtime_error(ss1.str());
+    std::cerr << ss1.str() << std::endl;
+    throw std::runtime_error( ss1.str() );
   }
 
-  if (fabs(v_max_) > fabs(v_limit_)+1.0e-13) {
+  if (fabs(v_max_) > fabs(v_limit_)+1.0e-12) {
     std::stringstream ss2;
     ss2 << std::fixed << std::setprecision(15)
         << "unreachable parameter. solved v_max(="
         << fabs(v_max_)
-        << ") exceeds v_limit+1.0e-13(="
-        << fabs(v_limit_)+1.0e-13 << ").";
+        << ") exceeds v_limit+1.0e-12(="
+        << fabs(v_limit_)+1.0e-12 << ").";
+    std::cerr << ss2.str() << std::endl;
     throw std::runtime_error( ss2.str() );
   }
 }
@@ -773,7 +786,9 @@ void Trapezoid5251525::set_parameter() {
 
 int Trapezoid5251525::pop(const double& t, double& xt, double& vt, double& at) {
   if (!is_generated_) {
-    throw std::runtime_error("Not generated path yet.");
+    std::string err_msg = "Not generated path yet.";
+    std::cerr << err_msg << std::endl;
+    throw std::runtime_error( err_msg );
   }
 
   if (no_movement_) {
@@ -884,7 +899,8 @@ int Trapezoid5251525::pop(const double& t, double& xt, double& vt, double& at) {
     ss1 << std::fixed << std::setprecision(15);
     ss1 << "time value is out of range between t0(=" << t0_
         << ") and tf(t7)+1.0e-12(=" << t7_+1.0e-12 << ").";
-    std::out_of_range(ss1.str());
+    std::cerr << ss1.str() << std::endl;
+    throw std::out_of_range( ss1.str() );
   }
 
   return 0;
