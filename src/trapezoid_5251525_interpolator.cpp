@@ -168,8 +168,8 @@ RetCode TrapezoidalInterpolator::generate_path (
       target_goal = nurs.pop();
     }
     else {
-      // nursが３点未満の場合、不均一丸みスプラインの速度計算未実施のため
-      // まだ軌道生成できるような(目標速度をもった)目標goal点はpopできないためcontinue
+      // nursが３点未満の場合、丸み不均一スプラインの速度計算未実施のため
+      // まだ軌道生成できるような(目標速度をもった)目標点(target_goal)はpopできないためcontinue
       trajectory_idx--; // 軌道を生成するまでカウントしない
       continue;
     }
@@ -213,7 +213,6 @@ RetCode TrapezoidalInterpolator::generate_path(
        (trajectory_idx < trapzd_trajectory_que_.size())
          && (target_TimePVA_queue.size() > 0);
        trajectory_idx++ ) {
-
     target_goal = target_TimePVA_queue.pop();
     //
     Trapezoid5251525& ref_trapzd = trapzd_trajectory_que_.at( trajectory_idx );
@@ -296,6 +295,16 @@ const TimePVA TrapezoidalInterpolator::pop( const double& t ) {
   TimePVA ret( t, PosVelAcc( xt, vt, at ) );
 
   return ret;
+}
+
+
+RetCode TrapezoidalInterpolator::clear() {
+
+  trapzd_config_que_.clear();
+
+  trapzd_trajectory_que_.clear();
+
+  return SplineInterpolator::clear();
 }
 
 

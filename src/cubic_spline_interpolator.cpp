@@ -245,6 +245,18 @@ const TimePVA CubicSplineInterpolator::pop(const double& t ) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
+RetCode CubicSplineInterpolator::clear() {
+
+  a_.clear();
+  b_.clear();
+  c_.clear();
+  d_.clear();
+
+  return SplineInterpolator::clear();
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
 RetCode CubicSplineInterpolator::tridiagonal_matrix_eq_solver(
           std::vector<double> d, const std::vector<double>& u,
           const std::vector<double>& l, std::vector<double> p,

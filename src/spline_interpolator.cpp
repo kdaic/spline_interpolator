@@ -100,3 +100,11 @@ RetCode SplineInterpolator::generate_path(
 
   return SPLINE_NOT_DEF_FUNCTION;
 }
+
+
+RetCode SplineInterpolator::clear() {
+
+  target_tpva_queue_.clear();
+
+  return SPLINE_SUCCESS;
+}

@@ -31,82 +31,123 @@ public:
   NonUniformRoundingSpline operator=( const NonUniformRoundingSpline& src );
 
   /// velocity calculating
-  /// @param[in] tp0 time-position point0.
-  /// @param[in] tp1 time-position point1. this is target to calurate & get veloctiy.
-  /// @param[in] tp2 time-position point2.
+  /// @param[in] tp0 time-position,velocity,accerlation point0.
+  /// @param[in] tp1 time-position,velocity,accerlation point1.
+  ///                this is target to calurate & get veloctiy.
+  /// @param[in] tp2 time-position,velocity,accerlation point2.
   /// @return velocity
-  double calculate_velocity( const TimePosition& tp0,
-                             const TimePosition& tp1,
-                             const TimePosition& tp2 );
+  double calculate_velocity( const TimePVA& tp0,
+                             const TimePVA& tp1,
+                             const TimePVA& tp2 );
 
   /// push(queue) the data next to the last index
   /// @param[in] clock_time  target clock time
   /// @param[in] position    target position
+  /// @return
+  /// - SPLINE_SUCCESS: no error
+  /// - SPLINE_INVALID_INPUT_TIME: the time is less than the one of previous index
+  /// - SPLINE_INVALID_INPUT_INDEX: Not exist input-index
   /// @details
   /// adds a new time-position-Velocity data into the queue with velocity no changed.
-  void push_without_velocity_change( const double& clock_time,
-                                     const double& position );
+  RetCode push_without_velocity_change( const double& clock_time,
+                                        const double& position );
 
   /// push(queue) the data next to the last index
   /// @param[in] time_pva  target time-position-velocity-acceleration
+  /// @return
+  /// - SPLINE_SUCCESS: no error
+  /// - SPLINE_INVALID_INPUT_TIME: the time is less than the one of previous index
+  /// - SPLINE_INVALID_INPUT_INDEX: Not exist input-index
   /// @details
   /// adds a new time-position-Velocity data into the queue with velocity no changed.
-  void push_without_velocity_change( const TimePVA& time_pva );
+  RetCode push_without_velocity_change( const TimePVA& time_pva );
 
   /// push(queue) the data next to the last index
   /// @param[in] clock_time  target clock time
   /// @param[in] position    target position
+  /// @return
+  /// - SPLINE_SUCCESS: no error
+  /// - SPLINE_INVALID_INPUT_TIME: the time is less than the one of previous index
+  /// - SPLINE_INVALID_INPUT_INDEX: Not exist input-index
   /// @details
   /// If the queue has time-position data greater than or equal to 3 (>=3),
   /// this function calculates internally the interploated velocity
   /// by means of a non-Uniform rounding spline
   /// and adds a new time-position-Velocity data into the queue.
-  void push( const double& clock_time, const double& position) ;
+  RetCode push( const double& clock_time, const double& position) ;
 
   /// push(queue) the data next to the last index
   /// @param[in] time_pva target time-position-velocity-acceleration
+  /// @return
+  /// - SPLINE_SUCCESS: no error
+  /// - SPLINE_INVALID_INPUT_TIME: the time is less than the one of previous index
+  /// - SPLINE_INVALID_INPUT_INDEX: Not exist input-index
   /// @details
   /// If the queue has time-position data greater than or equal to 3 (>=3),
   /// this function calculates internally the interploated velocity
   /// by means of a non-Uniform rounding spline
   /// and adds a new time-position-Velocity data into the queue.
-  void push( const TimePVA& time_pva );
+  RetCode push( const TimePVA& time_pva );
 
   /// push(queue) the data next to the last index
   /// @param[in] interval_time  interval time between now and post target
   /// @param[in] position       target position
+  /// @return
+  /// - SPLINE_SUCCESS: no error
+  /// - SPLINE_INVALID_INPUT_TIME: the time is less than the one of previous index
+  /// - SPLINE_INVALID_INPUT_INDEX: Not exist input-index
   /// @details
   /// adds a new time-position-Velocity data into the queue with velocity no changed.
-  void push_dT_without_velocity_change(
-         const double& interval_time, const double& position );
+  RetCode push_dT_without_velocity_change(
+            const double& interval_time, const double& position );
 
   /// push(queue) the data next to the last index
   /// @param[in] interval_time  interval time between now and post target
   /// @param[in] pva            target position-velocity-acceleration
+  /// @return
+  /// - SPLINE_SUCCESS: no error
+  /// - SPLINE_INVALID_INPUT_TIME: the time is less than the one of previous index
+  /// - SPLINE_INVALID_INPUT_INDEX: Not exist input-index
   /// @details
   /// adds a new time-position-Velocity data into the queue with velocity no changed.
-  void push_dT_without_velocity_change(
-         const double& interval_time, const PosVelAcc& pva );
+  RetCode push_dT_without_velocity_change(
+            const double& interval_time, const PosVelAcc& pva );
 
   /// push(queue) the data next to the last index
   /// @param[in] interval_time  interval time between now and post target
   /// @param[in] position       target position
+  /// @return
+  /// - SPLINE_SUCCESS: no error
+  /// - SPLINE_INVALID_INPUT_TIME: the time is less than the one of previous index
+  /// - SPLINE_INVALID_INPUT_INDEX: Not exist input-index
   /// @details
   /// If the queue has time-position data greater than or equal to 3 (>=3),
   /// this function calculates internally the interploated velocity
   /// by means of a non-Uniform rounding spline
   /// and adds a new time-position-Velocity data into the queue.
-  void push_dT( const double& interval_time, const double& position );
+  RetCode push_dT( const double& interval_time, const double& position );
 
   /// push(queue) the data next to the last index
   /// @param[in] interval_time  interval time between now and post target
   /// @param[in] pva            target position-velocity-acceleration
+  /// @return
+  /// - SPLINE_SUCCESS: no error
+  /// - SPLINE_INVALID_INPUT_TIME: the time is less than the one of previous index
+  /// - SPLINE_INVALID_INPUT_INDEX: Not exist input-index
   /// @details
   /// If the queue has time-position data greater than or equal to 3 (>=3),
   /// this function calculates internally the interploated velocity
   /// by means of a non-Uniform rounding spline
   /// and adds a new time-position-Velocity data into the queue.
-  void push_dT( const double& interval_time, const PosVelAcc& pva );
+  RetCode push_dT( const double& interval_time, const PosVelAcc& pva );
+
+  /// set Time-Position-Velocity-Acceleration to the index node
+  /// @param[in] index    target index
+  /// @param[in] velocity target velocity
+  /// @return
+  /// - SPLINE_SUCCESS: no error
+  /// - SPLINE_INVALID_INPUT_INDEX: Not exist input-index
+  RetCode force_set_velocity( const std::size_t& index , const double& velocity );
 
   /// get the tpva_buffer_
   /// @return tpva_buffer_
@@ -161,9 +202,6 @@ public:
   const double total_dT() const;
 
 private:
-
-  /// inputted time, position
-  TPQueue tp_buffer_;
 
   /// time, position, calculated velocity.
   TPVAQueue tpva_buffer_;

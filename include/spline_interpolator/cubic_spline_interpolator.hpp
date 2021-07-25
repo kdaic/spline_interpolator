@@ -88,6 +88,11 @@ public:
   /// - TimeOutOfRange : time is not within the range of generated spline-path
   virtual const TimePVA pop( const double& t );
 
+  /// clear target TPVAQueue (target_tpva_queue_)
+  ///       & path parameter queue (depend on each interpolator class)
+  virtual RetCode clear();
+
+
 private:
   /// Tridiagonal Matrix Equation Solver
   /// @param[in] d diagonal elements list
