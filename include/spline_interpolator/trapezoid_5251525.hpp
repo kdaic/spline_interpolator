@@ -82,7 +82,7 @@ public:
   /// @param[in] t 入力時刻
   /// @return 入力時刻のときの位置・速度・加速度
   /// @exception 軌道生成が実施されていない
-  int pop(const double& t, double& xt, double& vt, double& at);
+  const int pop(const double& t, double& xt, double& vt, double& at) const;
 
   /// 終端時刻
   /// @return 終端時刻

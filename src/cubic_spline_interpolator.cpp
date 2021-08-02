@@ -213,7 +213,7 @@ RetCode CubicSplineInterpolator::generate_path_from_pva(
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-const TimePVA CubicSplineInterpolator::pop(const double& t ) {
+const TimePVA CubicSplineInterpolator::pop(const double& t ) const {
   TimePVA empty_tpva(t);
   if( !is_path_generated_ ) {
     THROW( NotSplineGenerated,
@@ -241,6 +241,18 @@ const TimePVA CubicSplineInterpolator::pop(const double& t ) {
                      PosVelAcc(position, velocity, acceleration) );
   //
   return dest_tpva;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+RetCode CubicSplineInterpolator::clear() {
+
+  a_.clear();
+  b_.clear();
+  c_.clear();
+  d_.clear();
+
+  return SplineInterpolator::clear();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////

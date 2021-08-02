@@ -137,7 +137,12 @@ public:
   /// @exception
   /// - NotSplineGenerated : spline-path is not genrated
   /// - TimeOutOfRange : time is not within the range of generated spline-path
-  virtual const TimePVA pop( const double& t );
+  virtual const TimePVA pop( const double& t ) const;
+
+  /// clear target TPVAQueue (target_tpva_queue_)
+  ///       & path parameter queue (depend on each interpolator class)
+  virtual RetCode clear();
+
 
 private:
   /// コンストラクタにてTrapzoidConfigデータからtrapzd_trajectory_que_を生成
