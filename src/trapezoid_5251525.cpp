@@ -822,9 +822,9 @@ void Trapezoid5251525::calc_v_max_and_dT3() {
         << "   - start position(x0)=" << x0_      << std::endl
         << "   - start_velocity(v0)=" << v0_      << std::endl
         << "   - goal_position(xf)="  << xf_      << std::endl
-        << "   - goal_velocity(vf)="  << vf_      << std::endl;
-        << "   - v_limit: "           << v_limit_ << std::endl;
-        << "   - a_smoothing_rate: "  << asr_     << std::endl;
+        << "   - goal_velocity(vf)="  << vf_      << std::endl
+        << "   - v_limit: "           << v_limit_ << std::endl
+        << "   - a_smoothing_rate: "  << asr_     << std::endl
         << "   - d_smoothing_rate: "  << dsr_     << std::endl;
     std::cerr << ss1.str() << std::endl;
     throw std::runtime_error( ss1.str() );
