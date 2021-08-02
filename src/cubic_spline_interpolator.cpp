@@ -213,7 +213,7 @@ RetCode CubicSplineInterpolator::generate_path_from_pva(
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-const TimePVA CubicSplineInterpolator::pop(const double& t ) {
+const TimePVA CubicSplineInterpolator::pop(const double& t ) const {
   TimePVA empty_tpva(t);
   if( !is_path_generated_ ) {
     THROW( NotSplineGenerated,

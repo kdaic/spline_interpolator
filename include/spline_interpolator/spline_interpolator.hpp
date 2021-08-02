@@ -135,7 +135,7 @@ public:
   /// @exception
   /// - NotSplineGenerated : spline-path is not genrated
   /// - TimeOutOfRange : time is not within the range of generated spline-path
-  virtual const TimePVA pop( const double& t )=0;
+  virtual const TimePVA pop( const double& t )const = 0;
 
   /// clear target TPVAQueue (target_tpva_queue_)
   ///       & path parameter queue (depend on each interpolator class)
