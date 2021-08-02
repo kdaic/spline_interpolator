@@ -325,6 +325,14 @@ public:
   virtual ~TimeQueue() {
   };
 
+  /// Copy Constructor
+  /// @param[in] src source of copy
+  TimeQueue( const TimeQueue<T>& src ) :
+    queue_buffer_( src.queue_buffer_ ),
+    dT_queue_    ( src.dT_queue_ ),
+    total_dT_    ( src.total_dT_ ) {
+  };
+
   /// Copy operator
   /// @param[in] src TimeQueue<T> source for copy
   /// @return copied instance of TimeQueue<T>
@@ -333,10 +341,11 @@ public:
     if( src.size() < 1 ) {
       THROW( InvalidIndexAccess, "source queue size is empty." );
     }
+    TimeQueue<T> dest(src);
     this->clear();
-    queue_buffer_ = src.queue_buffer_;
-    dT_queue_     = src.dT_queue_;
-    total_dT_     = src.total_dT_;
+    queue_buffer_ = dest.queue_buffer_;
+    dT_queue_     = dest.dT_queue_;
+    total_dT_     = dest.total_dT_;
     return *this;
   };
 
@@ -487,7 +496,7 @@ public:
     return SPLINE_SUCCESS;
   };
 
-  /// Get a value at the index
+  /// Get a time-value at the index
   /// @return constant a value at the index
   /// @exception If invalid index is accessed.
   const TimeVal<T> get( const std::size_t& index ) const
@@ -499,7 +508,7 @@ public:
     return queue_buffer_.at(index);
   };
 
-  /// Get a value at the first inputted index(oldest data)
+  /// Get a time-value at the first inputted index(oldest data)
   /// @return constant a value at the first index
   /// @exception If invalid index is accessed.
   const TimeVal<T> front() const
@@ -511,7 +520,7 @@ public:
     return queue_buffer_.front();
   };
 
-  /// Get a value at the last inputted index(newest data)
+  /// Get a time-value at the last inputted index(newest data)
   /// @return constant a value at the last index
   /// @exception If invalid index is accessed.
   const TimeVal<T> back() const
@@ -524,9 +533,9 @@ public:
     return queue_buffer_.back();
   };
 
-  /// Set T value at the input-index
+  /// Set time-value (type T) at the input-index
   /// @param[in] the index for setting T data
-  /// @param[in] newval setting T new value
+  /// @param[in] newval setting TimeVal<T> new value
   /// @return setted T data
   /// - SPLINE_SUCCESS: No error
   /// - SPLINE_INVALID_INPUT_INDEX: Not exist input-index
@@ -566,6 +575,30 @@ public:
     return SPLINE_SUCCESS;
   };
 
+  /// Set an only value (type T) without time at the input-index
+  /// @param[in] the index for setting T data
+  /// @param[in] newval setting value(type T) new value
+  /// @return setted T data
+  /// - SPLINE_SUCCESS: No error
+  /// - SPLINE_INVALID_INPUT_INDEX: Not exist input-index
+  virtual RetCode set_value( const std::size_t& index,
+                             const T newval ) {
+
+    if( index < 0 || index > queue_buffer_.size() -1 ) {
+      return SPLINE_INVALID_INPUT_INDEX;
+    }
+
+    if( ( index >= 1 )
+        || ( index < queue_buffer_.size()-1 ) ) {
+      return SPLINE_INVALID_INPUT_TIME;
+    }
+    //
+    queue_buffer_.at(index).P = newval;
+    //
+    return SPLINE_SUCCESS;
+  };
+
+
   /// Clear all data of queue buffer
   void clear() {
     queue_buffer_.clear();
@@ -595,7 +628,8 @@ public:
     if( index < 0 || index > dT_queue_.size() - 1 ) {
       std::stringstream ss;
       ss << "the index=" << index
-         << " is out of range between 0<= and < dT_queue size()-1=" << (dT_queue_.size() - 1);
+         << " is out of range between 0<= and < dT_queue size()-1="
+         << (dT_queue_.size() - 1);
       THROW( InvalidIndexAccess, ss.str() );
     }
     return dT_queue_[index];
