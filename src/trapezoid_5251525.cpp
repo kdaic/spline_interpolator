@@ -435,7 +435,7 @@ void Trapezoid5251525::calc_fastest_parameter( const double& a_max,
   // tf_の時刻がtf_fastest_とほぼ同じ場合、最速軌道動作とする
   if ( (is_fastest_)
        || ((tf_ - tf_fastest_ >= 0.0) && (tf_ - tf_fastest_ <= 1.0e-12))
-       || (fabs(tf_ - tf_fastest_) <= 1.0e-15)
+       || (fabs(tf_ - tf_fastest_) <= 1.0e-14)
      ) {
 
     tf_    = (tf_ < tf_fastest_) ? tf_fastest_ : tf_;
