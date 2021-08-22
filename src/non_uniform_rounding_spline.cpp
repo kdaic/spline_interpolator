@@ -48,7 +48,9 @@ double NonUniformRoundingSpline::calculate_velocity( const TimePVA& tp0,
   double x2 = tp2.P.pos; // position
 
   if ((t1 - t0 <= 0.0) || (t2 - t1 <= 0.0)) {
-    THROW( InvalidArgumentValue, "wrong time direction." );
+    const std::string err_msg = "wrong time direction.";
+    std::cerr << err_msg << std::endl;
+    THROW( InvalidArgumentValue, err_msg );
   }
 
   double distance_01 = sqrt( (t1 - t0)*(t1 - t0) + (x1 - x0)*(x1 - x0) );
@@ -62,7 +64,9 @@ double NonUniformRoundingSpline::calculate_velocity( const TimePVA& tp0,
   // std::cout << "v  : " << dx/dt << std::endl;
 
   if (dt == 0.0) {
-    std::out_of_range("velocity is infinity (dt = 0.0).");
+    const std::string err_msg = "velocity is infinity (dt = 0.0).";
+    std::cerr << err_msg << std::endl;
+    THROW( TimeOutOfRange, err_msg );
   }
 
   return dx / dt;

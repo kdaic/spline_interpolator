@@ -216,8 +216,9 @@ RetCode CubicSplineInterpolator::generate_path_from_pva(
 const TimePVA CubicSplineInterpolator::pop(const double& t ) const {
   TimePVA empty_tpva(t);
   if( !is_path_generated_ ) {
-    THROW( NotSplineGenerated,
-           "pop data not exists -- Path has not be generated yet.");
+    const std::string err_msg = "pop data not exists -- Path has not be generated yet.";
+    std::cerr << err_msg << std::endl;
+    THROW( NotSplineGenerated, err_msg );
   }
   int index= -1;
   for ( std::size_t i=0; i < target_tpva_queue_.size(); i++ ) {
@@ -227,8 +228,9 @@ const TimePVA CubicSplineInterpolator::pop(const double& t ) const {
     }
   }
   if( index == -1 ) {
-    THROW( TimeOutOfRange,
-           "time is out of range of generated path" );
+    const std::string err_msg = "time is out of range of generated path";
+    std::cerr << err_msg << std::endl;
+    THROW( TimeOutOfRange, err_msg );
   }
   //
   double dTi    = (t - target_tpva_queue_.get(index).time);
@@ -263,10 +265,14 @@ RetCode CubicSplineInterpolator::tridiagonal_matrix_eq_solver(
           std::vector<double>& out_solved_x ) {
   out_solved_x.clear();
   if( d.size() != u.size() || d.size() != l.size() || d.size() != p.size() ) {
-    THROW( InvalidArgumentSize, "all input parmeter size must be same." );
+    const std::string err_msg = "all input parmeter size must be same.";
+    std::cerr << err_msg << std::endl;
+    THROW( InvalidArgumentSize, err_msg );
   }
   if( d.size() < 1 ) {
-    THROW( InvalidArgumentSize, "input parmeter size must be >= 1." );
+    const std::string err_msg = "input parmeter size must be >= 1.";
+    std::cerr << err_msg << std::endl;
+    THROW( InvalidArgumentSize, err_msg );
   }
   double temp;
   // first loop from top

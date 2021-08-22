@@ -300,6 +300,7 @@ const TimePVA TrapezoidalInterpolator::pop( const double& t ) const {
         << "] tf(="
         << target_tpva_queue_.get( finish_index ).time
         << ").";
+    std::cerr << ss1.str() << std::endl;
     std::out_of_range( ss1.str() );
   }
 
