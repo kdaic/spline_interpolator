@@ -141,6 +141,9 @@ public:
   ///       & path parameter queue (depend on each interpolator class)
   virtual RetCode clear();
 
+  /// Return the size of target TPVAQueue (target_tpva_queue_)
+  /// @return targt_tpva_queue_
+  virtual const std::size_t target_tpva_queue_size();
 
 protected:
   /// flag if the spline-path is generated. (default: false)
