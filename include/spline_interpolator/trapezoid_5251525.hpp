@@ -273,6 +273,9 @@ private:
   /// 最速軌道の最大速度
   double v_max_fastest_;
 
+  /// 最速軌道のdT3
+  double dT3_fastest_;
+
   /// 最速軌道の最短時間
   double tf_fastest_;
 
@@ -436,6 +439,9 @@ public:
 
   /// 最速軌道の最大速度の取得
   const double v_max_fastest() const;
+
+  /// 最速軌道のdT3の取得
+  const double dT3_fastest() const;
 
   /// 最速軌道の最短時間の取得
   const double tf_fastest() const;
