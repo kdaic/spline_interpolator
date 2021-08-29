@@ -1,6 +1,11 @@
 #include "trapezoid_5251525.hpp"
 
 // #define DEBUG_ 1
+
+#define V_EPSILON 1.0e-15
+#define X_EPSILON 1.0e-13
+#define T_EPSILON 1.0e-12
+
 #define SIGNV(a) ((a>=0) ? 1: -1)
 
 using namespace interp;
@@ -82,6 +87,7 @@ Trapezoid5251525::Trapezoid5251525(const Trapezoid5251525& src) :
   v6_( src.v6() ),
   t7_( src.t7() ),
   v_max_fastest_  ( src.v_max_fastest()  ),
+  dT3_fastest_    ( src.dT3_fastest()    ),
   tf_fastest_     ( src.tf_fastest()     ),
   is_initialized_ ( src.is_initialized() ),
   is_generated_   ( src.is_generated()   ),
@@ -138,6 +144,7 @@ Trapezoid5251525 Trapezoid5251525::operator=(const Trapezoid5251525& src) {
   this->v6_ = dest.v6();
   this->t7_ = dest.t7();
   this->v_max_fastest_  = dest.v_max_fastest();
+  this->dT3_fastest_    = dest.dT3_fastest();
   this->tf_fastest_     = dest.tf_fastest();
   this->is_initialized_ = dest.is_initialized();
   this->is_generated_   = dest.is_generated();
@@ -256,6 +263,7 @@ double Trapezoid5251525::generate_path(const double& ts, const double& tf,
   std::cout << "tf : " << tf_  << std::endl;
   std::cout << "xf : " << xf_  << std::endl;
   std::cout << "vf : " << vf_  << std::endl;
+  std::cout << std::endl;
 #endif
 
   // 2. 加速度上限値による、最速軌道の最大速度と最短時間の算出
@@ -288,6 +296,11 @@ double Trapezoid5251525::generate_path(const double& ts, const double& tf,
     // 加速度を、最短時間に対する目標移動時間の比率により、上限値と下限値の内分をとって算出
     calc_acceleration_with_ratio();
 
+#ifdef DEBUG_
+    std::cout << "a_max_ : " << a_max_ << std::endl;
+    std::cout << "d_max_ : " << d_max_ << std::endl;
+#endif
+
     // 新しい加速度による、最速軌道の最大速度と最短時間の算出
     this->calc_fastest_parameter(a_max_, d_max_);
     // 新しい加速度による、到達限界・速度反転領域の判定
@@ -303,11 +316,6 @@ double Trapezoid5251525::generate_path(const double& ts, const double& tf,
     // 5. 最大速度v_maxと等速移動時間dT3の算出
     this->calc_v_max_and_dT3();
   }
-
-#ifdef DEBUG_
-    std::cout << "a_max_ : " << a_max_ << std::endl;
-    std::cout << "d_max_ : " << d_max_ << std::endl;
-#endif
 
   // 6. 軌道パラメータを算出する
   this->set_parameter();
@@ -349,7 +357,7 @@ void Trapezoid5251525::input_check() {
     throw std::invalid_argument( ss.str() );
   }
   // 開始と終了地点が同じでかつ開始と終了の速度0.0ならば移動なしフラグを立てる
-  if ( fabs(x0_-xf_)<= 1.0e-13 && fabs(v0_)<= 1.0e-15 && fabs(vf_)<= 1.0e-15) {
+  if ( fabs(x0_-xf_)<= X_EPSILON && fabs(v0_)<= V_EPSILON && fabs(vf_)<= V_EPSILON) {
       no_movement_ = true;
 #ifdef DEBUG_
       std::cout << "no_movement_ : " << no_movement_ << std::endl;
@@ -367,19 +375,8 @@ void Trapezoid5251525::input_check() {
 double Trapezoid5251525::calc_initial_v_max_direction_sign() {
   sign_ = (xf_ - x0_ > 0) ? 1 : -1;
   // 位置が同じ場合,
-  if (fabs(x0_-xf_) <= 1.0e-13) {
-    if ( is_fastest_ ) {
-      // 最速軌道ならば,
-      // 最大速度を開始-終端速度の絶対値の大きい方の符号をとる(等しい場合は開始側の符号)
-      sign_ = ( fabs(v0_) < fabs(vf_) ) ? SIGNV(vf_) : SIGNV(v0_);
-    } else {
-      // 時間指定ならば
-      // 最大速度を開始-終端速度の絶対値の大きい方の符号の反転をとる
-      // (実際時間指定の場合、
-      //  calc_v_max_and_dT3()で最大4通りの方法で最大速度の方向を試すため、
-      //  ここでの符号によらず解は求まる)
-      sign_ = ( fabs(v0_) < fabs(vf_) ) ? -SIGNV(vf_) : -SIGNV(v0_);
-    }
+  if (fabs(x0_-xf_) <= X_EPSILON) {
+    sign_ = ( fabs(v0_) < fabs(vf_) ) ? SIGNV(vf_) : SIGNV(v0_);
   }
   return sign_;
 }
@@ -407,40 +404,39 @@ void Trapezoid5251525::calc_fastest_parameter( const double& a_max,
   std::cout << "xd_: " << xd_ << std::endl;
   std::cout << "xd_limit: " << xd_limit << std::endl;
 #endif
-  double dT3_fastest;
 
   // 最速軌道が台形か三角形かチェック
   if( fabs(v_max_fastest_) > v_limit_) {
     // 台形
     v_max_fastest_ = sign_ * v_limit_;
-    dT3_fastest = fabs( (xd_limit - xd_) / v_limit_ );
+    dT3_fastest_   = fabs( (xd_limit - xd_) / v_limit_ );
   } else {
     // 三角形
-    dT3_fastest = 0.0;
+    dT3_fastest_ = 0.0;
   }
 
   double dT1_fastest = asr_*fabs(v_max_fastest_ - v0_) / a_max;
   double dT2_fastest = (1-asr_)*fabs(v_max_fastest_ - v0_) / a_max;
   double dT4_fastest = dsr_*fabs(v_max_fastest_ - vf_) / d_max;
   double dT5_fastest = (1-dsr_)*fabs(v_max_fastest_ - vf_) / d_max;
-  tf_fastest_ = t0_ + 2*dT1_fastest + dT2_fastest + dT3_fastest + 2*dT4_fastest + dT5_fastest;
+  tf_fastest_ = t0_ + 2*dT1_fastest + dT2_fastest + dT3_fastest_ + 2*dT4_fastest + dT5_fastest;
 
 #ifdef DEBUG_
   std::cout << "is_fastest_ : " << is_fastest_ << std::endl;
   std::cout << "v_max_fastest : " << v_max_fastest_ << std::endl;
-  std::cout << "dT3_fastest : " << dT3_fastest << std::endl;
+  std::cout << "dT3_fastest : " << dT3_fastest_ << std::endl;
   std::cout << "tf_fastest : " << tf_fastest_ << std::endl;
 #endif
 
   // tf_の時刻がtf_fastest_とほぼ同じ場合、最速軌道動作とする
   if ( (is_fastest_)
-       || ((tf_ - tf_fastest_ >= 0.0) && (tf_ - tf_fastest_ <= 1.0e-12))
-       || (fabs(tf_ - tf_fastest_) <= 1.0e-14)
+       || ((tf_ - tf_fastest_ >= 0.0) && (tf_ - tf_fastest_ <= T_EPSILON))
+       || (fabs(tf_ - tf_fastest_) <= X_EPSILON)
      ) {
 
     tf_    = (tf_ < tf_fastest_) ? tf_fastest_ : tf_;
     v_max_ = v_max_fastest_;
-    dT3_   = dT3_fastest;
+    dT3_   = dT3_fastest_;
     is_fastest_ = true;
 
   } else if ( tf_ < tf_fastest_ ) {
@@ -689,44 +685,53 @@ double Trapezoid5251525::internal_calc_v_max_and_dT3(const double& signA,
   double xd = xd_;
   ret = true;
   if ( pA==0.0 && pB!=0.0 ) {
-    v_max = pC / pB;
-    dT3 = (tf_ - t0_) - signA * (1.0+asr_)*(v_max - v0_)/a_max_
-                      - signD * (1.0+dsr_)*(v_max - vf_)/d_max_;
 #ifdef DEBUG_
     std::cout << std::endl;
     std::cout << "Case 2,3" << std::endl;
 #endif
-
+    v_max = pC / pB;
+    dT3 = (tf_ - t0_) - signA * (1.0+asr_)*(v_max - v0_)/a_max_
+                      - signD * (1.0+dsr_)*(v_max - vf_)/d_max_;
   } else if (pD < 0.0 ) {
-
+#ifdef DEBUG_
+    std::cout << std::endl;
+    std::cout << "pD no solution" << std::endl;
+#endif
     if(!is_fastest_) {
       // ２次方程式の判別式が0未満で最速軌道でなければ解なしで終了
       ret = false;
     }
     v_max = v_max_fastest_;
-    dT3 = 0.0;
+    dT3   = dT3_fastest_;
 
-#ifdef DEBUG_
-    std::cout << std::endl;
-    std::cout << "pD no solution" << std::endl;
-#endif
   } else {
-    v_max = 0.5*( pB - std::sqrt(pD) )/pA;
-    dT3 = tf_ - t0_ - signA * (1.0+asr_)*(v_max - v0_)/a_max_
-                    - signD * (1.0+dsr_)*(v_max - vf_)/d_max_;
-    xd = signA*0.5*(1.0+asr_)*(v_max*v_max - v0_*v0_)/a_max_
-       + signD*0.5*(1.0+dsr_)*(v_max*v_max - vf_*vf_)/d_max_ + v_max*dT3 ;
 #ifdef DEBUG_
     std::cout << std::endl;
     std::cout << "Case 1,4" << std::endl;
 #endif
+    v_max = 0.5*( pB - std::sqrt(pD) )/pA;
+    dT3 = tf_ - t0_ - signA * (1.0+asr_)*(v_max - v0_)/a_max_
+                    - signD * (1.0+dsr_)*(v_max - vf_)/d_max_;
+    if( is_fastest_
+        && (fabs(v_max) > fabs(v_max_fastest_)) ) {
+#ifdef DEBUG_
+    std::cout << std::endl;
+    std::cout << "v_max(=" << v_max
+              << ") > v_max_fastest(=" << v_max_fastest_
+              << ")" << std::endl;
+#endif
+      v_max = v_max_fastest_;
+      dT3   = dT3_fastest_;
+    }
+    xd = signA*0.5*(1.0+asr_)*(v_max*v_max - v0_*v0_)/a_max_
+       + signD*0.5*(1.0+dsr_)*(v_max*v_max - vf_*vf_)/d_max_ + v_max*dT3 ;
   }
   // v_maxとv0_の大小関係, v_maxとvfの大小関係のパターンに
   // 当てはまらなければ解なしで終了
-  if(sign_*v_max <= -1.0e-15
+  if(sign_*v_max <= -1.0 * V_EPSILON
      || signA*(v_max - v0_) < 0.0
      || signD*(v_max - vf_) < 0.0
-     || fabs(xd - xd_) > 1.0e-12
+     || fabs(xd - xd_) > X_EPSILON
      || dT3 < 0.0) {
     ret = false;
 #ifdef DEBUG_
@@ -735,6 +740,7 @@ double Trapezoid5251525::internal_calc_v_max_and_dT3(const double& signA,
 #endif
   }
 #ifdef DEBUG_
+  std::cout << std::endl;
   std::cout << "v0 : " << v0_ << std::endl;
   std::cout << "vf : " << vf_ << std::endl;
   std::cout << "sign : " << sign_ << std::endl;
@@ -749,14 +755,14 @@ double Trapezoid5251525::internal_calc_v_max_and_dT3(const double& signA,
   std::cout << "dT3 : " << dT3 << std::endl;
   std::cout << "xd_ : " << xd_ << std::endl;
   std::cout << "xd : " << xd << std::endl;
-  std::cout << "sign_*v_max(="<<(sign_*v_max)<<") <= 1.0e-15 : "
-            << (sign_*v_max < 0.0) << std::endl;
+  std::cout << "sign_*v_max(="<<(sign_*v_max)<<") <= -"<<V_EPSILON<<" : "
+            << (sign_*v_max < -1.0*V_EPSILON) << std::endl;
   std::cout << "signA*(v_max - v0_)(="<<(signA*(v_max - v0_))<<") < 0.0 : "
             << (signA*(v_max - v0_) < 0.0) << std::endl;
   std::cout << "signD*(v_max - vf_)(="<<(signD*(v_max - vf_))<<") < 0.0 : "
             << (signD*(v_max - vf_) < 0.0) << std::endl;
-  std::cout << "fabs(xd - xd_)(="<<(fabs(xd - xd_))<< ") > 1.0e-12 : "
-            << (fabs(xd - xd_) > 1.0e-12) << std::endl;
+  std::cout << "fabs(xd - xd_)(="<<(fabs(xd - xd_))<< ") > "<< X_EPSILON<<" : "
+            << (fabs(xd - xd_) > X_EPSILON) << std::endl;
   std::cout << "dT3 < 0.0 : " << (dT3 < 0.0) << std::endl;
 #endif
   return v_max;
@@ -830,13 +836,13 @@ void Trapezoid5251525::calc_v_max_and_dT3() {
     throw std::runtime_error( ss1.str() );
   }
 
-  if (fabs(v_max_) > fabs(v_limit_)+1.0e-12) {
+  if (fabs(v_max_) > fabs(v_limit_)+V_EPSILON) {
     std::stringstream ss2;
     ss2 << std::fixed << std::setprecision(15)
         << "unreachable parameter. solved v_max(="
         << fabs(v_max_)
-        << ") exceeds v_limit+1.0e-12(="
-        << fabs(v_limit_)+1.0e-12 << ").";
+        << ") exceeds v_limit+" << V_EPSILON << "(="
+        << (fabs(v_limit_)+V_EPSILON) << ").";
     std::cerr << ss2.str() << std::endl;
     throw std::runtime_error( ss2.str() );
   }
@@ -874,33 +880,33 @@ void Trapezoid5251525::set_parameter() {
   dT_total_ = 2*dT1_ + dT2_ + dT3_ + 2*dT4_ + dT5_;
 
 #ifdef DEBUG_
-  std::cout << std::fixed << std::setprecision(8) << "dT1 : " << dT1_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "dT2 : " << dT2_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "dT3 : " << dT3_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "dT4 : " << dT4_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "dT5 : " << dT5_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "xd : " << xd_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "v0 : " << v0_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "x0 : " << x0_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "v1 : " << v1_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "x1 : " << x1_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "v2 : " << v2_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "x2 : " << x2_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "v3 : " << v3_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "x3 : " << x3_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "v6 : " << v6_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "x6 : " << x6_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "v5 : " << v5_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "x5 : " << x5_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "v4 : " << v4_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "x4 : " << x4_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "t1 : " << t1_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "t2 : " << t2_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "t3 : " << t3_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "t4 : " << t4_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "t5 : " << t5_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "t6 : " << t6_ << std::endl;
-  std::cout << std::fixed << std::setprecision(8) << "t7 : " << t7_ << std::endl;
+  std::cout << "dT1 : " << dT1_ << std::endl;
+  std::cout << "dT2 : " << dT2_ << std::endl;
+  std::cout << "dT3 : " << dT3_ << std::endl;
+  std::cout << "dT4 : " << dT4_ << std::endl;
+  std::cout << "dT5 : " << dT5_ << std::endl;
+  std::cout << "xd : " << xd_ << std::endl;
+  std::cout << "v0 : " << v0_ << std::endl;
+  std::cout << "x0 : " << x0_ << std::endl;
+  std::cout << "v1 : " << v1_ << std::endl;
+  std::cout << "x1 : " << x1_ << std::endl;
+  std::cout << "v2 : " << v2_ << std::endl;
+  std::cout << "x2 : " << x2_ << std::endl;
+  std::cout << "v3 : " << v3_ << std::endl;
+  std::cout << "x3 : " << x3_ << std::endl;
+  std::cout << "v6 : " << v6_ << std::endl;
+  std::cout << "x6 : " << x6_ << std::endl;
+  std::cout << "v5 : " << v5_ << std::endl;
+  std::cout << "x5 : " << x5_ << std::endl;
+  std::cout << "v4 : " << v4_ << std::endl;
+  std::cout << "x4 : " << x4_ << std::endl;
+  std::cout << "t1 : " << t1_ << std::endl;
+  std::cout << "t2 : " << t2_ << std::endl;
+  std::cout << "t3 : " << t3_ << std::endl;
+  std::cout << "t4 : " << t4_ << std::endl;
+  std::cout << "t5 : " << t5_ << std::endl;
+  std::cout << "t6 : " << t6_ << std::endl;
+  std::cout << "t7 : " << t7_ << std::endl;
 #endif
 
 }
@@ -995,7 +1001,7 @@ const int Trapezoid5251525::pop(const double& t, double& xt, double& vt, double&
 
     at = signD_ * (-d_max_);
 
-  } else if ( t6_ <= t && t <= t7_+1.0e-12) {
+  } else if ( t6_ <= t && t <= t7_+T_EPSILON) {
     // Step7
     xt = signD_ * (-0.1) * d_max_/(dT4_ * dT4_ * dT4_)
           * (t-t6_) * (t-t6_) * (t-t6_) * (t-t6_) * (t-t6_)
@@ -1020,7 +1026,7 @@ const int Trapezoid5251525::pop(const double& t, double& xt, double& vt, double&
     std::stringstream ss1;
     ss1 << std::fixed << std::setprecision(15);
     ss1 << "time value is out of range between t0(=" << t0_
-        << ") and tf(t7)+1.0e-12(=" << t7_+1.0e-12 << ").";
+        << ") and tf(t7)+"<<T_EPSILON<<"(=" << t7_+T_EPSILON << ").";
     std::cerr << ss1.str() << std::endl;
     throw std::out_of_range( ss1.str() );
   }
@@ -1080,6 +1086,7 @@ const double Trapezoid5251525::x6() const { return x6_; }
 const double Trapezoid5251525::v6() const { return v6_; }
 const double Trapezoid5251525::t7() const { return t7_; }
 const double Trapezoid5251525::v_max_fastest() const { return v_max_fastest_;   }
+const double Trapezoid5251525::dT3_fastest()   const { return dT3_fastest_;     }
 const double Trapezoid5251525::tf_fastest()    const { return tf_fastest_;      }
 const bool Trapezoid5251525::is_initialized()  const { return is_initialized_;  }
 const bool Trapezoid5251525::is_generated()    const { return is_generated_;    }
