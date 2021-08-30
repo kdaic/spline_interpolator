@@ -106,6 +106,8 @@ RetCode SplineInterpolator::clear() {
 
   target_tpva_queue_.clear();
 
+  is_path_generated_ = false;
+
   return SPLINE_SUCCESS;
 }
 
