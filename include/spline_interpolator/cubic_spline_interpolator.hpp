@@ -2,6 +2,9 @@
 #define INCLDE_CUBIC_SPLINE_INTERPOLATOR_
 #include "spline_interpolator.hpp"
 
+#include <sstream>
+#include <iomanip>
+
 namespace interp{
 /// Cubic Spline Interpolator
 /// @brief parameters are kept internally.

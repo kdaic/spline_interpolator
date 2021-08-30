@@ -123,7 +123,7 @@ RetCode CubicSplineInterpolator::generate_path(
   for ( std::size_t i=0; i < finish_index; i++ ) {
     inverse_dT = 1.0 / target_tp_queue.dT(i);
     //
-    double dp = target_tp_queue.get(i+1).value - target_tp_queue.get(i).value;
+    const double dp = target_tp_queue.get(i+1).value - target_tp_queue.get(i).value;
     //
     a_.push_back( ( (c_[i+1] + c_[i]) * target_tp_queue.dT(i) - 2.0 * dp )
                   * inverse_dT * inverse_dT * inverse_dT );
@@ -214,34 +214,60 @@ RetCode CubicSplineInterpolator::generate_path_from_pva(
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 const TimePVA CubicSplineInterpolator::pop(const double& t ) const {
-  TimePVA empty_tpva(t);
+
   if( !is_path_generated_ ) {
-    const std::string err_msg = "pop data not exists -- Path has not be generated yet.";
+    const std::string err_msg = "pop data does not exist -- Path has not be generated yet.";
     std::cerr << err_msg << std::endl;
     THROW( NotSplineGenerated, err_msg );
   }
-  int index= -1;
-  for ( std::size_t i=0; i < target_tpva_queue_.size(); i++ ) {
-    if( target_tpva_queue_.get(i).time <= t  && t <= target_tpva_queue_.get(i+1).time ) {
-      index = i;
+
+  const std::size_t& target_tpva_queue_size = target_tpva_queue_.size();
+  if ( target_tpva_queue_size == 0 )
+  {
+    std::stringstream ss0;
+    ss0 << "Failed to pop a point from Trapezoid5251525 trajectory. "
+        << "The size of target_tpva_queue is zero.";
+    std::cerr << ss0.str() << std::endl;
+    THROW( QueueSizeEmpty, ss0.str() );
+  }
+
+  std::size_t index    = 0;
+  bool is_out_of_range = true;
+
+  for ( std::size_t idx=0; idx < target_tpva_queue_size; idx++ ) {
+    if( target_tpva_queue_.get( idx ).time <= t
+        && t <= target_tpva_queue_.get( idx+1 ).time ) {
+      index           = idx;
+      is_out_of_range = false;
       break;
     }
   }
-  if( index == -1 ) {
-    const std::string err_msg = "time is out of range of generated path";
-    std::cerr << err_msg << std::endl;
-    THROW( TimeOutOfRange, err_msg );
+
+  if( is_out_of_range ) {
+    std::stringstream ss1;
+    const std::size_t finish_index = target_tpva_queue_size - 1;
+    ss1 << std::fixed << std::setprecision(15);
+    ss1 << "time value = "
+        << t
+        << " is out of range of generated path between time of start index[0] t0(="
+        << target_tpva_queue_.get( 0 ).time
+        << ") and time of finish index["
+        << finish_index
+        << "] tf(="
+        << target_tpva_queue_.get( finish_index ).time
+        << ").";
+    std::cerr << ss1.str() << std::endl;
+    THROW( TimeOutOfRange, ss1.str() );
   }
-  //
-  double dTi    = (t - target_tpva_queue_.get(index).time);
-  double square = dTi * dTi;
-  double cube   = dTi * dTi * dTi;
-  double position = a_[index] * cube + b_[index] * square + c_[index] * dTi + d_[index];
-  double velocity = 3.0 * a_[index] * square + 2.0 * b_[index] * dTi + c_[index];
-  double acceleration = 6.0 * a_[index] * dTi + 2.0 * b_[index];
-  TimePVA dest_tpva( t,
-                     PosVelAcc(position, velocity, acceleration) );
-  //
+
+  const double dTi    = (t - target_tpva_queue_.get(index).time);
+  const double square = dTi * dTi;
+  const double cube   = dTi * dTi * dTi;
+  const double xt     = a_[index] * cube + b_[index] * square + c_[index] * dTi + d_[index];
+  const double vt     = 3.0 * a_[index] * square + 2.0 * b_[index] * dTi + c_[index];
+  const double at     = 6.0 * a_[index] * dTi + 2.0 * b_[index];
+  const TimePVA dest_tpva( t, PosVelAcc(xt, vt, at) );
+
   return dest_tpva;
 }
 

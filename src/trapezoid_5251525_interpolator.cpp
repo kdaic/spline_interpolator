@@ -220,9 +220,10 @@ RetCode TrapezoidalInterpolator::generate_path(
     target_goal = target_TimePVA_queue.pop();
     //
     Trapezoid5251525& ref_trapzd = trapzd_trajectory_que_.at( trajectory_idx );
-    double dT_total = ref_trapzd.generate_path( target_start.time,  target_goal.time,
-                                                target_start.P.pos, target_goal.P.pos,
-                                                target_start.P.vel, target_goal.P.vel );
+    const double dT_total =
+                   ref_trapzd.generate_path( target_start.time,  target_goal.time,
+                                             target_start.P.pos, target_goal.P.pos,
+                                             target_start.P.vel, target_goal.P.vel );
     if( dT_total < 0.0 )
     {
       // 移動なしフラグが立っていればスルー、そうでなければエラー
@@ -250,9 +251,9 @@ RetCode TrapezoidalInterpolator::generate_path_from_pva(
   }
 
   Trapezoid5251525& ref_trapzd = trapzd_trajectory_que_.at(0);
-  double dT_total = ref_trapzd.generate_path( 0.0,  0.0,
-                                              xs,   xf,
-                                              vs,   vf  );
+  const double dT_total = ref_trapzd.generate_path( 0.0,  0.0,
+                                                    xs,   xf,
+                                                    vs,   vf  );
   if( dT_total < 0.0 )
   {
     // 移動なしフラグが立っていればスルー、そうでなければエラー
@@ -273,27 +274,43 @@ RetCode TrapezoidalInterpolator::generate_path_from_pva(
 
 
 const TimePVA TrapezoidalInterpolator::pop( const double& t ) const {
-  double xt, vt, at;
+
+  if( !is_path_generated_ ) {
+    const std::string err_msg = "pop data does not exist -- Path has not be generated yet.";
+    std::cerr << err_msg << std::endl;
+    THROW( NotSplineGenerated, err_msg );
+  }
+
+  const std::size_t& target_tpva_queue_size = target_tpva_queue_.size();
+  if ( target_tpva_queue_size == 0 )
+  {
+    std::stringstream ss0;
+    ss0 << "Failed to pop a point from Trapezoid5251525 trajectory. "
+        << "The size of target_tpva_queue is zero.";
+    std::cerr << ss0.str() << std::endl;
+    THROW( QueueSizeEmpty, ss0.str() );
+  }
+
   std::size_t trajectory_idx = 0;
   bool is_out_of_range       = true;
 
-  for( std::size_t idx=0; idx<target_tpva_queue_.size() - 1; idx++) {
-
+  for( std::size_t idx=0; idx<target_tpva_queue_size - 1; idx++) {
     if( target_tpva_queue_.get( idx ).time <= t
         && t <= target_tpva_queue_.get( idx+1 ).time ) {
-      trajectory_idx = idx;
-      is_out_of_range  = false;
+      trajectory_idx  = idx;
+      is_out_of_range = false;
+      break;
     }
   }
 
   if( is_out_of_range )
   {
     std::stringstream ss1;
-    std::size_t finish_index = target_tpva_queue_.size() - 1;
+    const std::size_t finish_index = target_tpva_queue_size - 1;
     ss1 << std::fixed << std::setprecision(15);
     ss1 << "time value = "
         << t
-        << " is out of range between time of start index[0] t0(="
+        << " is out of range of generated path between time of start index[0] t0(="
         << target_tpva_queue_.get( 0 ).time
         << ") and time of finish index["
         << finish_index
@@ -301,13 +318,14 @@ const TimePVA TrapezoidalInterpolator::pop( const double& t ) const {
         << target_tpva_queue_.get( finish_index ).time
         << ").";
     std::cerr << ss1.str() << std::endl;
-    std::out_of_range( ss1.str() );
+    THROW( TimeOutOfRange, ss1.str() );
   }
 
+  double xt, vt, at;
   trapzd_trajectory_que_[trajectory_idx].pop( t, xt, vt, at );
-  TimePVA ret( t, PosVelAcc( xt, vt, at ) );
+  const TimePVA dest_tpva( t, PosVelAcc( xt, vt, at ) );
 
-  return ret;
+  return dest_tpva;
 }
 
 

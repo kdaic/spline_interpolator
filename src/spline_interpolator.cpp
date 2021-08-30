@@ -106,9 +106,11 @@ RetCode SplineInterpolator::clear() {
 
   target_tpva_queue_.clear();
 
+  is_path_generated_ = false;
+
   return SPLINE_SUCCESS;
 }
 
-const std::size_t SplineInterpolator::target_tpva_queue_size() {
+const std::size_t SplineInterpolator::target_tpva_queue_size() const {
   return target_tpva_queue_.size();
 }
