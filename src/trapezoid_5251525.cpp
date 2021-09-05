@@ -684,7 +684,8 @@ double Trapezoid5251525::internal_calc_v_max_and_dT3(const double& signA,
   double v_max;
   double xd = xd_;
   ret = true;
-  if ( pA==0.0 && pB!=0.0 ) {
+  // pA==0 && pB!=0
+  if ( fabs(pA) < V_EPSILON && fabs(pB)>V_EPSILON ) {
 #ifdef DEBUG_
     std::cout << std::endl;
     std::cout << "Case 2,3" << std::endl;
