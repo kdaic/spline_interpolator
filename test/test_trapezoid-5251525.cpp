@@ -158,7 +158,8 @@ public:
       // データログ出力
       test_gp.dump_csv( interp_path_tpva,
                         output_path_,
-                        index );
+                        index,
+                        label_ );
 
       // グラフプロット
       test_gp.plot_tp_tv_pv(target_tpva,
@@ -627,7 +628,79 @@ TEST(TrackingTest, reachable4) {
 
 }
 
+/// @test
+TEST(TrackingTest, reachable5)
+{
+  std::string outdir = "images/trapezoid-5251525/reachable5";
+   // ディレクトリ作成
+  std::string mkdir_cmd = "mkdir -p " + outdir;
+  FILE* mkdir = popen( mkdir_cmd.c_str(), "re" );
+  pclose(mkdir);
+  // 既に存在する画像を削除
+  std::string rmdir_cmd = "rm_-f " + outdir + "/*.png";
+  FILE* rm_time_position_images = popen(rmdir_cmd.c_str(), "re");
+  pclose(rm_time_position_images);
 
+  // 開始-目標到達の軌道セット
+  std::vector<TimePVA> start_set;
+  std::vector<TimePVA> goal_set;
+  // 軌道１セット分の開始点
+  TimePVA start;
+  // 軌道１セット分の目標到達点
+  TimePVA goal;
+
+  // 1.
+  start.time  = 0.0;
+  start.P.pos = 1.0;
+  start.P.vel = 0.0;
+  start_set.push_back(start);
+  goal.time  = 0.0;
+  goal.P.pos = 0.996194698091746;
+  goal.P.vel = -0.081634405782459;
+  goal_set.push_back(goal);
+
+  // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
+  PlotPtoPGraph plot_ptop_graph( outdir,
+                                 0.0001,              // cycle
+                                 44.710896029548501,  // acc_limit
+                                 44.710896029548621,  // dec_limit
+                                 1.507059421063559,  // v_limit
+                                 0.00,               // smoothing_rate
+                                 "test01-");         // label
+
+  // 軌道生成＆グラフ出力
+  plot_ptop_graph.plot(start_set, goal_set);
+
+  // -----------------------------------------------
+  start_set.clear();
+  goal_set.clear();
+
+  // 2.
+  start.time  = 0.0;
+  start.P.pos = 1.0;
+  start.P.vel = 0.0;
+  start_set.push_back(start);
+  goal.time  = 0.092896849441572;
+  goal.P.pos = 0.996194698091746;
+  goal.P.vel = -0.081634405782459;
+  goal_set.push_back(goal);
+
+  // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
+  PlotPtoPGraph plot_ptop_graph2( outdir,
+                                  0.0001,              // cycle
+                                  44.710896029548501,  // acc_limit
+                                  44.710896029548621,  // dec_limit
+                                  1.507059421063559,  // v_limit
+                                  0.00,               // smoothing_rate
+                                  "test02-");         // label
+
+  // 軌道生成＆グラフ出力
+  plot_ptop_graph2.plot(start_set, goal_set);
+
+  // -----------------------------------------------
+  start_set.clear();
+  goal_set.clear();
+}
 
 
 /// @test 速度リミット @n
