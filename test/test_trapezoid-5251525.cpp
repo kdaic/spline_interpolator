@@ -72,19 +72,23 @@ public:
   /// @param dec_limit 最大減速度リミット(デフォルト:1200)
   /// @param vel_limit 最大速度リミット(デフォルト:170)
   /// @param smoothing_rate 丸め率(デフォルト:0.8)
+  /// @param file_label ファイル名に付けるラベル
+  /// @param pva_label  ファイル名に付ける位置・速度・加速度の要素ラベル
   PlotPtoPGraph(const std::string& output_path="./",
                 const double cycle=0.05,
                 const double acc_limit=1200,
                 const double dec_limit=1200,
                 const double vel_limit=170,
                 const double smoothing_rate=0.8,
-                const std::string& label= "") :
+                const std::string& prefix_file_label= "",
+                const std::string& prefix_pva_label = "") :
     output_path_(output_path),
     cycle_(cycle),
     acc_limit_(acc_limit), dec_limit_(dec_limit),
     vel_limit_(vel_limit),
     smoothing_rate_(smoothing_rate),
-    label_(label) {};
+    prefix_file_label_(prefix_file_label),
+    prefix_pva_label_(prefix_pva_label) {};
 
   /// デストラクタ
   ~PlotPtoPGraph(){};
@@ -158,7 +162,9 @@ public:
       // データログ出力
       test_gp.dump_csv( interp_path_tpva,
                         output_path_,
-                        index );
+                        index,
+                        prefix_file_label_,
+                        prefix_pva_label_ );
 
       // グラフプロット
       test_gp.plot_tp_tv_pv(target_tpva,
@@ -170,7 +176,8 @@ public:
                             gpserver_set_list_tp,
                             gpserver_set_list_tv,
                             gpserver_set_list_pv,
-                            label_
+                            prefix_file_label_,
+                            prefix_pva_label_
                             );
 
       // PtoP ２点間１セットごとにクリア
@@ -192,8 +199,11 @@ public:
   const double vel_limit_;
   /// 丸め率
   const double smoothing_rate_;
-  /// ラベル
-  const std::string label_;
+  /// ファイル名に付けるラベル
+  const std::string prefix_file_label_;
+  /// ファイル名に付ける位置・速度・加速度の要素ラベル
+  const std::string prefix_pva_label_;
+
 };
 
 
@@ -532,7 +542,7 @@ TEST(TrackingTest, reachable4) {
                                 0.921556254253312,  // dec_limit
                                 0.131365013138030,  // v_limit
                                 0.00,               // smoothing_rate
-                                "test01-");         // label
+                                "test01-");         // filelabel
   // ディレクトリ作成
   FILE* mkdir = popen("mkdir -p images/trapezoid-5251525/reachable4", "re");
   pclose(mkdir);
@@ -566,7 +576,7 @@ TEST(TrackingTest, reachable4) {
                                  5.401846602816129,  // dec_limit
                                  2.400179894310761,  // v_limit
                                  0.00,               // smoothing_rate
-                                 "test02-01-");      // label
+                                 "test02-01-");      // filelabel
 
   // 軌道生成＆グラフ出力
   plot_ptop_graph3_01.plot(start_set, goal_set);
@@ -593,7 +603,7 @@ TEST(TrackingTest, reachable4) {
                                  0.296208475089815,  // dec_limit
                                  2.254393935200920,  // v_limit
                                  0.00,               // smoothing_rate
-                                 "test02-02-");      // label
+                                 "test02-02-");      // filelabel
 
   // 軌道生成＆グラフ出力
   plot_ptop_graph3_02.plot(start_set, goal_set);
@@ -620,14 +630,86 @@ TEST(TrackingTest, reachable4) {
                                  33.675645289374003, // dec_limit
                                  2.400179894310761,  // v_limit
                                  0.00,               // smoothing_rate
-                                 "test03-");         // label
+                                 "test03-");         // filelabel
 
   // 軌道生成＆グラフ出力
   plot_ptop_graph6.plot(start_set, goal_set);
 
 }
 
+/// @test
+TEST(TrackingTest, reachable5)
+{
+  std::string outdir = "images/trapezoid-5251525/reachable5";
+   // ディレクトリ作成
+  std::string mkdir_cmd = "mkdir -p " + outdir;
+  FILE* mkdir = popen( mkdir_cmd.c_str(), "re" );
+  pclose(mkdir);
+  // 既に存在する画像を削除
+  std::string rmdir_cmd = "rm_-f " + outdir + "/*.png";
+  FILE* rm_time_position_images = popen(rmdir_cmd.c_str(), "re");
+  pclose(rm_time_position_images);
 
+  // 開始-目標到達の軌道セット
+  std::vector<TimePVA> start_set;
+  std::vector<TimePVA> goal_set;
+  // 軌道１セット分の開始点
+  TimePVA start;
+  // 軌道１セット分の目標到達点
+  TimePVA goal;
+
+  // 1.
+  start.time  = 0.0;
+  start.P.pos = 1.0;
+  start.P.vel = 0.0;
+  start_set.push_back(start);
+  goal.time  = 0.0;
+  goal.P.pos = 0.996194698091746;
+  goal.P.vel = -0.081634405782459;
+  goal_set.push_back(goal);
+
+  // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
+  PlotPtoPGraph plot_ptop_graph( outdir,
+                                 0.0001,              // cycle
+                                 44.710896029548501,  // acc_limit
+                                 44.710896029548621,  // dec_limit
+                                 1.507059421063559,  // v_limit
+                                 0.00,               // smoothing_rate
+                                 "test01-");         // filelabel
+
+  // 軌道生成＆グラフ出力
+  plot_ptop_graph.plot(start_set, goal_set);
+
+  // -----------------------------------------------
+  start_set.clear();
+  goal_set.clear();
+
+  // 2.
+  start.time  = 0.0;
+  start.P.pos = 1.0;
+  start.P.vel = 0.0;
+  start_set.push_back(start);
+  goal.time  = 0.092896849441572;
+  goal.P.pos = 0.996194698091746;
+  goal.P.vel = -0.081634405782459;
+  goal_set.push_back(goal);
+
+  // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
+  PlotPtoPGraph plot_ptop_graph2( outdir,
+                                  0.0001,              // cycle
+                                  44.710896029548501,  // acc_limit
+                                  44.710896029548621,  // dec_limit
+                                  1.507059421063559,  // v_limit
+                                  0.00,               // smoothing_rate
+                                  "test02-");         // filelabel
+
+  // 軌道生成＆グラフ出力
+  plot_ptop_graph2.plot(start_set, goal_set);
+
+  // -----------------------------------------------
+  start_set.clear();
+  goal_set.clear();
+}
 
 
 /// @test 速度リミット @n
@@ -819,6 +901,7 @@ TEST(TrackingTest, random_plot) {
                             gpserver_set_list_tp,
                             gpserver_set_list_tv,
                             gpserver_set_list_pv,
+                            "",
                             "",
                             true
                            );
@@ -1047,7 +1130,7 @@ TEST(TrackingTest, plot_xy) {
                      interp_path_pos_x,
                      interp_path_pos_y,
                      output_dir_xy,
-                     "xy_",
+                     "xy",
                      index,
                      gpserver_set_list_xy,
                      "x-position",
@@ -1108,6 +1191,7 @@ TEST(TrackingTest, plot_xy) {
                                gpserver_set_list_tp,
                                gpserver_set_list_tv,
                                gpserver_set_list_pv,
+                               "",
                                prefix_pva_label
                               );
         gpserver_set_list_tp.clear();
