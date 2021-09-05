@@ -21,19 +21,21 @@ public:
   };
 
   /// dump csv as "{path_index}_time_position_velocity.csv"
-  /// @param[in] interp_path_tpva plotting interpolated path
-  ///                             of time-position-velocity-acceleration with cycletime dT.
-  ///                             (ts,     path(s)),
-  ///                             (ts+dT,  path(ts+dT)),
-  ///                             (ts+2dT, path(ts+2dT)),
-  ///                             ... ,
-  ///                             (tf,     path(tf))
-  /// @param[in] output_dir       destination directory of plotted graph image(.png)
-  /// @param[in] path_index       prefix index of destination path of plotted graph
-  /// @param[in] prefix_pva_label prefix label of destination path of plotted graph
+  /// @param[in] interp_path_tpva  plotting interpolated path
+  ///                              of time-position-velocity-acceleration with cycletime dT.
+  ///                              (ts,     path(s)),
+  ///                              (ts+dT,  path(ts+dT)),
+  ///                              (ts+2dT, path(ts+2dT)),
+  ///                              ... ,
+  ///                              (tf,     path(tf))
+  /// @param[in] output_dir        destination directory of plotted csv
+  /// @param[in] path_index        prefix index of destination path of plotted csv
+  /// @param[in] prefix_file_label prefix file label of destionation path of plotted csv
+  /// @param[in] prefix_pva_label  prefix pva element label of destination path of plotted csv
   void dump_csv( const TPVAQueue& interp_path_tpva,
                  const std::string& output_dir="./",
                  const int path_index = 0,
+                 const std::string& prefix_file_label = "",
                  const std::string& prefix_pva_label = "" ) {
 
     // input character into the graph
@@ -45,7 +47,10 @@ public:
            << "/"
            << std::setfill('0')
            << std::setw(4)
-           << path_index << "_time_"<< prefix_pva_label <<"position_velocity_acceleration.csv";
+           << path_index
+           << "_"
+           << prefix_file_label
+           << "time-"<< prefix_pva_label <<"position-velocity-acceleration.csv";
 
     std::ofstream ofstrm( numstr.str().c_str(), std::ios::out );
     if (ofstrm.fail()) {
@@ -83,24 +88,27 @@ public:
   ~TestGraphPlot() {};
 
   /// dump csv as "{path_index}_time_position_velocity.csv"
-  /// @param[in] interp_path_tpva plotting interpolated path
-  ///                             of time-position-velocity-acceleration with cycletime dT.
-  ///                             (ts,     path(s)),
-  ///                             (ts+dT,  path(ts+dT)),
-  ///                             (ts+2dT, path(ts+2dT)),
-  ///                             ... ,
-  ///                             (tf,     path(tf))
-  /// @param[in] output_dir       destination directory of plotted graph image(.png)
-  /// @param[in] path_index       prefix index of destination path of plotted graph
-  /// @param[in] prefix_pva_label prefix label of destination path of plotted graph
+  /// @param[in] interp_path_tpva  plotting interpolated path
+  ///                              of time-position-velocity-acceleration with cycletime dT.
+  ///                              (ts,     path(s)),
+  ///                              (ts+dT,  path(ts+dT)),
+  ///                              (ts+2dT, path(ts+2dT)),
+  ///                              ... ,
+  ///                              (tf,     path(tf))
+  /// @param[in] output_dir        destination directory of plotted graph image(.png)
+  /// @param[in] path_index        prefix index of destination path of plotted graph
+  /// @param[in] prefix_file_label prefix file label of destionation path of plotted csv
+  /// @param[in] prefix_pva_label  prefix label of destination path of plotted graph
   void dump_csv( const TPVAQueue& interp_path_tpva,
                  const std::string& output_dir="./",
                  const int path_index = 0,
+                 const std::string& prefix_file_label = "",
                  const std::string& prefix_pva_label = "" ) {
 
     test_dump_.dump_csv( interp_path_tpva,
                          output_dir,
                          path_index,
+                         prefix_file_label,
                          prefix_pva_label );
   };
 
