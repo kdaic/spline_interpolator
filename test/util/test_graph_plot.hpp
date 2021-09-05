@@ -103,7 +103,7 @@ public:
                  const std::string& output_dir="./",
                  const int path_index = 0,
                  const std::string& prefix_file_label = "",
-                 const std::string& prefix_pva_label = "" ) {
+                 const std::string& prefix_pva_label  = "" ) {
 
     test_dump_.dump_csv( interp_path_tpva,
                          output_dir,
@@ -113,26 +113,28 @@ public:
   };
 
   /// plot time-position, time-velocity, position-velocity graph (overload)
-  /// @param[in] target_tp        plotting target time-position data
-  ///                             (ts, target_tp_s),
-  ///                             (t1, target_tp_1),
-  ///                             ... ,
-  ///                             (tf, target_tp_f)
-  /// @param[in] interp_path_tpva plotting interpolated path
-  ///                             of time-position-velocity-acceleration with cycletime dT.
-  ///                             (ts,     path(s)),
-  ///                             (ts+dT,  path(ts+dT)),
-  ///                             (ts+2dT, path(ts+2dT)),
-  ///                             ... ,
-  ///                             (tf,     path(tf))
-  /// @param[in] output_dir       destination path of plotted graph image(.png)
-  /// @param[in] path_index       prefix index of destination path of plotted graph
-  /// @param[in] prefix_pva_label prefix label of destination path of plotted graph
+  /// @param[in] target_tp         plotting target time-position data
+  ///                              (ts, target_tp_s),
+  ///                              (t1, target_tp_1),
+  ///                              ... ,
+  ///                              (tf, target_tp_f)
+  /// @param[in] interp_path_tpva  plotting interpolated path
+  ///                              of time-position-velocity-acceleration with cycletime dT.
+  ///                              (ts,     path(s)),
+  ///                              (ts+dT,  path(ts+dT)),
+  ///                              (ts+2dT, path(ts+2dT)),
+  ///                              ... ,
+  ///                              (tf,     path(tf))
+  /// @param[in] output_dir        destination path of plotted graph image(.png)
+  /// @param[in] path_index        prefix index of destination path of plotted graph
+  /// @param[in] prefix_file_label prefix file label of destionation path of plotted csv
+  /// @param[in] prefix_pva_label  prefix label of destination path of plotted graph
   void plot_tp_tv_pv( const TPQueue&     target_tp,
                       const TPVAQueue&   interp_path_tpva,
                       const std::string& output_dir="./",
                       const int          path_index = 0,
-                      const std::string& prefix_pva_label = ""
+                      const std::string& prefix_file_label = "",
+                      const std::string& prefix_pva_label  = ""
                      ) {
 
     TPVAQueue target_tpva;
@@ -150,31 +152,34 @@ public:
                    empty_list,
                    empty_list,
                    empty_list,
+                   prefix_file_label,
                    prefix_pva_label,
                    false );
   };
 
   /// plot time-position, time-velocity, position-velocity graph
-  /// @param[in] target_tpva      plotting target time-position-velocity data
-  ///                             (ts, target_tpva_s),
-  ///                             (t1, target_tpva_1),
+  /// @param[in] target_tpva       plotting target time-position-velocity data
+  ///                              (ts, target_tpva_s),
+  ///                              (t1, target_tpva_1),
+  ///                               ... ,
+  ///                              (tf, target_tpva_f)
+  /// @param[in] interp_path_tpva  plotting interpolated path
+  ///                              of time-position-velocity with cycletime dT.
+  ///                              (ts,     path(s)),
+  ///                              (ts+dT,  path(ts+dT)),
+  ///                              (ts+2dT, path(ts+2dT)),
   ///                              ... ,
-  ///                             (tf, target_tpva_f)
-  /// @param[in] interp_path_tpva plotting interpolated path
-  ///                             of time-position-velocity with cycletime dT.
-  ///                             (ts,     path(s)),
-  ///                             (ts+dT,  path(ts+dT)),
-  ///                             (ts+2dT, path(ts+2dT)),
-  ///                             ... ,
-  ///                             (tf,     path(tf))
-  /// @param[in] output_dir_tp    destination path of time-position graph image(.png)
-  /// @param[in] output_dir_tv    destination path of time-velocity graph image(.png)
-  /// @param[in] output_dir_pv    destination path of position-velocity graph image(.png)
-  /// @param[in] path_index       prefix index of destination path of plotted graph
-  /// @param[in] gp_set_list_tp   gnuplot set options before plot for time-position graph.
-  /// @param[in] gp_set_list_tv   gnuplot set options before plot for time-position graph.
-  /// @param[in] gp_set_list_pv   gnuplot set options before plot for position-velocity graph.
-  /// @param[in] is_target_vel    wether target velocity data exists. default: true(exists)
+  ///                              (tf,     path(tf))
+  /// @param[in] output_dir_tp     destination path of time-position graph image(.png)
+  /// @param[in] output_dir_tv     destination path of time-velocity graph image(.png)
+  /// @param[in] output_dir_pv     destination path of position-velocity graph image(.png)
+  /// @param[in] path_index        prefix index of destination path of plotted graph
+  /// @param[in] gp_set_list_tp    gnuplot set options before plot for time-position graph.
+  /// @param[in] gp_set_list_tv    gnuplot set options before plot for time-position graph.
+  /// @param[in] gp_set_list_pv    gnuplot set options before plot for position-velocity graph.
+  /// @param[in] prefix_file_label prefix file label of destionation path of plotted csv
+  /// @param[in] prefix_pva_label  prefix label of destination path of plotted graph
+  /// @param[in] is_target_vel     wether target velocity data exists. default: true(exists)
   /// @details generate path of each set
   /// plot graph of time-position, time-velocity, position-velocity \n
   void plot_tp_tv_pv(
@@ -187,7 +192,8 @@ public:
          const std::vector<std::string>& gp_set_list_tp = std::vector<std::string>(),
          const std::vector<std::string>& gp_set_list_tv = std::vector<std::string>(),
          const std::vector<std::string>& gp_set_list_pv = std::vector<std::string>(),
-         const std::string& prefix_pva_label = "",
+         const std::string& prefix_file_label = "",
+         const std::string& prefix_pva_label  = "",
          bool  is_target_vel=true
        ) {
 
@@ -206,33 +212,36 @@ public:
                    gp_set_list_tp,
                    gp_set_list_tv,
                    gp_set_list_pv,
+                   prefix_file_label,
                    prefix_pva_label,
                    is_target_vel );
   };
 
 
   /// plot time-position, time-velocity, position-velocity graph
-  /// @param[in] target_tpva      plotting target time-position-velocity data
-  ///                             (ts, target_tpva[0]_s), (ts, target_tpva[1]_s),
-  ///                             (t1, target_tpva[0]_1), (t1, target_tpva[1]_1),
-  ///                              ... ,
-  ///                             (tf, target_tpva[0]_f), (tf, target_tpva[1]_f),
+  /// @param[in] target_tpva       plotting target time-position-velocity data
+  ///                              (ts, target_tpva[0]_s), (ts, target_tpva[1]_s),
+  ///                              (t1, target_tpva[0]_1), (t1, target_tpva[1]_1),
+  ///                               ... ,
+  ///                              (tf, target_tpva[0]_f), (tf, target_tpva[1]_f),
   ///
-  /// @param[in] interp_path_tpva plotting interpolated path
-  ///                             of time-position-velocity with cycletime dT.
-  ///                             (ts,     path[0](ts)),     (ts,     path[1]](ts)),
-  ///                             (ts+dT,  path[0](ts+dT)),  (ts+dT,  path[1]](ts+dT)),
-  ///                             (ts+2dT, path[0](ts+2dT)), (ts+2dT, path[1](ts+2dT)),
-  ///                             ... ,
-  ///                             (tf,     path[0](tf)),     (tf,     path[1](tf))
-  /// @param[in] output_dir_tp    destination path of time-position graph image(.png)
-  /// @param[in] output_dir_tv    destination path of time-velocity graph image(.png)
-  /// @param[in] output_dir_pv    destination path of position-velocity graph image(.png)
-  /// @param[in] path_index       prefix index of destination path of plotted graph
-  /// @param[in] gp_set_list_tp   gnuplot set options before plot for time-position graph.
-  /// @param[in] gp_set_list_tv   gnuplot set options before plot for time-position graph.
-  /// @param[in] gp_set_list_pv   gnuplot set options before plot for position-velocity graph.
-  /// @param[in] is_target_vel    wether target velocity data exists. default: true(exists)
+  /// @param[in] interp_path_tpva  plotting interpolated path
+  ///                              of time-position-velocity with cycletime dT.
+  ///                              (ts,     path[0](ts)),     (ts,     path[1]](ts)),
+  ///                              (ts+dT,  path[0](ts+dT)),  (ts+dT,  path[1]](ts+dT)),
+  ///                              (ts+2dT, path[0](ts+2dT)), (ts+2dT, path[1](ts+2dT)),
+  ///                              ... ,
+  ///                              (tf,     path[0](tf)),     (tf,     path[1](tf))
+  /// @param[in] output_dir_tp     destination path of time-position graph image(.png)
+  /// @param[in] output_dir_tv     destination path of time-velocity graph image(.png)
+  /// @param[in] output_dir_pv     destination path of position-velocity graph image(.png)
+  /// @param[in] path_index        prefix index of destination path of plotted graph
+  /// @param[in] gp_set_list_tp    gnuplot set options before plot for time-position graph.
+  /// @param[in] gp_set_list_tv    gnuplot set options before plot for time-position graph.
+  /// @param[in] gp_set_list_pv    gnuplot set options before plot for position-velocity graph.
+  /// @param[in] prefix_file_label prefix file label of destionation path of plotted csv
+  /// @param[in] prefix_pva_label  prefix label of destination path of plotted graph
+  /// @param[in] is_target_vel     wether target velocity data exists. default: true(exists)
   /// @details generate path of each set
   /// plot graph of time-position, time-velocity, position-velocity \n
   void plot_tp_tv_pv(
@@ -245,7 +254,8 @@ public:
          const std::vector<std::string>& gp_set_list_tp = std::vector<std::string>(),
          const std::vector<std::string>& gp_set_list_tv = std::vector<std::string>(),
          const std::vector<std::string>& gp_set_list_pv = std::vector<std::string>(),
-         const std::string& prefix_pva_label = "",
+         const std::string& prefix_file_label = "",
+         const std::string& prefix_pva_label  = "",
          bool  is_target_vel=true
        ) {
 
@@ -374,7 +384,10 @@ public:
            << "/"
            << std::setfill('0')
            << std::setw(4)
-           << path_index << "_time-" << prefix_pva_label << "position_graph.png"
+           << path_index
+           << "_"
+           << prefix_file_label
+           << "time-" << prefix_pva_label << "position_graph.png"
            << "'";
     std::cout << "drawing " << numstr.str() << "..." << std::endl;
     gpserver_.set("output " +  numstr.str());
@@ -411,7 +424,10 @@ public:
            << "/"
            << std::setfill('0')
            << std::setw(4)
-           << path_index << "_time-" << prefix_pva_label << "velocity_graph.png"
+           << path_index
+           << "_"
+           << prefix_file_label
+           << "time-" << prefix_pva_label << "velocity_graph.png"
            << "'";
     std::cout << "drawing " << numstr.str() << "..." << std::endl;
     gpserver_.set("output " +  numstr.str());
@@ -448,7 +464,10 @@ public:
            << "/"
            << std::setfill('0')
            << std::setw(4)
-           << path_index << "_"<< prefix_pva_label << "position-velocity_diagram.png"
+           << path_index
+           << "_"
+           << prefix_file_label
+           << prefix_pva_label << "position-velocity_diagram.png"
            << "'";
     std::cout << "drawing " << numstr.str() << "..." << std::endl;
     gpserver_.set("output " +  numstr.str());
