@@ -709,6 +709,33 @@ TEST(TrackingTest, reachable5)
   // -----------------------------------------------
   start_set.clear();
   goal_set.clear();
+
+  // 3.
+  start.time  = 0.0;
+  start.P.pos = 0.0;
+  start.P.vel = 0.0;
+  start_set.push_back(start);
+  goal.time  = 0.0; // 16.346054699042330
+  goal.P.pos = 1.0;
+  goal.P.vel = 0.0;
+  goal_set.push_back(goal);
+
+  // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
+  PlotPtoPGraph plot_ptop_graph3( outdir,
+                                  0.001,               // cycle
+                                  14.682296621831551,  // acc_limit
+                                  69.017591170165971,  // dec_limit
+                                  0.061186300465189,   // v_limit
+                                  0.00,               // smoothing_rate
+                                  "test03-");         // filelabel
+
+  // 軌道生成＆グラフ出力
+  plot_ptop_graph3.plot(start_set, goal_set);
+
+  // -----------------------------------------------
+  start_set.clear();
+  goal_set.clear();
+
 }
 
 

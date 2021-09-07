@@ -3,7 +3,7 @@
 // #define DEBUG_ 1
 
 #define V_EPSILON 1.0e-15
-#define X_EPSILON 1.0e-13
+#define X_EPSILON 1.0e-12
 #define T_EPSILON 1.0e-12
 
 #define SIGNV(a) ((a>=0) ? 1: -1)
