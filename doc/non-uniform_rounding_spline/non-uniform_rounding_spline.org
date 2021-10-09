@@ -1,0 +1,145 @@
+#+TITLE: 丸み不均一スプライン
+#+AUTHOR:
+#+DATE:
+#+OPTIONS: toc:nil H:3 num:t \n:nil creator:nil
+#+OPTIONS: ^:{}
+#+LANGUAGE: ja
+#+LaTeX_CLASS: jsarticle
+#+LaTeX_CLASS_OPTIONS: [a4paper]
+#+LaTeX_HEADER: \renewcommand{\theequation}{\thesection.\arabic{equation}}
+#+LaTeX_HEADER: \usepackage{amssymb}
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+
+# LATEX & HTML互換の改ページ用のマクロpagebreak定義
+#+MACRO: pagebreak @@latex:\newpage@@ @@html:<div style="page-break-before: always">&nbsp;</div>@@
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+
+#+CAPTION: 丸み不均一スプライン
+#+NAME: fig:non-uniform_rounding_spline
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.8\hsize
+[[./Figure/png/non-uniform_rounding_spline.png]]
+
+丸み不均一スプラインにより速度 $\dot{x}$ を幾何学的に算出する。
+
+時刻 $t$ における位置 $x$ を 時間-位置の座標平面上の点 $\bf P$ として表す。
+
+時系列順に $0, 1, \ldots, N$ 番目の点がそれぞれ以下のようにあったとする。
+#
+\begin{eqnarray}
+  {\bf P}_0,
+  {\bf P}_1,
+  \ldots,
+  {\bf P}_N
+  =
+  \left[
+    \begin{array}{c}
+      t_0 \\
+      x_0
+    \end{array}
+  \right],
+  \left[
+    \begin{array}{c}
+      t_1 \\
+      x_1
+    \end{array}
+  \right],
+  \ldots,
+  \left[
+    \begin{array}{c}
+      t_N \\
+      x_N
+    \end{array}
+  \right] \nonumber
+\end{eqnarray}
+#
+図[[fig:non-uniform_rounding_spline]]のように、
+$i-1$, $i$, $i+1$ 番目の連番３点を考える。
+#
+\begin{eqnarray}
+  \begin{array}{ccc}
+    {\bf P}_{i-1}
+    =
+    \left[
+      \begin{array}{c}
+        t_{i-1} \\
+        x_{i-1}
+      \end{array}
+    \right],
+    {\bf P}_{i}
+    =
+    \left[
+      \begin{array}{c}
+        t_{i} \\
+        x_{i}
+      \end{array}
+    \right],
+    {\bf P}_{i+1}
+    =
+    \left[
+      \begin{array}{c}
+        t_{i+1} \\
+        x_{i+1}
+      \end{array}
+    \right]
+  \end{array} \nonumber
+\end{eqnarray}
+#
+３点の内、 $i$ 番目の速度 $\dot{x}_{i}$ を求める。
+
+( ${\bf P}_{i}$ の傾き ) = ( 速度 $\dot{x}_{i}$ )
+とみなす。
+この傾きは、
+ $\overrightarrow{{\bf P}_{i} {\bf P}_{i-1}}$ と $\overrightarrow{{\bf P}_{i} {\bf P}_{i+1}}$
+のなす角を二等分する直線に対し垂直な方向ベクトル $\overrightarrow{{\bf P'}_{i-1} {\bf P'}_{i+1}}$
+と平行とする。
+#
+\begin{eqnarray}
+  \overrightarrow{{\bf P'}_{i-1} {\bf P'}_{i+1}}
+    = \frac{ \overrightarrow{{\bf P}_{i} {\bf P}_{i+1}} }
+           { \left| \overrightarrow{{\bf P'}_{i} {\bf P'}_{i+1}} \right| }
+    - \frac{ \overrightarrow{{\bf P}_{i} {\bf P}_{i-1}} }
+           { \left| \overrightarrow{{\bf P'}_{i} {\bf P'}_{i-1}} \right| }
+    = \left[
+        \begin{array}{c}
+          \Delta t'_{i} \\
+          \Delta x'_{i}
+        \end{array}
+      \right] \nonumber
+\end{eqnarray}
+
+\begin{eqnarray}
+  \Delta t'_{i}
+    = \frac{ t_{i+1} - t_{i} }{ \sqrt{ (t_{i+1} - t_{i})^2 + (x_{i+1} - x_{i})^2 } }
+    - \frac{ t_{i-1} - t_{i} }{ \sqrt{ (t_{i-1} - t_{i})^2 + (x_{i-1} - x_{i})^2 } }
+  \nonumber
+\end{eqnarray}
+
+\begin{eqnarray}
+  \Delta x'_{i}
+    = \frac{ x_{i+1} - x_{i} }{ \sqrt{ (t_{i+1} - t_{i})^2 + (x_{i+1} - x_{i})^2 } }
+    - \frac{ x_{i-1} - x_{i} }{ \sqrt{ (t_{i-1} - t_{i})^2 + (x_{i-1} - x_{i})^2 } }
+  \nonumber
+\end{eqnarray}
+
+\begin{eqnarray}
+  \dot{x}_{i}
+    = \frac{ \Delta x'_{i} }{ \Delta t'_{i} }
+  \nonumber
+\end{eqnarray}
+
+
+
+\begin{flushright}
+以上
+\end{flushright}
+
