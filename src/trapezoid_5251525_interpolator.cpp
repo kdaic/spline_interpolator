@@ -285,25 +285,17 @@ const TimePVA TrapezoidalInterpolator::pop( const double& t ) const {
   if ( target_tpva_queue_size == 0 )
   {
     std::stringstream ss0;
-    ss0 << "Failed to pop a point from Trapezoid5251525 trajectory. "
+    ss0 << "Failed to pop a point from the trajectory. "
         << "The size of target_tpva_queue is zero.";
     std::cerr << ss0.str() << std::endl;
     THROW( QueueSizeEmpty, ss0.str() );
   }
 
   std::size_t trajectory_idx = 0;
-  bool is_out_of_range       = true;
 
-  for( std::size_t idx=0; idx<target_tpva_queue_size - 1; idx++) {
-    if( target_tpva_queue_.get( idx ).time <= t
-        && t <= target_tpva_queue_.get( idx+1 ).time ) {
-      trajectory_idx  = idx;
-      is_out_of_range = false;
-      break;
-    }
-  }
+  RetCode retcode = this->index_of_time( t, trajectory_idx );
 
-  if( is_out_of_range )
+  if( retcode != SPLINE_SUCCESS )
   {
     std::stringstream ss1;
     const std::size_t finish_index = target_tpva_queue_size - 1;

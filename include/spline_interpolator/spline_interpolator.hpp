@@ -53,6 +53,18 @@ public:
   /// - NotSplineGenerated : spline-path is not genrated
   const double finish_time() const;
 
+  /// Get the trajectory index of the input time
+  /// @param[in] t            input time
+  /// @param[in] output_index output index matched the input time
+  /// @return
+  /// - SPLINE_INVALID_INPUT_TIME : fail. The input time is out of range of target_tpva_queue.
+  /// - SPLINE_SUCCESS            : success.
+  /// @exception
+  /// - QueueSizeEmpty : failed to pop a point from trajectory
+  ///                    because the size of target_tpva_queue is zero.
+  const RetCode index_of_time( const double& t,
+                               std::size_t&  output_index ) const;
+
   /// Genrate a spline-path from initial-finish point
   /// @paran[in] ts start time (default: 0.0)
   /// @paran[in] tf finish time (default: 0.0)
