@@ -202,3 +202,54 @@ TEST_F( CubicSplineTest, pop1 ) {
 #endif // #ifdef __QNX__
 
 }
+
+
+TEST_F( CubicSplineTest, index_of_time ) {
+
+  TPQueue tp_queue; // TP = time, position
+  tp_queue.push_on_clocktime( 0.0, -1.0 );
+  tp_queue.push_on_clocktime( 1.0, -1.0 );
+  tp_queue.push_on_clocktime( 2.0, 0.0 );
+  tp_queue.push_on_clocktime( 3.0, 10.1 );
+  tp_queue.push_on_clocktime( 4.0, 20.0 );
+  tp_queue.push_on_clocktime( 5.0, 3.1 );
+  tp_queue.push_on_clocktime( 6.0, 7.0 );
+  tp_queue.push_on_clocktime( 7.0, 10.1 );
+
+   // cubic spline path interpolator
+  CubicSplineInterpolator tg;
+
+  // start velocity  = -0.0
+  double vs = 0.0;
+  // finish velocity = 0.0
+  double vf = 0.0;
+  // generate path & total dT
+  if( tg.generate_path( tp_queue, vs, vf ) != SPLINE_SUCCESS ) {
+    THROW( UndefSplineException,
+           "failed to generated_path()");
+  }
+
+  // test of index_of_time
+  std::size_t index=100;
+  EXPECT_EQ( SPLINE_INVALID_INPUT_TIME, tg.index_of_time(-1.0, index) );
+  EXPECT_EQ( 100, index );
+  EXPECT_EQ( SPLINE_SUCCESS, tg.index_of_time(0.0, index) );
+  EXPECT_EQ( 0, index );
+  EXPECT_EQ( SPLINE_SUCCESS, tg.index_of_time(0.5, index) );
+  EXPECT_EQ( 0, index );
+  EXPECT_EQ( SPLINE_SUCCESS, tg.index_of_time(1.0, index) );
+  EXPECT_EQ( 1, index );
+  EXPECT_EQ( SPLINE_SUCCESS, tg.index_of_time(1.5, index) );
+  EXPECT_EQ( 1, index );
+  EXPECT_EQ( SPLINE_SUCCESS, tg.index_of_time(2.0, index) );
+  EXPECT_EQ( 2, index );
+  EXPECT_EQ( SPLINE_SUCCESS, tg.index_of_time(2.5, index) );
+  EXPECT_EQ( 2, index );
+  EXPECT_EQ( SPLINE_SUCCESS, tg.index_of_time(6.5, index) );
+  EXPECT_EQ( 6, index );
+  EXPECT_EQ( SPLINE_SUCCESS, tg.index_of_time(7.0, index) );
+  EXPECT_EQ( 7, index );
+  index=100;
+  EXPECT_EQ( SPLINE_INVALID_INPUT_TIME, tg.index_of_time(7.1, index) );
+  EXPECT_EQ( 100, index );
+}

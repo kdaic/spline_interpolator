@@ -65,6 +65,39 @@ const double SplineInterpolator::finish_time() const {
   return target_tpva_queue_.get( target_tpva_queue_.size() - 1 ).time;
 }
 
+const RetCode SplineInterpolator::index_of_time( const double& t,
+                                                 std::size_t&  output_index ) const {
+  const std::size_t& target_tpva_queue_size = target_tpva_queue_.size();
+  const std::size_t last_index = target_tpva_queue_size - 1;
+  bool is_out_of_range = true;
+
+  if( t > target_tpva_queue_.get( last_index ).time ) {
+
+    return SPLINE_INVALID_INPUT_TIME;
+
+  } else if( t == target_tpva_queue_.get( last_index ).time ) {
+
+    output_index    = last_index;
+    is_out_of_range = false;
+    return SPLINE_SUCCESS;
+  }
+  for ( std::size_t idx=0; idx < target_tpva_queue_size; idx++ ) {
+
+    if( target_tpva_queue_.get( idx ).time <= t
+        && t < target_tpva_queue_.get( idx+1 ).time ) {
+      output_index    = idx;
+      is_out_of_range = false;
+      break;
+    }
+  } // End of for loop idx=0 -> target_tpva_queue_size-1
+
+  if( is_out_of_range ) {
+    return SPLINE_INVALID_INPUT_TIME;
+  }
+
+  return SPLINE_SUCCESS;
+}
+
 RetCode SplineInterpolator::generate_path(
                             const double& ts, const double& tf,
                             const double& xs, const double& xf,

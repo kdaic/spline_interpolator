@@ -181,6 +181,13 @@ public:
   /// - SPLINE_QUEUE_SIZE_EMPTY : calculated buffer size is empty yet.
   const TimePVA pop_back();
 
+  /// delete T front(oldest) data from buffer queue(FIFO)
+  /// @return
+  /// - SPLINE_SUCCESS: no error
+  /// @exception
+  /// - SPLINE_QUEUE_SIZE_EMPTY: buffer size is not enough to pop and dlete.
+  RetCode pop_delete();
+
   /// clear all data from the queue.
   /// @brief clear the all stored data from the queue.
   void clear();

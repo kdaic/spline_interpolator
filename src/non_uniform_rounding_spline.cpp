@@ -238,6 +238,10 @@ const TimePVA NonUniformRoundingSpline::pop_back() {
   return tpva_buffer_.pop_back();
 }
 
+RetCode NonUniformRoundingSpline::pop_delete() {
+  return tpva_buffer_.pop_delete();
+}
+
 void NonUniformRoundingSpline::clear() {
   if ( tpva_buffer_.size() != 0 ) {
     tpva_buffer_.clear();

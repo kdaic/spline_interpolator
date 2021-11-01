@@ -451,7 +451,7 @@ public:
     return output;
   };
 
-  /// Pop T (oldest) data from buffer queue(FIFO)
+  /// Pop T (newest) data from buffer queue(LILO)
   /// @brief delete the pop data from queue_buffer_
   /// @return output oldest T data
   /// @exception
@@ -503,7 +503,12 @@ public:
     throw(InvalidIndexAccess) {
 
     if( index < 0 || index > queue_buffer_.size() -1 ) {
-      THROW( InvalidIndexAccess, "Queue index is invalid." );
+      std::stringstream err_ss;
+      err_ss << "Queue index is invalid. the last index of queue_buffer : "
+             << queue_buffer_.size() - 1
+             << ", but input index : "
+             << index;
+      THROW( InvalidIndexAccess, err_ss.str() );
     }
     return queue_buffer_.at(index);
   };
