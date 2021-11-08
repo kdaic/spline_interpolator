@@ -330,4 +330,7 @@ RetCode TrapezoidalInterpolator::clear() {
   return SplineInterpolator::clear();
 }
 
+const std::size_t TrapezoidalInterpolator::trapzd_trajectory_que_size() const {
+  return trapzd_trajectory_que_.size();
+}
 

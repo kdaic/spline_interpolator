@@ -155,7 +155,7 @@ public:
 
   /// Return the size of target TPVAQueue (target_tpva_queue_)
   /// @return targt_tpva_queue_
-  virtual const std::size_t target_tpva_queue_size() const;
+  const std::size_t target_tpva_queue_size() const;
 
 protected:
   /// flag if the spline-path is generated. (default: false)
