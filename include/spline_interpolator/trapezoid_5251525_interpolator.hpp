@@ -143,6 +143,9 @@ public:
   ///       & path parameter queue (depend on each interpolator class)
   virtual RetCode clear();
 
+  /// The size of trapezoid5251525 trajecotries queue.
+  /// @return the size of trapzd_config_que_
+  const std::size_t trapzd_trajectory_que_size() const;
 
 private:
   /// コンストラクタにてTrapzoidConfigデータからtrapzd_trajectory_que_を生成
