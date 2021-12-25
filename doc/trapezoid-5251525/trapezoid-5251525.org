@@ -334,7 +334,7 @@ $\Delta T_1$ (もしくは $\Delta T_4$ )、$\Delta T_2$ (もしくは $\Delta T
 \begin{eqnarray}
   X_{dd}
   &=& {\rm signD}
-      \frac{(1+s_{rd})}{2a_{\rm max}}
+      \frac{(1+s_{rd})}{2d_{\rm max}}
       \left(
         v_{\rm max}^2 - \dot{x}_f^2
       \right)
