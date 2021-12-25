@@ -15,11 +15,14 @@
 
 using namespace interp;
 
-// 補間周期 0.05[s](=50[ms])
+/// 移動時間最大リミット判定計算精度
+#define DT_MAX_LIMIT_MARGIN 1.0e-13
+
+/// 補間周期 0.05[s](=50[ms])
 #define CYCLE 0.05
-// 入力点周期 0.5[s]
+/// 入力点周期 0.5[s]
 #define PATH_CYCLE 0.5
-// 入力点の数
+/// 入力点の数
 #define POINT_NUM 100
 /// 乱数パラメータ
 #define MU 0.0
@@ -129,7 +132,7 @@ public:
       double dT_total = tg.generate_path(start.time,  goal.time,
                                          start.P.pos, goal.P.pos,
                                          start.P.vel, goal.P.vel );
-      std::cout << "dT_total:" << dT_total;
+      std::cout << "dT_total:" << dT_total << std::endl;
 
       // 開始目標点
       target_tpva.push( TimePVA(
@@ -255,6 +258,40 @@ TEST(TrackingTest, time_error) {
                                 start.P.pos, goal.P.pos,
                                 start.P.vel, goal.P.vel),
                std::invalid_argument);
+}
+
+/// @test 移動時間の入力制限 @n
+/// 終端時刻 - 開始時刻の移動時間が DT_MAX_LIMIT を超えていたらエラー
+/// となることを確認
+TEST(TrackingTest, DT_MAX_LIMIT ) {
+  Trapezoid5251525 tg;
+  // 軌道１セット分の開始点
+  TimePVA start;
+  // 軌道１セット分の目標到達点
+  TimePVA goal;
+  start.time = 0.0;
+  start.P.pos = 0;
+  start.P.vel = 0.0;
+
+  // 移動時間が DT_MAX_LIMIT を超えていない場合
+  goal.time  = start.time + tg.DT_MAX_LIMIT_;
+  goal.P.pos = 10;
+  goal.P.vel = 100.0;
+
+  double ret;
+  EXPECT_NO_THROW( ret=tg.generate_path(start.time,  goal.time,
+                                        start.P.pos, goal.P.pos,
+                                        start.P.vel, goal.P.vel) );
+  EXPECT_EQ( ret, goal.time );
+  EXPECT_EQ( ret, tg.finish_time() );
+
+  // 移動時間が DT_MAX_LIMIT を超える場合
+  goal.time = start.time + tg.DT_MAX_LIMIT_ + DT_MAX_LIMIT_MARGIN;
+  EXPECT_THROW( tg.generate_path(start.time,  goal.time,
+                                 start.P.pos, goal.P.pos,
+                                 start.P.vel, goal.P.vel),
+                std::invalid_argument );
+
 }
 
 /// @test 到達限界テスト @n
@@ -524,7 +561,8 @@ TEST(TrackingTest, reachable4) {
   // 軌道１セット分の目標到達点
   TimePVA goal;
 
-  // 0.
+  // 1.
+  std::cout << "== test01 ==================================" << std::endl;
   start.time  = 0.0;
   start.P.pos = 0.37;
   start.P.vel = 0.0;
@@ -559,7 +597,8 @@ TEST(TrackingTest, reachable4) {
   goal_set.clear();
 
 
-  // // 3. 01
+  // // 2. 01
+  std::cout << "== test02-01 ==================================" << std::endl;
   start.time = 0.0;
   start.P.pos = 1.000000000000000;
   start.P.vel = 0.000000000000000;
@@ -586,7 +625,8 @@ TEST(TrackingTest, reachable4) {
   goal_set.clear();
 
 
-  // // 3. 01
+  // // 2. 02
+  std::cout << "== test02-02 ==================================" << std::endl;
   start.time = 0.290472121528706;
   start.P.pos = 0.970691715357122;
   start.P.vel = -0.089127359654605;
@@ -612,7 +652,8 @@ TEST(TrackingTest, reachable4) {
   start_set.clear();
   goal_set.clear();
 
-  // // 6.
+  // // 3.
+  std::cout << "== test03 ==================================" << std::endl;
   start.time = 0.0;
   start.P.pos = 0.0;
   start.P.vel = 0.0;
@@ -659,6 +700,7 @@ TEST(TrackingTest, reachable5)
   TimePVA goal;
 
   // 1.
+  std::cout << "== test01 ==================================" << std::endl;
   start.time  = 0.0;
   start.P.pos = 1.0;
   start.P.vel = 0.0;
@@ -685,6 +727,7 @@ TEST(TrackingTest, reachable5)
   goal_set.clear();
 
   // 2.
+  std::cout << "== test02 ==================================" << std::endl;
   start.time  = 0.0;
   start.P.pos = 1.0;
   start.P.vel = 0.0;
@@ -711,6 +754,7 @@ TEST(TrackingTest, reachable5)
   goal_set.clear();
 
   // 3.
+  std::cout << "== test03 ==================================" << std::endl;
   start.time  = 0.0;
   start.P.pos = 0.0;
   start.P.vel = 0.0;
@@ -731,6 +775,49 @@ TEST(TrackingTest, reachable5)
 
   // 軌道生成＆グラフ出力
   plot_ptop_graph3.plot(start_set, goal_set);
+
+  // -----------------------------------------------
+  start_set.clear();
+  goal_set.clear();
+
+  // 4.
+  std::cout << "== test04 ==================================" << std::endl;
+  start.time  = 0.0;
+  start.P.pos = -0.13;
+  start.P.vel = 0.0;
+  start_set.push_back(start);
+  // goal.time  = 4.0281850927854954; // OK (default)
+  // goal.time  = 40.281850927854954; // NG (10%)
+  // goal.time  = 402.81850927854954; // OK (1%)
+  goal.time  = 900.00000000000000; // OK (15[min])
+  // goal.time  = 4028.1850927854954; // NG (0.1%)
+  // goal.time  = 40281.850927854954; // NG (0.01%)
+  goal.P.pos = -0.33;
+  goal.P.vel = -0.024809795256163;
+  goal_set.push_back(goal);
+
+  // Trapezoid5251525 tg(5.707321673189086,  // acc_limit
+  //                     5.098833056169758,  // dec_limit
+  //                     0.815667386042436,  // v_limit
+  //                     0.00,               // smoothing_rateacc_limit_,
+  //                     0.00                // smoothing_rateacc_limit_,
+  //                    );
+  // double dT_total = tg.generate_path(start.time,  goal.time,
+  //                                    start.P.pos, goal.P.pos,
+  //                                    start.P.vel, goal.P.vel );
+  // EXPECT_EQ( dT_total, goal.time );
+
+  // 最大加速度リミット、最大速度リミット、丸め率、グラフ＆データ出力先パス設定
+  PlotPtoPGraph plot_ptop_graph4( outdir,
+                                  0.005,              // cycle
+                                  5.707321673189086,  // acc_limit
+                                  5.098833056169758,  // dec_limit
+                                  0.815667386042436,  // v_limit
+                                  0.00,               // smoothing_rate
+                                  "test04-");         // filelabel
+
+  // 軌道生成＆グラフ出力
+  plot_ptop_graph4.plot(start_set, goal_set);
 
   // -----------------------------------------------
   start_set.clear();

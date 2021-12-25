@@ -3,12 +3,14 @@
 // #define DEBUG_ 1
 
 #define V_EPSILON 1.0e-15
-#define X_EPSILON 1.0e-12
+#define X_EPSILON 1.0e-9
 #define T_EPSILON 1.0e-12
 
 #define SIGNV(a) ((a>=0) ? 1: -1)
 
 using namespace interp;
+
+const double Trapezoid5251525::DT_MAX_LIMIT_ = 900.0; // [sec] = 15[min]
 
 Trapezoid5251525::Trapezoid5251525 () :
   a_limit_(1200),
@@ -363,6 +365,16 @@ void Trapezoid5251525::input_check() {
       std::cout << "no_movement_ : " << no_movement_ << std::endl;
 #endif
   }
+  if( (tf_ - t0_) > this->DT_MAX_LIMIT_ ) {
+    // 指定移動時間が最大閾値を超えていたらエラー
+    std::stringstream ss;
+    ss << "interval time (tf - t0 : "
+       << std::fixed << std::setprecision(15)
+       << tf_ << " - " << t0_ << " = " << (tf_ - t0_)
+       << ") exceeds DT_MAX_LIMIT (" << this->DT_MAX_LIMIT_ <<  ")";
+    std::cerr << ss.str() << std::endl;
+    throw std::invalid_argument( ss.str() );
+  }
   // 終了時刻が0.0の場合、最速軌道フラグを立てる
   if( tf_ == 0.0 )
   {
@@ -678,8 +690,8 @@ double Trapezoid5251525::internal_calc_v_max_and_dT3(const double& signA,
             + signD*0.5*(1.0+dsr_)/d_max_;
   double pB = tf_-t0_ + signA*(1.0+asr_)*v0_/a_max_
                       + signD*(1.0+dsr_)*vf_/d_max_;
-  double pC = xd_ + signA * 0.5*(1+asr_)*v0_*v0_/a_max_
-                  + signD * 0.5*(1+dsr_)*vf_*vf_/d_max_;
+  double pC = xd_ + signA * 0.5*(1.0+asr_)*v0_*v0_/a_max_
+                  + signD * 0.5*(1.0+dsr_)*vf_*vf_/d_max_;
   double pD = pB*pB - 4.0*pA*pC;
   double v_max;
   double xd = xd_;
@@ -713,6 +725,7 @@ double Trapezoid5251525::internal_calc_v_max_and_dT3(const double& signA,
     v_max = 0.5*( pB - std::sqrt(pD) )/pA;
     dT3 = tf_ - t0_ - signA * (1.0+asr_)*(v_max - v0_)/a_max_
                     - signD * (1.0+dsr_)*(v_max - vf_)/d_max_;
+
     if( is_fastest_
         && (fabs(v_max) > fabs(v_max_fastest_)) ) {
 #ifdef DEBUG_
@@ -724,9 +737,11 @@ double Trapezoid5251525::internal_calc_v_max_and_dT3(const double& signA,
       v_max = v_max_fastest_;
       dT3   = dT3_fastest_;
     }
+
     xd = signA*0.5*(1.0+asr_)*(v_max*v_max - v0_*v0_)/a_max_
        + signD*0.5*(1.0+dsr_)*(v_max*v_max - vf_*vf_)/d_max_ + v_max*dT3 ;
   }
+
   // v_maxとv0_の大小関係, v_maxとvfの大小関係のパターンに
   // 当てはまらなければ解なしで終了
   if(sign_*v_max <= -1.0 * V_EPSILON
@@ -869,8 +884,7 @@ void Trapezoid5251525::set_parameter() {
   x5_ = x6_ + signD_ * 0.50 * d_max_ * dT5_ * dT5_ - v5_ * dT5_;
   v4_ = v_max_;
   x4_ = x5_ + signD_ * 0.15 * d_max_ * dT4_ * dT4_ - v_max_ * dT4_;
-  /*"dT3";
-    dT3 = cabs((x4-x3) / v_max_);*/
+
   t1_ = t0_ + dT1_;
   t2_ = t1_ + dT2_;
   t3_ = t2_ + dT1_;
