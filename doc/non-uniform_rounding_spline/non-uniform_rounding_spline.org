@@ -1,7 +1,7 @@
-#+TITLE: 丸み不均一スプライン
-#+AUTHOR:
-#+DATE:
-#+OPTIONS: toc:nil H:3 num:t \n:nil creator:nil
+#+TITLE: 丸み不均一スプラインによる幾何学的な速度算出
+#+OPTIONS: toc:nil H:3 num:nil \n:nil creator:nil author:nil <:nil creator:nil date:nil timestamp:nil
+# #+AUTHOR:
+# #+DATE:
 #+OPTIONS: ^:{}
 #+LANGUAGE: ja
 #+LaTeX_CLASS: jsarticle
@@ -26,7 +26,7 @@
 #+CAPTION: 丸み不均一スプライン
 #+NAME: fig:non-uniform_rounding_spline
 #+ATTR_HTML: :align center :width 1000
-#+ATTR_LaTeX: :width 0.8\hsize
+#+ATTR_LaTeX: :width 0.53\hsize
 [[./Figure/png/non-uniform_rounding_spline.png]]
 
 丸み不均一スプラインにより速度 $\dot{x}$ を幾何学的に算出する。
@@ -102,6 +102,7 @@ $i-1$, $i$, $i+1$ 番目の連番３点を考える。
  $\overrightarrow{{\bf P}_{i} {\bf P}_{i-1}}$ と $\overrightarrow{{\bf P}_{i} {\bf P}_{i+1}}$
 のなす角を二等分する直線に対し垂直な方向ベクトル $\overrightarrow{{\bf P'}_{i-1} {\bf P'}_{i+1}}$
 と平行とする。
+傾きの計算により以下のように速度 $\dot{x}_{i}$ を求める。
 #
 \begin{eqnarray}
   \overrightarrow{{\bf P'}_{i-1} {\bf P'}_{i+1}}
@@ -137,6 +138,10 @@ $i-1$, $i$, $i+1$ 番目の連番３点を考える。
   \nonumber
 \end{eqnarray}
 
+
+* 参考文献
+
+- Andrew Kirmse(著),中本 浩(監訳),川西 裕幸(翻訳), "Game Programming Gems 4 日本語版", ボーンデジタル, 2005
 
 
 \begin{flushright}
