@@ -15,11 +15,14 @@
 
 using namespace interp;
 
-// 補間周期 0.05[s](=50[ms])
+/// 移動時間最大リミット判定計算精度
+#define DT_MAX_LIMIT_MARGIN 1.0e-13
+
+/// 補間周期 0.05[s](=50[ms])
 #define CYCLE 0.05
-// 入力点周期 0.5[s]
+/// 入力点周期 0.5[s]
 #define PATH_CYCLE 0.5
-// 入力点の数
+/// 入力点の数
 #define POINT_NUM 100
 /// 乱数パラメータ
 #define MU 0.0
@@ -255,6 +258,40 @@ TEST(TrackingTest, time_error) {
                                 start.P.pos, goal.P.pos,
                                 start.P.vel, goal.P.vel),
                std::invalid_argument);
+}
+
+/// @test 移動時間の入力制限 @n
+/// 終端時刻 - 開始時刻の移動時間が DT_MAX_LIMIT を超えていたらエラー
+/// となることを確認
+TEST(TrackingTest, DT_MAX_LIMIT ) {
+  Trapezoid5251525 tg;
+  // 軌道１セット分の開始点
+  TimePVA start;
+  // 軌道１セット分の目標到達点
+  TimePVA goal;
+  start.time = 0.0;
+  start.P.pos = 0;
+  start.P.vel = 0.0;
+
+  // 移動時間が DT_MAX_LIMIT を超えていない場合
+  goal.time  = start.time + tg.DT_MAX_LIMIT_;
+  goal.P.pos = 10;
+  goal.P.vel = 100.0;
+
+  double ret;
+  EXPECT_NO_THROW( ret=tg.generate_path(start.time,  goal.time,
+                                        start.P.pos, goal.P.pos,
+                                        start.P.vel, goal.P.vel) );
+  EXPECT_EQ( ret, goal.time );
+  EXPECT_EQ( ret, tg.finish_time() );
+
+  // 移動時間が DT_MAX_LIMIT を超える場合
+  goal.time = start.time + tg.DT_MAX_LIMIT_ + DT_MAX_LIMIT_MARGIN;
+  EXPECT_THROW( tg.generate_path(start.time,  goal.time,
+                                 start.P.pos, goal.P.pos,
+                                 start.P.vel, goal.P.vel),
+                std::invalid_argument );
+
 }
 
 /// @test 到達限界テスト @n
