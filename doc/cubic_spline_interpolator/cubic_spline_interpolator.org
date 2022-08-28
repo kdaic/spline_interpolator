@@ -1,0 +1,453 @@
+#+TITLE: 3次スプライン軌道 計算書
+#+AUTHOR: 作成者 兼田大史
+#+DATE:
+#+OPTIONS: toc:nil H:3 num:t \n:nil creator:nil
+#+OPTIONS: ^:{}
+#+LANGUAGE: ja
+#+LaTeX_CLASS: jsarticle
+#+LaTeX_CLASS_OPTIONS: [a4paper]
+#+LaTeX_HEADER: \renewcommand{\theequation}{\thesection.\arabic{equation}}
+#+LaTeX_HEADER: \usepackage{amssymb}
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+
+# LATEX & HTML互換の改ページ用のマクロpagebreak定義
+#+MACRO: pagebreak @@latex:\newpage@@ @@html:<div style="page-break-before: always">&nbsp;</div>@@
+
+# #+BEGIN_LaTeX
+# \newpage
+# #+END_LaTeX
+
+# {{{pagebreak}}}
+
+* モデル式
+
+\begin{eqnarray}
+x_n(t) &=& a_n (t - t_n)^3 + b_n(t - t_n)^2 + c_n(t - t_n) + d_n
+\end{eqnarray}
+
+\begin{eqnarray}
+{\rm x}_{n}  &=& x_{n-1} (t_{n}) \nonumber \\
+             &=& x_{n}   (t_{n}) \nonumber \\
+{\rm v}_{n}  &=& \left. \frac{d x_{n-1}}{d t} \right|_{t=t_{n}}
+              = \dot{x}_{n-1}(t_{n}) \nonumber \\
+             &=& \left. \frac{d x_n}{d t} \right|_{t=t_{n}}
+              = \dot{x}_{n}(t_{n}) \nonumber \\
+{\rm a}_{n}  &=& \left. \frac{d^2 x_{n-1}}{d t^2} \right|_{t=t_{n}}
+              = \ddot{x}_{n-1}(t_{n}) \nonumber \\
+             &=& \left. \frac{d^2 x_n}{d t^2} \right|_{t=t_{n}}
+              = \ddot{x}_{n}(t_{n})
+\end{eqnarray}
+
+
+* 入力
+
+$[t_{0},   {\rm x}_{0},  {\rm v}_{0} ]$,  
+$\ldots$  
+$[t_{i-1}, {\rm x}_{i-1} ]$,  
+$[t_{i},   {\rm x}_{i}   ]$,  
+$[t_{i+1}, {\rm x}_{i+1} ]$,  
+$\ldots$  
+$[t_{f},   {\rm x}_{f},  {\rm v}_{f} ]$
+
+* 出力
+
+$[a_0, b_0, c_0, d_0]$,  
+$\ldots$  
+$[a_{i-1}, b_{i-1}, c_{i-1}, d_{i-1}]$,  
+$[a_{i},   b_{i},   c_{i},   d_{i}]$,  
+$[a_{i+1}, b_{i+1}, c_{i*1}, d_{i+1}]$,  
+$\ldots$  
+$[a_f, b_f, c_f, d_f]$,  
+
+* 計算
+
+元の式、1階微分、2階微分は以下のようになる。
+\begin{eqnarray}
+x_{i-1}(t)        &=&   a_{i-1} (t - t_{i-1})^3 +   b_{i-1} (t - t_{i-1})^2
+                    +   c_{i-1} (t - t_{i-1})   +   d_{i-1} \nonumber \\
+\dot{x}_{i-1}(t)  &=& 3 a_{i-1} (t - t_{i-1})^2 + 2 b_{i-1} (t - t_{i-1})
+                    +   c_{i-1} \\
+\ddot{x}_{i-1}(t) &=& 6 a_{i-1} (t - t_{i-1})   + 2 b_{i-1}
+\end{eqnarray}
+
+# \begin{eqnarray}
+# x_{i}(t)        &=&   a_{i} (t - t_{i})^3 +   b_{i} (t - t_{i})^2
+#                   +   c_{i} (t - t_{i})   +   d_{i} \\
+# \dot{x}_{i}(t)  &=& 3 a_{i-1} (t - t_{i})^2 + 2 b_{i} (t - t_{i})
+#                   +   c_{i} \\
+# \ddot{x}_{i}(t) &=& 6 a_{i} (t - t_{i})   + 2 b_{i}
+# \end{eqnarray}
+
+$\Delta T_0 = t_1 - t_0$, $\ldots$ $\Delta T_{i-1} = t_{i} - t_{i-1}$, $\Delta T_{i} = t_{i+1} - t_{i}$, $\ldots$ $\Delta T_{f-1} = t_{f} - t_{f-1}$ とおく。
+\begin{eqnarray}
+{\rm x}_{i} &=& x_{i-1}(t_{i})        =   a_{i-1} \Delta T_{i-1}^3 +   b_{i-1} \Delta T_{i-1}^2
+                                      +   c_{i-1} \Delta T_{i-1}   +   d_{i-1} \nonumber \\
+            &=& x_{i}(t_{i})          =   d_{i} \nonumber \\
+{\rm v}_{i} &=& \dot{x}_{i}(t_{i})   = 3 a_{i-1} \Delta T_{i-1}^2 + 2 b_{i-1} \Delta T_{i-1}
+                                      +   c_{i-1} \nonumber \\
+            &=& \dot{x}_{i}(t_{i})    =   c_{i} \nonumber \\
+{\rm a}_{i} &=& \ddot{x}_{i-1}(t_{i}) = 6 a_{i-1} \Delta T_{i-1}   + 2 b_{i-1} \nonumber \\
+            &=& \ddot{x}_{i}(t_{i})   = 2 b_{i}
+\end{eqnarray}
+
+# \begin{eqnarray}
+# {\rm x}_{i+1} &=& x_{i}(t_{i+1})          =   a_{i} \Delta T_{i}^3 +   b_{i} \Delta T_{i}^2
+#                                           +   c_{i} \Delta T_{i}   +   d_{i} \nonumber \\
+#               &=& x_{i+1}(t_{i+1})        =   d_{i+1} \\
+# {\rm v}_{i+1} &=& \dot{x}_{i}(t_{i+1})    = 3 a_{i} \Delta T_{i}^2 + 2 b_{i} \Delta T_{i}
+#                                           +   c_{i} \nonumber \\
+#               &=& \dot{x}_{i+1}(t_{i+1})  =   c_{i+1} \\
+# {\rm a}_{i+1} &=& \ddot{x}_{i}(t_{i+1})   = 6 a_{i} \Delta T_{i}   + 2 b_{i} \nonumber \\
+#               &=& \ddot{x}_{i+1}(t_{i})   = 2 b_{i+1}
+# \end{eqnarray}
+
+まとめると、以下の連立方程式で表される。
+これを $a_{i}$, $b_{i}$, $c_{i}$ ($i=0 \ldots f$) について解く。
+\begin{eqnarray}
+  \left\{
+  \begin{array}{lllll}
+      a_{i-1} \Delta T_{i-1}^3 &+   b_{i-1} \Delta T_{i-1}^2\
+  &+  c_{i-1} \Delta T_{i-1}   &+   d_{i-1}                  &= d_{i} = {\rm x}_{i} \\
+    3 a_{i-1} \Delta T_{i-1}^2 &+ 2 b_{i-1} \Delta T_{i-1}\
+  &+  c_{i-1}                  &                             &= c_{i} \\
+    6 a_{i-1} \Delta T_{i-1}   &+ 2 b_{i-1}\
+  &                            &                             &= 2 b_{i}
+  \end{array}
+  \right.
+\end{eqnarray}
+
+$({\rm 2式目}) \times \Delta T_{i-1} - ({\rm 1式目}) \times 2$
+\begin{eqnarray}
+a_{i-1} \Delta T_{i-1}^3 - c_{i-1} \Delta T_{i-1} - 2 d_{i-1}
+                       &=& c_{i}   \Delta T_{i-1} - 2 d_{i}  \nonumber \\
+\therefore
+a_{i-1} &=&   \frac{ c_{i-1} }{ \Delta T_{i-1}^2 }
+            + \frac{ c_{i}   }{ \Delta T_{i-1}^2 }
+            + \frac{ - 2 d_{i} + 2 d_{i-1} }{ \Delta T_{i-1}^3 }
+\end{eqnarray}
+
+
+$({\rm 1式目}) \times 3 - ({\rm 2式目}) \times \Delta T_{i-1}$
+\begin{eqnarray}
+b_{i-1} \Delta T_{i-1}^2 + 2 c_{i-1} \Delta T_{i-1} + 3 d_{i-1}
+                       &=& 3 d_{i} - 2 c_{i}\Delta T_{i-1}  \nonumber \\
+\therefore
+b_{i-1} &=& - \frac{ 2 c_{i-1} }{ \Delta T_{i-1} }
+            - \frac{   c_{i}   }{ \Delta T_{i-1} }
+            + \frac{ 3 d_{i} - 3 d_{i-1} }{ \Delta T_{i-1}^2 }
+\end{eqnarray}
+
+算出した $a_{i-1}$, $b_{i-1}$ を (3式目)に代入
+\begin{eqnarray}
+6 \left\{
+      \frac{ c_{i-1} }{ \Delta T_{i-1}^2 }
+    + \frac{ c_{i}   }{ \Delta T_{i-1}^2 }
+    + \frac{ 2 d_{i-1} - 2 d_{i} }{ \Delta T_{i-1}^3 }
+  \right\}
+\Delta T_{i-1}
++
+2 \left\{
+    -  \frac{ 2 c_{i-1} }{ \Delta T_{i-1} }
+    -  \frac{   c_{i}   }{ \Delta T_{i-1} }
+    +  \frac{ - 3 d_{i-1} + 3 d_{i} }{ \Delta T_{i-1}^2 }
+  \right\}
+&=& 2 b_{i} \nonumber \\
+  \frac{ 2 c_{i-1} }{ \Delta T_{i-1} }
++ \frac{ 4 c_{i}   }{ \Delta T_{i-1} }
++ \frac{ 6 d_{i} - 6 d_{i-1} }{ \Delta T_{i-1}^2 }
+&=& 2 b_{i}
+\end{eqnarray}
+
+ここで $b_{i-1}$ の式を漸化式として１ステップ進めて $b_{i}$ を求めると、
+\begin{eqnarray}
+\therefore
+b_{i} &=& - \frac{ 2 c_{i} }{ \Delta T_{i} }
+          - \frac{   c_{i+1}   }{ \Delta T_{i} }
+          + \frac{ 3 d_{i+1} - 3 d_{i} }{ \Delta T_{i}^2 }
+\end{eqnarray}
+
+であるため、本 $b_{i}$ の式を上の式に代入すると、
+\begin{eqnarray}
+  \frac{ 2 c_{i-1} }{ \Delta T_{i-1} }
++ \frac{ 4 c_{i}   }{ \Delta T_{i-1} }
++ \frac{ 6 d_{i} - 6 d_{i-1} }{ \Delta T_{i-1}^2 }
+&=&
+2 \left\{
+    - \frac{ 2 c_{i} }{ \Delta T_{i} }
+    - \frac{   c_{i+1}   }{ \Delta T_{i} }
+    + \frac{ 3 d_{i+1} - 3 d_{i} }{ \Delta T_{i}^2 }
+  \right\}
+\nonumber \\
+\frac{ 2 }{ \Delta T_{i-1} } c_{i-1}
++ \left(
+      \frac{ 4 }{ \Delta T_{i-1} }
+    + \frac{ 4 }{ \Delta T_{i} }
+  \right)
+  c_{i}
++ \frac{ 2 }{ \Delta T_{i} } c_{i+1}
+&=&
+\frac{ 6 d_{i+1} - 6 d_{i} }{ \Delta T_{i}^2 }
++
+\frac{ 6 d_{i} - 6 d_{i-1} }{ \Delta T_{i-1}^2 }
+\end{eqnarray}
+
+これを ${\rm L}_{i}$, ${\rm D}_{i}$, ${\rm U}_{i}$, ${\rm P}_{i}$ という記号を用いて、定数を以下のように置き換える。
+\begin{eqnarray}
+{\rm L}_{i} c_{i-1}
++
+{\rm D}_{i} c_{i}
++
+{\rm U}_{i} c_{i+1}
+=
+{\rm P}_{i}
+\end{eqnarray}
+
+それぞれ以下のように置き換えている。
+\begin{eqnarray}
+    {\rm L}_{i} &=& \frac{ 2 }{ \Delta T_{i-1} } \nonumber \\
+    {\rm D}_{i} &=& \left(
+                        \frac{ 4 }{ \Delta T_{i-1} }
+                      + \frac{ 4 }{ \Delta T_{i} }
+                    \right) \nonumber \\
+    {\rm U}_{i} &=& \frac{ 2 }{ \Delta T_{i} } \nonumber \\
+    {\rm P}_{i} &=& \frac{ 6 d_{i+1} - 6 d_{i} }{ \Delta T_{i}^2 }
+                    +
+                    \frac{ 6 d_{i} - 6 d_{i-1} }{ \Delta T_{i-1}^2 }
+\end{eqnarray}
+
+ただし、開始(左辺の下付き文字が $i=0$ )の場合、
+\begin{eqnarray}
+    {\rm L}_{0} &=& 0 \nonumber \\
+    {\rm D}_{0} &=& 1 \nonumber \\
+    {\rm U}_{0} &=& 0 \nonumber \\
+    {\rm P}_{0} &=& {\rm v}_{0}
+\end{eqnarray}
+
+終端(左辺の下付き文字が $i=f$ )の場合、
+\begin{eqnarray}
+    {\rm L}_{f} &=& 0 \nonumber \\
+    {\rm D}_{f} &=& 1 \nonumber \\
+    {\rm U}_{f} &=& 0 \nonumber \\
+    {\rm P}_{f} &=& {\rm v}_{f}
+\end{eqnarray}
+
+とする。これにより $i=0 \ldots f$ 全てを書き出すと以下のようになる。
+\begin{eqnarray}
+  \begin{array}{lllllllll}
+      {\rm D}_{0} c_{0}     & +{\rm U}_{0} c_{1}    &                       & & & & & & = {\rm P}_{0} \\
+      {\rm L}_{1} c_{0}     & +{\rm D}_{1} c_{1}    & +{\rm U}_{1} c_{2}    & & & & & & = {\rm P}_{1} \\
+                            &                       & \cdots                & & & & & & \vdots      \\
+    & & {\rm L}_{i-1} c_{i-2} & +{\rm D}_{i-1} c_{i-1}  & +{\rm U}_{i-1} c_{i-1} &                      & & & = {\rm P}_{i-1} \\
+    & &                       & \ \ {\rm L}_{1} c_{i}   & +{\rm D}_{i}   c_{i}   & +{\rm U}_{i} c_{i+1} & & & = {\rm P}_{i}   \\
+    & &                       &                         &                        & \cdots               & & & \vdots        \\
+    & & & & & {\rm L}_{f-1} c_{f-2} & +{\rm D}_{f-1} c_{f-1}    & +{\rm U}_{f-1} c_{f} & = {\rm P}_{f-1} \\
+    & & & & &                       & \ \ {\rm L}_{f} c_{f-1}   & +{\rm D}_{f}   c_{f} & = {\rm P}_{f}
+  \end{array}
+\end{eqnarray}
+
+さらに行列式で表せば以下となる。
+\begin{eqnarray}
+  \left[
+    \begin{array}{ccccccccc}
+        {\rm D}_{0} & {\rm U}_{0} & 0           &        & & & & \\
+        {\rm L}_{1} & {\rm D}_{1} & {\rm U}_{1} &        & & & & \\
+                    &             &             &        & & & & \\
+                    &             &             & \ddots & & & & \\
+      & &               &             &               &             &        & \\
+      & &               & {\rm L}_{1} & {\rm D}_{i}   & {\rm U}_{i} &        & \\
+      & &               &             &               &             &        & \\
+      & &               &             &               & \ddots      &        & \\
+      & & & & &               &                 & \\
+      & & & & & {\rm L}_{f-1} & {\rm D}_{f-1}   & {\rm U}_{f-1} \\
+      & & & & & 0             & \ \ {\rm L}_{f} & {\rm D}_{f}
+    \end{array}
+  \right]
+  \left[
+    \begin{array}{c}
+      c_{0}   \\
+      c_{1}   \\
+      c_{2}   \\
+      \vdots  \\
+      c_{i-1} \\
+      c_{i}   \\
+      c_{i+1} \\
+      \vdots  \\
+      c_{f-2} \\
+      c_{f-1} \\
+      c_{f}
+    \end{array}
+  \right]
+  =
+  \left[
+    \begin{array}{c}
+      {\rm P}_{0}   \\
+      {\rm P}_{1}   \\
+      {\rm P}_{2}   \\
+      \vdots        \\
+      \vdots        \\
+      {\rm P}_{i}   \\
+      \vdots        \\
+      \vdots        \\
+      {\rm P}_{f-1} \\
+      {\rm P}_{f}
+    \end{array}
+  \right]
+\end{eqnarray}
+
+左辺の行列は三重対角行列でありこの連立方程式は以下のアルゴリズムで効率よく解くことができる。
+
+$i=0$ から始めて、 $i=0 \ldots f$ の昇順で以下のような計算で置き換えていく。
+\begin{eqnarray}
+  &1)& \ \ {\rm W}_{i} := \frac{ {\rm L}_{i} }{ {\rm D}_{i-1} } \nonumber \\
+  &2)& \ \ {\rm D'}_{i} := {\rm D}_{i} - {\rm W}_{i} {\rm U}_{i-1} \nonumber \\
+  && \ \ {\rm P'}_{i} := {\rm P}_{i} - {\rm W}_{i} {\rm P}_{i-1}
+\end{eqnarray}
+
+これにより、行列式は以下のように変形される。
+\begin{eqnarray}
+  \left[
+    \begin{array}{ccccccccc}
+        {\rm D'}_{0} & {\rm U}_{0}  & 0           &        & & & & \\
+        0            & {\rm D'}_{1} & {\rm U}_{1} &        & & & & \\
+                     &              &             &        & & & & \\
+                     &              &             & \ddots & & & & \\
+      & &               &             &                &             &        & \\
+      & &               & 0           & {\rm D'}_{i}   & {\rm U}_{i} &        & \\
+      & &               &             &                &             &        & \\
+      & &               &             &                & \ddots      &        & \\
+      & & & & &               &                 & \\
+      & & & & & 0             & {\rm D'}_{f-1}  & {\rm U}_{f-1} \\
+      & & & & & 0             & 0               & {\rm D'}_{f}
+    \end{array}
+  \right]
+  \left[
+    \begin{array}{c}
+      c_{0}   \\
+      c_{1}   \\
+      c_{2}   \\
+      \vdots  \\
+      c_{i-1} \\
+      c_{i}   \\
+      c_{i+1} \\
+      \vdots  \\
+      c_{f-2} \\
+      c_{f-1} \\
+      c_{f}
+    \end{array}
+  \right]
+  =
+  \left[
+    \begin{array}{c}
+      {\rm P'}_{0}   \\
+      {\rm P'}_{1}   \\
+      {\rm P'}_{2}   \\
+      \vdots         \\
+      \vdots         \\
+      {\rm P'}_{i}   \\
+      \vdots         \\
+      \vdots         \\
+      {\rm P'}_{f-1} \\
+      {\rm P'}_{f}
+    \end{array}
+  \right]
+\end{eqnarray}
+
+次に、 $i=f$ から始めて、 $i=f \ldots 0$ の降順で以下のような計算で $c_{i}$ を求めていく。
+\begin{eqnarray}
+&&
+\left(
+  c_{f} = \frac{ {\rm P'}_{f} }{ {\rm D'}_{f} }
+\right) \nonumber \\
+&& \therefore c_{i} = \frac{ {\rm P'}_{i} - {\rm U}_{i} c_{i+1} }{ {\rm D'}_{i} }
+\end{eqnarray}
+
+* まとめ
+
+以上をまとめると、以下のアルゴリズムとなる。
+
+**(1) $d_{i}$ を計算**
+\begin{eqnarray}
+d_{i} = {\rm x}_{i}
+\end{eqnarray}
+
+
+**(2) ${\rm L}_{i}$, ${\rm D}_{i}$, ${\rm U}_{i}$,  ${\rm P}_{i}$ を計算。**
+\begin{eqnarray}
+    {\rm L}_{i} &=& \frac{ 2 }{ \Delta T_{i-1} } \nonumber \\
+    {\rm D}_{i} &=& \left(
+                        \frac{ 4 }{ \Delta T_{i-1} }
+                      + \frac{ 4 }{ \Delta T_{i} }
+                    \right) \nonumber \\
+    {\rm U}_{i} &=& \frac{ 2 }{ \Delta T_{i} } \nonumber \\
+    {\rm P}_{i} &=& \frac{ 6 d_{i+1} - 6 d_{i} }{ \Delta T_{i}^2 }
+                    +
+                    \frac{ 6 d_{i} - 6 d_{i-1} }{ \Delta T_{i-1}^2 }
+\end{eqnarray}
+
+ただし、開始(左辺の下付き文字が $i=0$ )の場合、
+\begin{eqnarray}
+    {\rm L}_{0} &=& 0 \nonumber \\
+    {\rm D}_{0} &=& 1 \nonumber \\
+    {\rm U}_{0} &=& 0 \nonumber \\
+    {\rm P}_{0} &=& {\rm v}_{0}
+\end{eqnarray}
+
+終端(左辺の下付き文字が $i=f$ )の場合、
+\begin{eqnarray}
+    {\rm L}_{f} &=& 0 \nonumber \\
+    {\rm D}_{f} &=& 1 \nonumber \\
+    {\rm U}_{f} &=& 0 \nonumber \\
+    {\rm P}_{f} &=& {\rm v}_{f}
+\end{eqnarray}
+
+とする。
+
+
+**(3) $c_{i}$ を計算**
+
+$i=0$ から始めて、 $i=0 \ldots f$ の昇順で以下のような計算で置き換えていく。
+\begin{eqnarray}
+  &1)& \ \ {\rm W}_{i} := \frac{ {\rm L}_{i} }{ {\rm D}_{i-1} } \nonumber \\
+  &2)& \ \ {\rm D'}_{i} := {\rm D}_{i} - {\rm W}_{i} {\rm U}_{i-1} \nonumber \\
+  && \ \ {\rm P'}_{i} := {\rm P}_{i} - {\rm W}_{i} {\rm P}_{i-1}
+\end{eqnarray}
+
+次に、 $i=f$ から始めて、 $i=f \ldots 0$ の降順で以下のような計算で $c_{i}$ を求めていく。
+\begin{eqnarray}
+&&
+\left(
+  c_{f} = \frac{ {\rm P'}_{f} }{ {\rm D'}_{f} }
+\right) \nonumber \\
+&& \therefore c_{i} = \frac{ {\rm P'}_{i} - {\rm U}_{i} c_{i+1} }{ {\rm D'}_{i} }
+\end{eqnarray}
+
+
+**(4) $d_{i}$ を計算**
+
+\begin{eqnarray}
+a_{i} &=&   \frac{ c_{i} }{ \Delta T_{i}^2 }
+            + \frac{ c_{i+1}   }{ \Delta T_{i}^2 }
+            + \frac{ 2 d_{i+1} - 2 d_{i} }{ \Delta T_{i}^3 }
+\end{eqnarray}
+
+
+**(5) $b_{i}$ を計算**
+
+\begin{eqnarray}
+b_{i} &=& - \frac{ 2 c_{i}   }{ \Delta T_{i} }
+          - \frac{   c_{i+1} }{ \Delta T_{i} }
+          + \frac{ 3 d_{i+1} - 3 d_{i} }{ \Delta T_{i}^2 }
+\end{eqnarray}
+
+
+
+\begin{flushright}
+以上
+\end{flushright}
+
