@@ -1,7 +1,7 @@
 #+TITLE: 3次スプライン軌道 計算書
-#+AUTHOR: 作成者 兼田大史
-#+DATE:
-#+OPTIONS: toc:nil H:3 num:t \n:nil creator:nil
+# #+AUTHOR:
+# #+DATE:
+#+OPTIONS: toc:nil H:3 num:t \n:nil creator:nil author:nil <:nil creator:nil date:nil timestamp:nil
 #+OPTIONS: ^:{}
 #+LANGUAGE: ja
 #+LaTeX_CLASS: jsarticle
@@ -37,6 +37,7 @@
 x_n(t) &=& a_n (t - t_n)^3 + b_n(t - t_n)^2 + c_n(t - t_n) + d_n
 \end{eqnarray}
 
+境界点の連続性条件
 \begin{eqnarray}
 {\rm x}_{n}  &=& x_{n-1} (t_{n}) \nonumber \\
              &=& x_{n}   (t_{n}) \nonumber \\
@@ -385,7 +386,9 @@ d_{i} = {\rm x}_{i}
 \end{eqnarray}
 
 
-**(2) ${\rm L}_{i}$, ${\rm D}_{i}$, ${\rm U}_{i}$,  ${\rm P}_{i}$ を計算。**
+**(2) ${\rm L}_{i}$, ${\rm D}_{i}$, ${\rm U}_{i}$,  ${\rm P}_{i}$ を計算。** 
+
+$\Delta T_0 = t_1 - t_0$, $\ldots$ $\Delta T_{i-1} = t_{i} - t_{i-1}$, $\Delta T_{i} = t_{i+1} - t_{i}$, $\ldots$ $\Delta T_{f-1} = t_{f} - t_{f-1}$ とおく。
 \begin{eqnarray}
     {\rm L}_{i} &=& \frac{ 2 }{ \Delta T_{i-1} } \nonumber \\
     {\rm D}_{i} &=& \left(
