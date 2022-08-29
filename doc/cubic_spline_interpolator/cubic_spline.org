@@ -25,6 +25,12 @@
 
 # {{{pagebreak}}}
 
+#+CAPTION: 3次スプラインのイメージ
+#+NAME: fig:cubic_spline_image
+#+ATTR_HTML: :align center :width 1000
+#+ATTR_LaTeX: :width 0.9\hsize
+[[./Figure/eps/cubic_spline.eps]]
+
 * モデル式
 
 \begin{eqnarray}
@@ -67,7 +73,7 @@ $[a_f, b_f, c_f, d_f]$,
 
 * 計算
 
-元の式、1階微分、2階微分は以下のようになる。
+元の式(0階微分)、1階微分、2階微分は以下のようになる。
 \begin{eqnarray}
 x_{i-1}(t)        &=&   a_{i-1} (t - t_{i-1})^3 +   b_{i-1} (t - t_{i-1})^2
                     +   c_{i-1} (t - t_{i-1})   +   d_{i-1} \nonumber \\
@@ -85,6 +91,8 @@ x_{i-1}(t)        &=&   a_{i-1} (t - t_{i-1})^3 +   b_{i-1} (t - t_{i-1})^2
 # \end{eqnarray}
 
 $\Delta T_0 = t_1 - t_0$, $\ldots$ $\Delta T_{i-1} = t_{i} - t_{i-1}$, $\Delta T_{i} = t_{i+1} - t_{i}$, $\ldots$ $\Delta T_{f-1} = t_{f} - t_{f-1}$ とおく。
+
+各曲線同士が連結する境界点(0階微分)、1階微分、2階微分の連続性より以下の等式が成り立つ。
 \begin{eqnarray}
 {\rm x}_{i} &=& x_{i-1}(t_{i})        =   a_{i-1} \Delta T_{i-1}^3 +   b_{i-1} \Delta T_{i-1}^2
                                       +   c_{i-1} \Delta T_{i-1}   +   d_{i-1} \nonumber \\
