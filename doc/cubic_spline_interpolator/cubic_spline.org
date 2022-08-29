@@ -137,7 +137,7 @@ a_{i-1} \Delta T_{i-1}^3 - c_{i-1} \Delta T_{i-1} - 2 d_{i-1}
 \therefore
 a_{i-1} &=&   \frac{ c_{i-1} }{ \Delta T_{i-1}^2 }
             + \frac{ c_{i}   }{ \Delta T_{i-1}^2 }
-            + \frac{ - 2 d_{i} + 2 d_{i-1} }{ \Delta T_{i-1}^3 }
+            - \frac{ 2 d_{i} - 2 d_{i-1} }{ \Delta T_{i-1}^3 }
 \end{eqnarray}
 
 
@@ -184,7 +184,7 @@ b_{i} &=& - \frac{ 2 c_{i} }{ \Delta T_{i} }
 \begin{eqnarray}
   \frac{ 2 c_{i-1} }{ \Delta T_{i-1} }
 + \frac{ 4 c_{i}   }{ \Delta T_{i-1} }
-+ \frac{ 6 d_{i} - 6 d_{i-1} }{ \Delta T_{i-1}^2 }
+- \frac{ 6 d_{i} - 6 d_{i-1} }{ \Delta T_{i-1}^2 }
 &=&
 2 \left\{
     - \frac{ 2 c_{i} }{ \Delta T_{i} }
@@ -436,12 +436,12 @@ $i=0$ から始めて、 $i=0 \ldots f$ の昇順で以下のような計算で�
 \end{eqnarray}
 
 
-**(4) $d_{i}$ を計算**
+**(4) $a_{i}$ を計算**
 
 \begin{eqnarray}
 a_{i} &=&   \frac{ c_{i} }{ \Delta T_{i}^2 }
             + \frac{ c_{i+1}   }{ \Delta T_{i}^2 }
-            + \frac{ 2 d_{i+1} - 2 d_{i} }{ \Delta T_{i}^3 }
+            - \frac{ 2 d_{i+1} - 2 d_{i} }{ \Delta T_{i}^3 }
 \end{eqnarray}
 
 
