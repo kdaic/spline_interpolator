@@ -103,6 +103,9 @@ See the below documents which simply explains this library.
 
 - [./doc/spline\_interpolator/spline\_interpolator\_JP](./doc/spline_interpolator/spline_interpolator_JP.md)
 
+Also the doxygen output html is placed on
+
+- [Doxygen html](http://kdaic.net/program/trajectory/spline_interpolator/doxyout/index.html)
 
 &nbsp;
 
