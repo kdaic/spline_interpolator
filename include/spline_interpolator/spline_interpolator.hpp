@@ -1,3 +1,8 @@
+/// \mainpage
+///
+/// This is practice for implementing spline-interplator. \n
+/// See [README.md](./README.md).
+///
 #ifndef INCLUDE_BASE_SPLINE_INTERPOLATOR_HPP_
 #define INCLUDE_BASE_SPLINE_INTERPOLATOR_HPP_
 
