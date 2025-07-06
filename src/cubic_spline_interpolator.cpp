@@ -184,8 +184,8 @@ RetCode CubicSplineInterpolator::generate_path(
     const double& vel1 = target_tpva_queue_.get( i+1 ).value.vel;
     const double& vel0 = target_tpva_queue_.get( i   ).value.vel;
     const double  dT0  = target_tpva_queue_.dT(  i   );
-    a_.push_back( ((vel1 + vel0)*dT0     - 2.0*(pos1 - pos0)) / (dT0 * dT0 * dT0) );
-    b_.push_back( ((vel1 + 2.0*vel0)*dT0 + 3.0*(pos1 - pos0)) / (dT0 * dT0 ) );
+    a_.push_back( (2.0*(pos0 - pos1) + (vel1 + vel0)*dT0) / (dT0 * dT0 * dT0) );
+    b_.push_back( (3.0*(pos1 - pos0) - (vel1 + 2.0*vel0)*dT0) / (dT0 * dT0 ) );
     c_.push_back( vel0 );
     d_.push_back( pos0 );
   }
