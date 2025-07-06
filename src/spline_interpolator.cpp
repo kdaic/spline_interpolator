@@ -124,11 +124,11 @@ RetCode SplineInterpolator::generate_path(
 
   } else {
 
-    TPVAQueue target_tpva_queue;
-    target_tpva_queue.push_on_clocktime( 0.0, pvas );
-    target_tpva_queue.push_on_dT( dT, pvaf );
+    target_tpva_queue_.clear();
+    target_tpva_queue_.push_on_clocktime( ts, pvas );
+    target_tpva_queue_.push_on_dT( dT, pvaf );
 
-    return generate_path( target_tpva_queue );
+    return generate_path( target_tpva_queue_ );
   }
 
   return SPLINE_NOT_DEF_FUNCTION;
