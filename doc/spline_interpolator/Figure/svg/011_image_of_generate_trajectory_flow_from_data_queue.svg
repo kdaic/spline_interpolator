@@ -2,24 +2,24 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:ns0="http://www.iki.fi/pav/software/textext/"
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="400mm"
    height="350mm"
    viewBox="0 0 400 350"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    sodipodi:docname="011_image_of_generate_trajectory_flow_from_data_queue.svg"
    inkscape:export-filename="../png/011_image_of_generate_trajectory_flow_from_data_queue.png"
    inkscape:export-xdpi="300"
-   inkscape:export-ydpi="300">
+   inkscape:export-ydpi="300"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:ns0="http://www.iki.fi/pav/software/textext/">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -27,19 +27,20 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.3535534"
-     inkscape:cx="553.65339"
-     inkscape:cy="679.28249"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="648.77046"
+     inkscape:cy="944.69464"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1853"
-     inkscape:window-height="1025"
-     inkscape:window-x="67"
-     inkscape:window-y="27"
+     inkscape:window-width="1850"
+     inkscape:window-height="1043"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:measure-start="0,0"
-     inkscape:measure-end="0,0" />
+     inkscape:measure-end="0,0"
+     inkscape:pagecheckerboard="0" />
   <defs
      id="defs2">
     <marker
@@ -367,7 +368,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -431,7 +432,7 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot903"
-       style="font-style:normal;font-weight:normal;font-size:26.66666603px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        transform="matrix(0.26458333,0,0,0.26458333,15.875,0)"><flowRegion
          id="flowRegion905"><rect
            id="rect907"
@@ -440,10 +441,11 @@
            x="97.984795"
            y="288.13367" /></flowRegion><flowPara
          id="flowPara909"
-         style="line-height:1" /></flowRoot>    <flowRoot
+         style="line-height:1" /></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot911"
-       style="font-style:normal;font-weight:normal;font-size:26.66666603px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        transform="matrix(0.26458333,0,0,0.26458333,15.875,0)"><flowRegion
          id="flowRegion913"><rect
            id="rect915"
@@ -451,10 +453,11 @@
            height="77.276672"
            x="100.51018"
            y="294.69968" /></flowRegion><flowPara
-         id="flowPara919" /></flowRoot>    <flowRoot
+         id="flowPara919" /></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot923"
-       style="font-style:normal;font-weight:normal;font-size:26.66666603px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        transform="translate(15.875)"><flowRegion
          id="flowRegion925"><rect
            id="rect927"
@@ -462,7 +465,8 @@
            height="79.802048"
            x="108.5914"
            y="318.43826" /></flowRegion><flowPara
-         id="flowPara929" /></flowRoot>    <flowRoot
+         id="flowPara929" /></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot939-3"
        style="font-style:normal;font-weight:normal;font-size:16px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
@@ -475,7 +479,8 @@
            x="88.893425"
            y="323.99411"
            style="font-size:16px" /></flowRegion><flowPara
-         id="flowPara945-5">...</flowPara></flowRoot>    <g
+         id="flowPara945-5">...</flowPara></flowRoot>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$t_f$"
@@ -500,7 +505,8 @@
    inkscape:connector-curvature="0"
    id="path1662"
    d="m 229.88,708.38 h 0.68 c 0.14,0 0.23,0 0.23,0.15 0,0.1 -0.09,0.1 -0.22,0.1 h -0.64 c 0.16,0.88 0.21,1.2 0.27,1.4 0.03,0.16 0.19,0.3 0.35,0.3 0.01,0 0.2,0 0.33,-0.08 -0.28,-0.09 -0.31,-0.34 -0.31,-0.38 0,-0.16 0.12,-0.26 0.28,-0.26 0.19,0 0.4,0.16 0.4,0.42 0,0.32 -0.34,0.5 -0.7,0.5 -0.3,0 -0.65,-0.18 -0.84,-0.52 -0.14,-0.26 -0.19,-0.58 -0.34,-1.38 h -0.55 c -0.14,0 -0.23,0 -0.23,-0.16 0,-0.09 0.09,-0.09 0.22,-0.09 h 0.51 c 0,-0.04 -0.44,-2.55 -0.61,-3.29 -0.04,-0.15 -0.16,-0.68 -0.49,-0.68 -0.01,0 -0.18,0 -0.31,0.08 0.29,0.09 0.31,0.34 0.31,0.38 0,0.16 -0.12,0.26 -0.28,0.26 -0.19,0 -0.4,-0.16 -0.4,-0.42 0,-0.32 0.33,-0.5 0.68,-0.5 0.45,0 0.75,0.46 0.84,0.61 0.25,0.47 0.41,1.33 0.42,1.41 z" />
-</g>    <g
+</g>
+    <g
        id="g1780"
        transform="matrix(0.48307477,0,0,-0.48307477,-63.180628,350.12185)"
        xml:space="preserve"
@@ -535,7 +541,8 @@
    inkscape:connector-curvature="0"
    d="m 240.26,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 0.01 0 0.01 0 0.01 0 0.01 0 0.01 l -0.01,0.01 v 0.01 0 l -0.01,0.01 v 0.01 h -0.01 v 0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 h -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 c -0.45,-0.44 -1.09,-0.45 -1.38,-0.45 v -0.25 c 0.17,0 0.63,0 1.02,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.27 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    id="path1778" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$t_{i+1}$"
@@ -575,7 +582,8 @@
    inkscape:connector-curvature="0"
    id="path1898"
    d="m 238.31,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 h -0.01 v 0.01 0.01 0 0.01 0 0.01 0 0.01 0 0.01 l -0.01,0.01 v 0.01 0 l -0.01,0.01 v 0.01 h -0.01 v 0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 h -0.01 v 0 h -0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 c -0.45,-0.44 -1.09,-0.45 -1.37,-0.45 v -0.25 c 0.16,0 0.62,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.26 c -0.7,0 -0.7,0.09 -0.7,0.32 z" />
-</g>    <path
+</g>
+    <path
        sodipodi:nodetypes="cccccccc"
        inkscape:connector-curvature="0"
        id="path2080"
@@ -646,7 +654,8 @@
            x="88.893425"
            y="323.99411"
            style="font-size:16px" /></flowRegion><flowPara
-         id="flowPara945-5-0">...</flowPara></flowRoot>    <rect
+         id="flowPara945-5-0">...</flowPara></flowRoot>
+    <rect
        style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.30000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="rect819-1-0-4"
        width="46.16666"
@@ -792,7 +801,8 @@
    inkscape:connector-curvature="0"
    d="m 227.87,706.45 -0.01,-0.02 v -0.02 l -0.01,-0.03 -0.01,-0.02 v -0.02 l -0.01,-0.01 v -0.02 l -0.01,-0.02 v -0.02 l -0.01,-0.02 v -0.01 -0.01 -0.01 -0.01 -0.01 -0.02 -0.01 -0.01 -0.01 c 0,-0.32 0.28,-0.59 0.66,-0.59 0.7,0 1.01,0.96 1.01,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.11,-0.05 -0.14,-0.12 -0.16,-0.56 -0.47,-0.84 -0.74,-0.84 -0.14,0 -0.17,0.09 -0.17,0.24 0,0.16 0.05,0.29 0.11,0.45 0.07,0.18 0.14,0.37 0.22,0.55 0.06,0.17 0.32,0.8 0.34,0.88 0.03,0.07 0.05,0.16 0.05,0.23 0,0.32 -0.28,0.59 -0.67,0.59 -0.69,0 -1.01,-0.95 -1.01,-1.07 0,-0.09 0.1,-0.09 0.12,-0.09 0.09,0 0.1,0.04 0.12,0.11 0.19,0.6 0.49,0.85 0.75,0.85 0.11,0 0.18,-0.05 0.18,-0.24 0,-0.16 -0.05,-0.27 -0.22,-0.7 z"
    id="path1189-6-5-3" />
-</g>    <rect
+</g>
+    <rect
        style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.30000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="rect819-8-5-2-0-9"
        width="31.358873"
@@ -829,7 +839,8 @@
    inkscape:connector-curvature="0"
    d="m 227.87,706.45 -0.01,-0.02 v -0.02 l -0.01,-0.03 -0.01,-0.02 v -0.02 l -0.01,-0.01 v -0.02 l -0.01,-0.02 v -0.02 l -0.01,-0.02 v -0.01 -0.01 -0.01 -0.01 -0.01 -0.02 -0.01 -0.01 -0.01 c 0,-0.32 0.28,-0.59 0.66,-0.59 0.7,0 1.01,0.96 1.01,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.11,-0.05 -0.14,-0.12 -0.16,-0.56 -0.47,-0.84 -0.74,-0.84 -0.14,0 -0.17,0.09 -0.17,0.24 0,0.16 0.05,0.29 0.11,0.45 0.07,0.18 0.14,0.37 0.22,0.55 0.06,0.17 0.32,0.8 0.34,0.88 0.03,0.07 0.05,0.16 0.05,0.23 0,0.32 -0.28,0.59 -0.67,0.59 -0.69,0 -1.01,-0.95 -1.01,-1.07 0,-0.09 0.1,-0.09 0.12,-0.09 0.09,0 0.1,0.04 0.12,0.11 0.19,0.6 0.49,0.85 0.75,0.85 0.11,0 0.18,-0.05 0.18,-0.24 0,-0.16 -0.05,-0.27 -0.22,-0.7 z"
    id="path1189-6-5-3-3" />
-</g>    <path
+</g>
+    <path
        style="fill:none;stroke:#000000;stroke-width:0.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4415)"
        d="m 46.853434,105.76704 0.07828,-53.394636"
        id="path4305"
@@ -878,7 +889,8 @@
    inkscape:connector-curvature="0"
    d="m 225.49,711.1 h 0.93 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.87 c 0.36,1.41 0.41,1.61 0.41,1.67 0,0.16 -0.13,0.26 -0.29,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.01,0 1.58,1.45 1.58,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.42,-1.04 -0.95,-1.28 -1.29,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
    id="path7096" />
-</g>    <g
+</g>
+    <g
        id="g7098-2"
        transform="matrix(1.0500101,0,0,-1.0500101,39.11614,854.76669)"
        xml:space="preserve"
@@ -898,7 +910,8 @@
    inkscape:connector-curvature="0"
    d="m 225.49,711.1 h 0.93 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.87 c 0.36,1.41 0.41,1.61 0.41,1.67 0,0.16 -0.13,0.26 -0.29,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.01,0 1.58,1.45 1.58,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.42,-1.04 -0.95,-1.28 -1.29,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
    id="path7096-8" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x(t)$"
@@ -933,7 +946,8 @@
    d="m 239.48,709.61 v 0.07 0.08 0.08 l -0.01,0.08 v 0.17 l -0.02,0.17 -0.01,0.18 -0.02,0.19 -0.03,0.2 -0.03,0.2 -0.04,0.2 -0.05,0.21 -0.05,0.21 -0.06,0.21 -0.07,0.21 -0.08,0.21 -0.05,0.11 -0.04,0.11 -0.05,0.1 -0.05,0.11 c -0.6,1.22 -1.45,1.87 -1.55,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.97,-0.99 1.54,-2.57 1.54,-4.64 0,-1.7 -0.37,-3.45 -1.6,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 0.99,0.68 1.58,1.94 0.51,1.09 0.63,2.19 0.63,3.03 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x(t)$"
@@ -968,7 +982,8 @@
    d="m 239.48,709.61 v 0.07 0.08 0.08 l -0.01,0.08 v 0.17 l -0.02,0.17 -0.01,0.18 -0.02,0.19 -0.03,0.2 -0.03,0.2 -0.04,0.2 -0.05,0.21 -0.05,0.21 -0.06,0.21 -0.07,0.21 -0.08,0.21 -0.05,0.11 -0.04,0.11 -0.05,0.1 -0.05,0.11 c -0.6,1.22 -1.45,1.87 -1.55,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.97,-0.99 1.54,-2.57 1.54,-4.64 0,-1.7 -0.37,-3.45 -1.6,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 0.99,0.68 1.58,1.94 0.51,1.09 0.63,2.19 0.63,3.03 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <path
+</g>
+    <path
        style="opacity:0.98999999;fill:none;stroke:#000000;stroke-width:0.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 276.59267,208.17474 c 5.43061,0.28403 8.3976,6.51733 9.39171,11.01586 1.51997,6.87811 5.91744,10.13585 9.72698,10.65525 4.16752,0.5682 9.92058,-5.19301 9.92058,-5.19301"
        id="path2001-8-6"
@@ -1205,7 +1220,8 @@
    d="m 239.48,709.61 v 0.07 0.08 0.08 l -0.01,0.08 v 0.17 l -0.02,0.17 -0.01,0.18 -0.02,0.19 -0.03,0.2 -0.03,0.2 -0.04,0.2 -0.05,0.21 -0.05,0.21 -0.06,0.21 -0.07,0.21 -0.08,0.21 -0.05,0.11 -0.04,0.11 -0.05,0.1 -0.05,0.11 c -0.6,1.22 -1.45,1.87 -1.55,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.97,-0.99 1.54,-2.57 1.54,-4.64 0,-1.7 -0.37,-3.45 -1.6,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 0.99,0.68 1.58,1.94 0.51,1.09 0.63,2.19 0.63,3.03 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <path
+</g>
+    <path
        style="opacity:0.98999999;fill:none;stroke:#000000;stroke-width:0.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4415-3-8-0)"
        d="m 166.45036,240.32178 151.45771,0.089"
        id="path4305-2-7-2"
@@ -1231,7 +1247,8 @@
    inkscape:connector-curvature="0"
    d="m 225.49,711.1 h 0.93 c 0.2,0 0.3,0 0.3,0.2 0,0.11 -0.1,0.11 -0.28,0.11 h -0.87 c 0.36,1.41 0.41,1.61 0.41,1.67 0,0.16 -0.13,0.26 -0.29,0.26 -0.03,0 -0.31,-0.01 -0.4,-0.35 l -0.39,-1.58 h -0.94 c -0.2,0 -0.3,0 -0.3,-0.19 0,-0.12 0.08,-0.12 0.28,-0.12 h 0.88 c -0.72,-2.82 -0.76,-2.99 -0.76,-3.17 0,-0.54 0.38,-0.91 0.92,-0.91 1.01,0 1.58,1.45 1.58,1.53 0,0.1 -0.08,0.1 -0.12,0.1 -0.09,0 -0.1,-0.04 -0.15,-0.14 -0.42,-1.04 -0.95,-1.28 -1.29,-1.28 -0.21,0 -0.31,0.13 -0.31,0.46 0,0.24 0.02,0.31 0.06,0.48 z"
    id="path7096-8-3" />
-</g>    <path
+</g>
+    <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 229.71585,216.24133 -0.0802,24.20167"
        id="path11665"
@@ -1845,7 +1862,8 @@
    inkscape:connector-curvature="0"
    d="m 283.86,713.49 h 1.09 v 0.25 h -1.09 v 1.28 h -0.24 c -0.01,-0.63 -0.29,-1.32 -0.96,-1.34 v -0.19 h 0.65 v -1.88 c 0,-0.78 0.58,-0.94 0.98,-0.94 0.46,0 0.79,0.4 0.79,0.95 V 712 h -0.24 v -0.38 c 0,-0.47 -0.23,-0.73 -0.5,-0.73 -0.48,0 -0.48,0.59 -0.48,0.71 z"
    id="path20726" />
-</g>    <path
+</g>
+    <path
        sodipodi:nodetypes="cccccccc"
        inkscape:connector-curvature="0"
        id="path2080-0-6-4-5"
@@ -1929,7 +1947,8 @@
    d="m 238.42,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 l -0.01,0.01 v 0 0.01 0 0.01 0 0.01 0 0.01 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 0 l -0.01,0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 c -0.45,-0.44 -1.09,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.26 v -0.25 c 0.12,0.01 0.98,0.03 1.24,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.26 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        id="g22926"
        transform="matrix(0.48307477,0,0,-0.48307477,168.52402,410.12494)"
        xml:space="preserve"
@@ -1959,7 +1978,8 @@
    id="path22924"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$t_{i+1}$"
@@ -1999,7 +2019,8 @@
    d="m 238.31,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 h -0.01 v 0.01 0.01 0 0.01 0 0.01 0 0.01 0 0.01 l -0.01,0.01 v 0.01 0 l -0.01,0.01 v 0.01 h -0.01 v 0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 h -0.01 v 0 h -0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 c -0.45,-0.44 -1.09,-0.45 -1.37,-0.45 v -0.25 c 0.16,0 0.62,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.26 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <path
+</g>
+    <path
        style="opacity:0.98999999;fill:none;stroke:#000000;stroke-width:0.40000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.4, 0.4;stroke-dashoffset:0;stroke-opacity:1"
        d="m 221.62603,89.486006 -0.0122,13.965104"
        id="path11665-3-8-1-8-6-7-8-8-2-6-5-9-3-2-4-5-9-4-5"
@@ -2069,7 +2090,8 @@
    inkscape:connector-curvature="0"
    d="m 238.31,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 h -0.01 v 0.01 0.01 0 0.01 0 0.01 0 0.01 0 0.01 l -0.01,0.01 v 0.01 0 l -0.01,0.01 v 0.01 h -0.01 v 0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 h -0.01 v 0 h -0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 c -0.45,-0.44 -1.09,-0.45 -1.37,-0.45 v -0.25 c 0.16,0 0.62,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.26 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    id="path24886-1" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$t_{i-1}$"
@@ -2109,7 +2131,8 @@
    inkscape:connector-curvature="0"
    id="path25824-6"
    d="m 238.42,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 l -0.01,0.01 v 0 0.01 0 0.01 0 0.01 0 0.01 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 0 l -0.01,0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 c -0.45,-0.44 -1.09,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.26 v -0.25 c 0.12,0.01 0.98,0.03 1.24,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.26 c -0.7,0 -0.7,0.09 -0.7,0.32 z" />
-</g>    <g
+</g>
+    <g
        id="g26838"
        transform="matrix(0.48307477,0,0,-0.48307477,-45.468277,538.28013)"
        xml:space="preserve"
@@ -2224,7 +2247,8 @@
    inkscape:connector-curvature="0"
    d="m 308.06,709.61 v 0.07 0.08 l -0.01,0.08 v 0.08 l -0.01,0.17 -0.01,0.17 -0.01,0.18 -0.03,0.19 -0.02,0.2 -0.04,0.2 -0.03,0.2 -0.05,0.21 -0.05,0.21 -0.07,0.21 -0.07,0.21 -0.07,0.21 -0.05,0.11 -0.04,0.11 -0.05,0.1 -0.05,0.11 c -0.6,1.22 -1.46,1.87 -1.56,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.98,-0.99 1.55,-2.57 1.55,-4.64 0,-1.7 -0.37,-3.45 -1.61,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 1,0.68 1.59,1.94 0.51,1.09 0.63,2.19 0.63,3.03 z"
    id="path26836" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x_{i}(t)$ $( t_{i-1} \\le t &lt; t_i )$"
@@ -2339,7 +2363,8 @@
    inkscape:connector-curvature="0"
    id="path29811"
    d="m 308.06,709.61 v 0.07 0.08 l -0.01,0.08 v 0.08 l -0.01,0.17 -0.01,0.17 -0.01,0.18 -0.03,0.19 -0.02,0.2 -0.04,0.2 -0.03,0.2 -0.05,0.21 -0.05,0.21 -0.07,0.21 -0.07,0.21 -0.07,0.21 -0.05,0.11 -0.04,0.11 -0.05,0.1 -0.05,0.11 c -0.6,1.22 -1.46,1.87 -1.56,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.98,-0.99 1.55,-2.57 1.55,-4.64 0,-1.7 -0.37,-3.45 -1.61,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 1,0.68 1.59,1.94 0.51,1.09 0.63,2.19 0.63,3.03 z" />
-</g>    <g
+</g>
+    <g
        id="g30818"
        transform="matrix(0.48307477,0,0,-0.48307477,-44.10813,575.92684)"
        xml:space="preserve"
@@ -2474,7 +2499,8 @@
    inkscape:connector-curvature="0"
    d="m 328.45,709.61 v 0.07 0.08 0.08 0.08 l -0.01,0.17 -0.01,0.17 -0.02,0.18 -0.02,0.19 -0.03,0.2 -0.03,0.2 -0.04,0.2 -0.04,0.21 -0.06,0.21 -0.06,0.21 -0.07,0.21 -0.08,0.21 -0.04,0.11 -0.05,0.11 -0.04,0.1 -0.05,0.11 c -0.6,1.22 -1.46,1.87 -1.56,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.98,-0.99 1.55,-2.57 1.55,-4.64 0,-1.7 -0.37,-3.45 -1.61,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 1,0.68 1.59,1.94 0.5,1.09 0.62,2.19 0.62,3.03 z"
    id="path30816" />
-</g>    <g
+</g>
+    <g
        id="g36968"
        transform="matrix(0.48307477,0,0,-0.48307477,-42.875956,599.6078)"
        xml:space="preserve"
@@ -2589,7 +2615,8 @@
    inkscape:connector-curvature="0"
    d="m 312.8,709.61 v 0.07 0.08 l -0.01,0.08 v 0.08 l -0.01,0.17 -0.01,0.17 -0.02,0.18 -0.02,0.19 -0.02,0.2 -0.04,0.2 -0.04,0.2 -0.04,0.21 -0.06,0.21 -0.06,0.21 -0.07,0.21 -0.08,0.21 -0.04,0.11 -0.04,0.11 -0.05,0.1 -0.05,0.11 c -0.6,1.22 -1.46,1.87 -1.56,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.98,-0.99 1.55,-2.57 1.55,-4.64 0,-1.7 -0.37,-3.45 -1.61,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 1,0.68 1.59,1.94 0.51,1.09 0.63,2.19 0.63,3.03 z"
    id="path36966" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x_{j+1}(t)$ $( t_{j}\\le t &lt; t_{j+1} )$"
@@ -2714,7 +2741,8 @@
    inkscape:connector-curvature="0"
    id="path38003"
    d="m 320.68,709.61 v 0.07 0.08 l -0.01,0.08 v 0.08 l -0.01,0.17 -0.01,0.17 -0.02,0.18 -0.02,0.19 -0.02,0.2 -0.04,0.2 -0.04,0.2 -0.04,0.21 -0.06,0.21 -0.06,0.21 -0.07,0.21 -0.08,0.21 -0.04,0.11 -0.04,0.11 -0.05,0.1 -0.05,0.11 c -0.6,1.22 -1.46,1.87 -1.56,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.98,-0.99 1.55,-2.57 1.55,-4.64 0,-1.7 -0.37,-3.45 -1.61,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 1,0.68 1.59,1.94 0.51,1.09 0.63,2.19 0.63,3.03 z" />
-</g>    <g
+</g>
+    <g
        id="g39038"
        transform="matrix(0.48307477,0,0,-0.48307477,70.075046,600.04068)"
        xml:space="preserve"
@@ -2829,7 +2857,8 @@
    inkscape:connector-curvature="0"
    d="m 310.7,709.61 v 0.07 0.08 0.08 0.08 l -0.01,0.17 -0.01,0.17 -0.02,0.18 -0.02,0.19 -0.03,0.2 -0.03,0.2 -0.04,0.2 -0.05,0.21 -0.05,0.21 -0.06,0.21 -0.07,0.21 -0.08,0.21 -0.04,0.11 -0.05,0.11 -0.05,0.1 -0.05,0.11 c -0.6,1.22 -1.45,1.87 -1.55,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.97,-0.99 1.54,-2.57 1.54,-4.64 0,-1.7 -0.37,-3.45 -1.6,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 0.99,0.68 1.58,1.94 0.51,1.09 0.63,2.19 0.63,3.03 z"
    id="path39036" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$t_k$"
@@ -2854,7 +2883,8 @@
    inkscape:connector-curvature="0"
    id="path40050"
    d="m 229.22,710.25 v 0 0 0 0 0 0 0.01 0 0 0 0.01 h 0.01 v 0 0.01 0 0.01 0 0.01 l 0.01,0.01 v 0 0.01 0 0 0.01 0 0.01 0 0 l 0.01,0.01 v 0 0 0 0 0 0.01 0 0 0 0 0 0 c 0,0.03 -0.03,0.1 -0.12,0.1 -0.14,0 -0.72,-0.06 -0.89,-0.07 -0.06,-0.01 -0.15,-0.02 -0.15,-0.16 0,-0.1 0.09,-0.1 0.18,-0.1 0.33,0 0.33,-0.05 0.33,-0.1 0,-0.05 -0.01,-0.1 -0.03,-0.16 l -0.98,-3.93 c -0.04,-0.13 -0.04,-0.14 -0.04,-0.16 0,-0.1 0.09,-0.22 0.24,-0.22 0.19,0 0.28,0.14 0.32,0.29 0.02,0.03 0.32,1.25 0.35,1.35 0.49,-0.05 0.89,-0.21 0.89,-0.57 0,-0.03 0,-0.07 -0.01,-0.14 -0.03,-0.1 -0.03,-0.14 -0.03,-0.21 0,-0.5 0.4,-0.72 0.74,-0.72 0.68,0 0.89,1.06 0.89,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.11,-0.04 -0.14,-0.17 -0.09,-0.3 -0.28,-0.79 -0.62,-0.79 -0.19,0 -0.24,0.17 -0.24,0.36 0,0.12 0,0.13 0.04,0.31 0.01,0.02 0.03,0.14 0.03,0.22 0,0.62 -0.83,0.71 -1.13,0.73 0.2,0.13 0.46,0.36 0.58,0.46 0.36,0.34 0.71,0.66 1.1,0.66 0.08,0 0.17,-0.02 0.23,-0.09 -0.3,-0.05 -0.36,-0.28 -0.36,-0.39 0,-0.15 0.11,-0.25 0.28,-0.25 0.19,0 0.39,0.15 0.39,0.44 0,0.23 -0.16,0.49 -0.53,0.49 -0.4,0 -0.77,-0.29 -1.12,-0.61 -0.3,-0.28 -0.53,-0.5 -0.81,-0.62 z" />
-</g>    <g
+</g>
+    <g
        id="g41071"
        transform="matrix(0.48307477,0,0,-0.48307477,124.13364,538.1771)"
        xml:space="preserve"
@@ -2924,7 +2954,8 @@
    inkscape:connector-curvature="0"
    d="m 264.68,710.25 v 0 0 0 0 0 0 0.01 h 0.01 v 0 0 0.01 0 0 0.01 0 0.01 h 0.01 v 0.01 0.01 0 0.01 0 0 0.01 0 l 0.01,0.01 v 0 0 0.01 0 0 0 0 0 0.01 0 0 0 0 0 0 c 0,0.03 -0.03,0.1 -0.11,0.1 -0.14,0 -0.72,-0.06 -0.9,-0.07 -0.05,-0.01 -0.15,-0.02 -0.15,-0.16 0,-0.1 0.1,-0.1 0.18,-0.1 0.34,0 0.34,-0.05 0.34,-0.1 0,-0.05 -0.02,-0.1 -0.03,-0.16 l -0.99,-3.93 c -0.03,-0.13 -0.03,-0.14 -0.03,-0.16 0,-0.1 0.08,-0.22 0.24,-0.22 0.19,0 0.28,0.14 0.32,0.29 0.01,0.03 0.31,1.25 0.34,1.35 0.5,-0.05 0.9,-0.21 0.9,-0.57 0,-0.03 0,-0.07 -0.02,-0.14 -0.03,-0.1 -0.03,-0.14 -0.03,-0.21 0,-0.5 0.41,-0.72 0.74,-0.72 0.68,0 0.89,1.06 0.89,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.1,-0.04 -0.14,-0.17 -0.08,-0.3 -0.27,-0.79 -0.61,-0.79 -0.19,0 -0.25,0.17 -0.25,0.36 0,0.12 0,0.13 0.04,0.31 0.01,0.02 0.04,0.14 0.04,0.22 0,0.62 -0.84,0.71 -1.14,0.73 0.21,0.13 0.47,0.36 0.59,0.46 0.35,0.34 0.7,0.66 1.09,0.66 0.09,0 0.18,-0.02 0.23,-0.09 -0.3,-0.05 -0.36,-0.28 -0.36,-0.39 0,-0.15 0.12,-0.25 0.28,-0.25 0.19,0 0.4,0.15 0.4,0.44 0,0.23 -0.17,0.49 -0.54,0.49 -0.4,0 -0.76,-0.29 -1.12,-0.61 -0.29,-0.28 -0.52,-0.5 -0.81,-0.62 z"
    id="path41069" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x^\\mathrm{ref}_k$, $\\dot{x}^\\mathrm{ref}_k$, $\\ddot{x}^\\mathrm{ref}_k$"
@@ -3039,7 +3070,8 @@
    inkscape:connector-curvature="0"
    id="path42091"
    d="m 275.24,708.92 v 0 0 0 0 0.01 0 0 0 0 l 0.01,0.01 v 0 0 0.01 0 0.01 0 0.01 0 l 0.01,0.01 v 0 0.01 0 0.01 0 0.01 0 0 l 0.01,0.01 v 0 0 0 0.01 0 0 0 0 0 0 0 0 0 c 0,0.04 -0.03,0.1 -0.11,0.1 -0.14,0 -0.72,-0.06 -0.9,-0.07 -0.05,-0.01 -0.15,-0.01 -0.15,-0.16 0,-0.1 0.1,-0.1 0.18,-0.1 0.33,0 0.33,-0.05 0.33,-0.1 0,-0.05 -0.01,-0.09 -0.02,-0.15 l -0.99,-3.94 c -0.03,-0.13 -0.03,-0.14 -0.03,-0.15 0,-0.11 0.08,-0.23 0.23,-0.23 0.19,0 0.28,0.14 0.33,0.3 0.01,0.02 0.31,1.25 0.34,1.35 0.5,-0.05 0.89,-0.21 0.89,-0.58 0,-0.03 0,-0.06 -0.01,-0.13 -0.03,-0.11 -0.03,-0.14 -0.03,-0.22 0,-0.49 0.41,-0.72 0.74,-0.72 0.68,0 0.89,1.06 0.89,1.07 0,0.09 -0.09,0.09 -0.11,0.09 -0.1,0 -0.11,-0.04 -0.14,-0.17 -0.09,-0.3 -0.27,-0.79 -0.62,-0.79 -0.19,0 -0.24,0.17 -0.24,0.36 0,0.12 0,0.13 0.04,0.31 0.01,0.02 0.04,0.14 0.04,0.22 0,0.62 -0.84,0.71 -1.14,0.74 0.21,0.12 0.46,0.35 0.58,0.46 0.36,0.33 0.71,0.66 1.1,0.66 0.08,0 0.18,-0.02 0.23,-0.09 -0.3,-0.05 -0.36,-0.29 -0.36,-0.39 0,-0.16 0.12,-0.26 0.28,-0.26 0.19,0 0.4,0.15 0.4,0.44 0,0.23 -0.17,0.49 -0.54,0.49 -0.4,0 -0.76,-0.28 -1.12,-0.61 -0.29,-0.28 -0.53,-0.49 -0.81,-0.61 z" />
-</g>    <g
+</g>
+    <g
        id="g43095"
        transform="matrix(0.65000318,0,0,-0.65000318,83.296339,705.4269)"
        xml:space="preserve"
@@ -3069,7 +3101,8 @@
    id="path43093"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$t_k$"
@@ -3094,7 +3127,8 @@
    d="m 229.22,710.25 v 0 0 0 0 0 0 0.01 0 0 0 0.01 h 0.01 v 0 0.01 0 0.01 0 0.01 l 0.01,0.01 v 0 0.01 0 0 0.01 0 0.01 0 0 l 0.01,0.01 v 0 0 0 0 0 0.01 0 0 0 0 0 0 c 0,0.03 -0.03,0.1 -0.12,0.1 -0.14,0 -0.72,-0.06 -0.89,-0.07 -0.06,-0.01 -0.15,-0.02 -0.15,-0.16 0,-0.1 0.09,-0.1 0.18,-0.1 0.33,0 0.33,-0.05 0.33,-0.1 0,-0.05 -0.01,-0.1 -0.03,-0.16 l -0.98,-3.93 c -0.04,-0.13 -0.04,-0.14 -0.04,-0.16 0,-0.1 0.09,-0.22 0.24,-0.22 0.19,0 0.28,0.14 0.32,0.29 0.02,0.03 0.32,1.25 0.35,1.35 0.49,-0.05 0.89,-0.21 0.89,-0.57 0,-0.03 0,-0.07 -0.01,-0.14 -0.03,-0.1 -0.03,-0.14 -0.03,-0.21 0,-0.5 0.4,-0.72 0.74,-0.72 0.68,0 0.89,1.06 0.89,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.11,-0.04 -0.14,-0.17 -0.09,-0.3 -0.28,-0.79 -0.62,-0.79 -0.19,0 -0.24,0.17 -0.24,0.36 0,0.12 0,0.13 0.04,0.31 0.01,0.02 0.03,0.14 0.03,0.22 0,0.62 -0.83,0.71 -1.13,0.73 0.2,0.13 0.46,0.36 0.58,0.46 0.36,0.34 0.71,0.66 1.1,0.66 0.08,0 0.17,-0.02 0.23,-0.09 -0.3,-0.05 -0.36,-0.28 -0.36,-0.39 0,-0.15 0.11,-0.25 0.28,-0.25 0.19,0 0.39,0.15 0.39,0.44 0,0.23 -0.16,0.49 -0.53,0.49 -0.4,0 -0.77,-0.29 -1.12,-0.61 -0.3,-0.28 -0.53,-0.5 -0.81,-0.62 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$t_{j-1}$"
@@ -3134,7 +3168,8 @@
    inkscape:connector-curvature="0"
    id="path46103"
    d="m 239.3,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 0.01 0 l -0.01,0.01 v 0 0.01 0 0.01 0 0.01 0.01 l -0.01,0.01 v 0 0.01 l -0.01,0.01 v 0 l -0.01,0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 c -0.45,-0.44 -1.08,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.26 v -0.25 c 0.12,0.01 0.98,0.03 1.24,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 H 240 c -0.7,0 -0.7,0.09 -0.7,0.32 z" />
-</g>    <g
+</g>
+    <g
        id="g47141"
        transform="matrix(0.65000317,0,0,-0.65000317,113.71795,568.64225)"
        xml:space="preserve"
@@ -3174,7 +3209,8 @@
    inkscape:connector-curvature="0"
    d="m 238.31,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 h -0.01 v 0.01 0.01 0 0.01 0 0.01 0 0.01 0 0.01 l -0.01,0.01 v 0.01 0 l -0.01,0.01 v 0.01 h -0.01 v 0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 h -0.01 v 0 h -0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 c -0.45,-0.44 -1.09,-0.45 -1.37,-0.45 v -0.25 c 0.16,0 0.62,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.26 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    id="path47139" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$t_{i}$"
@@ -3204,7 +3240,8 @@
    inkscape:connector-curvature="0"
    id="path48171"
    d="m 227.87,706.45 -0.01,-0.02 v -0.02 l -0.01,-0.03 -0.01,-0.02 v -0.02 l -0.01,-0.01 v -0.02 l -0.01,-0.02 v -0.02 l -0.01,-0.02 v -0.01 -0.01 -0.01 -0.01 -0.01 -0.02 -0.01 -0.01 -0.01 c 0,-0.32 0.28,-0.59 0.66,-0.59 0.7,0 1.01,0.96 1.01,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.11,-0.05 -0.14,-0.12 -0.16,-0.56 -0.47,-0.84 -0.74,-0.84 -0.14,0 -0.17,0.09 -0.17,0.24 0,0.16 0.05,0.29 0.11,0.45 0.07,0.18 0.14,0.37 0.22,0.55 0.06,0.17 0.32,0.8 0.34,0.88 0.03,0.07 0.05,0.16 0.05,0.23 0,0.32 -0.28,0.59 -0.67,0.59 -0.69,0 -1.01,-0.95 -1.01,-1.07 0,-0.09 0.1,-0.09 0.12,-0.09 0.09,0 0.1,0.04 0.12,0.11 0.19,0.6 0.49,0.85 0.75,0.85 0.11,0 0.18,-0.05 0.18,-0.24 0,-0.16 -0.05,-0.27 -0.22,-0.7 z" />
-</g>    <g
+</g>
+    <g
        id="g49217"
        transform="matrix(0.65000317,0,0,-0.65000317,45.937695,568.92585)"
        xml:space="preserve"
@@ -3244,7 +3281,8 @@
    inkscape:connector-curvature="0"
    d="m 238.42,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 l -0.01,0.01 v 0 0.01 0 0.01 0 0.01 0 0.01 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 0 l -0.01,0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 c -0.45,-0.44 -1.09,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.26 v -0.25 c 0.12,0.01 0.98,0.03 1.24,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.26 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    id="path49215" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$t_{i}$"
@@ -3274,7 +3312,8 @@
    d="m 227.87,706.45 -0.01,-0.02 v -0.02 l -0.01,-0.03 -0.01,-0.02 v -0.02 l -0.01,-0.01 v -0.02 l -0.01,-0.02 v -0.02 l -0.01,-0.02 v -0.01 -0.01 -0.01 -0.01 -0.01 -0.02 -0.01 -0.01 -0.01 c 0,-0.32 0.28,-0.59 0.66,-0.59 0.7,0 1.01,0.96 1.01,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.11,-0.05 -0.14,-0.12 -0.16,-0.56 -0.47,-0.84 -0.74,-0.84 -0.14,0 -0.17,0.09 -0.17,0.24 0,0.16 0.05,0.29 0.11,0.45 0.07,0.18 0.14,0.37 0.22,0.55 0.06,0.17 0.32,0.8 0.34,0.88 0.03,0.07 0.05,0.16 0.05,0.23 0,0.32 -0.28,0.59 -0.67,0.59 -0.69,0 -1.01,-0.95 -1.01,-1.07 0,-0.09 0.1,-0.09 0.12,-0.09 0.09,0 0.1,0.04 0.12,0.11 0.19,0.6 0.49,0.85 0.75,0.85 0.11,0 0.18,-0.05 0.18,-0.24 0,-0.16 -0.05,-0.27 -0.22,-0.7 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        id="g49217-5"
        transform="matrix(0.65000317,0,0,-0.65000317,-72.953537,568.3015)"
        xml:space="preserve"
@@ -3314,7 +3353,8 @@
    id="path49215-0"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <path
+</g>
+    <path
        style="opacity:0.98999999;fill:none;stroke:#000000;stroke-width:0.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 309.54455,65.158288 21.34848,-0.14394 c 5.07844,-0.22993 7.45838,1.38137 7.67813,7.936763 l 0.0537,14.547363 c 0.004,4.154692 -1.03759,7.067462 -7.70823,7.081872 l -64.6585,0.139687 1.53961,4.11616 -10.05342,-6.411667 9.67416,-4.921962 -1.19426,3.752422 64.60962,-0.48218 c 2.79028,-0.0208 3.95202,-1.19356 3.9338,-3.439402 l -0.0814,-14.060313 c -0.29534,-2.92521 -0.89394,-4.192 -3.85291,-4.15703 l -21.24489,0.0171 z"
        id="path1946-3"
@@ -3365,7 +3405,8 @@
    d="m 242.8,709.61 v 0.07 0.08 l -0.01,0.08 v 0.08 l -0.01,0.17 -0.01,0.17 -0.02,0.18 -0.02,0.19 -0.02,0.2 -0.04,0.2 -0.04,0.2 -0.04,0.21 -0.06,0.21 -0.06,0.21 -0.07,0.21 -0.08,0.21 -0.04,0.11 -0.04,0.11 -0.05,0.1 -0.05,0.11 c -0.6,1.22 -1.46,1.87 -1.56,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.98,-0.99 1.55,-2.57 1.55,-4.64 0,-1.7 -0.37,-3.45 -1.61,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 1,0.68 1.59,1.94 0.51,1.09 0.63,2.19 0.63,3.03 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x_{i}(t)$"
@@ -3410,7 +3451,8 @@
    d="m 242.8,709.61 v 0.07 0.08 l -0.01,0.08 v 0.08 l -0.01,0.17 -0.01,0.17 -0.02,0.18 -0.02,0.19 -0.02,0.2 -0.04,0.2 -0.04,0.2 -0.04,0.21 -0.06,0.21 -0.06,0.21 -0.07,0.21 -0.08,0.21 -0.04,0.11 -0.04,0.11 -0.05,0.1 -0.05,0.11 c -0.6,1.22 -1.46,1.87 -1.56,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.98,-0.99 1.55,-2.57 1.55,-4.64 0,-1.7 -0.37,-3.45 -1.61,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 1,0.68 1.59,1.94 0.51,1.09 0.63,2.19 0.63,3.03 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        id="g53861"
        transform="matrix(0.81872039,0,0,-0.81872039,5.440157,792.12992)"
        xml:space="preserve"
@@ -3455,8 +3497,9 @@
    d="m 243.68,709.61 v 0.07 0.08 l -0.01,0.08 v 0.08 l -0.01,0.17 -0.01,0.17 -0.01,0.18 -0.03,0.19 -0.02,0.2 -0.04,0.2 -0.03,0.2 -0.05,0.21 -0.05,0.21 -0.07,0.21 -0.07,0.21 -0.07,0.21 -0.05,0.11 -0.04,0.11 -0.05,0.1 -0.05,0.11 c -0.6,1.22 -1.46,1.87 -1.56,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.98,-0.99 1.55,-2.57 1.55,-4.64 0,-1.7 -0.37,-3.45 -1.61,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 1,0.68 1.59,1.94 0.51,1.09 0.63,2.19 0.63,3.03 z"
    id="path53859"
    style="fill:#000000;stroke-width:0" />
-</g>    <flowRoot
-       style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+</g>
+    <flowRoot
+       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot54433"
        xml:space="preserve"
        transform="translate(15.875)"><flowRegion
@@ -3466,9 +3509,10 @@
            height="55.861435"
            width="173.94827"
            id="rect54437" /></flowRegion><flowPara
-         id="flowPara54439" /></flowRoot>    <flowRoot
+         id="flowPara54439" /></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,143.56306,32.383996)"
-       style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot54441"
        xml:space="preserve"><flowRegion
          id="flowRegion54443"><rect
@@ -3478,9 +3522,10 @@
            width="252.43712"
            id="rect54445" /></flowRegion><flowPara
          id="flowPara54447">trajectory generation</flowPara><flowPara
-         id="flowPara69726">(non real time)</flowPara></flowRoot>    <flowRoot
+         id="flowPara69726">(non real time)</flowPara></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,274.75937,165.33371)"
-       style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.98999999;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot54441-5"
        xml:space="preserve"><flowRegion
          id="flowRegion54443-1"><rect
@@ -3489,9 +3534,10 @@
            height="67.882248"
            width="252.43712"
            id="rect54445-3" /></flowRegion><flowPara
-         id="flowPara54447-0">driver</flowPara></flowRoot>    <flowRoot
+         id="flowPara54447-0">driver</flowPara></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,324.50327,165.92619)"
-       style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.98999999;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot54441-5-4"
        xml:space="preserve"><flowRegion
          id="flowRegion54443-1-5"><rect
@@ -3500,9 +3546,10 @@
            height="67.882248"
            width="252.43712"
            id="rect54445-3-5" /></flowRegion><flowPara
-         id="flowPara54447-0-1">target system</flowPara></flowRoot>    <flowRoot
+         id="flowPara54447-0-1">target system</flowPara></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,258.62601,31.662965)"
-       style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.98999999;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot54441-8"
        xml:space="preserve"><flowRegion
          id="flowRegion54443-9"><rect
@@ -3512,7 +3559,8 @@
            width="492.85339"
            id="rect54445-8" /></flowRegion><flowPara
          id="flowPara54447-8">phase interpolation from boundary condition</flowPara><flowPara
-         id="flowPara56244">(e.g. non uniform spline among 3 pooint)</flowPara></flowRoot>    <g
+         id="flowPara56244">(e.g. non uniform spline among 3 pooint)</flowPara></flowRoot>
+    <g
        id="g56900"
        transform="matrix(0.51436583,0,0,-0.51436583,119.37317,457.44935)"
        xml:space="preserve"
@@ -3597,7 +3645,8 @@
    inkscape:connector-curvature="0"
    d="m 260.16,706.45 v -0.02 l -0.01,-0.02 -0.01,-0.03 v -0.02 l -0.01,-0.02 v -0.01 l -0.01,-0.02 v -0.02 l -0.01,-0.02 v -0.02 -0.01 l -0.01,-0.01 v -0.01 -0.01 -0.01 -0.02 -0.01 -0.01 -0.01 c 0,-0.32 0.28,-0.59 0.66,-0.59 0.7,0 1.01,0.96 1.01,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.11,-0.05 -0.13,-0.12 -0.16,-0.56 -0.47,-0.84 -0.74,-0.84 -0.14,0 -0.18,0.09 -0.18,0.24 0,0.16 0.05,0.29 0.11,0.45 0.07,0.18 0.15,0.37 0.23,0.55 0.06,0.17 0.31,0.8 0.34,0.88 0.02,0.07 0.04,0.16 0.04,0.23 0,0.32 -0.28,0.59 -0.66,0.59 -0.7,0 -1.02,-0.95 -1.02,-1.07 0,-0.09 0.1,-0.09 0.12,-0.09 0.1,0 0.11,0.04 0.13,0.11 0.18,0.6 0.49,0.85 0.75,0.85 0.11,0 0.17,-0.05 0.17,-0.24 0,-0.16 -0.04,-0.27 -0.22,-0.7 z"
    id="path56898" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x_{i-1}$, $\\dot{x}_{i-1}$, $\\ddot{x}_{i-1}$"
@@ -3712,7 +3761,8 @@
    d="m 291.11,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 l -0.01,0.01 v 0 0.01 0 0.01 0 0.01 0 0.01 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 0 l -0.01,0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 c -0.45,-0.44 -1.09,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.26 v -0.25 c 0.12,0.01 0.98,0.03 1.24,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.26 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x_{i-1}$, $\\dot{x}_{i-1}$, $\\ddot{x}_{i-1}$"
@@ -3827,7 +3877,8 @@
    d="m 291.11,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 l -0.01,0.01 v 0 0.01 0 0.01 0 0.01 0 0.01 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 0 l -0.01,0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 c -0.45,-0.44 -1.09,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.26 v -0.25 c 0.12,0.01 0.98,0.03 1.24,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.26 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <rect
+</g>
+    <rect
        style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.33903566;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="rect819-8-9-6-5"
        width="46.508774"
@@ -3874,7 +3925,8 @@
    inkscape:connector-curvature="0"
    id="path25824-6-4"
    d="m 238.42,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 l -0.01,0.01 v 0 0.01 0 0.01 0 0.01 0 0.01 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 0 l -0.01,0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 c -0.45,-0.44 -1.09,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.26 v -0.25 c 0.12,0.01 0.98,0.03 1.24,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.26 c -0.7,0 -0.7,0.09 -0.7,0.32 z" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x_{i-1}$, $\\dot{x}_{i-1}$, $\\ddot{x}_{i-1}$"
@@ -3989,7 +4041,8 @@
    d="m 291.11,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 l -0.01,0.01 v 0 0.01 0 0.01 0 0.01 0 0.01 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0.01 0 l -0.01,0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 c -0.45,-0.44 -1.09,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.26 v -0.25 c 0.12,0.01 0.98,0.03 1.24,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.26 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        id="g59695"
        transform="matrix(0.51436582,0,0,-0.51436582,2.4644301,455.7859)"
        xml:space="preserve"
@@ -4019,7 +4072,8 @@
    inkscape:connector-curvature="0"
    d="m 229.96,706.45 v -0.02 l -0.01,-0.02 -0.01,-0.03 v -0.02 l -0.01,-0.02 v -0.01 l -0.01,-0.02 v -0.02 l -0.01,-0.02 v -0.02 -0.01 -0.01 -0.01 l -0.01,-0.01 v -0.01 -0.02 -0.01 -0.01 -0.01 c 0,-0.32 0.28,-0.59 0.67,-0.59 0.7,0 1,0.96 1,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.1,-0.05 -0.13,-0.12 -0.16,-0.56 -0.47,-0.84 -0.74,-0.84 -0.14,0 -0.18,0.09 -0.18,0.24 0,0.16 0.05,0.29 0.11,0.45 0.07,0.18 0.15,0.37 0.23,0.55 0.06,0.17 0.31,0.8 0.34,0.88 0.02,0.07 0.04,0.16 0.04,0.23 0,0.32 -0.28,0.59 -0.66,0.59 -0.69,0 -1.01,-0.95 -1.01,-1.07 0,-0.09 0.09,-0.09 0.11,-0.09 0.1,0 0.11,0.04 0.13,0.11 0.18,0.6 0.49,0.85 0.75,0.85 0.11,0 0.17,-0.05 0.17,-0.24 0,-0.16 -0.04,-0.27 -0.21,-0.7 z"
    id="path59693" />
-</g>    <g
+</g>
+    <g
        id="g56900-8"
        transform="matrix(0.51436582,0,0,-0.51436582,171.91152,432.11389)"
        xml:space="preserve"
@@ -4104,7 +4158,8 @@
    inkscape:connector-curvature="0"
    d="m 260.16,706.45 v -0.02 l -0.01,-0.02 -0.01,-0.03 v -0.02 l -0.01,-0.02 v -0.01 l -0.01,-0.02 v -0.02 l -0.01,-0.02 v -0.02 -0.01 l -0.01,-0.01 v -0.01 -0.01 -0.01 -0.02 -0.01 -0.01 -0.01 c 0,-0.32 0.28,-0.59 0.66,-0.59 0.7,0 1.01,0.96 1.01,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.11,-0.05 -0.13,-0.12 -0.16,-0.56 -0.47,-0.84 -0.74,-0.84 -0.14,0 -0.18,0.09 -0.18,0.24 0,0.16 0.05,0.29 0.11,0.45 0.07,0.18 0.15,0.37 0.23,0.55 0.06,0.17 0.31,0.8 0.34,0.88 0.02,0.07 0.04,0.16 0.04,0.23 0,0.32 -0.28,0.59 -0.66,0.59 -0.7,0 -1.02,-0.95 -1.02,-1.07 0,-0.09 0.1,-0.09 0.12,-0.09 0.1,0 0.11,0.04 0.13,0.11 0.18,0.6 0.49,0.85 0.75,0.85 0.11,0 0.17,-0.05 0.17,-0.24 0,-0.16 -0.04,-0.27 -0.22,-0.7 z"
    id="path56898-1" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x_{i+1}$"
@@ -4144,7 +4199,8 @@
    d="m 240.4,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 0.01 0 0.01 0 0.01 0 0.01 0 l -0.01,0.01 v 0.01 0.01 h -0.01 v 0.01 0.01 h -0.01 v 0.01 h -0.01 -0.01 v 0.01 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 v 0.01 h -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 -0.01 c -0.44,-0.44 -1.08,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.02,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.21,0 1.09,-0.02 1.25,-0.03 v 0.25 h -0.27 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x_{i+1}$"
@@ -4184,9 +4240,10 @@
    d="m 240.4,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 0.01 0 0.01 0 0.01 0 0.01 0 l -0.01,0.01 v 0.01 0.01 h -0.01 v 0.01 0.01 h -0.01 v 0.01 h -0.01 -0.01 v 0.01 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 v 0.01 h -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 -0.01 c -0.44,-0.44 -1.08,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.02,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.21,0 1.09,-0.02 1.25,-0.03 v 0.25 h -0.27 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <flowRoot
+</g>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,46.611921,264.22067)"
-       style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.98999999;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot54441-82"
        xml:space="preserve"><flowRegion
          id="flowRegion54443-4"><rect
@@ -4195,7 +4252,8 @@
            height="58.882248"
            width="335.43713"
            id="rect54445-5" /></flowRegion><flowPara
-         id="flowPara54447-85">trajectory (parameter) queue</flowPara></flowRoot>    <g
+         id="flowPara54447-85">trajectory (parameter) queue</flowPara></flowRoot>
+    <g
        transform="translate(155.52891,-44.306587)"
        id="g822-2"
        style="opacity:0.98999999">
@@ -4243,7 +4301,7 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot939-3-5"
-       style="font-style:normal;font-weight:normal;font-size:16px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.98999999;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:16px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
        transform="matrix(0.26458333,0,0,0.26458333,184.61137,-67.776871)"><flowRegion
          id="flowRegion941-5-5"
          style="font-size:16px"><rect
@@ -4253,7 +4311,8 @@
            x="88.893425"
            y="323.99411"
            style="font-size:16px" /></flowRegion><flowPara
-         id="flowPara945-5-3">...</flowPara></flowRoot>    <g
+         id="flowPara945-5-3">...</flowPara></flowRoot>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$t_f$"
@@ -4278,7 +4337,8 @@
    inkscape:connector-curvature="0"
    id="path1662-4"
    d="m 229.88,708.38 h 0.68 c 0.14,0 0.23,0 0.23,0.15 0,0.1 -0.09,0.1 -0.22,0.1 h -0.64 c 0.16,0.88 0.21,1.2 0.27,1.4 0.03,0.16 0.19,0.3 0.35,0.3 0.01,0 0.2,0 0.33,-0.08 -0.28,-0.09 -0.31,-0.34 -0.31,-0.38 0,-0.16 0.12,-0.26 0.28,-0.26 0.19,0 0.4,0.16 0.4,0.42 0,0.32 -0.34,0.5 -0.7,0.5 -0.3,0 -0.65,-0.18 -0.84,-0.52 -0.14,-0.26 -0.19,-0.58 -0.34,-1.38 h -0.55 c -0.14,0 -0.23,0 -0.23,-0.16 0,-0.09 0.09,-0.09 0.22,-0.09 h 0.51 c 0,-0.04 -0.44,-2.55 -0.61,-3.29 -0.04,-0.15 -0.16,-0.68 -0.49,-0.68 -0.01,0 -0.18,0 -0.31,0.08 0.29,0.09 0.31,0.34 0.31,0.38 0,0.16 -0.12,0.26 -0.28,0.26 -0.19,0 -0.4,-0.16 -0.4,-0.42 0,-0.32 0.33,-0.5 0.68,-0.5 0.45,0 0.75,0.46 0.84,0.61 0.25,0.47 0.41,1.33 0.42,1.41 z" />
-</g>    <g
+</g>
+    <g
        id="g1780-0"
        transform="matrix(0.48307477,0,0,-0.48307477,100.45508,355.43891)"
        xml:space="preserve"
@@ -4313,7 +4373,8 @@
    inkscape:connector-curvature="0"
    d="m 240.26,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 0.01 0 0.01 0 0.01 0 0.01 0 0.01 l -0.01,0.01 v 0.01 0 l -0.01,0.01 v 0.01 h -0.01 v 0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 h -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 c -0.45,-0.44 -1.09,-0.45 -1.38,-0.45 v -0.25 c 0.17,0 0.63,0 1.02,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.27 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    id="path1778-5" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$t_{i+1}$"
@@ -4353,7 +4414,8 @@
    inkscape:connector-curvature="0"
    id="path1898-3"
    d="m 238.31,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 h -0.01 v 0.01 0.01 0 0.01 0 0.01 0 0.01 0 0.01 l -0.01,0.01 v 0.01 0 l -0.01,0.01 v 0.01 h -0.01 v 0.01 h -0.01 v 0 l -0.01,0.01 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0 l -0.01,0.01 h -0.01 v 0 h -0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 c -0.45,-0.44 -1.09,-0.45 -1.37,-0.45 v -0.25 c 0.16,0 0.62,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.22,0 1.1,-0.02 1.25,-0.03 v 0.25 h -0.26 c -0.7,0 -0.7,0.09 -0.7,0.32 z" />
-</g>    <path
+</g>
+    <path
        style="opacity:0.98999999;fill:none;stroke:#000000;stroke-width:0.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 236.5062,26.690929 14.23652,-0.0401 c 5.72893,-0.0974 8.52177,0.649144 10.4011,2.445518 1.77126,1.693072 1.65142,3.213098 1.67701,6.086555 l 0.14704,11.315706 4.97537,-2.381251 -6.85421,8.898584 -7.00635,-8.310654 5.21796,1.654301 -0.10019,-10.854764 c -0.0375,-0.819824 -0.10632,-2.685084 -1.66154,-4.138598 -1.44306,-1.348691 -6.03451,-1.415708 -9.7434,-1.321212 l -11.2124,0.162341 z"
        id="path1946-1"
@@ -4395,7 +4457,8 @@
    inkscape:connector-curvature="0"
    d="m 227.87,706.45 -0.01,-0.02 v -0.02 l -0.01,-0.03 -0.01,-0.02 v -0.02 l -0.01,-0.01 v -0.02 l -0.01,-0.02 v -0.02 l -0.01,-0.02 v -0.01 -0.01 -0.01 -0.01 -0.01 -0.02 -0.01 -0.01 -0.01 c 0,-0.32 0.28,-0.59 0.66,-0.59 0.7,0 1.01,0.96 1.01,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.11,-0.05 -0.14,-0.12 -0.16,-0.56 -0.47,-0.84 -0.74,-0.84 -0.14,0 -0.17,0.09 -0.17,0.24 0,0.16 0.05,0.29 0.11,0.45 0.07,0.18 0.14,0.37 0.22,0.55 0.06,0.17 0.32,0.8 0.34,0.88 0.03,0.07 0.05,0.16 0.05,0.23 0,0.32 -0.28,0.59 -0.67,0.59 -0.69,0 -1.01,-0.95 -1.01,-1.07 0,-0.09 0.1,-0.09 0.12,-0.09 0.09,0 0.1,0.04 0.12,0.11 0.19,0.6 0.49,0.85 0.75,0.85 0.11,0 0.18,-0.05 0.18,-0.24 0,-0.16 -0.05,-0.27 -0.22,-0.7 z"
    id="path62743" />
-</g>    <g
+</g>
+    <g
        id="g59695-4"
        transform="matrix(0.51436582,0,0,-0.51436582,-58.619889,396.60092)"
        xml:space="preserve"
@@ -4425,7 +4488,8 @@
    inkscape:connector-curvature="0"
    d="m 229.96,706.45 v -0.02 l -0.01,-0.02 -0.01,-0.03 v -0.02 l -0.01,-0.02 v -0.01 l -0.01,-0.02 v -0.02 l -0.01,-0.02 v -0.02 -0.01 -0.01 -0.01 l -0.01,-0.01 v -0.01 -0.02 -0.01 -0.01 -0.01 c 0,-0.32 0.28,-0.59 0.67,-0.59 0.7,0 1,0.96 1,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.1,-0.05 -0.13,-0.12 -0.16,-0.56 -0.47,-0.84 -0.74,-0.84 -0.14,0 -0.18,0.09 -0.18,0.24 0,0.16 0.05,0.29 0.11,0.45 0.07,0.18 0.15,0.37 0.23,0.55 0.06,0.17 0.31,0.8 0.34,0.88 0.02,0.07 0.04,0.16 0.04,0.23 0,0.32 -0.28,0.59 -0.66,0.59 -0.69,0 -1.01,-0.95 -1.01,-1.07 0,-0.09 0.09,-0.09 0.11,-0.09 0.1,0 0.11,0.04 0.13,0.11 0.18,0.6 0.49,0.85 0.75,0.85 0.11,0 0.17,-0.05 0.17,-0.24 0,-0.16 -0.04,-0.27 -0.21,-0.7 z"
    id="path59693-1" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x_{i+1}$"
@@ -4465,7 +4529,8 @@
    id="path64223"
    d="m 240.4,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 0.01 0 0.01 0 0.01 0 0.01 0 l -0.01,0.01 v 0.01 0.01 h -0.01 v 0.01 0.01 h -0.01 v 0.01 h -0.01 -0.01 v 0.01 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 v 0.01 h -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 -0.01 c -0.44,-0.44 -1.08,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.02,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.21,0 1.09,-0.02 1.25,-0.03 v 0.25 h -0.27 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        id="g65701"
        transform="matrix(0.51436582,0,0,-0.51436582,-58.741179,371.89151)"
        xml:space="preserve"
@@ -4500,7 +4565,8 @@
    d="m 242.36,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 0.01 0 0.01 0 0.01 0 l -0.01,0.01 v 0 0.01 0.01 0.01 h -0.01 v 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0 h -0.01 l -0.01,0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0.01 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 c -0.45,-0.44 -1.08,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.69,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.24,0.03 0.22,0 1.1,-0.02 1.26,-0.03 v 0.25 h -0.27 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    id="path65699"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x_{f}$"
@@ -4525,7 +4591,8 @@
    id="path67178"
    d="m 231.97,708.38 h 0.69 c 0.14,0 0.23,0 0.23,0.15 0,0.1 -0.09,0.1 -0.22,0.1 h -0.65 c 0.16,0.88 0.22,1.2 0.27,1.4 0.04,0.16 0.19,0.3 0.36,0.3 0.01,0 0.2,0 0.33,-0.08 -0.29,-0.09 -0.31,-0.34 -0.31,-0.38 0,-0.16 0.12,-0.26 0.28,-0.26 0.19,0 0.4,0.16 0.4,0.42 0,0.32 -0.34,0.5 -0.7,0.5 -0.31,0 -0.65,-0.18 -0.84,-0.52 -0.14,-0.26 -0.19,-0.58 -0.34,-1.38 h -0.55 c -0.14,0 -0.24,0 -0.24,-0.16 0,-0.09 0.1,-0.09 0.22,-0.09 h 0.52 c -0.01,-0.04 -0.45,-2.55 -0.62,-3.29 -0.03,-0.15 -0.15,-0.68 -0.48,-0.68 -0.01,0 -0.18,0 -0.31,0.08 0.28,0.09 0.31,0.34 0.31,0.38 0,0.16 -0.12,0.26 -0.28,0.26 -0.19,0 -0.4,-0.16 -0.4,-0.42 0,-0.32 0.32,-0.5 0.68,-0.5 0.44,0 0.75,0.46 0.83,0.61 0.25,0.47 0.42,1.33 0.43,1.41 z"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x_{i+1}$"
@@ -4565,7 +4632,8 @@
    id="path64223-3"
    d="m 240.4,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 0.01 0 0.01 0 0.01 0 0.01 0 l -0.01,0.01 v 0.01 0.01 h -0.01 v 0.01 0.01 h -0.01 v 0.01 h -0.01 -0.01 v 0.01 h -0.01 -0.01 -0.01 -0.01 v 0 h -0.01 v 0.01 h -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 -0.01 c -0.44,-0.44 -1.08,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.02,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.21,0 1.09,-0.02 1.25,-0.03 v 0.25 h -0.27 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        id="g65701-6"
        transform="matrix(0.51436582,0,0,-0.51436582,105.91515,377.22955)"
        xml:space="preserve"
@@ -4600,7 +4668,8 @@
    d="m 242.36,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 0.01 0 0.01 0 0.01 0 l -0.01,0.01 v 0 0.01 0.01 0.01 h -0.01 v 0.01 l -0.01,0.01 v 0 l -0.01,0.01 v 0 h -0.01 l -0.01,0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0.01 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 c -0.45,-0.44 -1.08,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.01,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.69,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.24,0.03 0.22,0 1.1,-0.02 1.26,-0.03 v 0.25 h -0.27 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    id="path65699-5"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="$x_{f}$"
@@ -4625,9 +4694,10 @@
    id="path67178-0"
    d="m 231.97,708.38 h 0.69 c 0.14,0 0.23,0 0.23,0.15 0,0.1 -0.09,0.1 -0.22,0.1 h -0.65 c 0.16,0.88 0.22,1.2 0.27,1.4 0.04,0.16 0.19,0.3 0.36,0.3 0.01,0 0.2,0 0.33,-0.08 -0.29,-0.09 -0.31,-0.34 -0.31,-0.38 0,-0.16 0.12,-0.26 0.28,-0.26 0.19,0 0.4,0.16 0.4,0.42 0,0.32 -0.34,0.5 -0.7,0.5 -0.31,0 -0.65,-0.18 -0.84,-0.52 -0.14,-0.26 -0.19,-0.58 -0.34,-1.38 h -0.55 c -0.14,0 -0.24,0 -0.24,-0.16 0,-0.09 0.1,-0.09 0.22,-0.09 h 0.52 c -0.01,-0.04 -0.45,-2.55 -0.62,-3.29 -0.03,-0.15 -0.15,-0.68 -0.48,-0.68 -0.01,0 -0.18,0 -0.31,0.08 0.28,0.09 0.31,0.34 0.31,0.38 0,0.16 -0.12,0.26 -0.28,0.26 -0.19,0 -0.4,-0.16 -0.4,-0.42 0,-0.32 0.32,-0.5 0.68,-0.5 0.44,0 0.75,0.46 0.83,0.61 0.25,0.47 0.42,1.33 0.43,1.41 z"
    style="fill:#000000;stroke-width:0" />
-</g>    <flowRoot
+</g>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,62.603959,2.7921656)"
-       style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97000002;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot54441-7"
        xml:space="preserve"><flowRegion
          id="flowRegion54443-8"><rect
@@ -4636,9 +4706,10 @@
            height="34.648228"
            width="235.46657"
            id="rect54445-9" /></flowRegion><flowPara
-         id="flowPara54447-1">time position queue</flowPara></flowRoot>    <flowRoot
+         id="flowPara54447-1">time position queue</flowPara></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,230.99105,140.34635)"
-       style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.98999999;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot54441-82-6"
        xml:space="preserve"><flowRegion
          id="flowRegion54443-4-6"><rect
@@ -4647,10 +4718,11 @@
            height="58.882248"
            width="335.43713"
            id="rect54445-5-6" /></flowRegion><flowPara
-         id="flowPara54447-85-3">driver of actuaor</flowPara><flowPara
-         id="flowPara69728">(real time)</flowPara></flowRoot>    <flowRoot
+         id="flowPara54447-85-3">driver of actuator</flowPara><flowPara
+         id="flowPara69728">(real time)</flowPara></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,151.77551,172.76452)"
-       style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.98999999;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot54441-82-6-7"
        xml:space="preserve"><flowRegion
          id="flowRegion54443-4-6-1"><rect
@@ -4659,8 +4731,9 @@
            height="58.882248"
            width="335.43713"
            id="rect54445-5-6-5" /></flowRegion><flowPara
-         id="flowPara54447-85-3-6">sequence play</flowPara><flowPara
-         id="flowPara69724">(real time)</flowPara></flowRoot>    <path
+         id="flowPara54447-85-3-6">sequence player</flowPara><flowPara
+         id="flowPara69724">(real time)</flowPara></flowRoot>
+    <path
        style="opacity:0.98999999;fill:none;stroke:#000000;stroke-width:0.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 24.6851,-25.55432 21.115696,-0.0401 c 5.72893,-0.0974 8.408197,0.361782 10.073694,1.83748 1.985868,1.759559 2.111124,3.953428 2.136714,6.826885 l 0.01475,5.362576 5.17381,-2.97656 -7.052655,8.4355277 -6.648222,-8.2926187 4.859832,2.694631 -0.10019,-5.033926 c -0.0375,-0.819824 -0.0214,-3.601279 -1.330809,-4.403181 -0.960663,-0.588324 -3.068491,-0.89789 -7.174256,-0.86954 l -20.99145,-0.02475 z"
        id="path1946-1-7-8"
@@ -4668,7 +4741,7 @@
        sodipodi:nodetypes="ccscccccccsccc" />
     <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,96.363642,188.11676)"
-       style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97000002;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot54441-79"
        xml:space="preserve"><flowRegion
          id="flowRegion54443-0"><rect
@@ -4678,7 +4751,8 @@
            width="252.43712"
            id="rect54445-6" /></flowRegion><flowPara
          id="flowPara54447-3">trajectory</flowPara><flowPara
-         id="flowPara69722">(parameter)</flowPara></flowRoot>    <g
+         id="flowPara69722">(parameter)</flowPara></flowRoot>
+    <g
        id="g4003"
        transform="matrix(0.6637345,0,0,-0.66954921,-74.448534,694.15047)"
        xml:space="preserve"
@@ -4718,7 +4792,8 @@
    inkscape:connector-curvature="0"
    d="m 393.24,710.05 v 0.01 0.01 0.01 0.01 0 0.01 0.01 0.01 0 0.01 0.01 0 0.01 0 0.01 0 0.01 h -0.01 v 0.01 0.01 0.01 h -0.01 v 0.01 0.01 h -0.01 v 0.01 h -0.01 -0.01 l -0.01,0.01 v 0 h -0.01 -0.01 -0.01 v 0 h -0.01 v 0.01 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 v 0 h -0.01 -0.01 -0.01 -0.01 -0.01 c -0.45,-0.44 -1.08,-0.45 -1.37,-0.45 v -0.25 c 0.17,0 0.63,0 1.02,0.2 v -3.55 c 0,-0.23 0,-0.32 -0.7,-0.32 h -0.27 v -0.25 c 0.13,0.01 0.99,0.03 1.25,0.03 0.21,0 1.09,-0.02 1.25,-0.03 v 0.25 h -0.27 c -0.7,0 -0.7,0.09 -0.7,0.32 z"
    id="path4001" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.97000002;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="\\begin{eqnarray}\nx_j  \\nonumber\n\\end{eqnarray}"
@@ -4748,7 +4823,8 @@
    d="m 387.66,705.29 -0.01,-0.04 -0.02,-0.05 -0.01,-0.04 -0.02,-0.05 -0.01,-0.04 -0.02,-0.04 -0.02,-0.04 -0.02,-0.04 -0.03,-0.04 -0.02,-0.04 -0.02,-0.03 -0.03,-0.04 -0.03,-0.04 -0.02,-0.03 -0.03,-0.03 -0.03,-0.03 -0.03,-0.03 -0.03,-0.03 -0.03,-0.03 -0.04,-0.02 -0.03,-0.02 -0.03,-0.02 -0.04,-0.02 -0.03,-0.02 -0.04,-0.02 -0.04,-0.01 -0.03,-0.01 -0.04,-0.01 -0.04,-0.01 -0.04,-0.01 h -0.03 -0.04 c -0.09,0 -0.18,0.01 -0.25,0.04 0.18,0.08 0.23,0.25 0.23,0.35 0,0.17 -0.13,0.26 -0.27,0.26 -0.21,0 -0.4,-0.19 -0.4,-0.41 0,-0.26 0.28,-0.44 0.7,-0.44 0.41,0 1.23,0.25 1.45,1.1 l 0.63,2.49 c 0.02,0.08 0.03,0.14 0.03,0.24 0,0.39 -0.33,0.66 -0.74,0.66 -0.78,0 -1.23,-0.97 -1.23,-1.07 0,-0.09 0.1,-0.09 0.12,-0.09 0.08,0 0.09,0.02 0.14,0.13 0.18,0.4 0.54,0.83 0.94,0.83 0.18,0 0.24,-0.11 0.24,-0.34 0,-0.07 -0.01,-0.17 -0.02,-0.21 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        id="g7065"
        transform="matrix(0.53508291,0,0,-0.53977055,70.911076,585.32665)"
        xml:space="preserve"
@@ -4788,7 +4864,8 @@
    id="path7063"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.97000002;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="\\begin{eqnarray}\nx_i  \\nonumber\n\\end{eqnarray}"
@@ -4818,7 +4895,8 @@
    d="m 387.35,706.45 v -0.02 l -0.01,-0.02 -0.01,-0.03 v -0.02 l -0.01,-0.02 v -0.01 l -0.01,-0.02 v -0.02 l -0.01,-0.02 v -0.02 -0.01 l -0.01,-0.01 v -0.01 -0.01 -0.01 -0.02 -0.01 -0.01 -0.01 c 0,-0.32 0.28,-0.59 0.66,-0.59 0.7,0 1.01,0.96 1.01,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.11,-0.05 -0.13,-0.12 -0.16,-0.56 -0.47,-0.84 -0.74,-0.84 -0.14,0 -0.18,0.09 -0.18,0.24 0,0.16 0.05,0.29 0.11,0.45 0.07,0.18 0.15,0.37 0.23,0.55 0.06,0.17 0.31,0.8 0.34,0.88 0.02,0.07 0.04,0.16 0.04,0.23 0,0.32 -0.28,0.59 -0.66,0.59 -0.7,0 -1.02,-0.95 -1.02,-1.07 0,-0.09 0.1,-0.09 0.12,-0.09 0.1,0 0.11,0.04 0.13,0.11 0.18,0.6 0.49,0.85 0.75,0.85 0.11,0 0.17,-0.05 0.17,-0.24 0,-0.16 -0.04,-0.27 -0.22,-0.7 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <path
+</g>
+    <path
        style="opacity:0.98999999;fill:none;stroke:#000000;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.26458332, 0.26458332;stroke-dashoffset:0;stroke-opacity:1"
        d="m 304.89299,225.28622 0.0112,15.40632"
        id="path11665-3-8-1-8-6-7-8-8-2-6-5-9-3-2-4-5-9-4-1-0"
@@ -4870,7 +4948,8 @@
    id="path10167"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <g
+</g>
+    <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.97000002;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
        ns0:text="\\begin{eqnarray}\nt_i  \\nonumber\n\\end{eqnarray}"
@@ -4900,7 +4979,8 @@
    d="m 386.3,706.45 v -0.02 l -0.01,-0.02 -0.01,-0.03 v -0.02 l -0.01,-0.02 v -0.01 l -0.01,-0.02 v -0.02 l -0.01,-0.02 v -0.02 -0.01 -0.01 l -0.01,-0.01 v -0.01 -0.01 -0.02 -0.01 -0.01 -0.01 c 0,-0.32 0.28,-0.59 0.66,-0.59 0.7,0 1.01,0.96 1.01,1.06 0,0.1 -0.09,0.1 -0.11,0.1 -0.1,0 -0.1,-0.05 -0.13,-0.12 -0.16,-0.56 -0.47,-0.84 -0.74,-0.84 -0.14,0 -0.18,0.09 -0.18,0.24 0,0.16 0.05,0.29 0.11,0.45 0.07,0.18 0.15,0.37 0.23,0.55 0.06,0.17 0.31,0.8 0.34,0.88 0.02,0.07 0.04,0.16 0.04,0.23 0,0.32 -0.28,0.59 -0.66,0.59 -0.7,0 -1.02,-0.95 -1.02,-1.07 0,-0.09 0.1,-0.09 0.12,-0.09 0.1,0 0.11,0.04 0.13,0.11 0.18,0.6 0.49,0.85 0.75,0.85 0.11,0 0.17,-0.05 0.17,-0.24 0,-0.16 -0.04,-0.27 -0.22,-0.7 z"
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
-</g>    <path
+</g>
+    <path
        style="opacity:0.97000002;fill:none;stroke:#000000;stroke-width:0.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 203.25217,125.74596 6.7337,0.0195 -0.14674,23.24691 c 0,4.99376 -4.26117,7.6475 -7.43901,7.87449 L 100.3834,157.0336 c -5.44774,-0.11349 -14.02125,2.46728 -13.90776,7.12056 l -0.24076,20.64017 5.350672,-0.31349 -8.670433,5.50358 -8.658063,-5.57319 5.318534,0.15611 0.0527,-24.88649 c -0.1135,-5.22075 6.66564,-9.79012 20.28498,-9.67663 l 96.60583,0.52045 c 4.48303,-0.11349 7.13029,-2.704 6.84655,-7.18703 z"
        id="path2079"
@@ -4925,7 +5005,7 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot54441-7-7-0-7-1-4"
-       style="font-style:normal;font-weight:normal;font-size:21.33333397px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97000002;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97;fill:#000000;fill-opacity:1;stroke:none"
        transform="matrix(0.26458333,0,0,0.26458333,-3.3639646,218.54556)"><flowRegion
          id="flowRegion54443-8-5-0-5-1-9"><rect
            id="rect54445-9-6-7-1-0-9"
@@ -4933,5 +5013,6 @@
            height="87.148224"
            x="48.08326"
            y="10.33545" /></flowRegion><flowPara
-         id="flowPara2627-0-4">new enqueue</flowPara></flowRoot>  </g>
+         id="flowPara2627-0-4">new enqueue</flowPara></flowRoot>
+  </g>
 </svg>
