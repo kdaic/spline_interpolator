@@ -7,8 +7,8 @@
    viewBox="0 0 400 350"
    version="1.1"
    id="svg8"
-   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
-   sodipodi:docname="011_image_of_generate_trajectory_flow_from_data_queue.svg"
+   inkscape:version="1.4.2 (1:1.4.2+202505120738+ebf0e940d0)"
+   sodipodi:docname="013_image_of_generate_trajectory_flow_from_data_queue.svg"
    inkscape:export-filename="../png/011_image_of_generate_trajectory_flow_from_data_queue.png"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300"
@@ -27,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="648.77046"
-     inkscape:cy="944.69464"
+     inkscape:zoom="0.7071068"
+     inkscape:cx="917.11747"
+     inkscape:cy="695.79305"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -40,7 +40,9 @@
      inkscape:window-maximized="1"
      inkscape:measure-start="0,0"
      inkscape:measure-end="0,0"
-     inkscape:pagecheckerboard="0" />
+     inkscape:pagecheckerboard="0"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1" />
   <defs
      id="defs2">
     <marker
@@ -359,6 +361,66 @@
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
          transform="matrix(-0.4,0,0,-0.4,-4,0)" />
     </marker>
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="492.31532"
+       height="79.650084"
+       id="rect3-5-3-6-0-7-0-7" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-0" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-0-3" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-0-3-6" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-0-3-6-3" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-0-3-6-3-9" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-0-3-6-3-9-6" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-0-3-6-3-9-6-5" />
   </defs>
   <metadata
      id="metadata5">
@@ -378,6 +440,128 @@
      inkscape:label="レイヤー 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="display:inline;opacity:0.97;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;paint-order:fill markers stroke"
+       id="rect1"
+       width="400.1915"
+       height="350.08701"
+       x="-0.26458317"
+       y="-52.470821"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-218.79201,-140.37886)"
+       id="text2-1-7-2-3-3-1-79"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-0);display:inline;opacity:0.97"
+       x="-171.09267"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan8"><tspan
+           style="text-align:start"
+           id="tspan7">new enqueue</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-121.17075,-172.58125)"
+       id="text2-1-7-2-3-3-1-79-9"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-0-3);display:inline;opacity:0.97"
+       x="-171.09267"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan10"><tspan
+           style="text-align:start"
+           id="tspan9">trajectory
+</tspan></tspan><tspan
+         x="871.63867"
+         y="1413.9015"
+         id="tspan12"><tspan
+           style="text-align:start"
+           id="tspan11">(parameter)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-62.940454,-186.78368)"
+       id="text2-1-7-2-3-3-1-79-9-0"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-0-3-6);display:inline;opacity:0.97"
+       x="-171.09267"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan14"><tspan
+           style="text-align:start"
+           id="tspan13">sequence player
+</tspan></tspan><tspan
+         x="871.63867"
+         y="1413.9015"
+         id="tspan16"><tspan
+           style="text-align:start"
+           id="tspan15">(real time)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,13.086402,-216.76023)"
+       id="text2-1-7-2-3-3-1-79-9-0-1"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-0-3-6-3);display:inline;opacity:0.97"
+       x="-171.09267"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan18"><tspan
+           style="text-align:start"
+           id="tspan17">driver of actuator
+</tspan></tspan><tspan
+         x="871.63867"
+         y="1413.9015"
+         id="tspan20"><tspan
+           style="text-align:start"
+           id="tspan19">(real time)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,56.714908,-193.53553)"
+       id="text2-1-7-2-3-3-1-79-9-0-1-7"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-0-3-6-3-9);display:inline;opacity:0.97"
+       x="-199.79655"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan22"><tspan
+           style="text-align:start"
+           id="tspan21">driver</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,108.7782,-193.20909)"
+       id="text2-1-7-2-3-3-1-79-9-0-1-7-3"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-0-3-6-3-9-6);display:inline;opacity:0.97"
+       x="-199.79655"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan24"><tspan
+           style="text-align:start"
+           id="tspan23">target system</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-170.98732,-95.416046)"
+       id="text2-1-7-2-3-3-1-79-9-0-1-7-3-3"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-0-3-6-3-9-6-5);display:inline;opacity:0.97"
+       x="-199.79655"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan26"><tspan
+           style="text-align:start"
+           id="tspan25">trajectory (parameter) queue</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-156.69013,-351.90021)"
+       id="text2-1-7-2-3-3-1-7"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3);display:inline;opacity:0.97"
+       x="-197.51389"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan28"><tspan
+           style="text-align:start"
+           id="tspan27">time position queue</tspan></tspan></text>
     <g
        transform="translate(-8.1068133,-41.686196)"
        id="g822">
@@ -3510,56 +3694,6 @@
            width="173.94827"
            id="rect54437" /></flowRegion><flowPara
          id="flowPara54439" /></flowRoot>
-    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,143.56306,32.383996)"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       id="flowRoot54441"
-       xml:space="preserve"><flowRegion
-         id="flowRegion54443"><rect
-           y="10.33545"
-           x="48.08326"
-           height="67.882248"
-           width="252.43712"
-           id="rect54445" /></flowRegion><flowPara
-         id="flowPara54447">trajectory generation</flowPara><flowPara
-         id="flowPara69726">(non real time)</flowPara></flowRoot>
-    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,274.75937,165.33371)"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       id="flowRoot54441-5"
-       xml:space="preserve"><flowRegion
-         id="flowRegion54443-1"><rect
-           y="10.33545"
-           x="48.08326"
-           height="67.882248"
-           width="252.43712"
-           id="rect54445-3" /></flowRegion><flowPara
-         id="flowPara54447-0">driver</flowPara></flowRoot>
-    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,324.50327,165.92619)"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       id="flowRoot54441-5-4"
-       xml:space="preserve"><flowRegion
-         id="flowRegion54443-1-5"><rect
-           y="10.33545"
-           x="48.08326"
-           height="67.882248"
-           width="252.43712"
-           id="rect54445-3-5" /></flowRegion><flowPara
-         id="flowPara54447-0-1">target system</flowPara></flowRoot>
-    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,258.62601,31.662965)"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       id="flowRoot54441-8"
-       xml:space="preserve"><flowRegion
-         id="flowRegion54443-9"><rect
-           y="10.33545"
-           x="48.08326"
-           height="74.9533"
-           width="492.85339"
-           id="rect54445-8" /></flowRegion><flowPara
-         id="flowPara54447-8">phase interpolation from boundary condition</flowPara><flowPara
-         id="flowPara56244">(e.g. non uniform spline among 3 pooint)</flowPara></flowRoot>
     <g
        id="g56900"
        transform="matrix(0.51436583,0,0,-0.51436583,119.37317,457.44935)"
@@ -4241,18 +4375,6 @@
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
 </g>
-    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,46.611921,264.22067)"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       id="flowRoot54441-82"
-       xml:space="preserve"><flowRegion
-         id="flowRegion54443-4"><rect
-           y="10.33545"
-           x="48.08326"
-           height="58.882248"
-           width="335.43713"
-           id="rect54445-5" /></flowRegion><flowPara
-         id="flowPara54447-85">trajectory (parameter) queue</flowPara></flowRoot>
     <g
        transform="translate(155.52891,-44.306587)"
        id="g822-2"
@@ -4695,63 +4817,12 @@
    d="m 231.97,708.38 h 0.69 c 0.14,0 0.23,0 0.23,0.15 0,0.1 -0.09,0.1 -0.22,0.1 h -0.65 c 0.16,0.88 0.22,1.2 0.27,1.4 0.04,0.16 0.19,0.3 0.36,0.3 0.01,0 0.2,0 0.33,-0.08 -0.29,-0.09 -0.31,-0.34 -0.31,-0.38 0,-0.16 0.12,-0.26 0.28,-0.26 0.19,0 0.4,0.16 0.4,0.42 0,0.32 -0.34,0.5 -0.7,0.5 -0.31,0 -0.65,-0.18 -0.84,-0.52 -0.14,-0.26 -0.19,-0.58 -0.34,-1.38 h -0.55 c -0.14,0 -0.24,0 -0.24,-0.16 0,-0.09 0.1,-0.09 0.22,-0.09 h 0.52 c -0.01,-0.04 -0.45,-2.55 -0.62,-3.29 -0.03,-0.15 -0.15,-0.68 -0.48,-0.68 -0.01,0 -0.18,0 -0.31,0.08 0.28,0.09 0.31,0.34 0.31,0.38 0,0.16 -0.12,0.26 -0.28,0.26 -0.19,0 -0.4,-0.16 -0.4,-0.42 0,-0.32 0.32,-0.5 0.68,-0.5 0.44,0 0.75,0.46 0.83,0.61 0.25,0.47 0.42,1.33 0.43,1.41 z"
    style="fill:#000000;stroke-width:0" />
 </g>
-    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,62.603959,2.7921656)"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97;fill:#000000;fill-opacity:1;stroke:none"
-       id="flowRoot54441-7"
-       xml:space="preserve"><flowRegion
-         id="flowRegion54443-8"><rect
-           y="10.33545"
-           x="48.08326"
-           height="34.648228"
-           width="235.46657"
-           id="rect54445-9" /></flowRegion><flowPara
-         id="flowPara54447-1">time position queue</flowPara></flowRoot>
-    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,230.99105,140.34635)"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       id="flowRoot54441-82-6"
-       xml:space="preserve"><flowRegion
-         id="flowRegion54443-4-6"><rect
-           y="10.33545"
-           x="48.08326"
-           height="58.882248"
-           width="335.43713"
-           id="rect54445-5-6" /></flowRegion><flowPara
-         id="flowPara54447-85-3">driver of actuator</flowPara><flowPara
-         id="flowPara69728">(real time)</flowPara></flowRoot>
-    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,151.77551,172.76452)"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       id="flowRoot54441-82-6-7"
-       xml:space="preserve"><flowRegion
-         id="flowRegion54443-4-6-1"><rect
-           y="10.33545"
-           x="48.08326"
-           height="58.882248"
-           width="335.43713"
-           id="rect54445-5-6-5" /></flowRegion><flowPara
-         id="flowPara54447-85-3-6">sequence player</flowPara><flowPara
-         id="flowPara69724">(real time)</flowPara></flowRoot>
     <path
        style="opacity:0.98999999;fill:none;stroke:#000000;stroke-width:0.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 24.6851,-25.55432 21.115696,-0.0401 c 5.72893,-0.0974 8.408197,0.361782 10.073694,1.83748 1.985868,1.759559 2.111124,3.953428 2.136714,6.826885 l 0.01475,5.362576 5.17381,-2.97656 -7.052655,8.4355277 -6.648222,-8.2926187 4.859832,2.694631 -0.10019,-5.033926 c -0.0375,-0.819824 -0.0214,-3.601279 -1.330809,-4.403181 -0.960663,-0.588324 -3.068491,-0.89789 -7.174256,-0.86954 l -20.99145,-0.02475 z"
        id="path1946-1-7-8"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccscccccccsccc" />
-    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,96.363642,188.11676)"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97;fill:#000000;fill-opacity:1;stroke:none"
-       id="flowRoot54441-79"
-       xml:space="preserve"><flowRegion
-         id="flowRegion54443-0"><rect
-           y="10.33545"
-           x="48.08326"
-           height="67.882248"
-           width="252.43712"
-           id="rect54445-6" /></flowRegion><flowPara
-         id="flowPara54447-3">trajectory</flowPara><flowPara
-         id="flowPara69722">(parameter)</flowPara></flowRoot>
     <g
        id="g4003"
        transform="matrix(0.6637345,0,0,-0.66954921,-74.448534,694.15047)"
@@ -5002,17 +5073,41 @@
        sodipodi:nodetypes="ccscscc"
        inkscape:transform-center-x="9.9772078"
        inkscape:transform-center-y="2.316838" />
-    <flowRoot
+    <text
        xml:space="preserve"
-       id="flowRoot54441-7-7-0-7-1-4"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,-3.3639646,218.54556)"><flowRegion
-         id="flowRegion54443-8-5-0-5-1-9"><rect
-           id="rect54445-9-6-7-1-0-9"
-           width="241.46657"
-           height="87.148224"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara2627-0-4">new enqueue</flowPara></flowRoot>
+       transform="matrix(0.26458333,0,0,0.26458333,-74.140131,-327.29396)"
+       id="text2-1-7-2-3-3-1"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0);display:inline;opacity:0.97"
+       x="-151.32738"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan30"><tspan
+           style="text-align:start"
+           id="tspan29">trajectory generation
+</tspan></tspan><tspan
+         x="871.63867"
+         y="1413.9015"
+         id="tspan32"><tspan
+           style="text-align:start"
+           id="tspan31">(non real time)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,41.615347,-326.08103)"
+       id="text2-1-7-2-3-3-1-9"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-7);display:inline;opacity:0.97"
+       x="-151.32738"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan34"><tspan
+           style="text-align:start"
+           id="tspan33">phase interpolation from boundary condition
+</tspan></tspan><tspan
+         x="871.63867"
+         y="1413.9015"
+         id="tspan36"><tspan
+           style="text-align:start"
+           id="tspan35">(e.g. non uniform spline among 3 points)</tspan></tspan></text>
   </g>
 </svg>

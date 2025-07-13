@@ -7,8 +7,8 @@
    viewBox="0 0 480 550"
    version="1.1"
    id="svg8"
-   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
-   sodipodi:docname="012_image_of_generate_trajectory_flow_from_interruput_data.svg"
+   inkscape:version="1.4.2 (1:1.4.2+202505120738+ebf0e940d0)"
+   sodipodi:docname="014_image_of_generate_trajectory_flow_from_interruput_data.svg"
    inkscape:export-filename="../png/012_image_of_generate_trajectory_flow_from_interruput_data.png"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300"
@@ -28,8 +28,8 @@
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="853.49998"
-     inkscape:cy="1390"
+     inkscape:cx="1457.5"
+     inkscape:cy="1257"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -40,7 +40,9 @@
      inkscape:window-maximized="1"
      inkscape:measure-start="0,0"
      inkscape:measure-end="0,0"
-     inkscape:pagecheckerboard="0" />
+     inkscape:pagecheckerboard="0"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1" />
   <defs
      id="defs2">
     <marker
@@ -1228,6 +1230,102 @@
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
          transform="matrix(-0.4,0,0,-0.4,-4,0)" />
     </marker>
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3-8" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3-8-3" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3-8-3-3" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3-6" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3-6-9" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3-6-9-4" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3-6-1" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3-6-9-4-9" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3-6-9-1" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3-2" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3-85" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3-6-1-0" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-0" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-0-3-6-3-9-6-5" />
+    <rect
+       x="871.63806"
+       y="1365.795"
+       width="406.7554"
+       height="71.164803"
+       id="rect3-5-3-6-0-7-0-3-6-9-4-9-3" />
   </defs>
   <metadata
      id="metadata5">
@@ -1247,6 +1345,224 @@
      inkscape:label="レイヤー 1"
      transform="translate(0,253)"
      style="opacity:0.97000002">
+    <rect
+       style="display:inline;opacity:0.97;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;paint-order:fill markers stroke"
+       id="rect1"
+       width="480.27188"
+       height="549.80688"
+       x="0.18025194"
+       y="-252.50357"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,72.410824,-185.59834)"
+       id="text2-1-7-2-3-3-1-7-2-7-1-4-6"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3-6-9-4-9-3);display:inline;opacity:0.97"
+       x="-197.51389"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan6"><tspan
+           style="text-align:start"
+           id="tspan5">sequence player
+</tspan></tspan><tspan
+         x="871.63867"
+         y="1413.9015"
+         id="tspan8"><tspan
+           style="text-align:start"
+           id="tspan7">(real time)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-37.36304,-89.430419)"
+       id="text2-1-7-2-3-3-1-79-9-0-1-7-3-3"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-0-3-6-3-9-6-5);display:inline;opacity:0.97"
+       x="-199.79655"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan10"><tspan
+           style="text-align:start"
+           id="tspan9">new trajectory (parameter) queue</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-90.11743,-116.30362)"
+       id="text2-1-7-2-3-3-1-79"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-0);display:inline;opacity:0.97"
+       x="-171.09267"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan12"><tspan
+           style="text-align:start"
+           id="tspan11">new enqueue</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-74.669303,-236.27415)"
+       id="text2-1-7-2-3-3-1-7-2-1-4"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3-6-1-0);display:inline;opacity:0.97"
+       x="-197.51389"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan14"><tspan
+           style="text-align:start"
+           id="tspan13">trajectory generation (non real time)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-158.54221,-202.12103)"
+       id="text2-1-7-2-3-3-1-7-7"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3-85);display:inline;opacity:0.97"
+       x="-197.51389"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan16"><tspan
+           style="text-align:start"
+           id="tspan15">time position queue</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-69.11305,-303.72104)"
+       id="text2-1-7-2-3-3-1-7-24"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3-2);display:inline;opacity:0.97"
+       x="-197.51389"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan18"><tspan
+           style="text-align:start"
+           id="tspan17">delete</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-41.596383,-268.55332)"
+       id="text2-1-7-2-3-3-1-7-2-7-3"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3-6-9-1);display:inline;opacity:0.97"
+       x="-197.51389"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan20"><tspan
+           style="text-align:start"
+           id="tspan19">trajectory (parameter) queue</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,70.294134,-363.92751)"
+       id="text2-1-7-2-3-3-1-7-2-7-1-4"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3-6-9-4-9);display:inline;opacity:0.97"
+       x="-197.51389"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan22"><tspan
+           style="text-align:start"
+           id="tspan21">sequence player
+</tspan></tspan><tspan
+         x="871.63867"
+         y="1413.9015"
+         id="tspan24"><tspan
+           style="text-align:start"
+           id="tspan23">(real time)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-75.463048,-413.80957)"
+       id="text2-1-7-2-3-3-1-7-2-1"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3-6-1);display:inline;opacity:0.97"
+       x="-197.51389"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan26"><tspan
+           style="text-align:start"
+           id="tspan25">trajectory generation (non real time)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-75.198465,-590.26479)"
+       id="text2-1-7-2-3-3-1-7-2"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3-6);display:inline;opacity:0.97"
+       x="-197.51389"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan28"><tspan
+           style="text-align:start"
+           id="tspan27">trajectory generation (non real time)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-37.098467,-456.40749)"
+       id="text2-1-7-2-3-3-1-7-2-7"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3-6-9);display:inline;opacity:0.97"
+       x="-197.51389"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan30"><tspan
+           style="text-align:start"
+           id="tspan29">trajectory (parameter) queue</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,70.58695,-548.48248)"
+       id="text2-1-7-2-3-3-1-7-2-7-1"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3-6-9-4);display:inline;opacity:0.97"
+       x="-197.51389"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan32"><tspan
+           style="text-align:start"
+           id="tspan31">sequence player
+</tspan></tspan><tspan
+         x="871.63867"
+         y="1413.9015"
+         id="tspan34"><tspan
+           style="text-align:start"
+           id="tspan33">(real time)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-160.54796,-565.86805)"
+       id="text2-1-7-2-3-3-1-7"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3);display:inline;opacity:0.97"
+       x="-197.51389"
+       y="0"><tspan
+         x="871.63867"
+         y="1387.2349"
+         id="tspan36"><tspan
+           style="text-align:start"
+           id="tspan35">time position queue</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-213.32265,-605.74681)"
+       id="text2-1-7-2-3-3-1-7-9"
+       style="font-size:32px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3-8);display:inline;opacity:0.97"
+       x="-247.94577"
+       y="0"><tspan
+         x="871.63867"
+         y="1397.9549"
+         id="tspan38"><tspan
+           style="text-align:start"
+           id="tspan37">(Step1)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-212.34999,-422.01024)"
+       id="text2-1-7-2-3-3-1-7-9-7"
+       style="font-size:32px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3-8-3);display:inline;opacity:0.97"
+       x="-247.94577"
+       y="0"><tspan
+         x="871.63867"
+         y="1397.9549"
+         id="tspan40"><tspan
+           style="text-align:start"
+           id="tspan39">(Step2)</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-213.40832,-235.21442)"
+       id="text2-1-7-2-3-3-1-7-9-7-1"
+       style="font-size:32px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3-5-3-6-0-7-0-3-8-3-3);display:inline;opacity:0.97"
+       x="-247.94577"
+       y="0"><tspan
+         x="871.63867"
+         y="1397.9549"
+         id="tspan42"><tspan
+           style="text-align:start"
+           id="tspan41">(Step3)</tspan></tspan></text>
     <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,5.2916667,0)"
        style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
@@ -2572,31 +2888,6 @@
            x="60.811184"
            y="27.306013" /></flowRegion><flowPara
          id="flowPara54439" /></flowRoot>
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot54441-82"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,180.2886,-96.592648)"><flowRegion
-         id="flowRegion54443-4"><rect
-           id="rect54445-5"
-           width="335.43713"
-           height="58.882248"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara54447-85">trajectory (parameter) queue</flowPara></flowRoot>
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot54441-82-6-7"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,285.45219,-188.0488)"><flowRegion
-         id="flowRegion54443-4-6-1"><rect
-           id="rect54445-5-6-5"
-           width="335.43713"
-           height="58.882248"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara54447-85-3-6">sequence player</flowPara><flowPara
-         id="flowPara69724">(real time)</flowPara></flowRoot>
     <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.97000002;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
@@ -3986,31 +4277,6 @@
    d="m 243.68,709.61 v 0.07 0.08 l -0.01,0.08 v 0.08 l -0.01,0.17 -0.01,0.17 -0.01,0.18 -0.03,0.19 -0.02,0.2 -0.04,0.2 -0.03,0.2 -0.05,0.21 -0.05,0.21 -0.07,0.21 -0.07,0.21 -0.07,0.21 -0.05,0.11 -0.04,0.11 -0.05,0.1 -0.05,0.11 c -0.6,1.22 -1.46,1.87 -1.56,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.98,-0.99 1.55,-2.57 1.55,-4.64 0,-1.7 -0.37,-3.45 -1.61,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 1,0.68 1.59,1.94 0.51,1.09 0.63,2.19 0.63,3.03 z"
    inkscape:connector-curvature="0" />
 </g>
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot54441-82-2"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,179.35614,89.276177)"><flowRegion
-         id="flowRegion54443-4-2"><rect
-           id="rect54445-5-0"
-           width="335.43713"
-           height="58.882248"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara54447-85-2">trajectory (parameter) queue</flowPara></flowRoot>
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot54441-82-6-7-8"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,284.51973,-2.179973)"><flowRegion
-         id="flowRegion54443-4-6-1-4"><rect
-           id="rect54445-5-6-5-2"
-           width="335.43713"
-           height="58.882248"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara54447-85-3-6-5">sequence player</flowPara><flowPara
-         id="flowPara69724-4">(real time)</flowPara></flowRoot>
     <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.97000002;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
@@ -6601,31 +6867,6 @@
    d="m 243.68,709.61 v 0.07 0.08 l -0.01,0.08 v 0.08 l -0.01,0.17 -0.01,0.17 -0.01,0.18 -0.03,0.19 -0.02,0.2 -0.04,0.2 -0.03,0.2 -0.05,0.21 -0.05,0.21 -0.07,0.21 -0.07,0.21 -0.07,0.21 -0.05,0.11 -0.04,0.11 -0.05,0.1 -0.05,0.11 c -0.6,1.22 -1.46,1.87 -1.56,1.87 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.03 0,-0.05 0.19,-0.23 0.98,-0.99 1.55,-2.57 1.55,-4.64 0,-1.7 -0.37,-3.45 -1.61,-4.7 -0.13,-0.12 -0.13,-0.14 -0.13,-0.17 0,-0.06 0.04,-0.1 0.1,-0.1 0.1,0 1,0.68 1.59,1.94 0.51,1.09 0.63,2.19 0.63,3.03 z"
    inkscape:connector-curvature="0" />
 </g>
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot54441-82-2-0"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,179.89734,271.07273)"><flowRegion
-         id="flowRegion54443-4-2-6"><rect
-           id="rect54445-5-0-6"
-           width="416.43713"
-           height="62.882248"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara54447-85-2-1">new trajectory (parameter) queue</flowPara></flowRoot>
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot54441-82-6-7-8-8"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,286.38386,175.64781)"><flowRegion
-         id="flowRegion54443-4-6-1-4-2"><rect
-           id="rect54445-5-6-5-2-8"
-           width="335.43713"
-           height="58.882248"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara54447-85-3-6-5-5">sequence player</flowPara><flowPara
-         id="flowPara69724-4-4">(real time)</flowPara></flowRoot>
     <g
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;letter-spacing:normal;word-spacing:normal;text-anchor:start;opacity:0.97000002;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.43299961;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        ns0:preamble="/home/daishi/.inkscape/textext/my.sty"
@@ -8332,18 +8573,6 @@
            y="10.33545" /></flowRegion><flowPara
          id="flowPara54447-1-4-0">new interrupt</flowPara><flowPara
          id="flowPara2631">time position queue</flowPara></flowRoot>
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot54441-7-7-0-7"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,55.195769,-207.79603)"><flowRegion
-         id="flowRegion54443-8-5-0-5"><rect
-           id="rect54445-9-6-7-1"
-           width="241.46657"
-           height="87.148224"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara2627">time position queue</flowPara></flowRoot>
     <path
        style="opacity:0.98999999;fill:none;stroke:#000000;stroke-width:0.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 64.781966,-178.20768 71.317684,0.0277 -0.0864,-3.85585 6.83442,5.73552 -6.68122,5.24212 v -3.60814 l -71.384504,0.0668 z"
@@ -9620,18 +9849,6 @@
    inkscape:connector-curvature="0"
    style="fill:#000000;stroke-width:0" />
 </g>
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot54441-7-7-0-7-1"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,58.370767,155.21231)"><flowRegion
-         id="flowRegion54443-8-5-0-5-1"><rect
-           id="rect54445-9-6-7-1-0"
-           width="241.46657"
-           height="87.148224"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara2627-0">time position queue</flowPara></flowRoot>
     <path
        style="opacity:0.97000002;fill:none;stroke:#000000;stroke-width:0.40000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.4, 0.4;stroke-dashoffset:0;stroke-opacity:1"
        d="m 176.66119,165.33974 c 1.57431,-2.71693 2.88383,-4.59742 5.45327,-2.94984 2.68028,1.9617 12.16306,10.27543 14.80595,8.71426 3.03974,-1.29659 9.47512,-5.66174 13.10787,-6.37467"
@@ -9688,45 +9905,6 @@
            x="134.88062"
            y="71.617592" /></flowRegion><flowPara
          id="flowPara2693" /></flowRoot>
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot2695"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,5.2916667,-253)"><flowRegion
-         id="flowRegion2697"><rect
-           id="rect2699"
-           width="197.98988"
-           height="71.24102"
-           x="47.552929"
-           y="34.140938" /></flowRegion><flowPara
-         id="flowPara2701"
-         style="font-size:32px">(Step1)</flowPara></flowRoot>
-    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,7.8263954,-69.154387)"
-       xml:space="preserve"
-       id="flowRoot2695-2"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
-         id="flowRegion2697-5"><rect
-           id="rect2699-1"
-           width="197.98988"
-           height="71.24102"
-           x="47.552929"
-           y="34.140938" /></flowRegion><flowPara
-         id="flowPara2701-9"
-         style="font-size:32px">(Step2)</flowPara></flowRoot>
-    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,8.3965334,115.85641)"
-       xml:space="preserve"
-       id="flowRoot2695-7"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
-         id="flowRegion2697-1"><rect
-           id="rect2699-3"
-           width="197.98988"
-           height="71.24102"
-           x="47.552929"
-           y="34.140938" /></flowRegion><flowPara
-         id="flowPara2701-1"
-         style="font-size:32px">(Step3)</flowPara></flowRoot>
     <path
        inkscape:connector-curvature="0"
        id="path2042-9-7-5-8"
@@ -9775,54 +9953,6 @@
        id="path2077-0"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccscscc" />
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot54441-7-7-0-7-1-4"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,125.33994,241.88093)"><flowRegion
-         id="flowRegion54443-8-5-0-5-1-9"><rect
-           id="rect54445-9-6-7-1-0-9"
-           width="241.46657"
-           height="87.148224"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara2627-0-4">new enqueue</flowPara></flowRoot>
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot54441-82-2-3"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,140.47493,-229.74865)"><flowRegion
-         id="flowRegion54443-4-2-2"><rect
-           id="rect54445-5-0-65"
-           width="456.43713"
-           height="66.382248"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara2825">trajectory generation (non real time)</flowPara></flowRoot>
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot54441-82-2-3-4"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,139.23956,-54.337693)"><flowRegion
-         id="flowRegion54443-4-2-2-6"><rect
-           id="rect54445-5-0-65-9"
-           width="456.43713"
-           height="66.382248"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara2825-2">trajectory generation (non real time)</flowPara></flowRoot>
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot54441-82-2-3-49"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.99;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,139.76873,122.93314)"><flowRegion
-         id="flowRegion54443-4-2-2-9"><rect
-           id="rect54445-5-0-65-3"
-           width="456.43713"
-           height="66.382248"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara2825-8">trajectory generation (non real time)</flowPara></flowRoot>
     <g
        id="g4246"
        transform="matrix(0.48307477,0,0,-0.48307477,89.868244,424.66331)"
@@ -10197,17 +10327,5 @@
        id="path2077-0-3"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccscscc" />
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot54441-7-7-0-7-1-4-6"
-       style="font-style:normal;font-weight:normal;font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.97;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,148.07685,54.46342)"><flowRegion
-         id="flowRegion54443-8-5-0-5-1-9-7"><rect
-           id="rect54445-9-6-7-1-0-9-5"
-           width="241.46657"
-           height="87.148224"
-           x="48.08326"
-           y="10.33545" /></flowRegion><flowPara
-         id="flowPara2627-0-4-3">delete</flowPara></flowRoot>
   </g>
 </svg>

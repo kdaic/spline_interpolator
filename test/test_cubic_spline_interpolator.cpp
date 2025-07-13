@@ -210,29 +210,29 @@ TEST_F( CubicSplineTest, pop2 ) {
 #ifndef __QNX__
   TPQueue tp_queue; // TP = time, position
   SplineInterpolator* sp = &cubic_spline_;
-  NonUniformRoundingSpline nusv;
+  NonUniformRoundingSpline nurs;
   TimePVA start, finish;
 
   double clock_time;
   const double interval_time = 1.0;
 
   clock_time = 0.0;
-  nusv.push(                  clock_time, -1.0 ); // P0 start position
+  nurs.push(                  clock_time, -1.0 ); // P0 start position
   tp_queue.push_on_clocktime( clock_time, -1.0 );
 
   clock_time += interval_time;
-  nusv.push(                  clock_time, -1.0 ); // P1
+  nurs.push(                  clock_time, -1.0 ); // P1
   tp_queue.push_on_clocktime( clock_time, -1.0 );
 
   clock_time += interval_time;
-  nusv.push(                  clock_time, 10.0 ); // P2 end position
+  nurs.push(                  clock_time, 10.0 ); // P2 end position
   tp_queue.push_on_clocktime( clock_time, 10.0 );
 
-  start  = nusv.pop(); // pop 1st P0 start
+  start  = nurs.pop(); // pop 1st P0 start
   clock_time += interval_time;
-  nusv.push(                  clock_time, 10.0 ); // Dummy1
+  nurs.push(                  clock_time, 10.0 ); // Dummy1
   // tp_queue.push_on_clocktime( clock_time, 10.0 );
-  finish = nusv.pop(); // pop 2nd P1
+  finish = nurs.pop(); // pop 2nd P1
   //
   RetCode ret = sp->generate_path( start.time,  finish.time,
                                    start.P.pos, finish.P.pos,
@@ -253,9 +253,9 @@ TEST_F( CubicSplineTest, pop2 ) {
   //
   start = finish;
   clock_time += interval_time;
-  nusv.push(                  clock_time, 10.0 ); // Dummy2
+  nurs.push(                  clock_time, 10.0 ); // Dummy2
   // tp_queue.push_on_clocktime( clock_time, 10.0 );
-  finish = nusv.pop();  // pop 3rd P2 end
+  finish = nurs.pop();  // pop 3rd P2 end
   //
   sp->clear();
   ret = sp->generate_path( start.time,  finish.time,
