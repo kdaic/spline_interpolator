@@ -323,7 +323,7 @@ $$
 制約を満たしつつ、入力として指定した経由点の位置、経由点間の速度比率、開始と終端の位置・速度に従って連続な時間軌道が自動生成される。  
 
 - 経由点間の速度と加速度・減速度のリミットのキュー  
-  $[ (v_{\mathrm{limit},0}, a_{\mathrm{max},0}, d_{\mathrm{max},0}), ..., (v_{\mathrm{limit},f}, a_{\mathrm{max},f}, d_{\mathrm{max},0}) ]$  
+  $[ (v_{\mathrm{limit},0}, a_{\mathrm{max},0}, d_{\mathrm{max},0}), ..., (v_{\mathrm{limit},f-1}, a_{\mathrm{max},f-1}, d_{\mathrm{max},f-1}) ]$  
   - 最大速度リミット $v_{\mathrm{limit},k}$
   - 最大加速度・減速度 $a_{\mathrm{max},k}$ , $d_{\mathrm{max},k}$
 - 経由点列 : 速さと位置のペアで組み合わせた時系列キュー  
@@ -337,7 +337,7 @@ $$
   - 開始速度 $\dot{x}_{0}$
   - 終端速度 $\dot{x}_{f}$
 
-このパターンでは、設定された最大速度リミットと最大加速度・減速度から、以下の図のように（？）で示した経由点の通過時刻、境界速度/加速度といった不明なパラメータを自動算出する機能が求められる。
+このパターンでは、設定された最大速度リミットと最大加速度・減速度から、以下の図のように（？）で示すような経由点の通過時刻、境界速度/加速度といった不明なパラメータを自動算出する機能が求められる。
 
 ![パラメータの自明/不明](Figure/svg/012_time_multi-position_with_limit-vel-acc-dec.svg)  
 
@@ -348,8 +348,14 @@ Ruckig (Git-Hub) : https://github.com/pantor/ruckig
 
 本ライブラリでは 5-2-5-1-5-2-5次の区分的なスプライン補間を提供する。  
  
+位置  
+![5-2-5-1-5-2-5次スプラインによる位置の補間イメージ](Figure/svg/013_time_multi-position-interpolation_with_limit-vel-acc-dec.svg)  
 
+速度  
+![5-2-5-1-5-2-5次スプラインによる速度の補間イメージ](Figure/svg/014_time_multi-velocity-interpolation_with_limit-vel-acc-dec.svg)  
 
+加速度  
+![5-2-5-1-5-2-5次スプラインによる加速度の補間イメージ](Figure/svg/015_time_multi-acceleration-interpolation_with_limit-vel-acc-dec.svg)  
 
 
 &nbsp;
@@ -360,7 +366,7 @@ Ruckig (Git-Hub) : https://github.com/pantor/ruckig
 
 ## シーン1―入力した(複数の)補間点間を全て一度に補間し曲線生成
 
-![複数点を全て一度に補間する場合](Figure/svg/015_image_of_generate_trajectory_flow_from_data_queue.svg)
+![複数点を全て一度に補間する場合](Figure/svg/016_image_of_generate_trajectory_flow_from_data_queue.svg)
 
 ### ユーザのアクション
 
@@ -379,7 +385,7 @@ Ruckig (Git-Hub) : https://github.com/pantor/ruckig
 
 ## シーン2―補間点の追加と曲線生成のタイミングを制御
 
-![追加と補間のタイミングを制御する場合](Figure/svg/016_image_of_generate_trajectory_flow_from_data_queue.svg)
+![追加と補間のタイミングを制御する場合](Figure/svg/017_image_of_generate_trajectory_flow_from_data_queue.svg)
 
 ### ユーザのアクション
 
@@ -400,7 +406,7 @@ Ruckig (Git-Hub) : https://github.com/pantor/ruckig
 
 ## シーン3―割り込み入力による曲線のリアルタイム更新
 
-![割り込み入力により曲線をリアルタイム更新する場合](Figure/svg/017_image_of_generate_trajectory_flow_from_interruput_data.svg)
+![割り込み入力により曲線をリアルタイム更新する場合](Figure/svg/018_image_of_generate_trajectory_flow_from_interruput_data.svg)
 
 ### ユーザのアクション
 
