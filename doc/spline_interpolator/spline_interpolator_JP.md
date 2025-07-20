@@ -149,12 +149,9 @@ $$
   sp = new CubicSplineInterpolator();
 ```
 
-&nbsp;
-
-続いて、ユーザは曲線が通過する制御点(境界点)、境界条件の入力をする。
-
+続いて、ユーザは曲線が通過する制御点(境界点)、境界条件の入力をする。  
 境界条件の入力パターンは各補間器モデルで共通化することができる。  
-以下、入力パターンを挙げる。
+以降、入力パターンを挙げる。
 
 &nbsp;
 
@@ -177,9 +174,14 @@ $$
   - 開始加速度 $\ddot{x}_{0}$  
   - 終端加速度 $\ddot{x}_{f}$  
 
+以上の入力より、補間器は自動で多項式のパラメータを計算し曲線を内挿して決定する。  
+計算方法は各モデルによって異なる。  
+
+
 ![開始位置-速度と終端位置-速度-加速度](Figure/svg/007_input_tpva_image.svg)
 
-実装例)   
+**実装例)**   
+以下は3次多項式による補間の例である。　　
 
 ```cpp  
 #include "cubic_spline_interpolator.hpp"
@@ -188,7 +190,7 @@ $$
   sp = new CubicSplineInterpolator();
   double start_time = 0.0;
   double start_position = 1.0;
-  double start_velocity = -0.1;
+  double start_velocity = -1.0;
   double start_acceleration =  0.4;
   double finish_time = 1.5;
   double finish_position = 3.0;
@@ -200,8 +202,15 @@ $$
                                    start_acceleration, finish_acceleration );
 ```
 
-以上の入力より、補間器は自動で多項式のパラメータを計算し曲線を内挿して決定する。  
-計算方法は各モデルによって異なる。  
+上記開始-終端の2点(＊印)を補間した、3次多項式の曲線の位置および速度の軌道を以下に示す。
+
+位置  
+<img src="Figure/png/cubic_spline/point_to_point/0000_time-position_graph.png" width="50%">  
+<!-- ![Point To Pointの制御点2点の補間位置](Figure/png/cubic_spline/point_to_point/0000_time-position_graph.png)   -->
+
+速度  
+<img src="Figure/png/cubic_spline/point_to_point/0000_time-velocity_graph.png" width="50%">  
+<!-- ![Point To Pointの制御点2点の補間速度](Figure/png/cubic_spline/point_to_point/0000_time-velocity_graph.png)   -->
 
 &nbsp;
 
@@ -221,17 +230,70 @@ $$
   - 開始加速度 $\ddot{x}_{0}$  
   - 終端加速度 $\ddot{x}_{f}$  
 
-![複数の制御点](Figure/svg/008_time_multi-position.svg)
+![複数の制御点](Figure/svg/008_time_multi-position.svg)  
 
 補間器は、中間点の速度、加速度をどうやって自動算出するか？が課題となる。  
 何かしらのモデル固有の拘束条件を用いて自動的に算出する必要がある。  
 
 ![中間点の速度は？](Figure/svg/009_time_multi-unkown-velocity.svg)
 
-中間点の速度が不明で、かつモデル固有の拘束条件が不明なとき、たとえば時刻-位置の３点が分かれば、丸み不均一スプラインを用いて中間の速度を自動補間する方法もある。  
+ただし、自動補間された速度を通る曲線は、制御点付近で位置の行き過ぎ量(オーバーシュート)が大きくなる場合もあり、ユーザにとって好ましくない結果となるかもしれない。  
+ユーザが各点の通過速度を１つずつ指定したい場合は、パターン１を利用する。  
 
-実装例1)  
+&nbsp;
+
+**実装例1)**  
+時刻-位置の列を3次スプラインで補間する。 
+
+3次スプラインは、メジャーな補間方法の一つである。  
+時間と位置の経由点列が与えられ、中間の経由点間の速度・加速度が不明でも、境界連続を条件にして、各区間の3次曲線のパラメータを線形連立方程式によりまとめて解く。  
+
+
+```cpp
+#include "cubic_spline_interpolator.hpp"
+〜〜
+  TPQueue tp_queue; // TP = time, position
+  tp_queue.push_on_dT( 0.0, -1.0 );
+  tp_queue.push_on_dT( 1.0, -1.0 );
+  tp_queue.push_on_dT( 2.0, 0.0 );
+  tp_queue.push_on_dT( 3.0, 10.1 );
+
+  const double start_velocity = 0.0;
+  const double finish_velocity = 0.0;
+  const double start_acceleration = 0.0;
+  const double finish_acceleration = 0.0;
+
+  SplineInterpolator* sp;
+  sp = new CubicSplineInterpolator();
+  sp->generate_path( target_tp, 
+                     start_velocity,     finish_velocity,
+                     start_acceleration, finish_acceleration );
+```
+
+上記 `tp_queue` の経由点(＊印)を補間した、3次スプライン曲線の位置および速度の軌道を以下に示す。
+
+位置  
+<img src="Figure/png/cubic_spline/pop1/0000_time-position_graph.png" width="50%">  
+<!-- ![3次数スプラインによる補間位置](Figure/png/cubic_spline/pop1/0000_time-position_graph.png)   -->
+
+
+速度  
+<img src="Figure/png/cubic_spline/pop1/0000_time-velocity_graph.png" width="50%">  
+<!-- ![3次数スプラインによる補間速度](Figure/png/cubic_spline/pop1/0000_time-velocity_graph.png)   -->
+
+
+3次スプラインは lagrange補間やその他の高次多項式補間に比べると、比較的 低次であり計算量が軽量、かつ曲線の変動(変曲点の数)も少ない。  
+ただし先にも述べたように、自動補間された経由点の速度により、場合によっては制御点付近で位置の行き過ぎ量(オーバーシュート)が発生することがある。このベタな対策として、前後の時間で位置を重複させて速度が大きくならないようにするという手がある。ただし曲線は振動的になるかもしれない。調整が難しければ、明示的に境界速度を指定するパターン１を利用するのも選択の一つである。 
+
+&nbsp;
+
+<div style="page-break-before:always"></div>
+
+**実装例2)**  
 丸み不均一スプラインを用いて境界速度を計算し、2点境界値に基づいて3次多項式で補間する。
+
+中間点の速度が不明で、かつモデル固有の拘束条件が不明なとき、たとえば時刻-位置の３点が分かれば、丸み不均一スプラインを用いて中間の速度を自動補間する方法もある。  
+つまりこれは、各時間区間の開始-終端の2点境界値を先に求め、次にその2点区間を多項式で補間するという２段階のプロセスになる。  
 
 ```cpp
 #include "non_uniform_rounding_spline.hpp"
@@ -270,34 +332,14 @@ $$
 〜〜
 ```
 
-<div style="page-break-before:always"></div>
+位置  
+<img src="Figure/png/cubic_spline/pop2/0000_time-position_graph.png" width="50%">  
+<!-- ![不均一スプラインによる中間速度補間された制御点3点の補間位置](Figure/png/cubic_spline/pop2/0000_time-position_graph.png)   -->
 
-実装例2)  
-時刻-位置の列を3次スプラインで補間する。 
+速度  
+<img src="Figure/png/cubic_spline/pop2/0000_time-velocity_graph.png" width="50%">  
+<!-- ![不均一スプラインによる中間速度補間された制御点3点の補間速度](Figure/png/cubic_spline/pop2/0000_time-velocity_graph.png)   -->
 
-```cpp
-#include "cubic_spline_interpolator.hpp"
-〜〜
-  TPQueue tp_queue; // TP = time, position
-  tp_queue.push_on_dT( 0.0, -1.0 );
-  tp_queue.push_on_dT( 1.0, -1.0 );
-  tp_queue.push_on_dT( 2.0, 0.0 );
-  tp_queue.push_on_dT( 3.0, 10.1 );
-
-  const double start_velocity = 0.0;
-  const double finish_velocity = 0.0;
-  const double start_acceleration = 0.0;
-  const double finish_acceleration = 0.0;
-
-  SplineInterpolator* sp;
-  sp = new CubicSplineInterpolator();
-  sp->generate_path( target_tp, 
-                     start_velocity,     finish_velocity,
-                     start_acceleration, finish_acceleration );
-```
-
-ただし、自動補間された速度を通る曲線は、制御点付近で位置の行き過ぎ量(オーバーシュート)が大きくなる場合もあり、ユーザにとって好ましくない結果となるかもしれない。  
-ユーザが各点の通過速度を１つずつ指定したい場合は、パターン１を利用する。  
 
 &nbsp;
 
@@ -344,10 +386,12 @@ $$
 通常、３次スプライン補間では、速度や加速度の制約を指定できないため、このような機能を実現できない。  
 
 そこでたとえば、ラッキグ(Ruckig)ライブラリのように、速度リミット、加速度・減速度リミットに加え、躍度（Jerk）のリミットを指定し、 3-2-3-1-3-2-3次の区分的なスプライン補間を用いることで、設定の機能を実現することができる（ただし一部の機能は有償らしい）。  
-Ruckig (Git-Hub) : https://github.com/pantor/ruckig  
+Ruckig (Git-Hub) : [https://github.com/pantor/ruckig](https://github.com/pantor/ruckig)  
 
 本ライブラリでは 5-2-5-1-5-2-5次の区分的なスプライン補間を提供する。  
- 
+
+詳細説明 T.B.D.  
+
 位置  
 ![5-2-5-1-5-2-5次スプラインによる位置の補間イメージ](Figure/svg/013_time_multi-position-interpolation_with_limit-vel-acc-dec.svg)  
 

@@ -165,6 +165,61 @@ TEST_F( CubicSplineTest, tri_matrix_eq_solver_size_is_3 ) {
   EXPECT_TRUE( g_isNearlyEq( out_solved_x[2], -23.0/26.0 ) );
 }
 
+TEST_F( CubicSplineTest, point_to_point ) {
+
+#ifndef __QNX__
+  TPQueue tp_queue; // TP = time, positi
+  SplineInterpolator* sp;
+  sp = new CubicSplineInterpolator();
+  double start_time = 0.0;
+  double start_position = 1.0;
+  double start_velocity = -1.0;
+  double start_acceleration =  0.4;
+  tp_queue.push_on_clocktime( start_time, start_position );
+  double finish_time = 1.5;
+  double finish_position = 3.0;
+  double finish_velocity = 0.0;
+  double finish_acceleration = 0.0;
+  tp_queue.push_on_clocktime( finish_time, finish_position );
+  RetCode ret = sp->generate_path( start_time,         finish_time,
+                                   start_position,     finish_position,
+                                   start_velocity,     finish_velocity,
+                                   start_acceleration, finish_acceleration );
+  EXPECT_EQ( ret, SPLINE_SUCCESS );
+
+  //
+  TimePVA plot_point;
+  TPVAQueue interpolated_tpva_queue;
+  const double cycle = 0.005;
+  for(double t=sp->start_time(); t<sp->finish_time(); t+=cycle) {
+    plot_point = sp->pop( t );
+    // add buffer of interpolated plot-point
+    interpolated_tpva_queue.push( TimePVA( plot_point.time,
+                                           PosVelAcc( plot_point.P.pos,
+                                                      plot_point.P.vel,
+                                                      plot_point.P.acc ) ) );
+  }
+
+  /// ディレクトリ作成
+  const std::string output_dir = "./images/cubic_spline/point_to_point";
+  const std::string mkdir_outdir_str = "mkdir -p " + output_dir;
+  FILE* mkdir_outdir = popen(mkdir_outdir_str.c_str(), "re");
+  pclose(mkdir_outdir);
+
+  // 既に存在する画像を削除
+  const std::string rm_outdir_images_str = "rm -f " + output_dir + "/*.png";
+  FILE* rm_outdir_images = popen(rm_outdir_images_str.c_str(), "re");
+  pclose(rm_outdir_images);
+
+  TestGraphPlot test_gp;
+  test_gp.plot_tp_tv_pv( tp_queue,
+                         interpolated_tpva_queue,
+                         output_dir );
+  test_gp.dump_csv( interpolated_tpva_queue, output_dir );
+
+#endif // #ifdef __QNX__
+}
+
 TEST_F( CubicSplineTest, pop1 ) {
 
 #ifndef __QNX__
@@ -179,13 +234,17 @@ TEST_F( CubicSplineTest, pop1 ) {
   tp_queue.push_on_dT( 6.0, 7.0 );
   tp_queue.push_on_dT( 7.0, 10.1 );
 
+  const double cycle = 0.005;
+  const double vs    = 0.0;
+  const double vf    = 0.0;
+
   // start velocity  = -0.0
   // finish velocity = 0.0
-  TPVAQueue interpolated_path_tpva
-    = g_generate_path_and_cycletime_queue(tp_queue, 0.005, -0.0, 0.0 );
+  TPVAQueue interpolated_tpva_queue
+    = g_generate_path_and_cycletime_queue(tp_queue, cycle, vs, vf );
 
   /// ディレクトリ作成
-  const std::string output_dir = "./images/cubic_spline";
+  const std::string output_dir = "./images/cubic_spline/pop1";
   const std::string mkdir_outdir_str = "mkdir -p " + output_dir;
   FILE* mkdir_outdir = popen(mkdir_outdir_str.c_str(), "re");
   pclose(mkdir_outdir);
@@ -197,13 +256,12 @@ TEST_F( CubicSplineTest, pop1 ) {
 
   TestGraphPlot test_gp;
   test_gp.plot_tp_tv_pv( tp_queue,
-                         interpolated_path_tpva,
+                         interpolated_tpva_queue,
                          output_dir );
-  test_gp.dump_csv( interpolated_path_tpva, output_dir );
+  test_gp.dump_csv( interpolated_tpva_queue, output_dir );
 #endif // #ifdef __QNX__
 
 }
-
 
 TEST_F( CubicSplineTest, pop2 ) {
 
@@ -238,17 +296,18 @@ TEST_F( CubicSplineTest, pop2 ) {
                                    start.P.pos, finish.P.pos,
                                    start.P.vel, finish.P.vel,
                                    start.P.acc, finish.P.acc );
+  EXPECT_EQ( ret, SPLINE_SUCCESS );
   //
   TimePVA plot_point;
-  TPVAQueue interpolated_path_tpva;
+  TPVAQueue interpolated_tpva_queue;
   const double cycle = 0.005;
   for(double t=sp->start_time(); t<sp->finish_time(); t+=cycle) {
     plot_point = sp->pop( t );
     // add buffer of interpolated plot-point
-    interpolated_path_tpva.push( TimePVA( plot_point.time,
-                                          PosVelAcc( plot_point.P.pos,
-                                                     plot_point.P.vel,
-                                                     plot_point.P.acc ) ) );
+    interpolated_tpva_queue.push( TimePVA( plot_point.time,
+                                           PosVelAcc( plot_point.P.pos,
+                                                      plot_point.P.vel,
+                                                      plot_point.P.acc ) ) );
   }
   //
   start = finish;
@@ -262,24 +321,25 @@ TEST_F( CubicSplineTest, pop2 ) {
                            start.P.pos, finish.P.pos,
                            start.P.vel, finish.P.vel,
                            start.P.acc, finish.P.acc );
+  EXPECT_EQ( ret, SPLINE_SUCCESS );
   //
   for(double t=sp->start_time(); t<sp->finish_time(); t+=cycle) {
     plot_point = sp->pop( t );
     // add buffer of interpolated plot-point
-    interpolated_path_tpva.push( TimePVA( plot_point.time,
-                                          PosVelAcc( plot_point.P.pos,
-                                                     plot_point.P.vel,
-                                                     plot_point.P.acc ) ) );
+    interpolated_tpva_queue.push( TimePVA( plot_point.time,
+                                           PosVelAcc( plot_point.P.pos,
+                                                      plot_point.P.vel,
+                                                      plot_point.P.acc ) ) );
   }
   // add target point at last
   plot_point = sp->pop( sp->finish_time() );
-  interpolated_path_tpva.push( TimePVA( plot_point.time,
-                                        PosVelAcc( plot_point.P.pos,
-                                                   plot_point.P.vel,
-                                                   plot_point.P.acc ) ) );
+  interpolated_tpva_queue.push( TimePVA( plot_point.time,
+                                         PosVelAcc( plot_point.P.pos,
+                                                    plot_point.P.vel,
+                                                    plot_point.P.acc ) ) );
 
   /// ディレクトリ作成
-  const std::string output_dir = "./images/cubic_spline2";
+  const std::string output_dir = "./images/cubic_spline/pop2";
   const std::string mkdir_outdir_str = "mkdir -p " + output_dir;
   FILE* mkdir_outdir = popen(mkdir_outdir_str.c_str(), "re");
   pclose(mkdir_outdir);
@@ -291,9 +351,9 @@ TEST_F( CubicSplineTest, pop2 ) {
 
   TestGraphPlot test_gp;
   test_gp.plot_tp_tv_pv( tp_queue,
-                         interpolated_path_tpva,
+                         interpolated_tpva_queue,
                          output_dir );
-  test_gp.dump_csv( interpolated_path_tpva, output_dir );
+  test_gp.dump_csv( interpolated_tpva_queue, output_dir );
 #endif // #ifdef __QNX__
 
 }
